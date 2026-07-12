@@ -54,6 +54,17 @@
 @media (prefers-reduced-motion: reduce){ .svc-card:hover{ transform:none; } }
 </style>
 <style id="root-fix">x-dc,helmet{display:block;} helmet{display:none;}</style>
+<style id="svc2-style">
+.svc2-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; }
+.svc2-card{ background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 10px 26px rgba(22,35,63,.08); transition:transform .28s ease, box-shadow .28s ease; display:flex; flex-direction:column; }
+.svc2-card:hover{ transform:translateY(-6px); box-shadow:0 18px 42px rgba(22,35,63,.17); }
+.svc2-media{ position:relative; height:150px; display:grid; place-items:center; background:linear-gradient(135deg,#024d87,#2c74c0); overflow:hidden; }
+.svc2-media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:2; }
+.svc2-body{ padding:22px 20px 24px; flex:1; display:flex; flex-direction:column; }
+.svc2-body h3{ font-family:var(--font-heading); font-weight:800; font-size:18px; color:#1a1a1a; margin:0 0 8px; }
+.svc2-body p{ font-size:13.5px; line-height:1.6; color:#5b6472; margin:0 0 18px; flex:1; }
+.svc2-body .svc-link{ align-self:flex-start; }
+</style>
 </head>
 <body>
 
@@ -565,105 +576,78 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   </div>
 </section>
 
-<section id="services" data-screen-label="Services" style="position:relative; padding:5vh 0; background:#fff; overflow:hidden;">
-  <div style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:clamp(28px,3vw,48px); align-items:center;">
-    <div data-reveal="" style="flex:1 1 100%; min-width:0; max-width:1000px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:34px;">
-        <div style="font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#024d87; margin-bottom:14px;">Our Services</div>
-        <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(24px,2.8vw,34px); line-height:1.2; letter-spacing:-.01em; margin:0; color:#1a1a1a;">One trusted team for every fix in your home</h2>
-        <p style="font-size:15px; line-height:1.7; margin:16px auto 0; max-width:54ch; color:#5b6472;">From plumbing and electrical to AC, carpentry and full renovations — licensed technicians, upfront quotes and guaranteed work across Dubai.</p>
-      </div>
-      <div style="overflow:hidden; padding:28px 36px 58px;">
-        <div data-svc-track="" style="display:flex; transition:transform .55s cubic-bezier(.4,0,.2,1);">
-      <div style="min-width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; align-items:start;">
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">01</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Plumbing</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">Leaks, water heaters and full bathroom installs — done clean and fast.</p>
+<section id="services" data-screen-label="Services" style="position:relative; padding:5vh 0; background:#eef2f7;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 clamp(20px,5vw,56px);">
+    <div style="text-align:center; max-width:660px; margin:0 auto 40px;">
+      <div style="font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#024d87; margin-bottom:12px;">Our Services</div>
+      <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(24px,2.8vw,34px); line-height:1.2; color:#1a1a1a; margin:0 0 12px;">One trusted team for every fix in your home</h2>
+      <p style="font-size:15px; line-height:1.7; color:#5b6472; margin:0;">From plumbing and electrical to AC, carpentry and full renovations — licensed technicians, upfront quotes and guaranteed work across Dubai.</p>
+    </div>
+    <div class="svc2-grid">
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg><img src="/static/img/svc-plumbing.webp" alt="Plumbing" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>Plumbing</h3>
+          <p>Leaks, water heaters and full bathroom installs — done clean and fast.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#024d87" stroke="none"></polygon></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">02</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Electrical</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">DEWA-approved wiring, DB boards, lighting and fault-finding, to code.</p>
+      </article>
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#024d87" stroke="none"></polygon></svg><img src="/static/img/svc-electrical.webp" alt="Electrical" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>Electrical</h3>
+          <p>DEWA-approved wiring, DB boards, lighting and fault-finding, to code.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">03</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">AC &amp; HVAC</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">Servicing, gas top-ups and new installs to beat the Dubai heat.</p>
+      </article>
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg><img src="/static/img/svc-ac-and-hvac.webp" alt="AC & HVAC" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>AC & HVAC</h3>
+          <p>Servicing, gas top-ups and new installs to beat the Dubai heat.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-      </div>
-      <div style="min-width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; align-items:start;">
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">04</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Handyman &amp; Repairs</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">Mounting, sealing and the small fixes that never quite get done.</p>
+      </article>
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg><img src="/static/img/svc-handyman-and-repairs.webp" alt="Handyman & Repairs" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>Handyman & Repairs</h3>
+          <p>Mounting, sealing and the small fixes that never quite get done.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="6" x="2" y="2" rx="1"></rect><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V5"></path><rect width="4" height="6" x="8" y="16" rx="1"></rect></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">05</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Painting</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">Interior and exterior, feature walls and touch-ups — dust-free.</p>
+      </article>
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="6" x="2" y="2" rx="1"></rect><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V5"></path><rect width="4" height="6" x="8" y="16" rx="1"></rect></svg><img src="/static/img/svc-painting.webp" alt="Painting" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>Painting</h3>
+          <p>Interior and exterior, feature walls and touch-ups — dust-free.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0z"></path><path d="m14.5 12.5 2-2"></path><path d="m11.5 9.5 2-2"></path><path d="m8.5 6.5 2-2"></path><path d="m17.5 15.5 2-2"></path></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">06</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Carpentry</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">Custom joinery, doors and wardrobes finished to a high standard.</p>
+      </article>
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0z"></path><path d="m14.5 12.5 2-2"></path><path d="m11.5 9.5 2-2"></path><path d="m8.5 6.5 2-2"></path><path d="m17.5 15.5 2-2"></path></svg><img src="/static/img/svc-carpentry.webp" alt="Carpentry" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>Carpentry</h3>
+          <p>Custom joinery, doors and wardrobes finished to a high standard.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-      </div>
-      <div style="min-width:100%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; align-items:start;">
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="20" x="3" y="2" rx="1"></rect><path d="M3 6h3"></path><path d="M17 6h.01"></path><circle cx="12" cy="13" r="5"></circle><path d="M12 18a2.5 2.5 0 0 0 0-5"></path></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">07</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Appliance Repair</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">Washing machines, ovens and fridges — back running fast.</p>
+      </article>
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="20" x="3" y="2" rx="1"></rect><path d="M3 6h3"></path><path d="M17 6h.01"></path><circle cx="12" cy="13" r="5"></circle><path d="M12 18a2.5 2.5 0 0 0 0-5"></path></svg><img src="/static/img/svc-appliance-repair.webp" alt="Appliance Repair" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>Appliance Repair</h3>
+          <p>Washing machines, ovens and fridges — back running fast.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-            <span style="font-family:var(--font-heading); font-weight:800; font-size:46px; line-height:1; color:#eef1f7;">08</span>
-          </div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Home Renovation</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#5b6472;">Kitchens, bathrooms and full fit-outs managed end to end.</p>
+      </article>
+      <article class="svc2-card">
+        <div class="svc2-media"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg><img src="/static/img/svc-home-renovation.webp" alt="Home Renovation" loading="lazy" onerror="this.remove()"></div>
+        <div class="svc2-body">
+          <h3>Home Renovation</h3>
+          <p>Kitchens, bathrooms and full fit-outs managed end to end.</p>
           <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
         </div>
-      </div>
-        </div>
-      </div>
-      <div style="display:flex; align-items:center; justify-content:center; gap:18px; margin-top:30px;">
-        <button type="button" data-svc-prev="" aria-label="Previous" style="width:48px; height:48px; border-radius:50%; border:1.5px solid #c6d0e2; background:#fff; color:#1a1a1a; cursor:pointer; display:grid; place-items:center; transition:all .2s ease;" style-hover="background:#024d87; border-color:#024d87; color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-        <div style="display:flex; align-items:center; gap:9px;">
-          <span data-svc-dot="" style="width:26px; height:9px; background:#024d87; cursor:pointer; transition:all .3s ease;"></span>
-          <span data-svc-dot="" style="width:9px; height:9px; background:#c6d0e2; cursor:pointer; transition:all .3s ease;"></span>
-          <span data-svc-dot="" style="width:9px; height:9px; background:#c6d0e2; cursor:pointer; transition:all .3s ease;"></span>
-        </div>
-        <button type="button" data-svc-next="" aria-label="Next" style="width:48px; height:48px; border-radius:50%; border:1.5px solid #024d87; background:#024d87; color:#fff; cursor:pointer; display:grid; place-items:center; transition:all .2s ease;" style-hover="background:#013a5e; border-color:#013a5e"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
-      </div>
+      </article>
     </div>
   </div>
 </section>
