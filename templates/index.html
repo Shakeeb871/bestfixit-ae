@@ -61,6 +61,18 @@
 .callbtn__label{ color:#ffce38; font-weight:800; font-size:15px; text-decoration:underline; text-underline-offset:3px; }
 .callbtn__num{ color:#fff; font-weight:800; font-size:20px; letter-spacing:.01em; }
 </style>
+<style id="resp-hdr">
+#navToggle{ display:none; }
+@media (max-width:900px){
+  #hdrRow{ flex-wrap:wrap; }
+  #navToggle{ display:flex; }
+  .callbtn{ display:none !important; }
+  #hdrNav{ display:none; order:5; flex-basis:100%; width:100%; margin-left:0; flex-direction:column; align-items:flex-start; gap:2px; padding:8px 0 6px; border-top:1px solid #e6e9f0; }
+  #hdrRow.nav-open #hdrNav{ display:flex; }
+  #hdrNav > a{ padding:11px 4px; width:100%; font-size:15px; }
+  .mob-call{ display:block !important; color:#024d87 !important; }
+}
+</style>
 </head>
 <body>
 
@@ -442,13 +454,13 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     </div>
   </div>
   <!-- main row: logo (left) + nav (right) + call button -->
-  <div style="max-width:1280px; margin:0 auto; position:relative; display:flex; align-items:center; gap:clamp(14px,2vw,28px); padding:8px clamp(16px,4vw,44px); min-height:80px;">
-    <a href="#top" style="flex:0 0 auto; display:inline-flex; align-items:center;"><img src="/static/img/logo.webp" alt="BEST FIX iT — Technical Services" style="height:66px; width:auto; display:block;"></a>
-    <nav style="margin-left:auto; display:flex; align-items:center; gap:clamp(14px,2vw,28px); flex-wrap:wrap;">
+  <div id="hdrRow" style="max-width:1280px; margin:0 auto; position:relative; display:flex; align-items:center; gap:clamp(14px,2vw,28px); padding:8px clamp(16px,4vw,44px); min-height:80px;">
+    <a href="#top" style="flex:0 0 auto; display:inline-flex; align-items:center;"><img src="/static/img/logo.webp" alt="BEST FIX iT — Technical Services" style="height:66px; width:auto; display:block;"></a><button id="navToggle" type="button" aria-label="Menu" style="margin-left:auto; flex-direction:column; justify-content:center; gap:5px; width:44px; height:44px; border:0; background:transparent; cursor:pointer; padding:9px;"><span style="height:3px;width:100%;background:#024d87;border-radius:2px;display:block;"></span><span style="height:3px;width:100%;background:#024d87;border-radius:2px;display:block;"></span><span style="height:3px;width:100%;background:#024d87;border-radius:2px;display:block;"></span></button>
+    <nav id="hdrNav" style="margin-left:auto; display:flex; align-items:center; gap:clamp(14px,2vw,28px); flex-wrap:wrap;">
       <a href="#top" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#024d87;">HOME</a>
       <a href="#services" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#1a1a1a;" style-hover="color:#024d87">SERVICES <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></a>
       <a href="#about" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#1a1a1a;" style-hover="color:#024d87">ABOUT</a>
-      <a href="#contact" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#1a1a1a;" style-hover="color:#024d87">CONTACT</a>
+      <a href="#contact" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#1a1a1a;" style-hover="color:#024d87">CONTACT</a><a href="tel:0547393716" class="mob-call" style="display:none;">Call: 054 739 3716</a>
     </nav>
     <a href="tel:0547393716" class="callbtn"><span class="callbtn__inner"><span class="callbtn__label">Call for help:</span><span class="callbtn__num">054 739 3716</span></span></a>
   </div>
@@ -569,6 +581,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 </section>
 
 <section id="services" data-screen-label="Services" style="position:relative; padding:22vh 0; background:#2c74c0; overflow:hidden;">
+  <img src="/static/img/bg-box.png" alt="" aria-hidden="true" style="position:absolute; top:0; left:0; width:100%; height:auto; display:block; z-index:1; pointer-events:none;">
   <div style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:clamp(28px,3vw,48px); align-items:center;">
     <div data-reveal="" style="flex:1 1 100%; min-width:0; max-width:1000px; margin:0 auto;">
       <div style="text-align:center; margin-bottom:34px;">
@@ -916,6 +929,9 @@ class Component extends DCLogic {
     if (next) next.addEventListener('click', function(){ i = (i + 1) % pages; render(); });
     render();
   });
+  var _tg=document.getElementById('navToggle'), _row=document.getElementById('hdrRow');
+  if(_tg&&_row){ _tg.addEventListener('click',function(){ _row.classList.toggle('nav-open'); });
+    _row.addEventListener('click',function(e){ if(e.target.closest('#hdrNav a')) _row.classList.remove('nav-open'); }); }
 })();
 </script>
 </body></html>
