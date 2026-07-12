@@ -70,11 +70,8 @@ def inject_globals():
 # --------------------------------------------------------------------------- #
 @app.route("/")
 def index():
-    return render_template(
-        "index.html",
-        services=SERVICES,
-        testimonials=TESTIMONIALS,
-    )
+    # Full single-page design (self-contained template).
+    return render_template("index.html")
 
 
 @app.route("/about")
@@ -109,20 +106,16 @@ def contact():
             "service": request.form.get("service", "").strip(),
             "message": request.form.get("message", "").strip(),
         }
-
-        errors = _validate(form)
-        if errors:
-            for err in errors:
-                flash(err, "error")
-            return render_template(
-                "contact.html", services=SERVICES, form=form
-            )
-
-        _save_lead(form)
-        _maybe_email_lead(form)
+        # Lenient capture: the site's forms range from a single phone field
+        # to a full callback form. Save whenever we have a usable contact.
+        digits = re.sub(r"\D", "", form["phone"])
+        if len(digits) >= 7 or form["email"]:
+            _save_lead(form)
+            _maybe_email_lead(form)
         return redirect(url_for("thank_you"))
 
-    return render_template("contact.html", services=SERVICES, form={})
+    # No standalone contact page — send visitors to the homepage form.
+    return redirect(url_for("index") + "#contact")
 
 
 @app.route("/thank-you")
