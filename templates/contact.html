@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block title %}Contact & Book — {{ site_name }}{% endblock %}
+{% block description %}Book a home service or ask a question. {{ site_name }} replies within the hour, Sat–Thu 8am–8pm, across the UAE.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ url_for('index') }}">Home</a> <span>/</span> <span>Contact</span>
+    </nav>
+    <h1 class="page-hero__title">Book a service or get a quote</h1>
+    <p class="page-hero__lead">Fill in the form and we'll get right back to you — usually within the hour.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact">
+    <div class="contact__form-wrap">
+      <form class="contact-form" action="{{ url_for('contact') }}" method="post" novalidate>
+        <div class="field-row">
+          <label class="field">
+            <span class="field__label">Your name *</span>
+            <input class="field__input" type="text" name="name" value="{{ form.name or '' }}" required autocomplete="name" placeholder="e.g. Sara Ahmed">
+          </label>
+          <label class="field">
+            <span class="field__label">Phone *</span>
+            <input class="field__input" type="tel" name="phone" value="{{ form.phone or '' }}" required autocomplete="tel" placeholder="+971 5X XXX XXXX">
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input class="field__input" type="email" name="email" value="{{ form.email or '' }}" autocomplete="email" placeholder="you@example.com">
+          </label>
+          <label class="field">
+            <span class="field__label">Service *</span>
+            <select class="field__input" name="service">
+              {% set chosen = form.service or request.args.get('service') %}
+              {% for s in services %}
+                <option value="{{ s.title }}" {{ 'selected' if chosen == s.title }}>{{ s.title }}</option>
+              {% endfor %}
+              <option value="Other" {{ 'selected' if chosen == 'Other' }}>Something else</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="field__label">How can we help? *</span>
+          <textarea class="field__input" name="message" rows="5" required placeholder="Describe the job, your location and preferred time.">{{ form.message or '' }}</textarea>
+        </label>
+
+        <button type="submit" class="btn btn--primary btn--lg btn--block">Send request {{ icon("arrow", "icon icon--sm") }}</button>
+        <p class="contact-form__note">By sending you agree to be contacted about your enquiry. We never share your details.</p>
+      </form>
+    </div>
+
+    <aside class="contact__aside">
+      <div class="info-card">
+        <h3>Talk to us directly</h3>
+        <a class="info-card__row" href="tel:{{ contact_phone|replace(' ', '') }}">{{ icon("phone") }}<span><strong>Call</strong><br>{{ contact_phone }}</span></a>
+        <a class="info-card__row" href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener">{{ icon("whatsapp") }}<span><strong>WhatsApp</strong><br>Chat instantly</span></a>
+        <a class="info-card__row" href="mailto:{{ contact_email }}">{{ icon("mail") }}<span><strong>Email</strong><br>{{ contact_email }}</span></a>
+        <div class="info-card__row info-card__row--static">{{ icon("clock") }}<span><strong>Hours</strong><br>Sat–Thu, 8am–8pm</span></div>
+        <div class="info-card__row info-card__row--static">{{ icon("pin") }}<span><strong>Areas</strong><br>{{ service_areas|join(', ') }}</span></div>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

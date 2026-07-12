@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ site_name }} — Home Maintenance & Handyman Services in the UAE{% endblock %}</title>
+  <meta name="description" content="{% block description %}Trusted plumbing, electrical, AC, carpentry, painting and handyman services across the UAE. Fast, reliable and fairly priced. Book {{ site_name }} today.{% endblock %}">
+  <meta name="theme-color" content="#0e2a47">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site_name }}">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:url" content="https://{{ site_domain }}{{ request.path }}">
+
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Top utility bar -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span class="topbar__item">{% from "_icons.html" import icon %}{{ icon("clock", "icon icon--sm") }} Sat–Thu, 8am–8pm</span>
+      <span class="topbar__item">{{ icon("pin", "icon icon--sm") }} Serving {{ service_areas|join(', ') }}</span>
+      <a class="topbar__phone" href="tel:{{ contact_phone|replace(' ', '') }}">{{ icon("phone", "icon icon--sm") }} {{ contact_phone }}</a>
+    </div>
+  </div>
+
+  <!-- Header / nav -->
+  <header class="site-header" id="siteHeader">
+    <div class="container site-header__inner">
+      <a class="brand" href="{{ url_for('index') }}" aria-label="{{ site_name }} home">
+        <span class="brand__mark">{{ icon("toolbox", "icon") }}</span>
+        <span class="brand__text">Best<strong>Fix</strong>It</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Primary">
+        <a href="{{ url_for('index') }}" class="nav__link {{ 'is-active' if request.endpoint == 'index' }}">Home</a>
+        <a href="{{ url_for('services') }}" class="nav__link {{ 'is-active' if request.endpoint in ('services', 'service_detail') }}">Services</a>
+        <a href="{{ url_for('about') }}" class="nav__link {{ 'is-active' if request.endpoint == 'about' }}">About</a>
+        <a href="{{ url_for('contact') }}" class="nav__link {{ 'is-active' if request.endpoint == 'contact' }}">Contact</a>
+        <a href="{{ url_for('contact') }}" class="btn btn--primary nav__cta">Get a Quote</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Flash messages -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container">
+        <div class="flash-stack">
+          {% for category, message in messages %}
+            <div class="flash flash--{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <div class="site-footer__col">
+        <a class="brand brand--light" href="{{ url_for('index') }}">
+          <span class="brand__mark">{{ icon("toolbox", "icon") }}</span>
+          <span class="brand__text">Best<strong>Fix</strong>It</span>
+        </a>
+        <p class="site-footer__blurb">Your one-call home maintenance team in the UAE. Skilled, background-checked and fully insured.</p>
+        <div class="site-footer__contact">
+          <a href="tel:{{ contact_phone|replace(' ', '') }}">{{ icon("phone", "icon icon--sm") }} {{ contact_phone }}</a>
+          <a href="mailto:{{ contact_email }}">{{ icon("mail", "icon icon--sm") }} {{ contact_email }}</a>
+        </div>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Services</h4>
+        <ul>
+          {% for s in all_services[:6] %}
+            <li><a href="{{ url_for('service_detail', slug=s.slug) }}">{{ s.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="{{ url_for('about') }}">About us</a></li>
+          <li><a href="{{ url_for('services') }}">All services</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact</a></li>
+          <li><a href="{{ url_for('contact') }}">Get a quote</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Areas we cover</h4>
+        <ul>
+          {% for area in service_areas %}
+            <li>{{ icon("pin", "icon icon--sm") }} {{ area }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="container site-footer__bar">
+      <p>© {{ current_year }} {{ site_name }} · {{ site_domain }} · All rights reserved.</p>
+      <p class="site-footer__built">Built with Flask &amp; care.</p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a class="wa-float" href="https://wa.me/{{ whatsapp_number }}?text=Hi%20{{ site_name }}%2C%20I%27d%20like%20to%20book%20a%20service."
+     target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    {{ icon("whatsapp", "icon") }}
+  </a>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>

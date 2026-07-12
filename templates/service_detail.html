@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block title %}{{ service.title }} Services in the UAE — {{ site_name }}{% endblock %}
+{% block description %}{{ service.short }} Professional {{ service.title|lower }} from {{ site_name }} across the UAE. Fast, fair and fully insured.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ url_for('index') }}">Home</a> <span>/</span>
+      <a href="{{ url_for('services') }}">Services</a> <span>/</span>
+      <span>{{ service.title }}</span>
+    </nav>
+    <div class="page-hero__row">
+      <span class="page-hero__icon">{{ icon(service.icon, "icon") }}</span>
+      <div>
+        <h1 class="page-hero__title">{{ service.title }}</h1>
+        <p class="page-hero__lead">{{ service.short }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container detail">
+    <div class="detail__main">
+      <h2>About our {{ service.title|lower }} service</h2>
+      <p class="detail__desc">{{ service.description }}</p>
+
+      <h3>What's included</h3>
+      <ul class="ticklist">
+        {% for point in service.points %}
+          <li>{{ icon("check", "icon icon--sm") }} {{ point }}</li>
+        {% endfor %}
+      </ul>
+
+      <div class="detail__promise">
+        <span class="feature__icon">{{ icon("shield") }}</span>
+        <p><strong>Our promise:</strong> upfront pricing, tidy work and a satisfaction guarantee on every {{ service.title|lower }} job.</p>
+      </div>
+    </div>
+
+    <aside class="detail__aside">
+      <div class="booking-card">
+        <h3>Book {{ service.title|lower }}</h3>
+        <p>Get a fast, no-obligation quote today.</p>
+        <a href="{{ url_for('contact', service=service.title) }}" class="btn btn--primary btn--block">Get a quote {{ icon("arrow", "icon icon--sm") }}</a>
+        <a href="https://wa.me/{{ whatsapp_number }}?text=Hi%2C%20I%20need%20{{ service.title|urlencode }}" target="_blank" rel="noopener" class="btn btn--whatsapp btn--block">{{ icon("whatsapp", "icon icon--sm") }} WhatsApp us</a>
+        <a href="tel:{{ contact_phone|replace(' ', '') }}" class="booking-card__phone">{{ icon("phone", "icon icon--sm") }} {{ contact_phone }}</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Explore more</span>
+      <h2 class="section__title">Other services</h2>
+    </div>
+    <div class="grid grid--services">
+      {% for s in others %}
+        <a class="service-card" href="{{ url_for('service_detail', slug=s.slug) }}">
+          <span class="service-card__icon">{{ icon(s.icon, "icon") }}</span>
+          <h3 class="service-card__title">{{ s.title }}</h3>
+          <p class="service-card__text">{{ s.short }}</p>
+          <span class="service-card__link">Learn more {{ icon("arrow", "icon icon--sm") }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

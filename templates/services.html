@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block title %}Our Services — {{ site_name }}{% endblock %}
+{% block description %}Explore all home maintenance services from {{ site_name }}: plumbing, electrical, AC, carpentry, painting, handyman, tiling and appliance repair across the UAE.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ url_for('index') }}">Home</a> <span>/</span> <span>Services</span>
+    </nav>
+    <h1 class="page-hero__title">Our services</h1>
+    <p class="page-hero__lead">One trusted team for every job around your home. Pick a service to see what's included and get a fast quote.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--services">
+      {% for s in services %}
+        <a class="service-card" href="{{ url_for('service_detail', slug=s.slug) }}">
+          <span class="service-card__icon">{{ icon(s.icon, "icon") }}</span>
+          <h3 class="service-card__title">{{ s.title }}</h3>
+          <p class="service-card__text">{{ s.short }}</p>
+          <span class="service-card__link">Learn more {{ icon("arrow", "icon icon--sm") }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta__inner">
+    <div>
+      <h2 class="cta__title">Not sure which service you need?</h2>
+      <p class="cta__sub">Tell us the problem — we'll point you to the right fix.</p>
+    </div>
+    <div class="cta__actions">
+      <a href="{{ url_for('contact') }}" class="btn btn--light btn--lg">Ask us anything</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

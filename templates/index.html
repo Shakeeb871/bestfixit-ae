@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <span class="eyebrow">{{ icon("shield", "icon icon--sm") }} Trusted across the UAE</span>
+      <h1 class="hero__title">Home repairs, done right<br>— the first time.</h1>
+      <p class="hero__lead">
+        Plumbing, electrical, AC, carpentry, painting and everything in between.
+        One call gets you a skilled, background-checked technician at your door — fast.
+      </p>
+      <div class="hero__actions">
+        <a href="{{ url_for('contact') }}" class="btn btn--primary btn--lg">Book a service {{ icon("arrow", "icon icon--sm") }}</a>
+        <a href="tel:{{ contact_phone|replace(' ', '') }}" class="btn btn--ghost btn--lg">{{ icon("phone", "icon icon--sm") }} {{ contact_phone }}</a>
+      </div>
+      <ul class="hero__trust">
+        <li>{{ icon("check", "icon icon--sm") }} Same-day availability</li>
+        <li>{{ icon("check", "icon icon--sm") }} Upfront, fair pricing</li>
+        <li>{{ icon("check", "icon icon--sm") }} Fully insured team</li>
+      </ul>
+    </div>
+
+    <div class="hero__card">
+      <div class="quick-quote">
+        <h2 class="quick-quote__title">Get a fast quote</h2>
+        <p class="quick-quote__sub">Tell us what you need — we reply within the hour.</p>
+        <form action="{{ url_for('contact') }}" method="get" class="quick-quote__form">
+          <label class="field">
+            <span class="field__label">Service</span>
+            <select name="service" class="field__input">
+              {% for s in services %}
+                <option value="{{ s.title }}">{{ s.title }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <button type="submit" class="btn btn--primary btn--block">Continue {{ icon("arrow", "icon icon--sm") }}</button>
+        </form>
+        <div class="quick-quote__meta">
+          {{ icon("star", "icon icon--sm star") }}{{ icon("star", "icon icon--sm star") }}{{ icon("star", "icon icon--sm star") }}{{ icon("star", "icon icon--sm star") }}{{ icon("star", "icon icon--sm star") }}
+          <span>Rated 4.9 / 5 by UAE homeowners</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<section class="strip">
+  <div class="container strip__inner">
+    <div class="strip__item"><span class="strip__num">8,500+</span><span class="strip__label">Jobs completed</span></div>
+    <div class="strip__item"><span class="strip__num">4.9★</span><span class="strip__label">Average rating</span></div>
+    <div class="strip__item"><span class="strip__num">60 min</span><span class="strip__label">Avg. response</span></div>
+    <div class="strip__item"><span class="strip__num">100%</span><span class="strip__label">Insured &amp; vetted</span></div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">What we do</span>
+      <h2 class="section__title">Every home service, one trusted team</h2>
+      <p class="section__sub">Skilled technicians for every job around the house — big or small.</p>
+    </div>
+
+    <div class="grid grid--services">
+      {% for s in services %}
+        <a class="service-card" href="{{ url_for('service_detail', slug=s.slug) }}">
+          <span class="service-card__icon">{{ icon(s.icon, "icon") }}</span>
+          <h3 class="service-card__title">{{ s.title }}</h3>
+          <p class="service-card__text">{{ s.short }}</p>
+          <span class="service-card__link">Learn more {{ icon("arrow", "icon icon--sm") }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Why choose us -->
+<section class="section section--alt">
+  <div class="container why">
+    <div class="why__copy">
+      <span class="eyebrow">Why {{ site_name }}</span>
+      <h2 class="section__title">Reliable people, honest prices</h2>
+      <p class="section__sub">We built {{ site_name }} to take the stress out of home repairs. No no-shows, no surprise bills — just quality work from people you can trust.</p>
+      <a href="{{ url_for('about') }}" class="btn btn--dark">More about us {{ icon("arrow", "icon icon--sm") }}</a>
+    </div>
+    <ul class="why__list">
+      <li class="feature">
+        <span class="feature__icon">{{ icon("user") }}</span>
+        <div><h3>Vetted professionals</h3><p>Every technician is background-checked, skilled and insured.</p></div>
+      </li>
+      <li class="feature">
+        <span class="feature__icon">{{ icon("wallet") }}</span>
+        <div><h3>Transparent pricing</h3><p>Clear quotes before we start. No hidden charges, ever.</p></div>
+      </li>
+      <li class="feature">
+        <span class="feature__icon">{{ icon("clock") }}</span>
+        <div><h3>On-time, every time</h3><p>We respect your schedule and show up when we say we will.</p></div>
+      </li>
+      <li class="feature">
+        <span class="feature__icon">{{ icon("shield") }}</span>
+        <div><h3>Work guaranteed</h3><p>Not happy? We'll make it right — your satisfaction is covered.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Simple &amp; fast</span>
+      <h2 class="section__title">How it works</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step__num">1</span><h3>Tell us the job</h3><p>Book online or on WhatsApp in under a minute.</p></div>
+      <div class="step"><span class="step__num">2</span><h3>Get a fast quote</h3><p>We confirm a fair, upfront price and a time that suits you.</p></div>
+      <div class="step"><span class="step__num">3</span><h3>We fix it</h3><p>A vetted pro arrives on time and gets it done right.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Loved by homeowners</span>
+      <h2 class="section__title">What our customers say</h2>
+    </div>
+    <div class="grid grid--reviews">
+      {% for t in testimonials %}
+        <figure class="review">
+          <div class="review__stars">
+            {% for _ in range(t.rating) %}{{ icon("star", "icon icon--sm star") }}{% endfor %}
+          </div>
+          <blockquote class="review__text">“{{ t.text }}”</blockquote>
+          <figcaption class="review__by">
+            <span class="review__avatar">{{ t.name[0] }}</span>
+            <span><strong>{{ t.name }}</strong><br><small>{{ t.area }}</small></span>
+          </figcaption>
+        </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container cta__inner">
+    <div>
+      <h2 class="cta__title">Need something fixed today?</h2>
+      <p class="cta__sub">Book in minutes. A friendly, skilled pro is closer than you think.</p>
+    </div>
+    <div class="cta__actions">
+      <a href="{{ url_for('contact') }}" class="btn btn--light btn--lg">Get a free quote</a>
+      <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener" class="btn btn--ghost-light btn--lg">{{ icon("whatsapp", "icon icon--sm") }} WhatsApp us</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

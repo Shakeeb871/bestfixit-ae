@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+
+{% block title %}About Us — {{ site_name }}{% endblock %}
+{% block description %}{{ site_name }} is the UAE's friendly, reliable home-maintenance team. Learn about our vetted professionals, honest pricing and satisfaction guarantee.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ url_for('index') }}">Home</a> <span>/</span> <span>About</span>
+    </nav>
+    <h1 class="page-hero__title">The home-repair team you can trust</h1>
+    <p class="page-hero__lead">We started {{ site_name }} with one goal: make fixing your home simple, honest and stress-free.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container about-grid">
+    <div class="about-grid__copy">
+      <span class="eyebrow">Our story</span>
+      <h2 class="section__title">Built on trust, one job at a time</h2>
+      <p>Finding a reliable handyman in the UAE shouldn't be hard. Too many people have waited around for no-shows or been surprised by the final bill. We built {{ site_name }} to be different — a single, dependable team you can call for anything around the home.</p>
+      <p>From a leaking tap to a full villa repaint, our technicians are skilled, background-checked and genuinely care about getting it right. We quote fairly, we show up on time, and we treat your home like our own.</p>
+      <a href="{{ url_for('contact') }}" class="btn btn--primary">Work with us {{ icon("arrow", "icon icon--sm") }}</a>
+    </div>
+    <ul class="stat-cards">
+      <li><span class="stat-cards__num">8,500+</span><span class="stat-cards__label">Jobs completed</span></li>
+      <li><span class="stat-cards__num">4.9★</span><span class="stat-cards__label">Customer rating</span></li>
+      <li><span class="stat-cards__num">5</span><span class="stat-cards__label">Emirates covered</span></li>
+      <li><span class="stat-cards__num">100%</span><span class="stat-cards__label">Vetted &amp; insured</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">What we stand for</span>
+      <h2 class="section__title">Our values</h2>
+    </div>
+    <div class="grid grid--values">
+      <div class="value"><span class="feature__icon">{{ icon("user") }}</span><h3>People first</h3><p>Friendly, respectful pros who listen and get the job done.</p></div>
+      <div class="value"><span class="feature__icon">{{ icon("wallet") }}</span><h3>Honest pricing</h3><p>Clear quotes upfront — you always know what you'll pay.</p></div>
+      <div class="value"><span class="feature__icon">{{ icon("clock") }}</span><h3>Respect for time</h3><p>We arrive when we say we will and work efficiently.</p></div>
+      <div class="value"><span class="feature__icon">{{ icon("shield") }}</span><h3>Quality guaranteed</h3><p>If it's not right, we fix it. Simple as that.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container cta__inner">
+    <div>
+      <h2 class="cta__title">Let's get your to-do list done</h2>
+      <p class="cta__sub">One call, one trusted team, every home service.</p>
+    </div>
+    <div class="cta__actions">
+      <a href="{{ url_for('contact') }}" class="btn btn--light btn--lg">Book a service</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

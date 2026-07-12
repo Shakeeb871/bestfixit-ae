@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Page not found — {{ site_name }}{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container narrow center">
+    <span class="big-404">404</span>
+    <h1 class="page-hero__title">We couldn't find that page</h1>
+    <p class="page-hero__lead">The link may be broken or the page may have moved. Let's get you back on track.</p>
+    <div class="hero__actions center-actions">
+      <a href="{{ url_for('index') }}" class="btn btn--primary btn--lg">Back to home</a>
+      <a href="{{ url_for('services') }}" class="btn btn--ghost btn--lg">Browse services</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
