@@ -51,6 +51,7 @@ from data.services import (
     SERVICES,
     TESTIMONIALS,
 )
+from data.stats import STATS
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -87,6 +88,7 @@ def inject_globals():
         "service_expertise": SERVICE_EXPERTISE,
         "testimonial_showcase": TESTIMONIAL_SHOWCASE,
         "blog": BLOG,
+        "stats": STATS,
     }
 
 
