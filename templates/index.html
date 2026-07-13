@@ -16,7 +16,7 @@
 .pxl-newsletter .pxl-item--title{ color:#fff; font-size:42px; font-weight:700; line-height:1.18; margin-bottom:20px; }
 .pxl-newsletter .pxl-item--description{ color:#c8c8c8; font-size:16px; line-height:1.6; max-width:440px; margin-bottom:32px; }
 .pxl-form--newsletter .tnp-field-email{ display:flex; max-width:460px; border-radius:10px; overflow:hidden; }
-.pxl-form--newsletter .tnp-email{ flex:1; border:none; outline:none; padding:20px 22px; font-size:16px; color:#333; background:#fff; }
+.pxl-form--newsletter .tnp-email{ flex:1; border:none; outline:none; padding:20px 22px; font-size:16px; color:#000; background:#fff; }
 .pxl-form--newsletter .tnp-email::placeholder{ color:#9a9a9a; }
 .pxl-form--newsletter .btn-newsletter{ border:none; cursor:pointer; background:var(--blue); color:#fff; font-size:16px; font-weight:600; padding:0 40px; transition:background .2s ease; }
 .pxl-form--newsletter .btn-newsletter:hover{ background:var(--red-dark); }
@@ -32,7 +32,7 @@
 .pxl-discount .pxl-item--meta .pxl-item--subtitle{ color:var(--gold); font-size:20px; font-weight:700; line-height:1; }
 .pxl-discount .pxl-item--meta .pxl-item--title{ color:#fff; font-size:44px; font-weight:800; line-height:1.05; }
 .pxl-discount .pxl-item--description{ background:#fff; padding:16px 16px 34px; clip-path:polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%); margin-bottom:16px; }
-.pxl-discount .pxl-item--description span{ color:#242424; font-size:14px; font-weight:500; line-height:1.35; display:block; text-align:left; }
+.pxl-discount .pxl-item--description span{ color:#000; font-size:14px; font-weight:500; line-height:1.35; display:block; text-align:left; }
 .pxl-discount .pxl-button--coupon .btn-45{ display:block; background:var(--gold); color:#fff; font-size:15px; font-weight:700; text-decoration:none; padding:13px 0; border-radius:6px; transition:background .2s ease; }
 .pxl-discount .pxl-button--coupon .btn-45:hover{ background:#1f9138; }
 @media(max-width:1200px){ .elementor-element-a2ef090 > .elementor-container{ grid-template-columns:1.3fr auto 170px; } .elementor-element-a2ef090::after{ right:30px; width:420px; } }
@@ -120,6 +120,15 @@
 .btn-skew:hover .bd.bottom{ width:80%; }
 .btn-skew:hover .bd.left{ height:80%; }
 @media (prefers-reduced-motion:reduce){ .btn-skew .bd{ transition:none !important; } }
+</style>
+<style id="global-typography">
+/* Site-wide content typography: black text at weight 400 / 17px on light
+   backgrounds. Text sitting on a coloured / dark background keeps the light
+   colour set on that section (those colours are not touched). Every heading
+   is rendered in Title Case (first letter of each word capitalised). */
+body{ color:#000; }
+p, li{ color:#000; font-size:17px !important; font-weight:400 !important; }
+h1, h2, h3, h4, h5, h6{ text-transform:capitalize !important; }
 </style>
 </head>
 <body>
@@ -222,7 +231,7 @@
 :root {
   --color-bg: #f3f2f2;
   --color-surface: #eae9e9;
-  --color-text: #201e1d;
+  --color-text: #000;
   --color-accent: #024d87;
   --color-accent-2: #2f5bb0;
   --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
@@ -236,7 +245,7 @@
   --color-neutral-500: #9b9797;
   --color-neutral-600: #7d7979;
   --color-neutral-700: #605d5d;
-  --color-neutral-800: #444141;
+  --color-neutral-800: #000;
   --color-neutral-900: #2d2b2b;
 
   --color-accent-100: #eef1f8;
@@ -506,9 +515,9 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     <a href="#top" style="flex:0 0 auto; display:inline-flex; align-items:center;"><img src="/static/img/logo.webp" alt="BEST FIX iT — Technical Services" style="height:66px; width:auto; display:block;"></a><button id="navToggle" type="button" aria-label="Menu" style="margin-left:auto; flex-direction:column; justify-content:center; gap:5px; width:44px; height:44px; border:0; background:transparent; cursor:pointer; padding:9px;"><span style="height:3px;width:100%;background:#024d87;border-radius:2px;display:block;"></span><span style="height:3px;width:100%;background:#024d87;border-radius:2px;display:block;"></span><span style="height:3px;width:100%;background:#024d87;border-radius:2px;display:block;"></span></button>
     <nav id="hdrNav" style="margin-left:auto; display:flex; align-items:center; gap:clamp(14px,2vw,28px); flex-wrap:wrap;">
       <a href="#top" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#024d87;">HOME</a>
-      <a href="#services" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#1a1a1a;" style-hover="color:#024d87">SERVICES <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></a>
-      <a href="#about" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#1a1a1a;" style-hover="color:#024d87">ABOUT</a>
-      <a href="#contact" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#1a1a1a;" style-hover="color:#024d87">CONTACT</a><a href="tel:0547393716" class="mob-call" style="display:none;">Call: 054 739 3716</a>
+      <a href="#services" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#000;" style-hover="color:#024d87">SERVICES <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></a>
+      <a href="#about" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#000;" style-hover="color:#024d87">ABOUT</a>
+      <a href="#contact" style="display:inline-flex; align-items:center; gap:5px; font-family:var(--font-heading); font-weight:700; font-size:14.5px; letter-spacing:.02em; color:#000;" style-hover="color:#024d87">CONTACT</a><a href="tel:0547393716" class="mob-call" style="display:none;">Call: 054 739 3716</a>
     </nav>
     <a href="tel:0547393716" class="callbtn"><span class="callbtn__inner"><span class="callbtn__label">Call for help:</span><span class="callbtn__num">054 739 3716</span></span></a>
   </div>
@@ -530,7 +539,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
       <p style="font-size:clamp(15px,1.5vw,17px); line-height:1.65; max-width:620px; margin:22px auto 0; color:rgba(255,255,255,.82);">Complete installation, repair and maintenance — plumbing, electrical, AC and carpentry — trusted across JVC, Dubai and the wider UAE.</p>
       <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:34px;">
         <a href="#services" class="btn-skew" style="display:inline-flex; align-items:center; gap:10px; background:#024d87; color:#fff; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#013a5e">Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
-        <a href="#contact" class="btn-skew btn-skew--outline" style="display:inline-flex; align-items:center; gap:10px; background:#fff; color:#1a1a1a; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#2db34a">Contact us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+        <a href="#contact" class="btn-skew btn-skew--outline" style="display:inline-flex; align-items:center; gap:10px; background:#fff; color:#000; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#2db34a">Contact us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
       </div>
     </div>
     <!-- slider arrows (decorative) -->
@@ -573,8 +582,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 clamp(20px,5vw,56px);">
     <!-- heading -->
     <div data-reveal="" style="text-align:center; max-width:840px; margin:0 auto clamp(44px,5vw,64px);">
-      <div style="font-family:var(--font-heading); font-weight:800; font-size:15px; letter-spacing:.04em; color:#1a1a1a; margin-bottom:14px;">About us</div>
-      <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,4.6vw,54px); line-height:1.1; letter-spacing:-.01em; margin:0; color:#1a1a1a;">Welcome to Best Fix<br><span style="color:#1a1a1a;">technical services</span></h2>
+      <div style="font-family:var(--font-heading); font-weight:800; font-size:15px; letter-spacing:.04em; color:#000; margin-bottom:14px;">About us</div>
+      <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(32px,4.6vw,54px); line-height:1.1; letter-spacing:-.01em; margin:0; color:#000;">Welcome to Best Fix<br><span style="color:#000;">technical services</span></h2>
     </div>
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr)); gap:clamp(40px,5vw,72px); align-items:start;">
@@ -582,35 +591,35 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
       <div data-reveal="">
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px;">
           <button type="button" data-bf-tab="0" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#024d87; color:#fff;">Why Choose us?<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:block;"></span></button>
-          <button type="button" data-bf-tab="1" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#f1f4f9; color:#1a1a1a;">Mission<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:none;"></span></button>
-          <button type="button" data-bf-tab="2" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#f1f4f9; color:#1a1a1a;">Company Goal<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:none;"></span></button>
+          <button type="button" data-bf-tab="1" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#f1f4f9; color:#000;">Mission<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:none;"></span></button>
+          <button type="button" data-bf-tab="2" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#f1f4f9; color:#000;">Company Goal<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:none;"></span></button>
         </div>
         <div data-bf-panel="0" style="display:block;">
           <ul style="list-style:none; margin:0; padding:0; display:grid; gap:18px;">
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#1a1a1a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Experienced, time-served technicians</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#1a1a1a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>A genuine commitment to customer service</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#1a1a1a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>We take the stress out of your project</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#1a1a1a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Flexibility in timing to suit you</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#1a1a1a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Service across Dubai and the wider UAE</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#1a1a1a;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Willing to go the extra mile for a quality job</li>
+            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Experienced, time-served technicians</li>
+            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>A genuine commitment to customer service</li>
+            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>We take the stress out of your project</li>
+            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Flexibility in timing to suit you</li>
+            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Service across Dubai and the wider UAE</li>
+            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Willing to go the extra mile for a quality job</li>
           </ul>
         </div>
         <div data-bf-panel="1" style="display:none;">
-          <p style="font-size:16px; line-height:1.75; margin:0 0 16px; color:#1a1a1a;">Our mission is simple: make reliable home maintenance effortless for every household in Dubai. We show up on time, quote honestly, and finish the job cleanly — so a fix stays fixed.</p>
-          <p style="font-size:16px; line-height:1.75; margin:0; color:#1a1a1a;">We invest in training and genuine parts because we'd rather earn the next call than win a one-off.</p>
+          <p style="font-size:16px; line-height:1.75; margin:0 0 16px; color:#000;">Our mission is simple: make reliable home maintenance effortless for every household in Dubai. We show up on time, quote honestly, and finish the job cleanly — so a fix stays fixed.</p>
+          <p style="font-size:16px; line-height:1.75; margin:0; color:#000;">We invest in training and genuine parts because we'd rather earn the next call than win a one-off.</p>
         </div>
         <div data-bf-panel="2" style="display:none;">
-          <p style="font-size:16px; line-height:1.75; margin:0 0 16px; color:#1a1a1a;">Our goal is to be the most trusted technical services team in the UAE — the number you save once and call for everything, from a dripping tap to a full renovation.</p>
-          <p style="font-size:16px; line-height:1.75; margin:0; color:#1a1a1a;">We grow through referrals, so every visit is a chance to prove it all over again.</p>
+          <p style="font-size:16px; line-height:1.75; margin:0 0 16px; color:#000;">Our goal is to be the most trusted technical services team in the UAE — the number you save once and call for everything, from a dripping tap to a full renovation.</p>
+          <p style="font-size:16px; line-height:1.75; margin:0; color:#000;">We grow through referrals, so every visit is a chance to prove it all over again.</p>
         </div>
       </div>
 
       <!-- RIGHT: copy + service experience + team member -->
       <div data-reveal="">
-        <p style="font-size:16px; line-height:1.8; margin:0 0 20px; color:#1a1a1a;">Best Fix should be your ‘first choice’ when it comes to a partner for specialist installations and building maintenance — with real expertise in Air Conditioning, Ventilation, Electrical services and Plumbing.</p>
-        <p style="font-size:16px; line-height:1.8; margin:0; color:#1a1a1a;">Although we're based in JVC, Dubai, we work with fit-out companies and contractors right across the Emirates.</p>
+        <p style="font-size:16px; line-height:1.8; margin:0 0 20px; color:#000;">Best Fix should be your ‘first choice’ when it comes to a partner for specialist installations and building maintenance — with real expertise in Air Conditioning, Ventilation, Electrical services and Plumbing.</p>
+        <p style="font-size:16px; line-height:1.8; margin:0; color:#000;">Although we're based in JVC, Dubai, we work with fit-out companies and contractors right across the Emirates.</p>
         <div style="margin-top:36px;">
-          <div style="font-family:var(--font-heading); font-weight:800; font-size:16px; color:#1a1a1a;">Service Experience</div>
+          <div style="font-family:var(--font-heading); font-weight:800; font-size:16px; color:#000;">Service Experience</div>
           <div style="height:8px; background:#eef1f7; margin-top:14px; overflow:hidden;"><div style="width:92%; height:100%; background:#024d87;"></div></div>
         </div>
       </div>
@@ -628,7 +637,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2__eyebrow{ font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em;
     text-transform:uppercase; color:#2c74c0; margin:0 0 14px; }
   .svc2__title{ font-family:var(--font-heading); font-weight:800; font-size:clamp(24px,2.8vw,34px);
-    line-height:1.2; letter-spacing:-.01em; margin:0; color:#1a2332; }
+    line-height:1.2; letter-spacing:-.01em; margin:0; color:#000; }
 
   /* ── slider ── */
   .svc2__slider{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,4vw,40px); }
@@ -663,7 +672,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2-card:focus-within .svc2-card__icon,
   .svc2-card.is-open .svc2-card__icon{ opacity:0; height:0; margin-bottom:0; }
 
-  .svc2-card__title{ position:relative; z-index:1; margin:0 0 12px; color:#1a2332; max-width:15ch;
+  .svc2-card__title{ position:relative; z-index:1; margin:0 0 12px; color:#000; max-width:15ch;
     font-family:var(--font-heading); font-weight:800; font-size:20px; line-height:1.28;
     transition:color .4s ease; }
   .svc2-card:hover .svc2-card__title,
@@ -671,7 +680,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2-card.is-open .svc2-card__title{ color:#fff; }
 
   .svc2-card__body{ position:relative; width:100%; min-height:132px; }
-  .svc2-card__desc{ margin:0; font-size:13.5px; line-height:1.7; color:#5b6472;
+  .svc2-card__desc{ margin:0; font-size:13.5px; line-height:1.7; color:#000;
     transition:opacity .35s ease, transform .35s ease; }
   .svc2-card:hover .svc2-card__desc,
   .svc2-card:focus-within .svc2-card__desc,
@@ -695,7 +704,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   /* ── stylish navigation ── */
   .svc2__nav{ display:flex; align-items:center; justify-content:center; gap:22px; margin-top:34px; }
   .svc2__arrow{ width:48px; height:48px; border-radius:50%; border:1.6px solid #cdd8e8; background:#fff;
-    color:#1a2332; display:grid; place-items:center; cursor:pointer; padding:0;
+    color:#000; display:grid; place-items:center; cursor:pointer; padding:0;
     transition:background-color .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease; }
   .svc2__arrow:hover{ background:#024d87; border-color:#024d87; color:#fff;
     box-shadow:0 12px 26px rgba(2,77,135,.3); }
@@ -772,8 +781,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 #bfc{
   --section-background:#eef2f8;
   --surface:#ffffff;
-  --primary-text:#1a1a1a;
-  --muted-text:#5b6472;
+  --primary-text:#000;
+  --muted-text:#000;
   --accent:#024d87;
   --accent-2:#2c74c0;
   --input-background:#f4f6fb;

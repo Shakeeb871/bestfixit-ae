@@ -370,3 +370,18 @@ a.info-card__row:hover strong { color: var(--accent); }
   .reveal { opacity: 1; transform: none; transition: none; }
   .btn:hover, .service-card:hover, .wa-float:hover { transform: none; }
 }
+
+/* ===== Global content typography ======================================= */
+/* Body copy is black at weight 400 / 17px on light backgrounds. Dark
+   sections (topbar, footer, CTA, info cards) set their own light text
+   colours explicitly, so they are unaffected. Headings render in Title
+   Case (first letter of each word capitalised). */
+:root{
+  --ink: #000;
+  --slate-700: #000;
+  --slate-500: #000;
+  --slate-400: #000;
+}
+body{ font-size: 17px; font-weight: 400; }
+p, li{ font-size: 17px; font-weight: 400; }
+h1, h2, h3, h4, h5, h6{ text-transform: capitalize; }
