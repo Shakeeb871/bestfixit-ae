@@ -55,6 +55,10 @@ from data.stats import STATS
 
 app = Flask(__name__)
 app.config.from_object(Config)
+# Re-read templates on every request so a git pull shows template changes
+# without needing a full app restart (cPanel/Passenger keeps the process alive).
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.jinja_env.auto_reload = True
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
