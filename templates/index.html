@@ -104,6 +104,16 @@
 .btn-skew:focus-visible{ outline:2px solid #024d87; outline-offset:4px; }
 .btn-skew svg{ flex:none; }
 .btn-skew--arrow::after{ content:"\2192"; font-size:16px; line-height:1; margin-left:1px; }
+/* border-draw hover animation (4 lines injected by JS), skewed to match the button */
+.btn-skew .bd-frame{ position:absolute; inset:0; z-index:1; pointer-events:none; transform:skewX(-11deg); }
+.btn-skew .bd{ position:absolute; background:#fff; }
+.btn-skew .bd.top{ top:0; right:0; width:0; height:2px; transition:width .35s ease; }
+.btn-skew .bd.right{ right:0; top:0; width:2px; height:0; transition:height .35s ease .1s; }
+.btn-skew .bd.bottom{ bottom:0; left:0; width:0; height:2px; transition:width .35s ease .2s; }
+.btn-skew .bd.left{ left:0; bottom:0; width:2px; height:0; transition:height .35s ease .3s; }
+.btn-skew:hover .bd.top, .btn-skew:hover .bd.bottom{ width:100%; }
+.btn-skew:hover .bd.right, .btn-skew:hover .bd.left{ height:100%; }
+@media (prefers-reduced-motion:reduce){ .btn-skew .bd{ transition:none !important; } }
 </style>
 </head>
 <body>
@@ -1266,6 +1276,16 @@ class Component extends DCLogic {
   var _tg=document.getElementById('navToggle'), _row=document.getElementById('hdrRow');
   if(_tg&&_row){ _tg.addEventListener('click',function(){ _row.classList.toggle('nav-open'); });
     _row.addEventListener('click',function(e){ if(e.target.closest('#hdrNav a')) _row.classList.remove('nav-open'); }); }
+
+  // border-draw hover animation: inject 4 line spans into every button
+  document.querySelectorAll('.btn-skew').forEach(function(b){
+    if(b.querySelector('.bd-frame')) return;
+    var f=document.createElement('span'); f.className='bd-frame'; f.setAttribute('aria-hidden','true');
+    ['top','right','bottom','left'].forEach(function(s){
+      var l=document.createElement('span'); l.className='bd '+s; f.appendChild(l);
+    });
+    b.appendChild(f);
+  });
 })();
 </script>
 </body></html>
