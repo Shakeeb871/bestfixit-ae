@@ -35,6 +35,7 @@ except ImportError:
     pass
 
 from config import Config
+from data.cta import CTA_BANNER
 from data.process import (
     PROCESS_EYEBROW_PRIMARY,
     PROCESS_EYEBROW_SECONDARY,
@@ -72,6 +73,14 @@ def inject_globals():
         "process_eyebrow_primary": PROCESS_EYEBROW_PRIMARY,
         "process_eyebrow_secondary": PROCESS_EYEBROW_SECONDARY,
         "process_title": PROCESS_TITLE,
+        "cta_badge": CTA_BANNER["badge"],
+        "cta_eyebrow": CTA_BANNER["eyebrow"],
+        "cta_title": CTA_BANNER["title"],
+        "cta_primary_label": CTA_BANNER["primary_label"],
+        "cta_primary_url": CTA_BANNER["primary_url"],
+        "cta_secondary_label": CTA_BANNER["secondary_label"],
+        "cta_secondary_url": CTA_BANNER["secondary_url"],
+        "cta_background": CTA_BANNER["background"],
     }
 
 
