@@ -1,0 +1,207 @@
+{#
+  Blog landing section — featured article + three related entries, with an
+  intro header and a commercial-services CTA banner. Layout/proportions
+  follow the reference; colours come from the site theme via CSS variables.
+  Grid + Flexbox only, semantic markup, no framework.
+#}
+{% set bl = blog %}
+
+<style id="blog-section-style">
+.blog-section{
+  --blog-text:#1a1a1a;
+  --blog-muted:#5b6472;
+  --blog-border:#e4e8f0;
+  --blog-accent:var(--color-accent,#024d87);
+  --blog-banner-bg:#1c2836;
+  --blog-banner-text:#ffffff;
+  --blog-btn-bg:var(--color-accent,#024d87);
+  --blog-cta-btn-bg:#2c74c0;
+
+  background:#ffffff; color:var(--blog-text);
+  padding:clamp(56px,7vw,80px) 0;
+  font-family:var(--font-body,inherit);
+}
+.blog-section__container{
+  max-width:1080px; margin:0 auto; padding-inline:clamp(16px,4vw,32px);
+}
+
+/* ---- top: intro + CTA banner ---- */
+.blog-section__top{
+  display:grid; grid-template-columns:1fr minmax(0,430px);
+  gap:clamp(24px,4vw,44px); align-items:start;
+}
+.blog-intro__label{
+  display:inline-block; color:var(--blog-accent);
+  font-weight:700; font-size:13px; margin-bottom:6px;
+}
+.blog-intro__title{
+  margin:0 0 12px; color:var(--blog-text);
+  font-family:var(--font-heading,inherit); font-weight:800;
+  font-size:clamp(28px,3.4vw,36px); line-height:1.1;
+}
+.blog-intro__title span{ color:var(--blog-accent); }
+.blog-intro__text{
+  margin:0; max-width:420px; color:var(--blog-muted);
+  font-size:13.5px; line-height:1.55;
+}
+.blog-cta{
+  margin-top:30px; box-sizing:border-box; min-height:78px;
+  display:flex; align-items:center; gap:20px;
+  background:var(--blog-banner-bg); color:var(--blog-banner-text);
+  padding:14px 18px;
+}
+.blog-cta__msg{ margin:0; font-size:12px; font-weight:700; line-height:1.4; }
+.blog-cta__btn{
+  flex:none; display:inline-flex; align-items:center; justify-content:center;
+  min-width:100px; height:39px; padding:0 14px; box-sizing:border-box;
+  background:var(--blog-cta-btn-bg); color:#fff; text-decoration:none;
+  font-weight:700; font-size:11px; border-radius:2px;
+  transition:filter .18s ease;
+}
+.blog-cta__btn:hover{ filter:brightness(1.08); }
+
+/* ---- main: featured + related ---- */
+.blog-section__main{
+  display:grid; grid-template-columns:1fr 1fr; gap:18px;
+  align-items:start; margin-top:clamp(40px,5vw,52px);
+}
+
+/* featured */
+.blog-featured__img{
+  width:100%; aspect-ratio:5 / 3; object-fit:cover; display:block; border-radius:2px;
+}
+.blog-featured__title{
+  margin:15px 0 0; color:var(--blog-text);
+  font-family:var(--font-heading,inherit); font-weight:800;
+  font-size:18px; line-height:1.25;
+}
+.blog-featured__meta{
+  display:flex; align-items:center; gap:18px; min-height:38px;
+  margin-top:12px; border-top:1px solid var(--blog-border);
+  border-bottom:1px solid var(--blog-border);
+  font-size:11px; color:var(--blog-muted);
+}
+.blog-featured__meta span{ display:inline-flex; align-items:center; gap:6px; }
+.blog-featured__meta svg{ width:13px; height:13px; flex:none; color:var(--blog-accent); }
+.blog-featured__excerpt{
+  margin:20px 0 0; color:var(--blog-muted);
+  font-size:13px; line-height:1.5;
+}
+.blog-featured__btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-top:16px; min-width:110px; height:35px; padding:0 16px; box-sizing:border-box;
+  background:var(--blog-btn-bg); color:#fff; text-decoration:none;
+  font-weight:700; font-size:11.5px; border-radius:2px;
+  transition:filter .18s ease;
+}
+.blog-featured__btn:hover{ filter:brightness(1.1); }
+
+/* related list */
+.blog-list{ display:flex; flex-direction:column; }
+.blog-item{
+  display:grid; grid-template-columns:132px 1fr; gap:18px; align-items:stretch;
+}
+.blog-item__img{
+  width:132px; aspect-ratio:132 / 125; object-fit:cover; display:block; border-radius:2px;
+}
+.blog-item__body{ display:flex; flex-direction:column; min-width:0; }
+.blog-item__title{
+  margin:0 0 8px; color:var(--blog-text);
+  font-family:var(--font-heading,inherit); font-weight:700;
+  font-size:15.5px; line-height:1.2;
+}
+.blog-item__excerpt{
+  margin:0; color:var(--blog-muted); font-size:12px; line-height:1.45;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.blog-item__more{
+  display:inline-flex; align-items:center; gap:6px; margin-top:auto; padding-top:12px;
+  color:var(--blog-text); font-weight:700; font-size:11px; text-decoration:none;
+}
+.blog-item__more svg{ width:9px; height:9px; fill:var(--blog-accent); }
+.blog-item__more:hover{ color:var(--blog-accent); }
+.blog-item__divider{
+  border:0; border-top:1px solid var(--blog-border); margin:20px 0;
+}
+.blog-list__foot{
+  margin:40px 0 0; font-size:12px; color:var(--blog-muted);
+}
+.blog-list__foot a{ color:var(--blog-text); font-weight:700; text-decoration:underline; }
+.blog-list__foot a:hover{ color:var(--blog-accent); }
+
+/* ---- responsive ---- */
+@media (max-width:800px){
+  .blog-section__top{ grid-template-columns:1fr; gap:26px; }
+  .blog-cta{ margin-top:0; width:100%; }
+  .blog-intro__text{ max-width:100%; }
+  .blog-section__main{ grid-template-columns:1fr; gap:44px; }
+}
+@media (max-width:520px){
+  .blog-cta{ flex-direction:column; align-items:flex-start; gap:14px; }
+  .blog-item{ grid-template-columns:110px 1fr; gap:14px; }
+  .blog-item__img{ width:110px; }
+}
+@media (max-width:480px){
+  .blog-item{ grid-template-columns:1fr; gap:12px; }
+  .blog-item__img{ width:100%; aspect-ratio:16 / 9; }
+}
+</style>
+
+<section class="blog-section" aria-labelledby="blog-heading">
+  <div class="blog-section__container">
+
+    <!-- intro + CTA -->
+    <div class="blog-section__top">
+      <header class="blog-intro">
+        <span class="blog-intro__label">{{ bl.label }}</span>
+        <h2 id="blog-heading" class="blog-intro__title">{{ bl.title_lead }} <span>{{ bl.title_accent }}</span></h2>
+        <p class="blog-intro__text">{{ bl.intro }}</p>
+      </header>
+      <aside class="blog-cta">
+        <p class="blog-cta__msg">{{ bl.cta_message }}</p>
+        <a class="blog-cta__btn" href="{{ bl.cta_button_url }}">{{ bl.cta_button_label }}</a>
+      </aside>
+    </div>
+
+    <!-- featured + related -->
+    <div class="blog-section__main">
+
+      <article class="blog-featured">
+        <img class="blog-featured__img" src="{{ bl.featured.image }}" alt="{{ bl.featured.image_alt }}"
+             width="510" height="306" loading="lazy">
+        <h3 class="blog-featured__title">{{ bl.featured.title }}</h3>
+        <div class="blog-featured__meta">
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><path d="M7 7h.01"></path></svg>
+            Tags: {{ bl.featured.tags }}
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Comment: {{ bl.featured.comments }}
+          </span>
+        </div>
+        <p class="blog-featured__excerpt">{{ bl.featured.excerpt }}</p>
+        <a class="blog-featured__btn" href="{{ bl.featured.url }}">Read More</a>
+      </article>
+
+      <aside class="blog-list" aria-label="More blog posts">
+        {% for post in bl.related %}
+        <article class="blog-item">
+          <img class="blog-item__img" src="{{ post.image }}" alt="{{ post.image_alt }}"
+               width="132" height="125" loading="lazy">
+          <div class="blog-item__body">
+            <h4 class="blog-item__title">{{ post.title }}</h4>
+            <p class="blog-item__excerpt">{{ post.excerpt }}</p>
+            <a class="blog-item__more" href="{{ post.url }}">Read More
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
+            </a>
+          </div>
+        </article>
+        {% if not loop.last %}<hr class="blog-item__divider">{% endif %}
+        {% endfor %}
+        <p class="blog-list__foot"><a href="{{ bl.foot_url }}">{{ bl.foot_link_label }}</a> {{ bl.foot_text }}</p>
+      </aside>
+
+    </div>
+  </div>
+</section>

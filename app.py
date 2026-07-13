@@ -35,6 +35,7 @@ except ImportError:
     pass
 
 from config import Config
+from data.blog import BLOG
 from data.cta import CTA_BANNER
 from data.expertise import SERVICE_EXPERTISE
 from data.process import (
@@ -85,6 +86,7 @@ def inject_globals():
         "cta_background": CTA_BANNER["background"],
         "service_expertise": SERVICE_EXPERTISE,
         "testimonial_showcase": TESTIMONIAL_SHOWCASE,
+        "blog": BLOG,
     }
 
 
