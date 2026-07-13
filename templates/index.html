@@ -642,14 +642,14 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   /* ── slider ── */
   .svc2__slider{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,4vw,40px); }
   .svc2__viewport{ overflow:hidden; padding-bottom:30px; }
-  .svc2__track{ position:relative; display:flex; align-items:stretch; gap:26px;
+  .svc2__track{ position:relative; display:flex; align-items:flex-start; gap:26px;
     transition:transform .6s cubic-bezier(.4,0,.2,1); will-change:transform; }
 
   /* outer card keeps overflow visible so the button can protrude below it */
-  .svc2-card{ flex:0 0 calc((100% - 52px) / 3); position:relative; display:flex; outline:none; }
+  .svc2-card{ flex:0 0 calc((100% - 52px) / 3); position:relative; display:flex; flex-direction:column; outline:none; }
   /* inner box clips the sliding overlay and carries the card surface */
-  .svc2-card__inner{ flex:1 1 auto; position:relative; overflow:hidden; z-index:0; background:#fff;
-    border-radius:14px; padding:28px 28px 44px; box-shadow:0 18px 40px rgba(20,40,80,.07);
+  .svc2-card__inner{ position:relative; overflow:hidden; z-index:0; background:#fff;
+    border-radius:14px; padding:28px 28px 30px; box-shadow:0 18px 40px rgba(20,40,80,.07);
     display:flex; flex-direction:column; align-items:flex-start; }
   .svc2-card__inner::before{ content:""; position:absolute; inset:0; z-index:-1; background:#024d87;
     transform:translateY(-101%); transition:transform .5s cubic-bezier(.4,0,.2,1); }
@@ -664,13 +664,12 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2-card:focus-within .svc2-card__num,
   .svc2-card.is-open .svc2-card__num{ color:rgba(255,255,255,.14); }
 
-  .svc2-card__icon{ display:block; height:40px; margin-bottom:15px; overflow:hidden; color:#2c74c0;
-    transition:color .4s ease, opacity .3s ease, height .45s cubic-bezier(.4,0,.2,1),
-      margin-bottom .45s cubic-bezier(.4,0,.2,1); }
+  .svc2-card__icon{ display:block; height:40px; margin-bottom:15px; color:#2c74c0;
+    transition:color .4s ease; }
   .svc2-card__icon svg{ width:40px; height:40px; display:block; }
   .svc2-card:hover .svc2-card__icon,
   .svc2-card:focus-within .svc2-card__icon,
-  .svc2-card.is-open .svc2-card__icon{ opacity:0; height:0; margin-bottom:0; }
+  .svc2-card.is-open .svc2-card__icon{ color:#fff; }
 
   .svc2-card__title{ position:relative; z-index:1; margin:0 0 10px; color:#000;
     font-family:var(--font-heading); font-weight:800; font-size:18px; line-height:1.22;
@@ -679,27 +678,14 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2-card:focus-within .svc2-card__title,
   .svc2-card.is-open .svc2-card__title{ color:#fff; }
 
-  .svc2-card__body{ position:relative; width:100%; min-height:112px; }
-  .svc2-card__desc{ margin:0; line-height:1.5; color:#000;
-    transition:opacity .35s ease, transform .35s ease; }
+  .svc2-card__body{ position:relative; width:100%; }
+  .svc2-card__desc{ margin:0; line-height:1.5; color:#000; transition:color .4s ease; }
   .svc2-card:hover .svc2-card__desc,
   .svc2-card:focus-within .svc2-card__desc,
-  .svc2-card.is-open .svc2-card__desc{ opacity:0; transform:translateY(-6px); }
-
-  .svc2-card__list{ position:absolute; inset:0; list-style:none; margin:0; padding:0;
-    display:flex; flex-direction:column; gap:8px; opacity:0; transition:opacity .35s ease .12s; }
-  .svc2-card:hover .svc2-card__list,
-  .svc2-card:focus-within .svc2-card__list,
-  .svc2-card.is-open .svc2-card__list{ opacity:1; }
-  .svc2-card__list li{ display:flex; align-items:flex-start; gap:11px; color:#fff;
-    font-size:14px; line-height:1.3; }
-  .svc2-card__list li::before{ content:""; width:15px; height:15px; margin-top:2px; flex:none;
-    background:rgba(255,255,255,.92);
-    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E") no-repeat center/contain;
-            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E") no-repeat center/contain; }
+  .svc2-card.is-open .svc2-card__desc{ color:#fff; }
 
   /* button protrudes past the inner box's bottom edge */
-  .svc2-card__cta.btn-skew{ position:absolute; left:30px; bottom:-20px; z-index:4; margin-top:0; }
+  .svc2-card__cta.btn-skew{ position:relative; z-index:4; align-self:flex-start; margin:-18px 0 0 28px; }
 
   /* ── stylish navigation ── */
   .svc2__nav{ display:flex; align-items:center; justify-content:center; gap:22px; margin-top:34px; }
@@ -723,9 +709,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     .svc2-card:hover .svc2-card__inner::before,
     .svc2-card:focus-within .svc2-card__inner::before,
     .svc2-card.is-open .svc2-card__inner::before{ transform:none; opacity:1; }
-    .svc2-card__icon{ transition:opacity .2s ease, color .2s ease; }
-    .svc2-card__desc{ transition:opacity .2s ease; }
-    .svc2-card__list{ transition:opacity .2s ease; }
+    .svc2-card__icon{ transition:color .2s ease; }
+    .svc2-card__desc{ transition:color .2s ease; }
   }
   </style>
   <div class="svc2__head" data-reveal>
@@ -743,9 +728,6 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
             <h3 class="svc2-card__title">{{ sv.title }}</h3>
             <div class="svc2-card__body">
               <p class="svc2-card__desc">{{ sv.desc }}</p>
-              <ul class="svc2-card__list">
-                {% for it in sv['items'] %}<li>{{ it }}</li>{% endfor %}
-              </ul>
             </div>
           </div>
           <a class="btn-skew svc2-card__cta" href="{{ sv.url }}">Get Offer
