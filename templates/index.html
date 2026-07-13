@@ -1064,27 +1064,9 @@ class Component extends DCLogic {
       rev.forEach((el) => ro.observe(el));
     }
 
-    // ── Our Services slider ──
-    const svcTrack = root.querySelector('[data-svc-track]');
-    if (svcTrack) {
-      const scount = svcTrack.children.length;
-      const sdots = [...root.querySelectorAll('[data-svc-dot]')];
-      let si = 0, stimer = null;
-      const sgo = (n) => {
-        si = (n + scount) % scount;
-        svcTrack.style.transform = 'translateX(-' + (si * 100) + '%)';
-        sdots.forEach((d, di) => {
-          d.style.background = di === si ? '#024d87' : '#c6d0e2';
-          d.style.width = di === si ? '26px' : '9px';
-        });
-      };
-      const srestart = () => { clearInterval(stimer); stimer = setInterval(() => sgo(si + 1), 5500); };
-      sdots.forEach((d, di) => d.addEventListener('click', () => { sgo(di); srestart(); }));
-      var sprev = root.querySelector('[data-svc-prev]'); if (sprev) sprev.addEventListener('click', () => { sgo(si - 1); srestart(); });
-      var snext = root.querySelector('[data-svc-next]'); if (snext) snext.addEventListener('click', () => { sgo(si + 1); srestart(); });
-      sgo(0);
-      srestart();
-    }
+    // ── Our Services slider is driven by the dedicated infinite-loop
+    //    carousel script further below (single source of truth) — do not
+    //    bind a second handler here or the two fight and misalign. ──
 
     // ── Testimonial carousel ──
     const track = root.querySelector('[data-tcar-track]');
