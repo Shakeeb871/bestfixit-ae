@@ -87,19 +87,23 @@
   font-size:clamp(26px,2.9vw,34px); line-height:1.2;
 }
 .testimonial-slide__quote{
-  margin:0 0 30px; color:var(--ts-text);
-  font-size:14.5px; line-height:1.8;
+  margin:0 0 26px; color:rgba(255,255,255,.86);
+  font-size:18px; line-height:1.75; font-style:italic;
   display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;
 }
-.testimonial-slide__rating{ display:flex; align-items:center; gap:16px; margin-bottom:26px; }
+/* google-style star rating */
+.testimonial-slide__rating{ display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.testimonial-slide__stars{ display:inline-flex; gap:3px; }
+.testimonial-slide__stars svg{ width:20px; height:20px; }
+.testimonial-slide__stars svg.is-on{ fill:#fbbc04; }
+.testimonial-slide__stars svg:not(.is-on){ fill:rgba(255,255,255,.22); }
 .testimonial-slide__score{
-  flex:none; border:1px solid var(--ts-circle-border); border-radius:4px;
-  padding:8px 12px; font-family:var(--font-heading,inherit); font-weight:700;
+  font-family:var(--font-heading,inherit); font-weight:700;
   font-size:16px; color:var(--ts-heading);
 }
-.testimonial-slide__meta{ display:flex; flex-direction:column; line-height:1.3; }
-.testimonial-slide__meta strong{ color:var(--ts-heading); font-size:15px; font-weight:700; }
-.testimonial-slide__meta small{ color:var(--ts-text); font-size:12.5px; margin-top:2px; }
+.testimonial-slide__meta{ display:flex; flex-direction:column; line-height:1.3; margin-bottom:24px; }
+.testimonial-slide__meta strong{ color:var(--ts-heading); font-size:16px; font-weight:700; }
+.testimonial-slide__meta small{ color:var(--ts-text); font-size:13px; margin-top:3px; }
 .testimonial-slide__link{
   display:inline-block; color:var(--ts-accent); font-weight:700; font-size:13px;
   text-decoration:underline; text-underline-offset:3px;
@@ -180,14 +184,20 @@
           <div class="testimonial-slide" data-slide>
             <div class="testimonial-slide__content">
               <h3 class="testimonial-slide__headline">{{ t.headline }}</h3>
-              <p class="testimonial-slide__quote">{{ t.quote }}</p>
+              <p class="testimonial-slide__quote">&ldquo;{{ t.quote }}&rdquo;</p>
+              {% set filled = t.rating | round(0, 'common') | int %}
               <div class="testimonial-slide__rating">
-                <span class="testimonial-slide__score">{{ t.rating }}</span>
-                <span class="testimonial-slide__meta">
-                  <strong>{{ t.name }}</strong>
-                  <small>{{ t.role }}</small>
+                <span class="testimonial-slide__stars" aria-label="Rated {{ '%.1f'|format(t.rating) }} out of 5">
+                  {% for n in range(5) %}
+                  <svg class="{{ 'is-on' if n < filled else '' }}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 7.1-1.01L12 2z"></path></svg>
+                  {% endfor %}
                 </span>
+                <span class="testimonial-slide__score">{{ '%.1f'|format(t.rating) }}</span>
               </div>
+              <span class="testimonial-slide__meta">
+                <strong>{{ t.name }}</strong>
+                <small>{{ t.role }}</small>
+              </span>
               {% if t.review_url %}
               <a class="testimonial-slide__link" href="{{ t.review_url }}">View All Review</a>
               {% endif %}
