@@ -99,6 +99,13 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/hero-demo")
+def hero_demo():
+    # Preview-only page (not linked from the homepage). Deploy to the
+    # homepage later on request.
+    return render_template("hero_demo.html")
+
+
 @app.route("/about")
 def about():
     return render_template("about.html")

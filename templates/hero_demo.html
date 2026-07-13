@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Hero Demo — Best Fix</title>
+<link rel="icon" href="/static/img/favicon.svg">
+<style>
+:root{
+  --hd-navy:#0d1f38; --hd-blue:#2c74c0; --hd-accent:#ffce38;
+  --hd-text:rgba(255,255,255,.82); --hd-heading:#ffffff;
+  --font-heading:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-body:system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{ box-sizing:border-box; }
+body{ margin:0; font-family:var(--font-body); background:var(--hd-navy); color:var(--hd-text); }
+img{ max-width:100%; }
+a{ text-decoration:none; }
+
+/* ── header / nav (pulse hover) ── */
+.hd-header{ position:absolute; top:0; left:0; right:0; z-index:10; }
+.hd-header__row{ max-width:1240px; margin:0 auto; padding:20px clamp(20px,4vw,44px);
+  display:flex; align-items:center; gap:24px; }
+.hd-logo{ display:inline-flex; background:#fff; padding:10px 16px; border-radius:10px; flex:none; }
+.hd-logo img{ height:40px; width:auto; display:block; }
+.hd-nav{ margin-left:auto; display:flex; align-items:center; gap:6px; }
+.hd-nav a{ position:relative; color:#fff; font-family:var(--font-heading); font-weight:600;
+  font-size:14px; letter-spacing:.02em; padding:10px 16px; border-radius:24px;
+  transition:color .2s ease, background .2s ease; }
+.hd-nav a:hover{ color:var(--hd-navy); background:var(--hd-accent);
+  animation:hd-pulse 1.1s ease-out infinite; }
+@keyframes hd-pulse{
+  0%{ box-shadow:0 0 0 0 rgba(255,206,56,.55); }
+  70%{ box-shadow:0 0 0 12px rgba(255,206,56,0); }
+  100%{ box-shadow:0 0 0 0 rgba(255,206,56,0); }
+}
+.hd-nav__cta{ margin-left:10px; background:var(--hd-accent); color:var(--hd-navy) !important;
+  font-family:var(--font-heading); font-weight:700; padding:12px 24px; border-radius:26px; }
+.hd-nav__cta:hover{ animation:hd-pulse 1.1s ease-out infinite; }
+.hd-burger{ display:none; margin-left:auto; width:44px; height:44px; border:0; background:transparent;
+  cursor:pointer; flex-direction:column; gap:5px; justify-content:center; align-items:center; }
+.hd-burger span{ width:24px; height:2.5px; background:#fff; border-radius:2px; }
+
+/* ── hero ── */
+.hd-hero{ position:relative; overflow:hidden; min-height:100vh;
+  display:flex; align-items:center;
+  background:linear-gradient(115deg, rgba(9,20,38,.94) 30%, rgba(13,42,84,.86) 100%),
+    url('/static/img/hero-team.webp') center/cover no-repeat; }
+.hd-hero__person{ position:absolute; left:clamp(-40px,2vw,40px); bottom:0; z-index:2;
+  height:88%; width:auto; max-width:44vw; object-fit:contain; object-position:bottom;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,.4)); pointer-events:none; }
+.hd-hero__inner{ position:relative; z-index:3; max-width:1240px; margin:0 auto; width:100%;
+  padding:120px clamp(20px,4vw,44px) 80px;
+  display:grid; grid-template-columns:1fr minmax(340px,400px); gap:clamp(30px,4vw,64px);
+  align-items:center; }
+
+/* center content */
+.hd-center{ text-align:center; max-width:600px; margin:0 auto; }
+.hd-eyebrow{ font-family:var(--font-heading); font-weight:700; font-size:13px;
+  letter-spacing:.32em; text-transform:uppercase; color:#fff; margin:0 0 20px; }
+.hd-title{ font-family:var(--font-heading); font-weight:800;
+  font-size:clamp(34px,4.4vw,56px); line-height:1.12; color:var(--hd-heading); margin:0 0 22px; }
+.hd-lead{ font-size:15px; line-height:1.75; color:var(--hd-text); margin:0 auto 34px; max-width:520px; }
+.hd-btn{ display:inline-flex; align-items:center; gap:9px; background:var(--hd-accent);
+  color:var(--hd-navy); font-family:var(--font-heading); font-weight:700; font-size:14px;
+  padding:15px 34px; border-radius:30px; border:0; cursor:pointer; transition:transform .18s ease, filter .18s ease; }
+.hd-btn:hover{ filter:brightness(1.05); transform:translateY(-2px); }
+.hd-dots{ display:flex; justify-content:center; gap:14px; margin-top:40px; }
+.hd-dots span{ width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.4); }
+.hd-dots span.on{ background:transparent; box-shadow:0 0 0 2px var(--hd-accent); position:relative; }
+.hd-dots span.on::after{ content:""; position:absolute; inset:2px; border-radius:50%; background:var(--hd-accent); }
+
+/* right form */
+.hd-form{ background:var(--hd-blue); border-radius:16px; padding:38px 34px;
+  box-shadow:0 30px 70px rgba(0,0,0,.35); color:#fff; }
+.hd-form h2{ font-family:var(--font-heading); font-weight:800; font-size:26px; margin:0 0 10px; color:#fff; }
+.hd-form p{ font-size:13px; line-height:1.6; color:rgba(255,255,255,.85); margin:0 0 26px; }
+.hd-form .fld{ position:relative; margin-bottom:26px; }
+.hd-form input, .hd-form select, .hd-form textarea{
+  width:100%; background:transparent; border:0; border-bottom:1.5px solid rgba(255,255,255,.4);
+  color:#fff; font:inherit; font-size:14px; padding:8px 0; outline:none; }
+.hd-form input::placeholder, .hd-form textarea::placeholder{ color:rgba(255,255,255,.7); }
+.hd-form input:focus, .hd-form select:focus, .hd-form textarea:focus{ border-bottom-color:var(--hd-accent); }
+.hd-form select{ appearance:none; -webkit-appearance:none; color:rgba(255,255,255,.7); cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23ffce38' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 2px center; padding-right:26px; }
+.hd-form select option{ color:#1a1a1a; }
+.hd-form textarea{ resize:none; min-height:56px; }
+.hd-form .submit{ display:block; margin:8px auto 0; background:var(--hd-accent); color:var(--hd-navy);
+  font-family:var(--font-heading); font-weight:700; font-size:14px; padding:14px 34px;
+  border:0; border-radius:30px; cursor:pointer; transition:transform .18s ease, filter .18s ease; }
+.hd-form .submit:hover{ filter:brightness(1.05); transform:translateY(-2px); }
+
+/* ── responsive ── */
+@media (max-width:1000px){
+  .hd-nav{ display:none; }
+  .hd-burger{ display:flex; }
+  .hd-hero__inner{ grid-template-columns:1fr; padding-top:110px; }
+  .hd-hero__person{ opacity:.18; height:70%; max-width:60vw; }
+  .hd-form{ max-width:440px; margin:0 auto; width:100%; }
+}
+@media (max-width:560px){
+  .hd-hero__person{ display:none; }
+  .hd-hero__inner{ padding:100px 20px 60px; }
+  .hd-form{ padding:30px 24px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hd-header">
+  <div class="hd-header__row">
+    <a class="hd-logo" href="/"><img src="/static/img/logo.webp" alt="Best Fix"></a>
+    <nav class="hd-nav">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">About</a>
+      <a href="#">Projects</a>
+      <a href="#">Contact</a>
+      <a href="#" class="hd-nav__cta">Get a Quote</a>
+    </nav>
+    <button class="hd-burger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hd-hero">
+  <img class="hd-hero__person" src="https://demo.casethemes.net/hardman/wp-content/uploads/2022/08/img-people1.png" alt="Maintenance technician">
+
+  <div class="hd-hero__inner">
+    <div class="hd-center">
+      <p class="hd-eyebrow">Lets Dive In</p>
+      <h1 class="hd-title">The Reliable<br>Maintenance Partner</h1>
+      <p class="hd-lead">From air-conditioning and plumbing to electrical and full home maintenance, our licensed Dubai technicians arrive on time, fix it right the first time, and leave your place spotless.</p>
+      <button class="hd-btn" type="button">Our Service
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </button>
+      <div class="hd-dots"><span></span><span></span><span class="on"></span></div>
+    </div>
+
+    <form class="hd-form" method="POST" action="/contact">
+      <h2>Contact Us</h2>
+      <p>Tell us what needs fixing and we'll get back to you within the hour with a clear, upfront quote.</p>
+      <div class="fld"><input type="text" name="name" placeholder="Your Name*" required></div>
+      <div class="fld"><input type="email" name="email" placeholder="Your Email*" required></div>
+      <div class="fld">
+        <select name="service" required>
+          <option value="" disabled selected hidden>Service Type</option>
+          <option>AC &amp; HVAC</option>
+          <option>Plumbing</option>
+          <option>Electrical</option>
+          <option>Handyman &amp; Repairs</option>
+          <option>Painting</option>
+          <option>Carpentry</option>
+        </select>
+      </div>
+      <div class="fld"><textarea name="message" placeholder="Problems" rows="2"></textarea></div>
+      <button class="submit" type="submit">Submit Inquiry</button>
+    </form>
+  </div>
+</section>
+
+</body>
+</html>
