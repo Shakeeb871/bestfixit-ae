@@ -36,6 +36,7 @@ except ImportError:
 
 from config import Config
 from data.cta import CTA_BANNER
+from data.expertise import SERVICE_EXPERTISE
 from data.process import (
     PROCESS_EYEBROW_PRIMARY,
     PROCESS_EYEBROW_SECONDARY,
@@ -81,6 +82,7 @@ def inject_globals():
         "cta_secondary_label": CTA_BANNER["secondary_label"],
         "cta_secondary_url": CTA_BANNER["secondary_url"],
         "cta_background": CTA_BANNER["background"],
+        "service_expertise": SERVICE_EXPERTISE,
     }
 
 

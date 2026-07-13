@@ -1,0 +1,211 @@
+{#
+  Service-expertise section — image + content ("We are Expert in All ...").
+  Reusable component: all copy, images, features, CTA and phone come from
+  `service_expertise`. Colours, buttons and type inherit from the site
+  theme (navy palette, not the reference orange). No JavaScript.
+#}
+{% set se = service_expertise %}
+{% set SE_ICONS = {
+  'check': '<path d="M20 6 9 17l-5-5"></path>'
+} %}
+
+<style id="service-expertise-style">
+.service-expertise{
+  --se-section-bg:#f4f6f9;
+  --se-surface:#ffffff;
+  --se-text:var(--color-text,#201e1d);
+  --se-muted:#5b6472;
+  --se-accent:var(--color-accent,#024d87);
+  --se-border:#e5e9f0;
+  --se-shadow:0 12px 30px rgba(2,77,135,.08);
+  --se-radius:14px;
+
+  position:relative; background:var(--se-section-bg);
+  padding:clamp(64px,8vw,88px) 0;
+  font-family:var(--font-body,inherit);
+}
+.service-expertise__container{
+  max-width:1160px; margin-inline:auto;
+  padding-inline:clamp(24px,4vw,32px);
+}
+.service-expertise__layout{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(60px,8vw,105px); align-items:center;
+}
+
+/* ---- left visual ---- */
+.service-expertise__visual{
+  position:relative; margin:0; max-width:460px; width:100%;
+}
+.service-expertise__main-image{
+  border-radius:var(--se-radius); overflow:hidden;
+  aspect-ratio:1.05 / 1; box-shadow:var(--se-shadow);
+}
+.service-expertise__main-image img{
+  width:100%; height:100%; object-fit:cover; object-position:center; display:block;
+}
+.service-expertise__secondary-image{
+  position:absolute; right:-84px; top:55%; z-index:2;
+  width:130px; height:130px; object-fit:cover; object-position:center;
+  border:4px solid var(--se-surface); border-radius:10px;
+  box-shadow:0 14px 30px rgba(2,77,135,.18);
+}
+
+/* ---- right content ---- */
+.service-expertise__content{ max-width:508px; }
+.service-expertise__eyebrow{
+  display:inline-flex; align-items:center; gap:6px; margin:0 0 24px;
+}
+.service-expertise__eyebrow b{
+  display:inline-block; padding:4px 8px; border-radius:3px;
+  background:var(--se-accent); color:#fff;
+  font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+}
+.service-expertise__eyebrow span{
+  color:var(--se-accent); font-size:10.5px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase;
+}
+.service-expertise__title{
+  margin:0 0 22px; color:var(--se-text);
+  font-family:var(--font-heading,inherit);
+  font-weight:800; font-size:clamp(29px,3.3vw,39px); line-height:1.18;
+  max-width:505px;
+}
+.service-expertise__title span{ color:var(--se-accent); display:block; }
+.service-expertise__description{
+  margin:0 0 28px; color:var(--se-muted);
+  font-size:14px; line-height:1.75; max-width:490px;
+}
+
+/* ---- features ---- */
+.service-expertise__features{
+  list-style:none; margin:0 0 44px; padding:0;
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;
+}
+.service-feature{
+  display:flex; align-items:center; gap:11px;
+  min-height:58px; box-sizing:border-box; padding:0 21px;
+  background:var(--se-surface); border:1px solid var(--se-border);
+  border-radius:10px; box-shadow:0 6px 16px rgba(2,77,135,.05);
+}
+.service-feature__icon{
+  flex:none; width:18px; height:18px; border-radius:50%;
+  background:var(--se-accent); color:#fff; display:grid; place-items:center;
+}
+.service-feature__icon svg{ width:11px; height:11px; }
+.service-feature__label{
+  color:var(--se-text); font-size:15px; font-weight:600; line-height:1.3;
+}
+
+/* ---- actions: CTA + phone ---- */
+.service-expertise__actions{
+  display:flex; align-items:center; gap:36px; flex-wrap:wrap;
+}
+.service-expertise__cta.btn{ min-height:45px; padding-inline:26px; font-size:13px; gap:8px; }
+.service-expertise__cta svg{ width:15px; height:15px; }
+.service-phone{
+  display:inline-flex; align-items:center; gap:14px;
+  text-decoration:none; color:inherit;
+}
+.service-phone__icon{
+  flex:none; width:58px; height:58px; border-radius:50%;
+  border:1.5px solid var(--se-border); display:grid; place-items:center;
+}
+.service-phone__dot{
+  width:44px; height:44px; border-radius:50%;
+  background:var(--se-accent); color:#fff; display:grid; place-items:center;
+}
+.service-phone__dot svg{ width:19px; height:19px; }
+.service-phone__text{ display:flex; flex-direction:column; line-height:1.2; }
+.service-phone__text small{ color:var(--se-muted); font-size:12.5px; margin-bottom:3px; }
+.service-phone__text strong{
+  color:var(--se-text); font-size:16px; font-weight:700; white-space:nowrap;
+}
+.service-phone:focus-visible{ outline:2px solid var(--se-accent); outline-offset:4px; border-radius:8px; }
+
+/* ---- responsive ---- */
+@media (max-width:1100px){
+  .service-expertise__layout{ gap:64px; }
+  .service-expertise__secondary-image{ right:-56px; width:114px; height:114px; }
+}
+@media (max-width:900px){
+  .service-expertise__layout{ grid-template-columns:1fr; gap:78px; justify-items:center; }
+  .service-expertise__visual{ max-width:560px; }
+  .service-expertise__secondary-image{ right:-24px; width:118px; height:118px; }
+  .service-expertise__content{ max-width:600px; width:100%; }
+}
+@media (max-width:640px){
+  .service-expertise{ padding:62px 0; }
+  .service-expertise__container{ padding-inline:20px; }
+  .service-expertise__title{ font-size:clamp(29px,7.5vw,35px); max-width:100%; }
+  .service-expertise__title span{ display:inline; }
+  .service-expertise__secondary-image{
+    right:14px; top:auto; bottom:14px; width:96px; height:96px; border-width:3px;
+  }
+  .service-expertise__features{ grid-template-columns:1fr; }
+  .service-expertise__actions{ flex-direction:column; align-items:flex-start; gap:26px; }
+  .service-expertise__cta.btn{ width:min(100%,260px); }
+}
+</style>
+
+<section class="service-expertise" aria-labelledby="expertise-heading">
+  <div class="service-expertise__container">
+    <div class="service-expertise__layout">
+
+      <figure class="service-expertise__visual">
+        <div class="service-expertise__main-image">
+          <img src="{{ se.main_image }}" alt="{{ se.main_image_alt }}"
+               width="460" height="438" loading="lazy">
+        </div>
+        <img class="service-expertise__secondary-image"
+             src="{{ se.secondary_image }}" alt="{{ se.secondary_image_alt }}"
+             width="130" height="130" loading="lazy">
+      </figure>
+
+      <div class="service-expertise__content">
+        <p class="service-expertise__eyebrow">
+          <b>{{ se.eyebrow_badge }}</b>
+          <span>{{ se.eyebrow_text }}</span>
+        </p>
+        <h2 id="expertise-heading" class="service-expertise__title">
+          {{ se.title_lead }} <span>{{ se.title_highlight }}</span>
+        </h2>
+        <p class="service-expertise__description">{{ se.description }}</p>
+
+        <ul class="service-expertise__features">
+          {% for f in se.features %}
+          <li class="service-feature">
+            <span class="service-feature__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                   stroke-linecap="round" stroke-linejoin="round">{{ SE_ICONS.get(f.icon, SE_ICONS['check'])|safe }}</svg>
+            </span>
+            <span class="service-feature__label">{{ f.label }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+
+        <div class="service-expertise__actions">
+          <a class="btn btn-primary service-expertise__cta" href="{{ se.cta_url }}">
+            {{ se.cta_label }}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
+          </a>
+          <a class="service-phone" href="tel:{{ se.phone_tel }}"
+             aria-label="Call us for service at {{ se.phone_display }}">
+            <span class="service-phone__icon" aria-hidden="true">
+              <span class="service-phone__dot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </span>
+            </span>
+            <span class="service-phone__text">
+              <small>{{ se.phone_label }}</small>
+              <strong>{{ se.phone_display }}</strong>
+            </span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
