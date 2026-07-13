@@ -690,6 +690,218 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 </section>
 
 
+
+<!-- ═══════════════ SERVICE CONSULTATION ═══════════════ -->
+<style id="bfc-style">
+#bfc{
+  --section-background:#eef2f8;
+  --surface:#ffffff;
+  --primary-text:#1a1a1a;
+  --muted-text:#5b6472;
+  --accent:#024d87;
+  --accent-2:#2c74c0;
+  --input-background:#f4f6fb;
+  --border-color:#e3e8f1;
+  --shadow:0 30px 70px rgba(2,77,135,.16);
+  position:relative; overflow:hidden; isolation:isolate;
+  background:var(--section-background);
+  padding:clamp(60px,9vw,100px) 0;
+  font-family:var(--font-body,inherit);
+}
+/* decorative geometric background shapes */
+#bfc::before,#bfc::after{ content:""; position:absolute; z-index:0; pointer-events:none; }
+#bfc::before{ right:-140px; top:60px; width:520px; height:520px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); opacity:.05;
+  clip-path:polygon(28% 0,100% 22%,74% 100%,0 70%); }
+#bfc::after{ left:38%; bottom:-120px; width:360px; height:360px;
+  background:var(--accent); opacity:.04;
+  clip-path:polygon(50% 0,100% 100%,0 100%); }
+#bfc .bfc-shape{ position:absolute; right:-60px; bottom:40px; width:240px; height:240px;
+  border:2px solid var(--accent); opacity:.05; transform:rotate(18deg); z-index:0; pointer-events:none; }
+#bfc .bfc-wrap{ position:relative; z-index:2; max-width:1180px; margin:0 auto;
+  padding:0 clamp(20px,5vw,48px);
+  display:grid; grid-template-columns:minmax(0,1.18fr) minmax(0,0.92fr);
+  gap:clamp(28px,4vw,56px); align-items:start; }
+
+/* ---- LEFT column ---- */
+#bfc .bfc-eyebrow{ display:inline-flex; align-items:center; gap:10px; margin-bottom:22px; }
+#bfc .bfc-eyebrow i{ display:block; width:34px; height:24px; border-radius:4px;
+  background:var(--accent); }
+#bfc .bfc-eyebrow span{ font-size:11px; letter-spacing:.22em; text-transform:uppercase;
+  font-weight:700; color:var(--accent); }
+#bfc .bfc-h2{ margin:0 0 22px; font-family:var(--font-heading,inherit);
+  font-weight:800; font-size:clamp(30px,3.4vw,46px); line-height:1.2;
+  color:var(--primary-text); max-width:560px; }
+#bfc .bfc-h2 span{ color:var(--accent); }
+#bfc .bfc-h2 br{ display:block; }
+#bfc .bfc-lead{ margin:0 0 34px; max-width:530px; font-size:15px; line-height:1.75;
+  color:var(--muted-text); }
+#bfc .bfc-cards{ display:flex; gap:16px; flex-wrap:wrap; }
+#bfc .bfc-stat{ width:150px; min-height:176px; box-sizing:border-box;
+  background:var(--surface); border:1px solid var(--border-color); border-radius:8px;
+  padding:26px 16px; text-align:center; box-shadow:0 14px 30px rgba(2,77,135,.06);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
+#bfc .bfc-stat .ic{ width:60px; height:60px; border-radius:50%;
+  border:1.6px solid var(--accent); color:var(--accent);
+  display:grid; place-items:center; }
+#bfc .bfc-stat b{ font-family:var(--font-heading,inherit); font-weight:800;
+  font-size:28px; color:var(--primary-text); line-height:1; }
+#bfc .bfc-stat small{ font-size:12px; color:var(--muted-text); letter-spacing:.02em; }
+#bfc .bfc-imgcard{ width:228px; min-height:176px; border-radius:8px; overflow:hidden;
+  background:var(--surface); border:1px solid var(--border-color); padding:9px;
+  box-shadow:0 14px 30px rgba(2,77,135,.06); }
+#bfc .bfc-imgcard img{ width:100%; height:100%; min-height:158px; object-fit:cover;
+  border-radius:6px; display:block; }
+
+/* ---- RIGHT column: appointment form ---- */
+#bfc .bfc-formwrap{ position:relative; margin-top:80px; }
+#bfc .bfc-form{ position:relative; box-sizing:border-box; width:100%; max-width:452px;
+  min-height:568px; margin-left:auto;
+  background:linear-gradient(160deg,#024d87,#013a63);
+  color:#fff; border-radius:12px;
+  padding:74px 40px 64px 62px;
+  box-shadow:var(--shadow);
+  clip-path:polygon(34px 0,100% 0,100% 100%,0 100%); }
+#bfc .bfc-form h3{ margin:0 0 20px; font-family:var(--font-heading,inherit);
+  font-weight:800; font-size:27px; line-height:1.25; color:#fff; }
+#bfc .bfc-form p{ margin:0 0 32px; font-size:14px; line-height:1.7; color:rgba(255,255,255,.72); }
+#bfc .bfc-field{ margin-bottom:16px; }
+#bfc .bfc-row{ display:flex; gap:12px; }
+#bfc .bfc-row .bfc-field{ flex:1; min-width:0; margin-bottom:16px; }
+#bfc .bfc-form input,#bfc .bfc-form select{
+  width:100%; box-sizing:border-box; height:46px; padding:0 18px;
+  border:1px solid transparent; border-radius:24px;
+  background:var(--input-background); color:var(--primary-text);
+  font-size:13px; font-family:inherit; outline:none; transition:box-shadow .2s,border-color .2s; }
+#bfc .bfc-form input::placeholder{ color:#8a93a3; font-size:12px; }
+#bfc .bfc-form input:focus,#bfc .bfc-form select:focus{
+  border-color:var(--accent-2); box-shadow:0 0 0 3px rgba(44,116,192,.28); }
+#bfc .bfc-form select{ appearance:none; -webkit-appearance:none; color:#8a93a3; cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a93a3' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 16px center; padding-right:38px; }
+#bfc .bfc-form select.filled,#bfc .bfc-form select:valid{ color:var(--primary-text); }
+#bfc .bfc-form input[type=date]{ color:#8a93a3; }
+#bfc .bfc-form input[type=date].filled{ color:var(--primary-text); }
+#bfc .bfc-form input[type=date]::-webkit-calendar-picker-indicator{ opacity:.5; cursor:pointer; }
+#bfc .bfc-form button{ width:100%; height:47px; margin-top:6px; border:0; cursor:pointer;
+  border-radius:24px; background:var(--accent-2); color:#fff;
+  font-size:13px; font-weight:700; letter-spacing:.04em; font-family:inherit;
+  transition:background .2s,transform .12s; box-shadow:0 12px 26px rgba(44,116,192,.4); }
+#bfc .bfc-form button:hover{ background:#3a82d0; transform:translateY(-1px); }
+
+/* ---- responsive ---- */
+@media (max-width:1100px){
+  #bfc .bfc-wrap{ grid-template-columns:1fr; gap:44px; justify-items:center; }
+  #bfc .bfc-left{ max-width:620px; width:100%; }
+  #bfc .bfc-formwrap{ margin-top:8px; width:100%; max-width:540px; }
+  #bfc .bfc-form{ margin-left:auto; margin-right:auto; }
+  #bfc .bfc-h2 br{ display:none; }
+}
+@media (max-width:640px){
+  #bfc{ padding:60px 0; }
+  #bfc .bfc-wrap{ padding:0 20px; }
+  #bfc .bfc-h2{ font-size:clamp(28px,8vw,36px); }
+  #bfc .bfc-lead{ max-width:100%; }
+  #bfc .bfc-cards{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  #bfc .bfc-stat{ width:100%; }
+  #bfc .bfc-imgcard{ width:100%; grid-column:1 / -1; min-height:150px; }
+  #bfc .bfc-formwrap{ margin-top:0; }
+  #bfc .bfc-form{ clip-path:none; padding:32px 26px; min-height:0; border-radius:12px; }
+  #bfc .bfc-form h3{ font-size:24px; }
+  #bfc .bfc-row{ flex-direction:column; gap:0; }
+  #bfc::before,#bfc::after,#bfc .bfc-shape{ display:none; }
+}
+</style>
+
+<section id="bfc" data-screen-label="Consultation">
+  <span class="bfc-shape" aria-hidden="true"></span>
+  <div class="bfc-wrap">
+
+    <!-- LEFT: content -->
+    <div class="bfc-left">
+      <div class="bfc-eyebrow"><i></i><span>Book A Service</span></div>
+      <h2 class="bfc-h2">Get Your All Kind Of Handy <br>Solution <span>From Us</span></h2>
+      <p class="bfc-lead">From air-conditioning tune-ups to full home maintenance, our licensed Dubai technicians arrive on time, fix it right the first time, and leave your place spotless. One trusted team for every job around the house.</p>
+      <div class="bfc-cards">
+        <div class="bfc-stat">
+          <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+          <b>15+</b>
+          <small>Years Of Experience</small>
+        </div>
+        <div class="bfc-stat">
+          <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
+          <b>2500+</b>
+          <small>Happy Customers</small>
+        </div>
+        <div class="bfc-imgcard">
+          <img src="/static/img/hero-team.webp" alt="Best Fix technician on a home service call" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: appointment form -->
+    <div class="bfc-formwrap">
+      <form class="bfc-form" method="POST" action="/contact" novalidate>
+        <h3>Pick The Service You Want</h3>
+        <p>Tell us what needs fixing and a convenient date — we'll confirm your appointment within the hour.</p>
+
+        <div class="bfc-field">
+          <label for="bfc-name" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your Name</label>
+          <input id="bfc-name" name="name" type="text" placeholder="Your Name" required>
+        </div>
+
+        <div class="bfc-row">
+          <div class="bfc-field">
+            <label for="bfc-phone" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Phone Number</label>
+            <input id="bfc-phone" name="phone" type="tel" placeholder="Phone Number" required>
+          </div>
+          <div class="bfc-field">
+            <label for="bfc-service" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Select Service</label>
+            <select id="bfc-service" name="service" required>
+              <option value="" disabled selected hidden>Select Service</option>
+              <option>AC &amp; HVAC</option>
+              <option>Plumbing</option>
+              <option>Electrical</option>
+              <option>Handyman &amp; Repairs</option>
+              <option>Painting</option>
+              <option>Carpentry</option>
+              <option>Appliance Repair</option>
+              <option>Home Renovation</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bfc-field">
+          <label for="bfc-date" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Inspection Date</label>
+          <input id="bfc-date" name="date" type="date" placeholder="Inspection Date" required>
+        </div>
+
+        <div class="bfc-field">
+          <label for="bfc-address" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your Address</label>
+          <input id="bfc-address" name="address" type="text" placeholder="Your Address" required>
+        </div>
+
+        <input type="hidden" name="message" value="">
+        <button type="submit">Get Schedule</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+<script>
+(function(){
+  var f=document.querySelector('#bfc .bfc-form'); if(!f) return;
+  var sel=f.querySelector('#bfc-service'), dt=f.querySelector('#bfc-date');
+  if(sel) sel.addEventListener('change',function(){ this.classList.toggle('filled', !!this.value); });
+  if(dt) dt.addEventListener('change',function(){ this.classList.toggle('filled', !!this.value); });
+  f.addEventListener('submit',function(){
+    var d=(dt&&dt.value)||'', a=(f.querySelector('#bfc-address')||{}).value||'';
+    var m=f.querySelector('input[name=message]');
+    if(m) m.value='Consultation request — Inspection date: '+d+' | Address: '+a;
+  });
+})();
+</script>
+
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer id="contact" style="background:var(--color-text); color:var(--color-bg);">
   <div style="max-width:1240px; margin:0 auto; padding:clamp(56px,7vw,88px) clamp(20px,5vw,72px) 0;">
