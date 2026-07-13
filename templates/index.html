@@ -622,7 +622,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 
 <section id="services" data-screen-label="Services" class="svc2">
   <style id="svc2-style">
-  .svc2{ position:relative; background:#f4f6f9; padding:clamp(56px,7vw,84px) 0; overflow:hidden; }
+  .svc2{ position:relative; background:#f4f6f9; overflow:hidden;
+    padding:clamp(56px,7vw,84px) 0 clamp(74px,8vw,104px); }
   .svc2__head{ text-align:center; max-width:760px; margin:0 auto clamp(34px,4vw,48px); padding:0 20px; }
   .svc2__eyebrow{ font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em;
     text-transform:uppercase; color:#2c74c0; margin:0 0 14px; }
@@ -630,88 +631,98 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     line-height:1.2; letter-spacing:-.01em; margin:0; color:#1a2332; }
   .svc2__grid{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,4vw,40px);
     display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
-  .svc2-card{ position:relative; overflow:hidden; z-index:0; background:#fff; border-radius:14px;
-    padding:38px 30px; box-shadow:0 18px 40px rgba(20,40,80,.07);
+
+  /* outer card keeps overflow visible so the button can protrude below it */
+  .svc2-card{ position:relative; outline:none; }
+  /* inner box clips the sliding overlay and carries the card surface */
+  .svc2-card__inner{ position:relative; overflow:hidden; z-index:0; background:#fff; border-radius:14px;
+    min-height:440px; padding:38px 32px 66px; box-shadow:0 18px 40px rgba(20,40,80,.07);
     display:flex; flex-direction:column; align-items:flex-start; }
-  .svc2-card::before{ content:""; position:absolute; inset:0; z-index:-1; background:#024d87;
+  .svc2-card__inner::before{ content:""; position:absolute; inset:0; z-index:-1; background:#024d87;
     transform:translateY(-101%); transition:transform .5s cubic-bezier(.4,0,.2,1); }
-  .svc2-card:hover::before{ transform:translateY(0); }
-  .svc2-card__num{ position:absolute; top:16px; right:26px; font-family:var(--font-heading); font-weight:800;
-    font-size:66px; line-height:1; color:rgba(20,40,80,.06); transition:color .4s ease; pointer-events:none; }
-  .svc2-card:hover .svc2-card__num{ color:rgba(255,255,255,.14); }
-  .svc2-card__icon{ color:#2c74c0; margin-bottom:22px; transition:color .4s ease; }
-  .svc2-card__icon svg{ width:46px; height:46px; }
-  .svc2-card:hover .svc2-card__icon{ color:#fff; }
-  .svc2-card__title{ margin:0 0 14px; font-family:var(--font-heading); font-weight:800; font-size:22px;
-    color:#1a2332; transition:color .4s ease; }
-  .svc2-card:hover .svc2-card__title{ color:#fff; }
-  .svc2-card__body{ position:relative; width:100%; min-height:150px; margin-bottom:24px; }
-  .svc2-card__desc{ margin:0; font-size:14px; line-height:1.7; color:#5b6472; transition:opacity .35s ease; }
-  .svc2-card:hover .svc2-card__desc{ opacity:0; }
+  .svc2-card:hover .svc2-card__inner::before,
+  .svc2-card:focus-within .svc2-card__inner::before,
+  .svc2-card.is-open .svc2-card__inner::before{ transform:translateY(0); }
+
+  .svc2-card__num{ position:absolute; top:14px; right:26px; z-index:1; pointer-events:none;
+    font-family:var(--font-heading); font-weight:800; font-size:78px; line-height:1;
+    color:rgba(20,40,80,.06); transition:color .45s ease; }
+  .svc2-card:hover .svc2-card__num,
+  .svc2-card:focus-within .svc2-card__num,
+  .svc2-card.is-open .svc2-card__num{ color:rgba(255,255,255,.14); }
+
+  .svc2-card__icon{ display:block; height:46px; margin-bottom:22px; overflow:hidden; color:#2c74c0;
+    transition:color .4s ease, opacity .3s ease, height .45s cubic-bezier(.4,0,.2,1),
+      margin-bottom .45s cubic-bezier(.4,0,.2,1); }
+  .svc2-card__icon svg{ width:46px; height:46px; display:block; }
+  .svc2-card:hover .svc2-card__icon,
+  .svc2-card:focus-within .svc2-card__icon,
+  .svc2-card.is-open .svc2-card__icon{ opacity:0; height:0; margin-bottom:0; }
+
+  .svc2-card__title{ position:relative; z-index:1; margin:0 0 14px; color:#1a2332;
+    font-family:var(--font-heading); font-weight:800; font-size:22px; transition:color .4s ease; }
+  .svc2-card:hover .svc2-card__title,
+  .svc2-card:focus-within .svc2-card__title,
+  .svc2-card.is-open .svc2-card__title{ color:#fff; }
+
+  .svc2-card__body{ position:relative; width:100%; min-height:150px; }
+  .svc2-card__desc{ margin:0; font-size:14px; line-height:1.7; color:#5b6472;
+    transition:opacity .35s ease, transform .35s ease; }
+  .svc2-card:hover .svc2-card__desc,
+  .svc2-card:focus-within .svc2-card__desc,
+  .svc2-card.is-open .svc2-card__desc{ opacity:0; transform:translateY(-6px); }
+
   .svc2-card__list{ position:absolute; inset:0; list-style:none; margin:0; padding:0;
-    display:flex; flex-direction:column; gap:11px; opacity:0; transition:opacity .35s ease .12s; }
-  .svc2-card:hover .svc2-card__list{ opacity:1; }
-  .svc2-card__list li{ display:flex; align-items:center; gap:10px; color:#fff; font-size:14px; }
-  .svc2-card__list li::before{ content:""; width:15px; height:15px; flex:none; background:rgba(255,255,255,.92);
+    display:flex; flex-direction:column; gap:12px; opacity:0; transition:opacity .35s ease .12s; }
+  .svc2-card:hover .svc2-card__list,
+  .svc2-card:focus-within .svc2-card__list,
+  .svc2-card.is-open .svc2-card__list{ opacity:1; }
+  .svc2-card__list li{ display:flex; align-items:flex-start; gap:11px; color:#fff;
+    font-size:14.5px; line-height:1.45; }
+  .svc2-card__list li::before{ content:""; width:16px; height:16px; margin-top:2px; flex:none;
+    background:rgba(255,255,255,.92);
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E") no-repeat center/contain;
             mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E") no-repeat center/contain; }
-  .svc2-card .btn-skew{ margin-top:auto; }
-  @media (max-width:900px){ .svc2__grid{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:600px){ .svc2__grid{ grid-template-columns:1fr; } }
+
+  /* button protrudes past the inner box's bottom edge */
+  .svc2-card__cta.btn-skew{ position:absolute; left:32px; bottom:-22px; z-index:4; margin-top:0; }
+
+  @media (max-width:900px){ .svc2__grid{ grid-template-columns:1fr 1fr; gap:56px 26px; } }
+  @media (max-width:600px){ .svc2__grid{ grid-template-columns:1fr; gap:52px; }
+    .svc2-card__inner{ min-height:0; } }
+
+  @media (prefers-reduced-motion:reduce){
+    .svc2-card__inner::before{ transition:opacity .25s ease; transform:none; opacity:0; }
+    .svc2-card:hover .svc2-card__inner::before,
+    .svc2-card:focus-within .svc2-card__inner::before,
+    .svc2-card.is-open .svc2-card__inner::before{ transform:none; opacity:1; }
+    .svc2-card__icon{ transition:opacity .2s ease, color .2s ease; }
+    .svc2-card__desc{ transition:opacity .2s ease; }
+    .svc2-card__list{ transition:opacity .2s ease; }
+  }
   </style>
   <div class="svc2__head" data-reveal>
     <p class="svc2__eyebrow">Our Services</p>
     <h2 class="svc2__title">One trusted team for every fix in your home</h2>
   </div>
   <div class="svc2__grid">
-    <article class="svc2-card">
-      <span class="svc2-card__num">01</span>
-      <span class="svc2-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></span>
-      <h3 class="svc2-card__title">AC &amp; HVAC</h3>
-      <div class="svc2-card__body">
-        <p class="svc2-card__desc">Installation, servicing and deep-cleaning to keep your home cool and efficient through every Dubai summer.</p>
-        <ul class="svc2-card__list">
-          <li>AC Installation</li>
-          <li>AC Servicing &amp; Repair</li>
-          <li>Duct Cleaning</li>
-          <li>Gas Refill &amp; Top-up</li>
-        </ul>
+    {% for sv in home_services %}
+    <article class="svc2-card" tabindex="0">
+      <div class="svc2-card__inner">
+        <span class="svc2-card__num" aria-hidden="true">{{ sv.num }}</span>
+        <span class="svc2-card__icon" aria-hidden="true">{{ sv.icon|safe }}</span>
+        <h3 class="svc2-card__title">{{ sv.title }}</h3>
+        <div class="svc2-card__body">
+          <p class="svc2-card__desc">{{ sv.desc }}</p>
+          <ul class="svc2-card__list">
+            {% for it in sv['items'] %}<li>{{ it }}</li>{% endfor %}
+          </ul>
+        </div>
       </div>
-      <a class="btn-skew" href="#contact">Get Offer
+      <a class="btn-skew svc2-card__cta" href="{{ sv.url }}">Get Offer
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
     </article>
-    <article class="svc2-card">
-      <span class="svc2-card__num">02</span>
-      <span class="svc2-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg></span>
-      <h3 class="svc2-card__title">Plumbing</h3>
-      <div class="svc2-card__body">
-        <p class="svc2-card__desc">Leaks, blockages, water heaters and fittings — fixed fast and clean by licensed plumbers you can trust.</p>
-        <ul class="svc2-card__list">
-          <li>Leak Detection &amp; Repair</li>
-          <li>Water Heater Install</li>
-          <li>Drain Unblocking</li>
-          <li>Tap &amp; Mixer Fitting</li>
-        </ul>
-      </div>
-      <a class="btn-skew" href="#contact">Get Offer
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
-    </article>
-    <article class="svc2-card">
-      <span class="svc2-card__num">03</span>
-      <span class="svc2-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
-      <h3 class="svc2-card__title">Electrical</h3>
-      <div class="svc2-card__body">
-        <p class="svc2-card__desc">Wiring, sockets, lighting and DB boards to UAE safety standards — done right the first time, every time.</p>
-        <ul class="svc2-card__list">
-          <li>Wiring &amp; Rewiring</li>
-          <li>Socket &amp; Switch Fitting</li>
-          <li>Lighting Installation</li>
-          <li>DB Board &amp; MCB Repair</li>
-        </ul>
-      </div>
-      <a class="btn-skew" href="#contact">Get Offer
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
-    </article>
+    {% endfor %}
   </div>
 </section>
 
@@ -1260,6 +1271,20 @@ class Component extends DCLogic {
   var _tg=document.getElementById('navToggle'), _row=document.getElementById('hdrRow');
   if(_tg&&_row){ _tg.addEventListener('click',function(){ _row.classList.toggle('nav-open'); });
     _row.addEventListener('click',function(e){ if(e.target.closest('#hdrNav a')) _row.classList.remove('nav-open'); }); }
+
+  // Service cards: on touch devices (no hover) tap the card to reveal its
+  // detail list; links/buttons stay clickable and don't toggle the card.
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
+    var svCards = document.querySelectorAll('.svc2-card');
+    svCards.forEach(function(card){
+      card.addEventListener('click', function(e){
+        if (e.target.closest('a')) return;
+        var wasOpen = card.classList.contains('is-open');
+        svCards.forEach(function(c){ c.classList.remove('is-open'); });
+        if (!wasOpen) card.classList.add('is-open');
+      });
+    });
+  }
 
   // border-draw hover animation: inject 4 line spans into every button
   document.querySelectorAll('.btn-skew').forEach(function(b){

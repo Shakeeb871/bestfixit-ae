@@ -45,6 +45,7 @@ from data.process import (
     PROCESS_TITLE,
 )
 from data.testimonials import TESTIMONIAL_SHOWCASE
+from data.home_services import HOME_SERVICES
 from data.services import (
     SERVICE_AREAS,
     SERVICE_BY_SLUG,
@@ -93,6 +94,7 @@ def inject_globals():
         "testimonial_showcase": TESTIMONIAL_SHOWCASE,
         "blog": BLOG,
         "stats": STATS,
+        "home_services": HOME_SERVICES,
     }
 
 
