@@ -620,107 +620,98 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   {% include 'components/stats_counter.html' %}
 </section>
 
-<section id="services" data-screen-label="Services" style="position:relative; padding:9vh 0; background:#2c74c0; overflow:hidden;">
-  <div style="max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,56px); display:flex; flex-wrap:wrap; gap:clamp(28px,3vw,48px); align-items:center;">
-    <div data-reveal="" style="flex:1 1 100%; min-width:0; max-width:1240px; margin:0 auto;">
-      <div style="text-align:center; margin-bottom:34px;">
-        <div style="font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#cfe2f8; margin-bottom:14px;">Our Services</div>
-        <h2 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(24px,2.8vw,34px); line-height:1.2; letter-spacing:-.01em; margin:0; color:#fff;">One trusted team for every fix in your home</h2>
-        <p style="font-size:15px; line-height:1.7; margin:16px auto 0; max-width:54ch; color:rgba(255,255,255,.92);">From plumbing and electrical to AC, carpentry and full renovations — licensed technicians, upfront quotes and guaranteed work across Dubai.</p>
+<section id="services" data-screen-label="Services" class="svc2">
+  <style id="svc2-style">
+  .svc2{ position:relative; background:#f4f6f9; padding:clamp(56px,7vw,84px) 0; overflow:hidden; }
+  .svc2__head{ text-align:center; max-width:760px; margin:0 auto clamp(34px,4vw,48px); padding:0 20px; }
+  .svc2__eyebrow{ font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em;
+    text-transform:uppercase; color:#2c74c0; margin:0 0 14px; }
+  .svc2__title{ font-family:var(--font-heading); font-weight:800; font-size:clamp(24px,2.8vw,34px);
+    line-height:1.2; letter-spacing:-.01em; margin:0; color:#1a2332; }
+  .svc2__grid{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,4vw,40px);
+    display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .svc2-card{ position:relative; overflow:hidden; z-index:0; background:#fff; border-radius:14px;
+    padding:38px 30px; box-shadow:0 18px 40px rgba(20,40,80,.07);
+    display:flex; flex-direction:column; align-items:flex-start; }
+  .svc2-card::before{ content:""; position:absolute; inset:0; z-index:-1; background:#024d87;
+    transform:translateY(-101%); transition:transform .5s cubic-bezier(.4,0,.2,1); }
+  .svc2-card:hover::before{ transform:translateY(0); }
+  .svc2-card__num{ position:absolute; top:16px; right:26px; font-family:var(--font-heading); font-weight:800;
+    font-size:66px; line-height:1; color:rgba(20,40,80,.06); transition:color .4s ease; pointer-events:none; }
+  .svc2-card:hover .svc2-card__num{ color:rgba(255,255,255,.14); }
+  .svc2-card__icon{ color:#2c74c0; margin-bottom:22px; transition:color .4s ease; }
+  .svc2-card__icon svg{ width:46px; height:46px; }
+  .svc2-card:hover .svc2-card__icon{ color:#fff; }
+  .svc2-card__title{ margin:0 0 14px; font-family:var(--font-heading); font-weight:800; font-size:22px;
+    color:#1a2332; transition:color .4s ease; }
+  .svc2-card:hover .svc2-card__title{ color:#fff; }
+  .svc2-card__body{ position:relative; width:100%; min-height:150px; margin-bottom:24px; }
+  .svc2-card__desc{ margin:0; font-size:14px; line-height:1.7; color:#5b6472; transition:opacity .35s ease; }
+  .svc2-card:hover .svc2-card__desc{ opacity:0; }
+  .svc2-card__list{ position:absolute; inset:0; list-style:none; margin:0; padding:0;
+    display:flex; flex-direction:column; gap:11px; opacity:0; transition:opacity .35s ease .12s; }
+  .svc2-card:hover .svc2-card__list{ opacity:1; }
+  .svc2-card__list li{ display:flex; align-items:center; gap:10px; color:#fff; font-size:14px; }
+  .svc2-card__list li::before{ content:""; width:15px; height:15px; flex:none; background:rgba(255,255,255,.92);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E") no-repeat center/contain;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E") no-repeat center/contain; }
+  .svc2-card .btn-skew{ margin-top:auto; }
+  @media (max-width:900px){ .svc2__grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:600px){ .svc2__grid{ grid-template-columns:1fr; } }
+  </style>
+  <div class="svc2__head" data-reveal>
+    <p class="svc2__eyebrow">Our Services</p>
+    <h2 class="svc2__title">One trusted team for every fix in your home</h2>
+  </div>
+  <div class="svc2__grid">
+    <article class="svc2-card">
+      <span class="svc2-card__num">01</span>
+      <span class="svc2-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></span>
+      <h3 class="svc2-card__title">AC &amp; HVAC</h3>
+      <div class="svc2-card__body">
+        <p class="svc2-card__desc">Installation, servicing and deep-cleaning to keep your home cool and efficient through every Dubai summer.</p>
+        <ul class="svc2-card__list">
+          <li>AC Installation</li>
+          <li>AC Servicing &amp; Repair</li>
+          <li>Duct Cleaning</li>
+          <li>Gas Refill &amp; Top-up</li>
+        </ul>
       </div>
-      <div style="overflow:hidden; padding:22px 0 44px;">
-        <div data-svc-track="" style="display:flex; gap:12px; transition:transform .55s cubic-bezier(.4,0,.2,1);">
-      <div style="min-width:100%; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; align-items:start;">
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-plumbing.webp" alt="Plumbing" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Plumbing</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Leaks, water heaters and full bathroom installs — done clean and fast.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-electrical.webp" alt="Electrical" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#024d87" stroke="none"></polygon></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Electrical</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">DEWA-approved wiring, DB boards, lighting and fault-finding, to code.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-ac-and-hvac.webp" alt="AC &amp; HVAC" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">AC &amp; HVAC</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Servicing, gas top-ups and new installs to beat the Dubai heat.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-handyman-and-repairs.webp" alt="Handyman &amp; Repairs" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Handyman &amp; Repairs</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Mounting, sealing and the small fixes that never quite get done.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
+      <a class="btn-skew" href="#contact">Get Offer
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+    </article>
+    <article class="svc2-card">
+      <span class="svc2-card__num">02</span>
+      <span class="svc2-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg></span>
+      <h3 class="svc2-card__title">Plumbing</h3>
+      <div class="svc2-card__body">
+        <p class="svc2-card__desc">Leaks, blockages, water heaters and fittings — fixed fast and clean by licensed plumbers you can trust.</p>
+        <ul class="svc2-card__list">
+          <li>Leak Detection &amp; Repair</li>
+          <li>Water Heater Install</li>
+          <li>Drain Unblocking</li>
+          <li>Tap &amp; Mixer Fitting</li>
+        </ul>
       </div>
-      <div style="min-width:100%; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; align-items:start;">
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-painting.webp" alt="Painting" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="6" x="2" y="2" rx="1"></rect><path d="M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V5"></path><rect width="4" height="6" x="8" y="16" rx="1"></rect></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Painting</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Interior and exterior, feature walls and touch-ups — dust-free.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-carpentry.webp" alt="Carpentry" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0z"></path><path d="m14.5 12.5 2-2"></path><path d="m11.5 9.5 2-2"></path><path d="m8.5 6.5 2-2"></path><path d="m17.5 15.5 2-2"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Carpentry</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Custom joinery, doors and wardrobes finished to a high standard.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-appliance-repair.webp" alt="Appliance Repair" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="20" x="3" y="2" rx="1"></rect><path d="M3 6h3"></path><path d="M17 6h.01"></path><circle cx="12" cy="13" r="5"></circle><path d="M12 18a2.5 2.5 0 0 0 0-5"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Appliance Repair</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Washing machines, ovens and fridges — back running fast.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-home-renovation.webp" alt="Home Renovation" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Home Renovation</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Kitchens, bathrooms and full fit-outs managed end to end.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
+      <a class="btn-skew" href="#contact">Get Offer
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+    </article>
+    <article class="svc2-card">
+      <span class="svc2-card__num">03</span>
+      <span class="svc2-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
+      <h3 class="svc2-card__title">Electrical</h3>
+      <div class="svc2-card__body">
+        <p class="svc2-card__desc">Wiring, sockets, lighting and DB boards to UAE safety standards — done right the first time, every time.</p>
+        <ul class="svc2-card__list">
+          <li>Wiring &amp; Rewiring</li>
+          <li>Socket &amp; Switch Fitting</li>
+          <li>Lighting Installation</li>
+          <li>DB Board &amp; MCB Repair</li>
+        </ul>
       </div>
-    
-      <div style="min-width:100%; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; align-items:start;">
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-plumbing.webp" alt="Plumbing" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Plumbing</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Leaks, water heaters and full bathroom installs — done clean and fast.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-electrical.webp" alt="Electrical" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="#024d87" stroke="none"></polygon></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Electrical</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">DEWA-approved wiring, DB boards, lighting and fault-finding, to code.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-ac-and-hvac.webp" alt="AC &amp; HVAC" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">AC &amp; HVAC</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Servicing, gas top-ups and new installs to beat the Dubai heat.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-        <div class="svc-card" style="position:relative; min-width:0; background:#fff; padding:24px 18px;">
-          <div class="sld-media"><img src="/static/img/svc-handyman-and-repairs.webp" alt="Handyman &amp; Repairs" loading="lazy" onerror="this.remove()"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
-          <h3 style="font-family:var(--font-heading); font-weight:800; font-size:18px; margin:16px 0 10px; color:#1a1a1a; overflow-wrap:anywhere;">Handyman &amp; Repairs</h3>
-          <p style="font-size:13px; line-height:1.6; margin:0 0 22px; color:#1a1a1a;">Mounting, sealing and the small fixes that never quite get done.</p>
-          <a href="#contact" class="svc-link">Learn More <span class="arw"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-        </div>
-      </div>
-    </div>
-      </div>
-      <div style="display:flex; align-items:center; justify-content:center; gap:18px; margin-top:30px;">
-        <button type="button" data-svc-prev="" aria-label="Previous" style="width:48px; height:48px; border-radius:50%; border:1.5px solid #c6d0e2; background:#fff; color:#1a1a1a; cursor:pointer; display:grid; place-items:center; transition:all .2s ease;" style-hover="background:#024d87; border-color:#024d87; color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-        <div style="display:flex; align-items:center; gap:9px;">
-          <span data-svc-dot="" style="width:26px; height:9px; background:#fff; cursor:pointer; transition:all .3s ease;"></span>
-          
-          <span data-svc-dot="" style="width:9px; height:9px; background:rgba(255,255,255,.45); cursor:pointer; transition:all .3s ease;"></span>
-        </div>
-        <button type="button" data-svc-next="" aria-label="Next" style="width:48px; height:48px; border-radius:50%; border:1.5px solid #024d87; background:#024d87; color:#fff; cursor:pointer; display:grid; place-items:center; transition:all .2s ease;" style-hover="background:#013a5e; border-color:#013a5e"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
-      </div>
-    </div>
+      <a class="btn-skew" href="#contact">Get Offer
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+    </article>
   </div>
 </section>
 
@@ -1266,28 +1257,6 @@ class Component extends DCLogic {
     });
   });
 
-  // Our-service carousel (dots + prev/next)
-  document.querySelectorAll('[data-svc-track]').forEach(function(track){
-    var wrap = track.closest('section');
-    var dots = wrap.querySelectorAll('[data-svc-dot]');
-    var prev = wrap.querySelector('[data-svc-prev]');
-    var next = wrap.querySelector('[data-svc-next]');
-    var real = dots.length;                 // real slides (clone excluded)
-    var TR = 'transform .55s cubic-bezier(.4,0,.2,1)';
-    var i = 0, busy = false;
-    function paint(){
-      var a = ((i % real) + real) % real;
-      dots.forEach(function(d, di){ var on = di === a; d.style.width = on ? '26px' : '9px'; d.style.background = on ? '#fff' : 'rgba(255,255,255,.45)'; });
-    }
-    function set(n, anim){ track.style.transition = anim ? TR : 'none'; i = n; track.style.transform = 'translateX(calc(' + (-i) + ' * (100% + 12px)))'; paint(); }
-    function goNext(){ if (busy) return; busy = true; set(i + 1, true); setTimeout(function(){ if (i >= real){ set(0, false); void track.offsetWidth; } busy = false; }, 580); }
-    function goPrev(){ if (busy) return; busy = true; if (i <= 0){ set(real, false); void track.offsetWidth; } set(i - 1, true); setTimeout(function(){ busy = false; }, 580); }
-    dots.forEach(function(d, di){ d.addEventListener('click', function(){ if (!busy) set(di, true); }); });
-    if (next) next.addEventListener('click', goNext);
-    if (prev) prev.addEventListener('click', goPrev);
-    paint();
-    if (real > 1){ setInterval(goNext, 4500); }
-  });
   var _tg=document.getElementById('navToggle'), _row=document.getElementById('hdrRow');
   if(_tg&&_row){ _tg.addEventListener('click',function(){ _row.classList.toggle('nav-open'); });
     _row.addEventListener('click',function(e){ if(e.target.closest('#hdrNav a')) _row.classList.remove('nav-open'); }); }
