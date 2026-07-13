@@ -127,7 +127,8 @@
    colour set on that section (those colours are not touched). Every heading
    is rendered in Title Case (first letter of each word capitalised). */
 body{ color:#000; }
-p, li{ color:#000; font-size:17px !important; font-weight:400 !important; }
+*, *::before, *::after{ font-weight:400 !important; }
+p, li{ color:#000; font-size:17px !important; }
 h1, h2, h3, h4, h5, h6{ text-transform:capitalize !important; }
 </style>
 </head>
@@ -649,7 +650,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2-card{ flex:0 0 calc((100% - 52px) / 3); position:relative; display:flex; flex-direction:column; outline:none; }
   /* inner box clips the sliding overlay and carries the card surface */
   .svc2-card__inner{ position:relative; overflow:hidden; z-index:0; background:#fff;
-    border-radius:14px; padding:28px 28px 50px; box-shadow:0 18px 40px rgba(20,40,80,.07);
+    border-radius:7px; padding:28px 28px 50px; box-shadow:0 18px 40px rgba(20,40,80,.07);
     display:flex; flex-direction:column; align-items:flex-start; }
   .svc2-card__inner::before{ content:""; position:absolute; inset:0; z-index:-1; background:#024d87;
     transform:translateY(-101%); transition:transform .5s cubic-bezier(.4,0,.2,1); }
@@ -664,9 +665,9 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2-card:focus-within .svc2-card__num,
   .svc2-card.is-open .svc2-card__num{ color:rgba(255,255,255,.14); }
 
-  .svc2-card__icon{ display:block; height:40px; margin-bottom:15px; color:#2c74c0;
+  .svc2-card__icon{ display:block; height:54px; margin-bottom:15px; color:#2c74c0;
     transition:color .4s ease; }
-  .svc2-card__icon svg{ width:40px; height:40px; display:block; }
+  .svc2-card__icon svg{ width:54px; height:54px; display:block; }
   .svc2-card:hover .svc2-card__icon,
   .svc2-card:focus-within .svc2-card__icon,
   .svc2-card.is-open .svc2-card__icon{ color:#fff; }
