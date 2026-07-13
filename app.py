@@ -43,6 +43,7 @@ from data.process import (
     PROCESS_STEPS,
     PROCESS_TITLE,
 )
+from data.testimonials import TESTIMONIAL_SHOWCASE
 from data.services import (
     SERVICE_AREAS,
     SERVICE_BY_SLUG,
@@ -83,6 +84,7 @@ def inject_globals():
         "cta_secondary_url": CTA_BANNER["secondary_url"],
         "cta_background": CTA_BANNER["background"],
         "service_expertise": SERVICE_EXPERTISE,
+        "testimonial_showcase": TESTIMONIAL_SHOWCASE,
     }
 
 
