@@ -35,6 +35,12 @@ except ImportError:
     pass
 
 from config import Config
+from data.process import (
+    PROCESS_EYEBROW_PRIMARY,
+    PROCESS_EYEBROW_SECONDARY,
+    PROCESS_STEPS,
+    PROCESS_TITLE,
+)
 from data.services import (
     SERVICE_AREAS,
     SERVICE_BY_SLUG,
@@ -62,6 +68,10 @@ def inject_globals():
         "service_areas": SERVICE_AREAS,
         "all_services": SERVICES,
         "current_year": datetime.now(timezone.utc).year,
+        "process_steps": PROCESS_STEPS,
+        "process_eyebrow_primary": PROCESS_EYEBROW_PRIMARY,
+        "process_eyebrow_secondary": PROCESS_EYEBROW_SECONDARY,
+        "process_title": PROCESS_TITLE,
     }
 
 

@@ -1,0 +1,169 @@
+{#
+  Working-process section — "Easy Quick Following Steps".
+  Reusable component: drives four (or more) step cards from `process_steps`.
+  Colours come from the site theme variables, not the reference screenshot.
+  Icons are an allow-list mapping (key -> predefined inline SVG); no raw
+  markup is ever rendered from data.
+#}
+<style id="process-section-style">
+.process-section{
+  /* component tokens derived from the site theme (overridable) */
+  --ps-surface:#ffffff;
+  --ps-section-bg:var(--color-bg,#f3f2f2);
+  --ps-text:var(--color-text,#201e1d);
+  --ps-muted:#5b6472;
+  --ps-accent:var(--color-accent,#024d87);
+  --ps-accent-2:#2c74c0;
+  --ps-icon-bg:#eaf1f9;
+  --ps-shadow:rgba(2,77,135,.16);
+
+  position:relative; isolation:isolate; overflow:hidden;
+  background:var(--ps-section-bg);
+  padding:clamp(48px,7vw,66px) 0 clamp(52px,7vw,68px);
+  font-family:var(--font-body,inherit);
+}
+/* very subtle depth only — no prominent shapes */
+.process-section__bg{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(ellipse 60% 55% at 50% 18%,
+    rgba(2,77,135,.06), transparent 70%);
+}
+.process-section__container{
+  position:relative; z-index:1;
+  max-width:1100px; margin:0 auto;
+  padding:0 clamp(20px,4vw,30px);
+}
+.process-section__header{ text-align:center; }
+.process-section__eyebrow{
+  display:inline-flex; align-items:center; gap:5px; margin:0 0 24px;
+}
+.process-section__eyebrow b{
+  display:inline-block; padding:4px 8px; border-radius:3px;
+  background:var(--ps-accent); color:#fff;
+  font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+}
+.process-section__eyebrow span{
+  font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ps-accent);
+}
+.process-section__title{
+  margin:0; color:var(--ps-text);
+  font-family:var(--font-heading,inherit);
+  font-weight:800; font-size:clamp(28px,3.4vw,40px); line-height:1.2;
+  max-width:760px; margin-inline:auto;
+}
+
+.process-section__grid{
+  list-style:none; margin:46px 0 0; padding:0;
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px;
+}
+
+/* ---- card ---- */
+.process-card{ position:relative; }
+.process-card__surface{
+  background:var(--ps-surface);
+  min-height:302px; box-sizing:border-box;
+  padding:40px 26px 70px;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%);
+  filter:drop-shadow(0 14px 34px var(--ps-shadow));
+  transition:transform .25s ease, filter .25s ease;
+}
+.process-card__icon{
+  width:76px; height:76px; border-radius:50%; flex:none;
+  background:var(--ps-icon-bg); color:var(--ps-accent);
+  display:grid; place-items:center; margin-bottom:22px;
+}
+.process-card__icon svg{ width:35px; height:35px; }
+.process-card__title{
+  margin:0 0 15px; color:var(--ps-text);
+  font-family:var(--font-heading,inherit);
+  font-weight:700; font-size:19px; line-height:1.25;
+  min-height:2.5em; display:flex; align-items:center;
+}
+.process-card__description{
+  margin:0; color:var(--ps-muted);
+  font-size:13.5px; line-height:1.7; max-width:190px;
+}
+/* overlapping step badge — outside the clipped surface so it isn't cropped */
+.process-card__number{
+  position:absolute; left:50%; bottom:-22px; transform:translateX(-50%);
+  width:44px; height:44px; border-radius:50%;
+  background:var(--ps-accent); color:#fff;
+  display:grid; place-items:center; z-index:2;
+  font-family:var(--font-heading,inherit);
+  font-weight:700; font-size:16px;
+  box-shadow:0 8px 18px rgba(2,77,135,.35);
+}
+
+.process-card:hover .process-card__surface{
+  transform:translateY(-5px);
+  filter:drop-shadow(0 20px 40px var(--ps-shadow));
+}
+@media (prefers-reduced-motion:reduce){
+  .process-card__surface{ transition:none; }
+  .process-card:hover .process-card__surface{ transform:none; }
+}
+
+/* ---- tablet: 2 x 2 ---- */
+@media (max-width:1024px){
+  .process-section__grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:34px 28px; max-width:760px; margin-inline:auto;
+    justify-content:center;
+  }
+  .process-card__surface{ min-height:296px; }
+  .process-section__title{ font-size:clamp(30px,4.4vw,36px); }
+}
+/* ---- mobile: single column ---- */
+@media (max-width:640px){
+  .process-section{ padding:44px 0 50px; }
+  .process-section__container{ padding:0 20px; }
+  .process-section__grid{
+    grid-template-columns:1fr; gap:60px; max-width:360px;
+  }
+  .process-card__surface{ min-height:288px; }
+  .process-section__title{ font-size:clamp(27px,7.5vw,33px); }
+  .process-section__bg{ display:none; }
+}
+</style>
+
+{% set PS_ICONS = {
+  'clipboard': '<rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path>',
+  'search': '<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path><path d="M11 8v3l2 1"></path>',
+  'gear': '<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>',
+  'package': '<path d="M16.5 9.4 7.55 4.24"></path><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path>'
+} %}
+
+<section class="process-section" aria-labelledby="process-heading">
+  <div class="process-section__bg" aria-hidden="true"></div>
+  <div class="process-section__container">
+
+    <div class="process-section__header">
+      <p class="process-section__eyebrow">
+        <b>{{ process_eyebrow_primary }}</b>
+        <span>{{ process_eyebrow_secondary }}</span>
+      </p>
+      <h2 id="process-heading" class="process-section__title">{{ process_title }}</h2>
+    </div>
+
+    <ol class="process-section__grid">
+      {% for step in process_steps %}
+      <li class="process-card">
+        <div class="process-card__surface">
+          <span class="process-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round">{{ PS_ICONS.get(step.icon, PS_ICONS['clipboard'])|safe }}</svg>
+          </span>
+          <h3 class="process-card__title">{{ step.title }}</h3>
+          <p class="process-card__description">{{ step.description }}</p>
+        </div>
+        <span class="process-card__number">
+          <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Step </span>{{ step.number }}
+        </span>
+      </li>
+      {% endfor %}
+    </ol>
+
+  </div>
+</section>
