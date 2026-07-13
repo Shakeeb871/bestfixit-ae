@@ -382,6 +382,14 @@ a.info-card__row:hover strong { color: var(--accent); }
   --slate-500: #000;
   --slate-400: #000;
 }
-body{ font-size: 17px; }
-p, li{ font-size: 17px; font-weight: 400; }
-h1, h2, h3, h4, h5, h6{ text-transform: capitalize; }
+body{ font-size: 17px; font-family: 'Museo Sans','Poppins','Plus Jakarta Sans',sans-serif; color:#58595b; }
+h1,h2,h3,h4,h5,h6{ font-family: 'Museo Sans','Poppins','Plus Jakarta Sans',sans-serif !important;
+  color:#303236 !important; font-weight:700 !important; text-transform: capitalize; }
+p, li{ font-family: 'Museo Sans','Poppins','Plus Jakarta Sans',sans-serif !important;
+  color:#58595b !important; font-weight:500 !important; font-size:17px !important; }
+/* dark sections keep light text */
+.topbar, .topbar :is(h1,h2,h3,h4,h5,h6,p,li),
+.site-footer :is(h1,h2,h3,h4,h5,h6,p,li),
+.cta :is(h1,h2,h3,h4,h5,h6,p,li),
+.info-card :is(h1,h2,h3,h4,h5,h6,p,li),
+.strip :is(h1,h2,h3,h4,h5,h6,p,li){ color:#fff !important; }

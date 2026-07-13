@@ -10,8 +10,8 @@
 :root{
   --hd-navy:#0d1f38; --hd-blue:#2c74c0; --hd-accent:#024d87;
   --hd-text:rgba(255,255,255,.82); --hd-heading:#ffffff;
-  --font-heading:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --font-body:system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-heading:'Museo Sans','Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-body:'Museo Sans','Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
 *{ box-sizing:border-box; }
 body{ margin:0; font-family:var(--font-body); background:var(--hd-navy); color:var(--hd-text); }
@@ -194,9 +194,16 @@ html{ scroll-behavior:smooth; }
 /* Site-wide content typography: black text at weight 400 / 17px on light
    backgrounds; text on coloured/dark sections keeps its own light colour.
    Headings render in Title Case. */
-body{ color:#000; }
-p, li{ color:#000; font-size:17px !important; font-weight:400 !important; }
-h1, h2, h3, h4, h5, h6{ text-transform:capitalize !important; }
+/* Museo Sans typography. This page's body background is dark, so colours
+   are applied only inside the light .svc2 section; the rest keeps its own
+   light text. */
+body{ font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif; }
+h1,h2,h3,h4,h5,h6{ font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif !important;
+  font-weight:700 !important; text-transform:capitalize !important; }
+p,li{ font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif !important;
+  font-weight:500 !important; font-size:17px !important; }
+.svc2 :is(h1,h2,h3,h4,h5,h6){ color:#303236 !important; }
+.svc2 p, .svc2 li{ color:#58595b !important; }
 </style>
 </head>
 <body>

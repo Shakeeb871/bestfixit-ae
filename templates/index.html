@@ -126,9 +126,26 @@
    backgrounds. Text sitting on a coloured / dark background keeps the light
    colour set on that section (those colours are not touched). Every heading
    is rendered in Title Case (first letter of each word capitalised). */
-body{ color:#000; }
-p, li{ color:#000; font-size:17px !important; font-weight:400 !important; }
-h1, h2, h3, h4, h5, h6{ text-transform:capitalize !important; }
+/* Museo Sans typography — headings #303236 / weight 700, body & paragraph
+   text #58595b / weight 500. Text on dark / coloured sections stays white
+   (re-assert list below). Museo Sans is a licensed font: add your embed
+   (Adobe Fonts kit <link> or self-hosted @font-face) for it to render —
+   until then the Poppins fallback shows. */
+body{ color:#58595b; font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif; }
+h1,h2,h3,h4,h5,h6{ font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif !important;
+  color:#303236 !important; font-weight:700 !important; text-transform:capitalize !important; }
+p:not([class*="eyebrow"]):not([class*="badge"]), li{
+  font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif !important;
+  color:#58595b !important; font-weight:500 !important; font-size:17px !important; }
+/* keep light text on dark / coloured sections (prefixed to out-specify the
+   body-copy rule above) */
+[data-bf-root] [data-ink-light] :is(h1,h2,h3,h4,h5,h6,p,li),
+[data-bf-root] #top :is(h1,h2,h3,h4,h5,h6,p,li),
+[data-bf-root] #testimonials :is(h1,h2,h3,h4,h5,h6,p,li),
+[data-bf-root] .cta-banner :is(h1,h2,h3,h4,h5,h6,p,li),
+[data-bf-root] .site-footer :is(h1,h2,h3,h4,h5,h6,p,li),
+[data-bf-root] .elementor-element-a2ef090 :is(h1,h2,h3,h4,h5,h6,p,li),
+[data-bf-root] #bfc .bfc-form :is(h1,h2,h3,h4,h5,h6,p,li){ color:#fff !important; }
 </style>
 </head>
 <body>
@@ -231,7 +248,7 @@ h1, h2, h3, h4, h5, h6{ text-transform:capitalize !important; }
 :root {
   --color-bg: #f3f2f2;
   --color-surface: #eae9e9;
-  --color-text: #000;
+  --color-text: #58595b;
   --color-accent: #024d87;
   --color-accent-2: #2f5bb0;
   --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
@@ -245,7 +262,7 @@ h1, h2, h3, h4, h5, h6{ text-transform:capitalize !important; }
   --color-neutral-500: #9b9797;
   --color-neutral-600: #7d7979;
   --color-neutral-700: #605d5d;
-  --color-neutral-800: #000;
+  --color-neutral-800: #58595b;
   --color-neutral-900: #2d2b2b;
 
   --color-accent-100: #eef1f8;
@@ -268,9 +285,9 @@ h1, h2, h3, h4, h5, h6{ text-transform:capitalize !important; }
   --color-accent-2-800: #71261b;
   --color-accent-2-900: #471d16;
 
-  --font-heading: "Archivo", system-ui, sans-serif;
-  --font-heading-weight: 800;
-  --font-body: "Archivo", system-ui, sans-serif;
+  --font-heading: "Museo Sans", "Poppins", "Archivo", system-ui, sans-serif;
+  --font-heading-weight: 700;
+  --font-body: "Museo Sans", "Poppins", "Archivo", system-ui, sans-serif;
 
   --space-1: 4.0px;
   --space-2: 8.0px;
@@ -496,7 +513,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 <!-- ═══════════════ HEADER (reference-style, full-width) ═══════════════ -->
 <header style="position:sticky; top:0; z-index:50; background:#fff; box-shadow:0 6px 22px rgba(22,35,63,.10);">
   <!-- top bar -->
-  <div style="background:#1a1a1a; color:#fff;">
+  <div data-ink-light style="background:#1a1a1a; color:#fff;">
     <div style="max-width:1280px; margin:0 auto; font-size:13px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding:9px clamp(16px,4vw,44px);">
       <div style="display:flex; align-items:center; gap:26px; flex-wrap:wrap;">
         <span style="display:inline-flex; align-items:center; gap:8px; color:rgba(255,255,255,.82);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2db34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>Working hours: Sun – Fri, 8:00 – 20:00</span>
@@ -676,13 +693,13 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     transition:color .4s ease; }
   .svc2-card:hover .svc2-card__title,
   .svc2-card:focus-within .svc2-card__title,
-  .svc2-card.is-open .svc2-card__title{ color:#fff; }
+  .svc2-card.is-open .svc2-card__title{ color:#fff !important; }
 
   .svc2-card__body{ position:relative; width:100%; }
   .svc2-card__desc{ margin:0; line-height:1.5; color:#000; transition:color .4s ease; }
   .svc2-card:hover .svc2-card__desc,
   .svc2-card:focus-within .svc2-card__desc,
-  .svc2-card.is-open .svc2-card__desc{ color:#fff; }
+  .svc2-card.is-open .svc2-card__desc{ color:#fff !important; }
 
   /* button protrudes past the inner box's bottom edge */
   .svc2-card__cta.btn-skew{ position:relative; z-index:4; align-self:flex-start; margin:-18px 0 0 28px; }
@@ -771,8 +788,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 #bfc{
   --section-background:#eef2f8;
   --surface:#ffffff;
-  --primary-text:#000;
-  --muted-text:#000;
+  --primary-text:#303236;
+  --muted-text:#58595b;
   --accent:#024d87;
   --accent-2:#2c74c0;
   --input-background:#f4f6fb;
