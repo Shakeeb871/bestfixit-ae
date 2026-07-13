@@ -105,16 +105,20 @@
 .btn-skew:focus-visible{ outline:2px solid #024d87; outline-offset:4px; }
 .btn-skew svg{ flex:none; }
 .btn-skew--arrow::after{ content:"\2192"; font-size:16px; line-height:1; margin-left:1px; }
-/* border-draw hover animation: two L-shaped spans (injected by JS) drawn with
-   real CSS borders so the corners miter and close fully (no gaps). Skewed to
-   match the button's parallelogram outline. */
+/* border-draw hover animation (4 lines injected by JS) — the exact reference
+   technique: each line is a background bar that grows to 80% on hover, so the
+   endpoints don't meet (small corner gaps) and nothing shows at rest (no dots).
+   Skewed to follow the button's parallelogram outline. */
 .btn-skew .bd-frame{ position:absolute; inset:0; z-index:1; pointer-events:none; transform:skewX(-11deg); }
-.btn-skew .bd{ position:absolute; width:0; height:0; box-sizing:border-box; }
-.btn-skew .bd.tl{ top:0; left:0; border-top:2px solid #fff; border-left:2px solid #fff;
-  transition:width .3s ease, height .3s ease .3s; }
-.btn-skew .bd.br{ bottom:0; right:0; border-bottom:2px solid #fff; border-right:2px solid #fff;
-  transition:width .3s ease, height .3s ease .3s; }
-.btn-skew:hover .bd{ width:100%; height:100%; }
+.btn-skew .bd{ position:absolute; background:#fff; transition:all .5s ease; }
+.btn-skew .bd.top{ top:0; right:0; width:0; height:2px; }
+.btn-skew .bd.right{ right:0; top:0; width:2px; height:0; }
+.btn-skew .bd.bottom{ bottom:0; left:0; width:0; height:2px; }
+.btn-skew .bd.left{ left:0; bottom:0; width:2px; height:0; }
+.btn-skew:hover .bd.top{ width:80%; }
+.btn-skew:hover .bd.right{ height:80%; }
+.btn-skew:hover .bd.bottom{ width:80%; }
+.btn-skew:hover .bd.left{ height:80%; }
 @media (prefers-reduced-motion:reduce){ .btn-skew .bd{ transition:none !important; } }
 </style>
 </head>
@@ -1283,7 +1287,7 @@ class Component extends DCLogic {
   document.querySelectorAll('.btn-skew').forEach(function(b){
     if(b.querySelector('.bd-frame')) return;
     var f=document.createElement('span'); f.className='bd-frame'; f.setAttribute('aria-hidden','true');
-    ['tl','br'].forEach(function(s){
+    ['top','right','bottom','left'].forEach(function(s){
       var l=document.createElement('span'); l.className='bd '+s; f.appendChild(l);
     });
     b.appendChild(f);
