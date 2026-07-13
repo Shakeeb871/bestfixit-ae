@@ -9,7 +9,7 @@
 .process-section{
   /* component tokens derived from the site theme (overridable) */
   --ps-surface:#ffffff;
-  --ps-section-bg:var(--color-bg,#f3f2f2);
+  --ps-section-bg:transparent;
   --ps-text:var(--color-text,#201e1d);
   --ps-muted:#5b6472;
   --ps-accent:var(--color-accent,#024d87);
@@ -21,12 +21,6 @@
   background:var(--ps-section-bg);
   padding:clamp(48px,7vw,66px) 0 clamp(52px,7vw,68px);
   font-family:var(--font-body,inherit);
-}
-/* very subtle depth only — no prominent shapes */
-.process-section__bg{
-  position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(ellipse 60% 55% at 50% 18%,
-    rgba(2,77,135,.06), transparent 70%);
 }
 .process-section__container{
   position:relative; z-index:1;
@@ -59,10 +53,13 @@
 }
 
 /* ---- card ---- */
-.process-card{ position:relative; }
+/* card stretches to the tallest in its row (grid align-items:stretch) and the
+   surface fills it, so the pointed bottom + number badge always line up even
+   when titles/descriptions differ in length. */
+.process-card{ position:relative; display:flex; flex-direction:column; }
 .process-card__surface{
   background:var(--ps-surface);
-  min-height:302px; box-sizing:border-box;
+  flex:1 1 auto; min-height:302px; box-sizing:border-box;
   padding:40px 26px 70px;
   display:flex; flex-direction:column; align-items:center; text-align:center;
   clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%);
@@ -136,7 +133,6 @@
 } %}
 
 <section class="process-section" aria-labelledby="process-heading">
-  <div class="process-section__bg" aria-hidden="true"></div>
   <div class="process-section__container">
 
     <div class="process-section__header">
