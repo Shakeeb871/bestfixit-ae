@@ -9,7 +9,7 @@
 .process-section{
   /* component tokens derived from the site theme (overridable) */
   --ps-surface:#ffffff;
-  --ps-section-bg:#ffffff;
+  --ps-section-bg:var(--color-bg,#f3f2f2);
   --ps-text:var(--color-text,#201e1d);
   --ps-muted:#5b6472;
   --ps-accent:var(--color-accent,#024d87);
@@ -21,6 +21,12 @@
   background:var(--ps-section-bg);
   padding:clamp(48px,7vw,66px) 0 clamp(52px,7vw,68px);
   font-family:var(--font-body,inherit);
+}
+/* very subtle depth only — no prominent shapes */
+.process-section__bg{
+  position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(ellipse 60% 55% at 50% 18%,
+    rgba(2,77,135,.06), transparent 70%);
 }
 .process-section__container{
   position:relative; z-index:1;
@@ -133,6 +139,7 @@
 } %}
 
 <section class="process-section" aria-labelledby="process-heading">
+  <div class="process-section__bg" aria-hidden="true"></div>
   <div class="process-section__container">
 
     <div class="process-section__header">
