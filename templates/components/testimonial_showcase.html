@@ -18,19 +18,24 @@
   --ts-circle-border:rgba(255,255,255,.07);
   --ts-surface:rgba(255,255,255,.05);
 
-  position:relative; overflow:hidden; isolation:isolate;
-  background:var(--ts-bg); color:var(--ts-heading);
+  position:relative; overflow:visible; isolation:isolate;
+  background:transparent; color:var(--ts-heading);
   padding:clamp(60px,8vw,96px) 0;
   font-family:var(--font-body,inherit);
 }
-/* angled decorative strips (theme accent) */
-.testimonial-showcase::before,
-.testimonial-showcase::after{ content:""; position:absolute; z-index:1; pointer-events:none;
-  background:var(--ts-accent); }
-.testimonial-showcase::before{ top:-14px; right:-2%; width:58%; height:74px;
-  clip-path:polygon(14% 0,100% 0,100% 100%,0 100%); opacity:.9; }
-.testimonial-showcase::after{ bottom:0; left:52%; right:-2%; height:26px;
-  clip-path:polygon(6% 0,100% 0,100% 100%,0 100%); opacity:.9; }
+/* the black surface as its own layer so the accent bar can sit BEHIND it */
+.testimonial-showcase__panel{ position:absolute; inset:0; z-index:1; background:var(--ts-bg); }
+/* top accent bar: BEHIND the black panel, peeking up above the section into
+   the lighter area above — it emerges "from behind the black" (like the ref) */
+.testimonial-showcase::before{ content:""; position:absolute; z-index:0; pointer-events:none;
+  background:var(--ts-accent);
+  top:-46px; right:0; width:56%; height:150px;
+  clip-path:polygon(15% 0,100% 0,100% 100%,0 100%); }
+/* thin bottom accent strip sitting on the black panel */
+.testimonial-showcase::after{ content:""; position:absolute; z-index:2; pointer-events:none;
+  background:var(--ts-accent);
+  bottom:26px; left:52%; right:0; height:20px;
+  clip-path:polygon(6% 0,100% 0,100% 100%,0 100%); }
 
 .testimonial-showcase__container{
   position:relative; z-index:2;
@@ -144,6 +149,7 @@
 
 <section class="testimonial-showcase" id="testimonials" aria-label="Customer testimonials"
          data-testimonial-slider>
+  <div class="testimonial-showcase__panel" aria-hidden="true"></div>
   <div class="testimonial-showcase__container">
 
     <!-- LEFT: static stats -->
