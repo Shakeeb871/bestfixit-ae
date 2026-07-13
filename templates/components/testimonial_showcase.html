@@ -74,7 +74,7 @@
   color:var(--ts-accent); font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
 }
 .testimonial-showcase__viewport{ overflow:hidden; }
-.testimonial-showcase__track{ display:flex; will-change:transform; }
+.testimonial-showcase__track{ display:flex; gap:48px; will-change:transform; }
 .testimonial-slide{
   flex:0 0 100%; min-width:100%; box-sizing:border-box;
   display:grid; grid-template-columns:1fr auto; gap:clamp(28px,4vw,52px);
@@ -247,7 +247,7 @@
     track.appendChild(firstClone);
 
     var total = real + 2;
-    var step = 100;                      // each slide = 100% of the viewport-width track
+    var GAP = 48;                        // px gap between slides (matches CSS track gap)
     var TR = 'transform .6s cubic-bezier(.4,0,.2,1)';
     var index = 1;                       // first real slide (after lastClone)
     var isTransitioning = false;
@@ -255,7 +255,7 @@
 
     function setX(i, anim){
       track.style.transition = anim ? TR : 'none';
-      track.style.transform = 'translate3d(' + (-i * step) + '%,0,0)';
+      track.style.transform = 'translate3d(calc(' + (-i) + ' * (100% + ' + GAP + 'px)), 0, 0)';
     }
     function updateA11y(){
       var realIdx = ((index - 1) % real + real) % real;
