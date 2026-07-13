@@ -382,7 +382,6 @@ a.info-card__row:hover strong { color: var(--accent); }
   --slate-500: #000;
   --slate-400: #000;
 }
-body{ font-size: 17px; font-weight: 400; }
-*, *::before, *::after{ font-weight: 400 !important; }
-p, li{ font-size: 17px; }
+body{ font-size: 17px; }
+p, li{ font-size: 17px; font-weight: 400; }
 h1, h2, h3, h4, h5, h6{ text-transform: capitalize; }
