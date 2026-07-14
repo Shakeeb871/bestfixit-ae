@@ -12,6 +12,7 @@ Then open http://127.0.0.1:5000
 from __future__ import annotations
 
 import json
+import os
 import re
 import smtplib
 from datetime import datetime, timezone
@@ -64,6 +65,20 @@ app.jinja_env.auto_reload = True
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
+def _css_version() -> str:
+    """Cache-busting token for site.css — its last-modified time.
+
+    Appended as ``?v=…`` to the stylesheet URL so browsers always fetch the
+    latest CSS after a deploy instead of serving a stale cached copy (which
+    makes new markup look "broken" until a hard refresh).
+    """
+    try:
+        path = os.path.join(app.static_folder, "css", "site.css")
+        return str(int(os.path.getmtime(path)))
+    except OSError:
+        return "1"
+
+
 # --------------------------------------------------------------------------- #
 # Template context — brand details available in every template.
 # --------------------------------------------------------------------------- #
@@ -95,6 +110,7 @@ def inject_globals():
         "blog": BLOG,
         "stats": STATS,
         "feature_cards": FEATURE_CARDS,
+        "css_version": _css_version(),
     }
 
 
