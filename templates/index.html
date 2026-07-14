@@ -127,7 +127,7 @@
   .svc2-card{ flex:0 0 calc((100% - 52px) / 3); position:relative; display:flex; flex-direction:column; outline:none; }
   /* inner box clips the sliding overlay and carries the card surface */
   .svc2-card__inner{ position:relative; overflow:hidden; z-index:0; background:#fff;
-    border-radius:7px; padding:28px 28px 50px; box-shadow:0 18px 40px rgba(20,40,80,.07);
+    border-radius:7px; padding:28px 40px 50px; box-shadow:0 18px 40px rgba(20,40,80,.07);
     display:flex; flex-direction:column; align-items:flex-start; }
   .svc2-card__inner::before{ content:""; position:absolute; inset:0; z-index:-1; background:#024d87;
     transform:translateY(-101%); transition:transform .5s cubic-bezier(.4,0,.2,1); }
@@ -163,7 +163,7 @@
   .svc2-card.is-open .svc2-card__desc{ color:#fff !important; }
 
   /* button protrudes past the inner box's bottom edge */
-  .svc2-card__cta.btn-skew{ position:relative; z-index:4; align-self:flex-start; margin:-18px 0 0 28px; }
+  .svc2-card__cta.btn-skew{ position:relative; z-index:4; align-self:flex-start; margin:-18px 0 0 40px; padding:10px 20px !important; }
 
   /* ── stylish navigation ── */
   .svc2__stage{ position:relative; }
