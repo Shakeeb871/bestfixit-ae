@@ -64,13 +64,29 @@
 (function(){
   var track = document.querySelector('[data-hero-track]');
   if(!track) return;
-  var slides = track.children;
-  var n = slides.length;
-  if(n < 2){ return; }
-  var i = 0;
+  var real = Array.prototype.slice.call(track.children);
+  var n = real.length;
   var dotsWrap = document.querySelector('[data-hero-dots]');
   var prev = document.querySelector('[data-hero-prev]');
   var next = document.querySelector('[data-hero-next]');
+  if(n < 2){
+    if(prev) prev.style.display = 'none';
+    if(next) next.style.display = 'none';
+    return;
+  }
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TR = 'transform .7s cubic-bezier(.65,.05,.36,1)';
+
+  // Clone last + first for a seamless infinite loop (no rewind at the ends).
+  var firstClone = real[0].cloneNode(true);
+  var lastClone = real[n - 1].cloneNode(true);
+  [firstClone, lastClone].forEach(function(c){ c.setAttribute('aria-hidden', 'true'); });
+  track.insertBefore(lastClone, real[0]);
+  track.appendChild(firstClone);
+
+  var index = 1;            // first real slide (sits after lastClone)
+  var animating = false;
+  var safety = null;
   var dots = [];
   if(dotsWrap){
     for(var d = 0; d < n; d++){
@@ -78,21 +94,52 @@
       b.type = 'button';
       b.className = 'hero-dot';
       b.setAttribute('aria-label', 'Go to slide ' + (d + 1));
-      (function(idx){ b.addEventListener('click', function(){ go(idx); reset(); }); })(d);
+      (function(idx){ b.addEventListener('click', function(){ goTo(idx + 1); reset(); }); })(d);
       dotsWrap.appendChild(b);
       dots.push(b);
     }
   }
-  function go(idx){
-    i = (idx + n) % n;
+  function setX(i, anim){
+    track.style.transition = anim ? TR : 'none';
     track.style.transform = 'translateX(-' + (i * 100) + '%)';
-    for(var k = 0; k < n; k++){ if(dots[k]) dots[k].classList.toggle('is-active', k === i); }
   }
-  if(prev) prev.addEventListener('click', function(){ go(i - 1); reset(); });
-  if(next) next.addEventListener('click', function(){ go(i + 1); reset(); });
-  go(0);
-  var timer = setInterval(function(){ go(i + 1); }, 6000);
-  function reset(){ clearInterval(timer); timer = setInterval(function(){ go(i + 1); }, 6000); }
+  function paint(){
+    var realIdx = ((index - 1) % n + n) % n;
+    for(var k = 0; k < n; k++){ if(dots[k]) dots[k].classList.toggle('is-active', k === realIdx); }
+  }
+  function settle(){
+    if(!animating) return;
+    if(safety){ clearTimeout(safety); safety = null; }
+    if(index >= n + 1){ index = 1; setX(index, false); }       // past last -> real first
+    else if(index <= 0){ index = n; setX(index, false); }      // before first -> real last
+    animating = false;
+    paint();
+  }
+  function move(dir){
+    if(animating) return;
+    animating = true;
+    index += dir;
+    setX(index, !reduce);
+    paint();
+    if(reduce){ settle(); } else { safety = setTimeout(settle, 780); }
+  }
+  function goTo(i){                                             // i in [1..n]
+    if(animating || i === index) return;
+    animating = true;
+    index = i;
+    setX(index, !reduce);
+    paint();
+    if(reduce){ settle(); } else { safety = setTimeout(settle, 780); }
+  }
+  track.addEventListener('transitionend', function(e){ if(e.propertyName === 'transform') settle(); });
+
+  setX(index, false);
+  paint();
+
+  var timer = setInterval(function(){ move(1); }, 6000);
+  function reset(){ clearInterval(timer); timer = setInterval(function(){ move(1); }, 6000); }
+  if(prev) prev.addEventListener('click', function(){ move(-1); reset(); });
+  if(next) next.addEventListener('click', function(){ move(1); reset(); });
   var root = track.closest('.hero-slider');
   if(root){
     root.addEventListener('mouseenter', function(){ clearInterval(timer); });

@@ -342,62 +342,132 @@ class Component extends DCLogic {
     });
   }
 
-  // Services slider: page-based, auto-advances right-to-left, pauses on
-  // hover, rebuilds on resize (3 / 2 / 1 cards per view). Uses each card's
-  // offsetLeft so gaps and responsive widths are handled exactly.
+  // Services slider: seamless infinite loop, advances one card at a time
+  // right-to-left, pauses on hover, rebuilds on resize (3 / 2 / 1 per view).
+  // Cloned edge cards let it wrap in either direction with no rewind jump.
   document.querySelectorAll('[data-svc2-track]').forEach(function(track){
     var slider = track.closest('.svc2__slider');
     if (!slider) return;
-    var cards = Array.prototype.slice.call(track.children);
-    if (!cards.length) return;
+    var real = Array.prototype.slice.call(track.children);
+    var n = real.length;
+    if (!n) return;
     var dotsWrap = slider.querySelector('[data-svc2-dots]');
     var prev = slider.querySelector('[data-svc2-prev]');
     var next = slider.querySelector('[data-svc2-next]');
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var page = 0, pages = 1, perView = 3, timer = null;
+    var TR = 'transform .6s cubic-bezier(.4,0,.2,1)';
+
+    if (n < 2){
+      if (prev) prev.style.display = 'none';
+      if (next) next.style.display = 'none';
+      return;
+    }
+
+    var perView = 3, di = null, animating = false, safety = null, timer = null;
+    var clones = [];
 
     function calcPerView(){ var w = window.innerWidth; return w <= 600 ? 1 : (w <= 900 ? 2 : 3); }
+
+    function clearClones(){
+      clones.forEach(function(c){ if (c.parentNode) c.parentNode.removeChild(c); });
+      clones = [];
+    }
+    function prep(c){
+      c.setAttribute('aria-hidden', 'true');
+      c.classList.remove('is-open');
+      c.querySelectorAll('a,button,[tabindex]').forEach(function(el){ el.tabIndex = -1; });
+      clones.push(c);
+    }
+    function buildClones(){
+      clearClones();
+      var k = Math.min(perView, n);
+      // prepend clones of the last k real cards (in order), before real[0]
+      for (var i = 0; i < k; i++){
+        var head = real[n - k + i].cloneNode(true); prep(head);
+        track.insertBefore(head, real[0]);
+      }
+      // append clones of the first k real cards (in order)
+      for (var j = 0; j < k; j++){
+        var tail = real[j].cloneNode(true); prep(tail);
+        track.appendChild(tail);
+      }
+    }
+
     function buildDots(){
       if (!dotsWrap) return;
       dotsWrap.innerHTML = '';
-      for (var i = 0; i < pages; i++){
+      for (var i = 0; i < n; i++){
         var d = document.createElement('button');
         d.type = 'button'; d.className = 'svc2__dot';
-        d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        (function(idx){ d.addEventListener('click', function(){ go(idx, true); }); })(i);
+        d.setAttribute('aria-label', 'Go to service ' + (i + 1));
+        (function(idx){ d.addEventListener('click', function(){ goTo(idx); }); })(i);
         dotsWrap.appendChild(d);
       }
     }
+    function realPos(){ return ((di - perView) % n + n) % n; }
     function paintDots(){
       if (!dotsWrap) return;
-      var ds = dotsWrap.children;
-      for (var i = 0; i < ds.length; i++) ds[i].classList.toggle('is-active', i === page);
+      var ds = dotsWrap.children, p = realPos();
+      for (var i = 0; i < ds.length; i++) ds[i].classList.toggle('is-active', i === p);
     }
-    function go(p, user){
-      page = ((p % pages) + pages) % pages;
-      var maxStart = Math.max(0, cards.length - perView);
-      var startIdx = Math.min(page * perView, maxStart);
-      track.style.transform = 'translateX(-' + cards[startIdx].offsetLeft + 'px)';
+    function setX(anim){
+      var child = track.children[di];
+      if (!child) return;
+      track.style.transition = anim ? TR : 'none';
+      track.style.transform = 'translateX(-' + child.offsetLeft + 'px)';
+    }
+    function settle(){
+      if (!animating) return;
+      if (safety){ clearTimeout(safety); safety = null; }
+      if (di >= perView + n){ di -= n; setX(false); }          // on a tail clone -> real
+      else if (di < perView){ di += n; setX(false); }          // on a head clone -> real
+      animating = false;
       paintDots();
-      if (user) restart();
     }
+    function move(dir){
+      if (animating) return;
+      animating = true;
+      di += dir;
+      setX(!reduce);
+      paintDots();
+      if (reduce){ settle(); } else { safety = setTimeout(settle, 720); }
+    }
+    function goTo(p){
+      if (animating) return;
+      var target = perView + p;
+      if (target === di) return;
+      animating = true;
+      di = target;
+      setX(!reduce);
+      paintDots();
+      if (reduce){ settle(); } else { safety = setTimeout(settle, 720); }
+      restart();
+    }
+
+    track.addEventListener('transitionend', function(e){ if (e.propertyName === 'transform') settle(); });
+
     function layout(){
+      var pos = (di === null) ? 0 : realPos();
       perView = calcPerView();
-      pages = Math.ceil(cards.length / perView);
-      if (page >= pages) page = 0;
-      buildDots();
-      go(page, false);
+      buildClones();
+      di = perView + pos;
+      setX(false);
+      paintDots();
     }
-    function start(){ if (!reduce && pages > 1 && !timer) timer = setInterval(function(){ go(page + 1, false); }, 4200); }
+
+    function start(){ if (!reduce && !timer) timer = setInterval(function(){ move(1); }, 4200); }
     function stop(){ if (timer){ clearInterval(timer); timer = null; } }
     function restart(){ stop(); start(); }
 
-    if (prev) prev.addEventListener('click', function(){ go(page - 1, true); });
-    if (next) next.addEventListener('click', function(){ go(page + 1, true); });
+    if (prev) prev.addEventListener('click', function(){ move(-1); restart(); });
+    if (next) next.addEventListener('click', function(){ move(1); restart(); });
     slider.addEventListener('mouseenter', stop);
     slider.addEventListener('mouseleave', start);
     var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(layout, 150); });
-    layout(); start();
+
+    buildDots();
+    layout();
+    start();
   });
 
   // border-draw hover animation: inject 4 line spans into every button
