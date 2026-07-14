@@ -1,44 +1,28 @@
-{% extends "base.html" %}
-{% from "_icons.html" import icon %}
-
-{% block title %}Our Services — {{ site_name }}{% endblock %}
-{% block description %}Explore all home maintenance services from {{ site_name }}: plumbing, electrical, AC, carpentry, painting, handyman, tiling and appliance repair across the UAE.{% endblock %}
-
+{% extends "site_base.html" %}
+{% block title %}Our Services — Best Fix Technical Services{% endblock %}
+{% block description %}Explore Best Fix technical services in Dubai — plumbing, electrical, AC maintenance, carpentry, painting, handyman, masonry and appliance repair.{% endblock %}
 {% block content %}
-<section class="page-hero">
-  <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="{{ url_for('index') }}">Home</a> <span>/</span> <span>Services</span>
-    </nav>
-    <h1 class="page-hero__title">Our services</h1>
-    <p class="page-hero__lead">One trusted team for every job around your home. Pick a service to see what's included and get a fast quote.</p>
+<section class="pagehero">
+  <div class="pagehero__wrap">
+    <h1>Our Services</h1>
+    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; Our Services</p>
   </div>
 </section>
-
-<section class="section">
-  <div class="container">
-    <div class="grid grid--services">
-      {% for s in services %}
-        <a class="service-card" href="{{ url_for('service_detail', slug=s.slug) }}">
-          <span class="service-card__icon">{{ icon(s.icon, "icon") }}</span>
-          <h3 class="service-card__title">{{ s.title }}</h3>
-          <p class="service-card__text">{{ s.short }}</p>
-          <span class="service-card__link">Learn more {{ icon("arrow", "icon icon--sm") }}</span>
-        </a>
-      {% endfor %}
-    </div>
+<section class="pagewrap">
+  <div style="text-align:center; max-width:640px; margin:0 auto clamp(30px,4vw,46px);">
+    <p class="eyebrow">What We Do</p>
+    <h2 style="font-size:clamp(24px,2.8vw,32px); margin:0;">One Trusted Team For Every Fix In Your Home</h2>
   </div>
-</section>
-
-<section class="cta">
-  <div class="container cta__inner">
-    <div>
-      <h2 class="cta__title">Not sure which service you need?</h2>
-      <p class="cta__sub">Tell us the problem — we'll point you to the right fix.</p>
-    </div>
-    <div class="cta__actions">
-      <a href="{{ url_for('contact') }}" class="btn btn--light btn--lg">Ask us anything</a>
-    </div>
+  <div class="svc-grid">
+    {% for s in all_services %}
+    <article class="svc-tile">
+      <span class="svc-tile__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></span>
+      <h3>{{ s.title }}</h3>
+      <p>{{ s.short }}</p>
+      <a class="btn-skew" href="/services/{{ s.slug }}">Learn More
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+    </article>
+    {% endfor %}
   </div>
 </section>
 {% endblock %}

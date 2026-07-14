@@ -1,14 +1,14 @@
-{% extends "base.html" %}
-{% block title %}Page not found — {{ site_name }}{% endblock %}
+{% extends "site_base.html" %}
+{% block title %}Page Not Found — Best Fix Technical Services{% endblock %}
 {% block content %}
-<section class="section">
-  <div class="container narrow center">
-    <span class="big-404">404</span>
-    <h1 class="page-hero__title">We couldn't find that page</h1>
-    <p class="page-hero__lead">The link may be broken or the page may have moved. Let's get you back on track.</p>
-    <div class="hero__actions center-actions">
-      <a href="{{ url_for('index') }}" class="btn btn--primary btn--lg">Back to home</a>
-      <a href="{{ url_for('services') }}" class="btn btn--ghost btn--lg">Browse services</a>
+<section class="pagewrap" style="text-align:center;">
+  <div style="max-width:620px; margin:0 auto;">
+    <div style="font-family:var(--font-heading); font-weight:700; font-size:clamp(80px,14vw,140px); line-height:1; color:#024d87;">404</div>
+    <h1 style="font-size:clamp(24px,3vw,34px); margin:6px 0 14px;">We Couldn't Find That Page</h1>
+    <p>The link may be broken or the page may have moved. Let's get you back on track.</p>
+    <div style="margin-top:26px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a class="btn-skew" href="/">Back To Home</a>
+      <a class="btn-skew btn-skew--outline" href="/services" style="color:#024d87;">Browse Services</a>
     </div>
   </div>
 </section>

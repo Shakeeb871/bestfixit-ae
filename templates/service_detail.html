@@ -1,73 +1,34 @@
-{% extends "base.html" %}
-{% from "_icons.html" import icon %}
-
-{% block title %}{{ service.title }} Services in the UAE — {{ site_name }}{% endblock %}
-{% block description %}{{ service.short }} Professional {{ service.title|lower }} from {{ site_name }} across the UAE. Fast, fair and fully insured.{% endblock %}
-
+{% extends "site_base.html" %}
+{% block title %}{{ service.title }} — Best Fix Technical Services{% endblock %}
+{% block description %}{{ service.short }} Professional {{ service.title|lower }} in Dubai and the UAE by Best Fix.{% endblock %}
 {% block content %}
-<section class="page-hero">
-  <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="{{ url_for('index') }}">Home</a> <span>/</span>
-      <a href="{{ url_for('services') }}">Services</a> <span>/</span>
-      <span>{{ service.title }}</span>
-    </nav>
-    <div class="page-hero__row">
-      <span class="page-hero__icon">{{ icon(service.icon, "icon") }}</span>
-      <div>
-        <h1 class="page-hero__title">{{ service.title }}</h1>
-        <p class="page-hero__lead">{{ service.short }}</p>
-      </div>
-    </div>
+<section class="pagehero">
+  <div class="pagehero__wrap">
+    <h1>{{ service.title }}</h1>
+    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; <a href="/services">Services</a> &middot; {{ service.title }}</p>
   </div>
 </section>
-
-<section class="section">
-  <div class="container detail">
-    <div class="detail__main">
-      <h2>About our {{ service.title|lower }} service</h2>
-      <p class="detail__desc">{{ service.description }}</p>
-
-      <h3>What's included</h3>
-      <ul class="ticklist">
-        {% for point in service.points %}
-          <li>{{ icon("check", "icon icon--sm") }} {{ point }}</li>
-        {% endfor %}
-      </ul>
-
-      <div class="detail__promise">
-        <span class="feature__icon">{{ icon("shield") }}</span>
-        <p><strong>Our promise:</strong> upfront pricing, tidy work and a satisfaction guarantee on every {{ service.title|lower }} job.</p>
-      </div>
+<section class="pagewrap">
+  <div class="prose">
+    <p style="font-size:16px;">{{ service.description }}</p>
+    <h2>What we cover</h2>
+    <ul>
+      {% for point in service.points %}<li>{{ point }}</li>{% endfor %}
+    </ul>
+    <div style="margin-top:30px;">
+      <a class="btn-skew" href="/contact">Get a Quote
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
     </div>
-
-    <aside class="detail__aside">
-      <div class="booking-card">
-        <h3>Book {{ service.title|lower }}</h3>
-        <p>Get a fast, no-obligation quote today.</p>
-        <a href="{{ url_for('contact', service=service.title) }}" class="btn btn--primary btn--block">Get a quote {{ icon("arrow", "icon icon--sm") }}</a>
-        <a href="https://wa.me/{{ whatsapp_number }}?text=Hi%2C%20I%20need%20{{ service.title|urlencode }}" target="_blank" rel="noopener" class="btn btn--whatsapp btn--block">{{ icon("whatsapp", "icon icon--sm") }} WhatsApp us</a>
-        <a href="tel:{{ contact_phone|replace(' ', '') }}" class="booking-card__phone">{{ icon("phone", "icon icon--sm") }} {{ contact_phone }}</a>
-      </div>
-    </aside>
   </div>
-</section>
-
-<section class="section section--alt">
-  <div class="container">
-    <div class="section__head">
-      <h2 class="section__title">Other services</h2>
-    </div>
-    <div class="grid grid--services">
-      {% for s in others %}
-        <a class="service-card" href="{{ url_for('service_detail', slug=s.slug) }}">
-          <span class="service-card__icon">{{ icon(s.icon, "icon") }}</span>
-          <h3 class="service-card__title">{{ s.title }}</h3>
-          <p class="service-card__text">{{ s.short }}</p>
-          <span class="service-card__link">Learn more {{ icon("arrow", "icon icon--sm") }}</span>
-        </a>
+  {% if others %}
+  <div style="max-width:840px; margin:clamp(40px,6vw,64px) auto 0;">
+    <h2 style="font-size:20px; margin:0 0 16px;">Other Services</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+      {% for o in others %}
+      <a href="/services/{{ o.slug }}" style="display:inline-block; padding:9px 16px; border:1px solid #dce3ee; border-radius:6px; background:#fff; color:#303236; font-size:14px;">{{ o.title }}</a>
       {% endfor %}
     </div>
   </div>
+  {% endif %}
 </section>
 {% endblock %}

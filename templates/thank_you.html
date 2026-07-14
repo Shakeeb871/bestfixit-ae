@@ -1,16 +1,16 @@
-{% extends "base.html" %}
-{% from "_icons.html" import icon %}
-
-{% block title %}Thank You — {{ site_name }}{% endblock %}
+{% extends "site_base.html" %}
+{% block title %}Thank You — Best Fix Technical Services{% endblock %}
 {% block content %}
-<section class="section">
-  <div class="container narrow center">
-    <span class="success-mark">{{ icon("check") }}</span>
-    <h1 class="page-hero__title">Thank you — we've got it!</h1>
-    <p class="page-hero__lead">Your request is in. A member of the {{ site_name }} team will call or message you shortly, usually within the hour.</p>
-    <div class="hero__actions center-actions">
-      <a href="{{ url_for('index') }}" class="btn btn--primary btn--lg">Back to home</a>
-      <a href="https://wa.me/{{ whatsapp_number }}" target="_blank" rel="noopener" class="btn btn--whatsapp btn--lg">{{ icon("whatsapp", "icon icon--sm") }} Message us now</a>
+<section class="pagewrap" style="text-align:center;">
+  <div style="max-width:620px; margin:0 auto;">
+    <span style="display:inline-grid; place-items:center; width:72px; height:72px; border-radius:50%; background:#eaf1fb; color:#2c74c0; margin:0 auto 22px;">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+    </span>
+    <h1 style="font-size:clamp(26px,3.4vw,38px); margin:0 0 14px;">Thank You — We've Got It!</h1>
+    <p>Your request is in. A member of the Best Fix team will call or message you shortly, usually within the hour.</p>
+    <div style="margin-top:26px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a class="btn-skew" href="/">Back To Home</a>
+      <a class="btn-skew btn-skew--outline" href="https://wa.me/971547393716" target="_blank" rel="noopener" style="color:#024d87;">Message Us Now</a>
     </div>
   </div>
 </section>

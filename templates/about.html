@@ -1,59 +1,47 @@
-{% extends "base.html" %}
-{% from "_icons.html" import icon %}
-
-{% block title %}About Us — {{ site_name }}{% endblock %}
-{% block description %}{{ site_name }} is the UAE's friendly, reliable home-maintenance team. Learn about our vetted professionals, honest pricing and satisfaction guarantee.{% endblock %}
-
+{% extends "site_base.html" %}
+{% block title %}About Us — Best Fix Technical Services{% endblock %}
+{% block description %}Best Fix is Dubai's dependable home-maintenance team since 2012 — licensed technicians, honest pricing and a satisfaction guarantee.{% endblock %}
 {% block content %}
-<section class="page-hero">
-  <div class="container">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="{{ url_for('index') }}">Home</a> <span>/</span> <span>About</span>
-    </nav>
-    <h1 class="page-hero__title">The home-repair team you can trust</h1>
-    <p class="page-hero__lead">We started {{ site_name }} with one goal: make fixing your home simple, honest and stress-free.</p>
+<section class="pagehero">
+  <div class="pagehero__wrap">
+    <h1>About Us</h1>
+    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; About Us</p>
   </div>
 </section>
 
-<section class="section">
-  <div class="container about-grid">
-    <div class="about-grid__copy">
-      <h2 class="section__title">Built on trust, one job at a time</h2>
-      <p>Finding a reliable handyman in the UAE shouldn't be hard. Too many people have waited around for no-shows or been surprised by the final bill. We built {{ site_name }} to be different — a single, dependable team you can call for anything around the home.</p>
-      <p>From a leaking tap to a full villa repaint, our technicians are skilled, background-checked and genuinely care about getting it right. We quote fairly, we show up on time, and we treat your home like our own.</p>
-      <a href="{{ url_for('contact') }}" class="btn btn--primary">Work with us {{ icon("arrow", "icon icon--sm") }}</a>
-    </div>
-    <ul class="stat-cards">
-      <li><span class="stat-cards__num">8,500+</span><span class="stat-cards__label">Jobs completed</span></li>
-      <li><span class="stat-cards__num">4.9★</span><span class="stat-cards__label">Customer rating</span></li>
-      <li><span class="stat-cards__num">5</span><span class="stat-cards__label">Emirates covered</span></li>
-      <li><span class="stat-cards__num">100%</span><span class="stat-cards__label">Vetted &amp; insured</span></li>
-    </ul>
-  </div>
-</section>
-
-<section class="section section--alt">
-  <div class="container">
-    <div class="section__head">
-      <h2 class="section__title">Our values</h2>
-    </div>
-    <div class="grid grid--values">
-      <div class="value"><span class="feature__icon">{{ icon("user") }}</span><h3>People first</h3><p>Friendly, respectful pros who listen and get the job done.</p></div>
-      <div class="value"><span class="feature__icon">{{ icon("wallet") }}</span><h3>Honest pricing</h3><p>Clear quotes upfront — you always know what you'll pay.</p></div>
-      <div class="value"><span class="feature__icon">{{ icon("clock") }}</span><h3>Respect for time</h3><p>We arrive when we say we will and work efficiently.</p></div>
-      <div class="value"><span class="feature__icon">{{ icon("shield") }}</span><h3>Quality guaranteed</h3><p>If it's not right, we fix it. Simple as that.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="container cta__inner">
+<section class="pagewrap">
+  <div class="split">
     <div>
-      <h2 class="cta__title">Let's get your to-do list done</h2>
-      <p class="cta__sub">One call, one trusted team, every home service.</p>
+      <p class="eyebrow">Who We Are</p>
+      <h2 style="font-size:clamp(24px,3vw,34px); margin:0 0 16px;">The Home-Repair Team You Can Trust</h2>
+      <p>Finding a reliable maintenance team in the UAE shouldn't be hard. Too many people have waited around for no-shows or been surprised by the final bill. We built Best Fix to be different — a single, dependable team you can call for anything around the home.</p>
+      <p>From a leaking tap to a full villa fit-out, our technicians are skilled, background-checked and genuinely care about getting it right. We quote fairly, we show up on time, and we treat your home like our own.</p>
+      <div style="margin-top:24px;">
+        <a class="btn-skew" href="/contact">Work With Us
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
+      </div>
     </div>
-    <div class="cta__actions">
-      <a href="{{ url_for('contact') }}" class="btn btn--light btn--lg">Book a service</a>
+    <div>
+      <img src="/static/img/hero-team.webp" alt="Best Fix technicians in Dubai">
+    </div>
+  </div>
+</section>
+
+<section style="background:#f4f6f9; padding:clamp(46px,7vw,80px) 0;">
+  <div style="max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+    <div style="background:#fff; border:1px solid #e6ebf3; border-radius:7px; padding:30px 26px;">
+      <p class="eyebrow">Our Mission</p>
+      <p style="margin:0 0 16px;">To make reliable home maintenance effortless for every household in Dubai — on time, fairly priced and done right the first time.</p>
+      <a href="/mission" style="color:#024d87; font-weight:600;">Read more &rarr;</a>
+    </div>
+    <div style="background:#fff; border:1px solid #e6ebf3; border-radius:7px; padding:30px 26px;">
+      <p class="eyebrow">Our Vision</p>
+      <p style="margin:0 0 16px;">To be the most trusted technical-services team in the UAE — the number you save once and call for everything.</p>
+      <a href="/vision" style="color:#024d87; font-weight:600;">Read more &rarr;</a>
+    </div>
+    <div style="background:#fff; border:1px solid #e6ebf3; border-radius:7px; padding:30px 26px;">
+      <p class="eyebrow">Why Choose Us</p>
+      <p style="margin:0;">Licensed technicians, upfront quotes, tidy work and a full satisfaction guarantee on every job across Dubai and the wider UAE.</p>
     </div>
   </div>
 </section>
