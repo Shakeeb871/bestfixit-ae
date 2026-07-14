@@ -1,0 +1,22 @@
+{#
+  Curved-top feature cards, server-rendered from data/feature_cards.py.
+  The card shape is defined once by the inline SVG clipPath (#fcardClip) and
+  applied via CSS (.fcard__bg). Content/colours come from Python data.
+#}
+<section class="fcard-section" aria-label="What we deliver">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="fcardClip" clipPathUnits="objectBoundingBox"><path d="M0,1 L0,0.01 C0.2,0.09 0.36,0.15 0.5,0.15 C0.64,0.15 0.8,0.09 1,0.01 L1,1 Z"></path></clipPath></defs></svg>
+  <div class="fcard-head" data-reveal>
+    <p class="eyebrow">Why Choose Us</p>
+    <h2 style="font-size:clamp(24px,2.8vw,32px); margin:0;">What We Deliver</h2>
+  </div>
+  <div class="fcard-grid">
+    {% for c in feature_cards %}
+    <article class="fcard">
+      <span class="fcard__bg" style="background:{{ c.bg }};" aria-hidden="true"></span>
+      <span class="fcard__icon" style="background:{{ c.circle_bg }}; color:{{ c.icon_color }};">{{ c.icon|safe }}</span>
+      <h3 class="fcard__title">{{ c.title }}</h3>
+      <p class="fcard__text">{{ c.text }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
