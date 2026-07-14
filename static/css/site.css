@@ -15,8 +15,8 @@ x-dc,helmet{display:block;} helmet{display:none;}
   #hdrRow{ flex-wrap:wrap; }
   #navToggle{ display:flex; }
   .callbtn{ display:none !important; }
-  #hdrNav{ display:none; order:5; flex-basis:100%; width:100%; margin-left:0; flex-direction:column; align-items:flex-start; gap:2px; padding:8px 0 6px; border-top:1px solid #e6e9f0; }
-  #hdrRow.nav-open #hdrNav{ display:flex; }
+  #hdrNav{ display:none !important; order:5; flex-basis:100%; width:100%; margin-left:0; flex-direction:column; align-items:flex-start; gap:2px; padding:8px 0 6px; border-top:1px solid #e6e9f0; }
+  #hdrRow.nav-open #hdrNav{ display:flex !important; }
   #hdrNav > a{ padding:11px 4px; width:100%; font-size:15px; }
   .mob-call{ display:block !important; color:#024d87 !important; }
 }
