@@ -121,11 +121,13 @@
 /* ---- navigation ---- */
 .testimonial-showcase__navigation{ display:flex; gap:10px; margin-top:30px; }
 .testimonial-showcase__navigation button{
-  width:46px; height:46px; border-radius:50%; cursor:pointer;
-  border:1px solid var(--ts-circle-border); background:var(--ts-surface); color:var(--ts-heading);
-  display:grid; place-items:center; transition:background .2s ease, border-color .2s ease;
+  width:48px; height:48px; border-radius:50%; cursor:pointer; padding:0;
+  border:1.6px solid #cdd8e8; background:#fff; color:#000;
+  display:grid; place-items:center;
+  transition:background-color .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
 }
-.testimonial-showcase__navigation button:hover{ background:var(--ts-accent); border-color:var(--ts-accent); }
+.testimonial-showcase__navigation button:hover{ background:#024d87; border-color:#024d87; color:#fff;
+  box-shadow:0 12px 26px rgba(2,77,135,.3); }
 .testimonial-showcase__navigation button:focus-visible{ outline:2px solid var(--ts-accent); outline-offset:3px; }
 .testimonial-showcase__navigation svg{ width:20px; height:20px; }
 
