@@ -1,8 +1,26 @@
 {#
   Curved-top feature cards, server-rendered from data/feature_cards.py.
-  The card shape is defined once by the inline SVG clipPath (#fcardClip) and
-  applied via CSS (.fcard__bg). Content/colours come from Python data.
+  Styles are inline here (self-contained) so the section always renders
+  correctly regardless of external-CSS caching. The shape is one inline
+  SVG clipPath (#fcardClip) applied via .fcard__bg.
 #}
+<style id="fcard-style">
+.fcard-section{ padding:clamp(40px,6vw,72px) 0 clamp(18px,3vw,30px); background:#fff; }
+.fcard-head{ text-align:center; max-width:660px; margin:0 auto clamp(30px,4vw,46px); padding:0 20px; }
+.fcard-grid{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,48px);
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:28px; align-items:start; }
+.fcard{ position:relative; padding:92px 30px 52px; text-align:center; }
+.fcard__bg{ position:absolute; inset:0; z-index:0; clip-path:url(#fcardClip); }
+.fcard__icon{ position:absolute; top:38px; left:50%; transform:translate(-50%,-50%);
+  width:74px; height:74px; border-radius:50%; display:grid; place-items:center;
+  box-shadow:0 8px 20px rgba(22,35,63,.25); z-index:2; }
+.fcard__icon svg{ width:32px; height:32px; }
+.fcard__title{ position:relative; z-index:1; font-weight:800; font-size:21px; margin:6px 0 14px; }
+.fcard__text{ position:relative; z-index:1; font-size:15px; line-height:1.65; margin:0; }
+/* keep card text white — out-specify the global body-copy colour rule */
+.fcard-grid .fcard .fcard__title{ color:#fff !important; }
+.fcard-grid .fcard .fcard__text{ color:rgba(255,255,255,.9) !important; }
+</style>
 <section class="fcard-section" aria-label="What we deliver">
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="fcardClip" clipPathUnits="objectBoundingBox"><path d="M0,1 L0,0.01 C0.2,0.09 0.36,0.15 0.5,0.15 C0.64,0.15 0.8,0.09 1,0.01 L1,1 Z"></path></clipPath></defs></svg>
   <div class="fcard-head" data-reveal>

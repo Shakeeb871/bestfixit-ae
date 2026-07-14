@@ -89,7 +89,6 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
 [data-bf-root] .elementor-element-a2ef090 :is(h1,h2,h3,h4,h5,h6,p,li),
 [data-bf-root] .pagehero :is(h1,h2,h3,h4,h5,h6,p,li),
 [data-bf-root] .blog-cta :is(h1,h2,h3,h4,h5,h6,p,li),
-[data-bf-root] .fcard :is(h1,h2,h3,h4,h5,h6,p),
 [data-bf-root] #bfc .bfc-form :is(h1,h2,h3,h4,h5,h6,p,li){ color:#fff !important; }
 [data-bf-root] .site-footer__legal a{ color:rgba(255,255,255,.6) !important; }
 [data-bf-root] .site-footer__legal a:hover{ color:#fff !important; }
@@ -835,17 +834,3 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   #bfc .bfc-row{ flex-direction:column; gap:0; }
   #bfc::before,#bfc::after,#bfc .bfc-shape{ display:none; }
 }
-
-/* ── feature cards (curved-top, server-rendered from data/feature_cards.py) ── */
-.fcard-section{ padding:clamp(40px,6vw,72px) 0 clamp(18px,3vw,30px); background:#fff; }
-.fcard-head{ text-align:center; max-width:660px; margin:0 auto clamp(30px,4vw,46px); padding:0 20px; }
-.fcard-grid{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,48px);
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:28px; align-items:start; }
-.fcard{ position:relative; color:#fff; padding:92px 30px 52px; text-align:center; }
-.fcard__bg{ position:absolute; inset:0; z-index:0; clip-path:url(#fcardClip); }
-.fcard__icon{ position:absolute; top:38px; left:50%; transform:translate(-50%,-50%);
-  width:74px; height:74px; border-radius:50%; display:grid; place-items:center;
-  box-shadow:0 8px 20px rgba(22,35,63,.25); z-index:2; }
-.fcard__icon svg{ width:32px; height:32px; }
-.fcard__title{ position:relative; z-index:1; font-weight:800; font-size:21px; margin:6px 0 14px; }
-.fcard__text{ position:relative; z-index:1; font-size:15px; line-height:1.65; margin:0; }
