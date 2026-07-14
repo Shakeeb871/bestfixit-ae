@@ -4,26 +4,49 @@
 <!-- ═══════════════ HERO (reference-style) ═══════════════ -->
 
 <section id="top" data-screen-label="Hero" style="position:relative; background:#fff;">
-  <div style="position:relative; overflow:hidden;">
-    <!-- background photo -->
-    <div style="position:absolute; inset:0; z-index:0;">
-      <img src="/static/img/maintenance-company-in-dubai.webp" onerror="this.onerror=null;this.src='/static/img/hero-team.webp';" alt="Maintenance company in Dubai — Best Fix technicians" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-    </div>
-    <!-- dark overlay -->
-    <div aria-hidden="true" style="position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(20,31,56,.80) 0%, rgba(20,31,56,.58) 42%, rgba(20,31,56,.85) 100%);"></div>
-    <!-- content -->
-    <div style="position:relative; z-index:2; max-width:940px; margin:0 auto; padding:clamp(88px,12vw,150px) clamp(20px,5vw,48px) clamp(150px,17vw,210px); text-align:center; color:#fff;">
-      <h1 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(34px,5.4vw,58px); line-height:1.12; letter-spacing:-.01em; margin:0;">Air conditioning service<br>&amp; full home maintenance</h1>
-      <p style="font-size:clamp(15px,1.5vw,17px); line-height:1.65; max-width:620px; margin:22px auto 0; color:rgba(255,255,255,.82);">Complete installation, repair and maintenance — plumbing, electrical, AC and carpentry — trusted across JVC, Dubai and the wider UAE.</p>
-      <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:34px;">
-        <a href="#services" class="btn-skew" style="display:inline-flex; align-items:center; gap:10px; background:#024d87; color:#fff; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#013a5e">Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
-        <a href="#contact" class="btn-skew btn-skew--outline" style="display:inline-flex; align-items:center; gap:10px; background:#fff; color:#000; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#2db34a">Contact us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+  <div class="hero-slider">
+    <div class="hero-slides" data-hero-track>
+
+      <!-- SLIDE 1 — original hero -->
+      <div class="hero-slide">
+        <div class="hero-slide__bg">
+          <img src="/static/img/hero-team.webp" alt="Best Fix technician and branded van in Dubai" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        </div>
+        <div aria-hidden="true" class="hero-slide__overlay"></div>
+        <div class="hero-slide__content">
+          <h1 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(34px,5.4vw,58px); line-height:1.12; letter-spacing:-.01em; margin:0;">Air conditioning service<br>&amp; full home maintenance</h1>
+          <p style="font-size:clamp(15px,1.5vw,17px); line-height:1.65; max-width:620px; margin:22px auto 0; color:rgba(255,255,255,.82);">Complete installation, repair and maintenance — plumbing, electrical, AC and carpentry — trusted across JVC, Dubai and the wider UAE.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:34px;">
+            <a href="#services" class="btn-skew" style="display:inline-flex; align-items:center; gap:10px; background:#024d87; color:#fff; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#013a5e">Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+            <a href="#contact" class="btn-skew btn-skew--outline" style="display:inline-flex; align-items:center; gap:10px; background:#fff; color:#000; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#2db34a">Contact us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+          </div>
+        </div>
       </div>
+
+      <!-- SLIDE 2 — maintenance-company image hero -->
+      <div class="hero-slide">
+        <div class="hero-slide__bg">
+          <img src="/static/img/maintenance-company-in-dubai.webp" onerror="this.onerror=null;this.src='/static/img/hero-team.webp';" alt="Maintenance company in Dubai — Best Fix technicians" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+        </div>
+        <div aria-hidden="true" class="hero-slide__overlay"></div>
+        <div class="hero-slide__content">
+          <h1 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(34px,5.4vw,58px); line-height:1.12; letter-spacing:-.01em; margin:0;">Dubai's trusted<br>maintenance company</h1>
+          <p style="font-size:clamp(15px,1.5vw,17px); line-height:1.65; max-width:620px; margin:22px auto 0; color:rgba(255,255,255,.82);">One licensed team for every fix in your home — AC, plumbing, electrical, painting and full fit-outs. On time, done right, and a spotless finish every visit.</p>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:34px;">
+            <a href="#services" class="btn-skew" style="display:inline-flex; align-items:center; gap:10px; background:#024d87; color:#fff; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#013a5e">Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+            <a href="#contact" class="btn-skew btn-skew--outline" style="display:inline-flex; align-items:center; gap:10px; background:#fff; color:#000; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#2db34a">Contact us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <!-- slider arrows (decorative) -->
-    <button type="button" aria-label="Previous" style="position:absolute; z-index:2; left:clamp(10px,3vw,40px); top:40%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; border:1.5px solid rgba(255,255,255,.5); background:rgba(255,255,255,.08); color:#fff; cursor:pointer; display:grid; place-items:center;" style-hover="background:#024d87; border-color:#024d87"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <button type="button" aria-label="Next" style="position:absolute; z-index:2; right:clamp(10px,3vw,40px); top:40%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; border:1.5px solid rgba(255,255,255,.5); background:rgba(255,255,255,.08); color:#fff; cursor:pointer; display:grid; place-items:center;" style-hover="background:#024d87; border-color:#024d87"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
-  
+
+    <!-- working slider arrows -->
+    <button type="button" data-hero-prev class="hero-arrow hero-arrow--prev" aria-label="Previous slide"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+    <button type="button" data-hero-next class="hero-arrow hero-arrow--next" aria-label="Next slide"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
+
+    <!-- slide dots -->
+    <div class="hero-dots" data-hero-dots></div>
   </div>
   <!-- overlapping service cards -->
   <div data-reveal="" style="position:relative; z-index:3; max-width:1180px; margin:-130px auto 0; padding:0 clamp(20px,5vw,48px) clamp(56px,7vw,84px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:28px; align-items:start;">
@@ -37,6 +60,46 @@
     {% endfor %}
   </div>
 </section>
+<script>
+(function(){
+  var track = document.querySelector('[data-hero-track]');
+  if(!track) return;
+  var slides = track.children;
+  var n = slides.length;
+  if(n < 2){ return; }
+  var i = 0;
+  var dotsWrap = document.querySelector('[data-hero-dots]');
+  var prev = document.querySelector('[data-hero-prev]');
+  var next = document.querySelector('[data-hero-next]');
+  var dots = [];
+  if(dotsWrap){
+    for(var d = 0; d < n; d++){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hero-dot';
+      b.setAttribute('aria-label', 'Go to slide ' + (d + 1));
+      (function(idx){ b.addEventListener('click', function(){ go(idx); reset(); }); })(d);
+      dotsWrap.appendChild(b);
+      dots.push(b);
+    }
+  }
+  function go(idx){
+    i = (idx + n) % n;
+    track.style.transform = 'translateX(-' + (i * 100) + '%)';
+    for(var k = 0; k < n; k++){ if(dots[k]) dots[k].classList.toggle('is-active', k === i); }
+  }
+  if(prev) prev.addEventListener('click', function(){ go(i - 1); reset(); });
+  if(next) next.addEventListener('click', function(){ go(i + 1); reset(); });
+  go(0);
+  var timer = setInterval(function(){ go(i + 1); }, 6000);
+  function reset(){ clearInterval(timer); timer = setInterval(function(){ go(i + 1); }, 6000); }
+  var root = track.closest('.hero-slider');
+  if(root){
+    root.addEventListener('mouseenter', function(){ clearInterval(timer); });
+    root.addEventListener('mouseleave', reset);
+  }
+})();
+</script>
 
 <section id="about" data-screen-label="About" style="position:relative; padding:7vh 0; background:#fff; overflow:hidden;">
   <!-- faint geometric decorations -->
