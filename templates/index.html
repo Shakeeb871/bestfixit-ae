@@ -207,17 +207,17 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
       <div class="svc2__viewport">
       <div class="svc2__track" data-svc2-track>
-        {% for sv in home_services %}
+        {% for sv in all_services %}
         <article class="svc2-card" tabindex="0">
           <div class="svc2-card__inner">
             <span class="svc2-card__num" aria-hidden="true">{{ sv.num }}</span>
             <span class="svc2-card__icon" aria-hidden="true">{{ sv.icon|safe }}</span>
             <h3 class="svc2-card__title">{{ sv.title }}</h3>
             <div class="svc2-card__body">
-              <p class="svc2-card__desc">{{ sv.desc }}</p>
+              <p class="svc2-card__desc">{{ sv.short }}</p>
             </div>
           </div>
-          <a class="btn-skew svc2-card__cta" href="{{ sv.url }}">Get Offer
+          <a class="btn-skew svc2-card__cta" href="/services/{{ sv.slug }}">Get Offer
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
         </article>
         {% endfor %}
