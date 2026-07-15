@@ -37,38 +37,33 @@
   background-size:cover; background-position:center;
   font-family:var(--font-body,inherit);
 }
-/* readability overlay — darkest behind the heading (left), the brand
-   graphic shows through more softly toward the right */
+/* readability overlay — a soft centre vignette: darkens the middle just
+   enough to guarantee text contrast while keeping the green corner
+   accents of the banner vivid. */
 .cta-banner::before{
   content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
-  background:linear-gradient(90deg,
-    rgba(11,26,56,.90) 0%,
-    rgba(11,26,56,.74) 40%,
-    rgba(11,26,56,.52) 66%,
-    rgba(11,26,56,.60) 100%);
+  background:radial-gradient(ellipse 78% 130% at 50% 50%,
+    rgba(6,12,20,.55) 0%,
+    rgba(6,12,20,.34) 62%,
+    rgba(6,12,20,.10) 100%);
 }
-/* subtle angled decorative panels — between image and overlay */
-.cta-banner__deco{ position:absolute; inset:0; z-index:1; pointer-events:none; }
-.cta-banner__deco::before,
-.cta-banner__deco::after{ content:""; position:absolute; top:0; bottom:0; background:var(--cta-shape); }
-.cta-banner__deco::before{ left:0; width:34%;
-  clip-path:polygon(0 0,58% 0,20% 100%,0 100%); }
-.cta-banner__deco::after{ right:0; width:30%;
-  clip-path:polygon(46% 0,100% 0,100% 100%,80% 100%); }
+/* the banner already carries its own diagonal accents — no extra panels */
+.cta-banner__deco{ display:none; }
 
 .cta-banner__container{
   position:relative; z-index:3;
   max-width:1120px; margin-inline:auto;
   padding-inline:clamp(24px,4vw,32px);
 }
+/* centred content — the background is a full cover with an empty middle */
 .cta-banner__layout{
-  display:grid; grid-template-columns:1.3fr 1fr; align-items:center;
-  gap:clamp(20px,4vw,40px); min-height:150px;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  gap:clamp(22px,3vw,30px); min-height:150px;
 }
-/* ---- left content ---- */
-.cta-banner__content{ max-width:600px; }
+/* ---- content ---- */
+.cta-banner__content{ max-width:720px; }
 .cta-banner__eyebrow{
-  display:inline-flex; align-items:center; gap:6px; margin:0 0 25px;
+  display:inline-flex; align-items:center; justify-content:center; gap:6px; margin:0 0 18px;
 }
 .cta-banner__badge{
   display:inline-block; padding:4px 8px; border-radius:3px;
@@ -80,14 +75,14 @@
   letter-spacing:.14em; text-transform:uppercase;
 }
 .cta-banner__title{
-  margin:0; color:var(--cta-heading);
+  margin:0 auto; color:var(--cta-heading);
   font-family:var(--font-heading,inherit);
   font-weight:800; font-size:clamp(30px,3.4vw,39px); line-height:1.2;
-  max-width:560px;
+  max-width:640px;
 }
-/* ---- right actions ---- */
+/* ---- actions ---- */
 .cta-banner__actions{
-  display:flex; align-items:center; justify-content:flex-end;
+  display:flex; align-items:center; justify-content:center;
   gap:14px; flex-wrap:wrap;
 }
 .cta-banner__actions .btn{
