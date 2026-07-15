@@ -22,7 +22,7 @@
 <style id="cta-banner-style">
 .cta-banner{
   /* component tokens derived from the site theme */
-  --cta-overlay:#0f1622;
+  --cta-overlay:#0b1a38;              /* dark brand navy, unifies the graphic */
   --cta-heading:#ffffff;
   --cta-eyebrow:#eef2f8;
   --cta-badge-bg:var(--color-accent,#024d87);
@@ -32,17 +32,20 @@
   position:relative; overflow:hidden; isolation:isolate;
   width:100%; min-height:280px;
   padding:clamp(46px,6vw,62px) 0;
+  background-color:#0b1a38;           /* fallback + fills any letterboxing */
   background-image:var(--cta-bg-image);
   background-size:cover; background-position:center;
   font-family:var(--font-body,inherit);
 }
-/* readability overlay — darker behind the heading (left) */
+/* readability overlay — darkest behind the heading (left), the brand
+   graphic shows through more softly toward the right */
 .cta-banner::before{
   content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
   background:linear-gradient(90deg,
-    color-mix(in srgb,var(--cta-overlay) 90%, transparent) 0%,
-    color-mix(in srgb,var(--cta-overlay) 74%, transparent) 55%,
-    color-mix(in srgb,var(--cta-overlay) 82%, transparent) 100%);
+    rgba(11,26,56,.90) 0%,
+    rgba(11,26,56,.74) 40%,
+    rgba(11,26,56,.52) 66%,
+    rgba(11,26,56,.60) 100%);
 }
 /* subtle angled decorative panels — between image and overlay */
 .cta-banner__deco{ position:absolute; inset:0; z-index:1; pointer-events:none; }
@@ -94,10 +97,11 @@
 .cta-banner__actions .btn-primary{ min-width:140px; }
 /* secondary needs a light outline on the dark banner */
 .cta-banner__actions .btn-secondary{
-  min-width:118px; color:#fff; border-color:rgba(255,255,255,.6); background:transparent;
+  min-width:118px; color:#fff; border-color:rgba(255,255,255,.65);
+  background:rgba(11,26,56,.34);      /* faint scrim keeps text readable on the bright side */
 }
 .cta-banner__actions .btn-secondary:hover{
-  background:rgba(255,255,255,.14); border-color:#fff;
+  background:rgba(255,255,255,.16); border-color:#fff;
 }
 
 /* ---- responsive ---- */

@@ -13,5 +13,5 @@ CTA_BANNER = {
     "primary_url": "#services",
     "secondary_label": "Contact Us",
     "secondary_url": "#bfc",
-    "background": "/static/img/hero-team.webp",
+    "background": "/static/img/cta-maintenance-company.webp",
 }
