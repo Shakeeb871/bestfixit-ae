@@ -696,8 +696,12 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
      both the white card and the navy hover state */
   .svc2-card__icon{ position:relative; z-index:1; display:grid; place-items:center;
     width:74px; height:74px; margin-bottom:16px; border-radius:50%; overflow:hidden;
-    background:#fff; box-shadow:0 6px 16px rgba(20,40,80,.14); }
+    background:#fff; box-shadow:none; transition:box-shadow .4s ease; }
   .svc2-card__icon img{ width:100%; height:100%; object-fit:cover; display:block; }
+  /* shadow appears only on hover / open (navy) state */
+  .svc2-card:hover .svc2-card__icon,
+  .svc2-card:focus-within .svc2-card__icon,
+  .svc2-card.is-open .svc2-card__icon{ box-shadow:0 8px 20px rgba(0,0,0,.28); }
 
   .svc2-card__title{ position:relative; z-index:1; margin:0 0 10px; color:#000;
     font-family:var(--font-heading); font-weight:800; font-size:18px; line-height:1.22;
