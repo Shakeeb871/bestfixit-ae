@@ -692,12 +692,12 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2-card:focus-within .svc2-card__num,
   .svc2-card.is-open .svc2-card__num{ color:rgba(255,255,255,.14); }
 
-  .svc2-card__icon{ display:block; height:54px; margin-bottom:15px; color:#2c74c0;
-    transition:color .4s ease; }
-  .svc2-card__icon svg{ width:54px; height:54px; display:block; }
-  .svc2-card:hover .svc2-card__icon,
-  .svc2-card:focus-within .svc2-card__icon,
-  .svc2-card.is-open .svc2-card__icon{ color:#fff; }
+  /* image icon rendered as a clean circular white badge so it reads well on
+     both the white card and the navy hover state */
+  .svc2-card__icon{ position:relative; z-index:1; display:grid; place-items:center;
+    width:74px; height:74px; margin-bottom:16px; border-radius:50%; overflow:hidden;
+    background:#fff; box-shadow:0 6px 16px rgba(20,40,80,.14); }
+  .svc2-card__icon img{ width:100%; height:100%; object-fit:cover; display:block; }
 
   .svc2-card__title{ position:relative; z-index:1; margin:0 0 10px; color:#000;
     font-family:var(--font-heading); font-weight:800; font-size:18px; line-height:1.22;

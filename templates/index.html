@@ -219,7 +219,7 @@
         <article class="svc2-card" tabindex="0">
           <div class="svc2-card__inner">
             <span class="svc2-card__num" aria-hidden="true">{{ sv.num }}</span>
-            <span class="svc2-card__icon" aria-hidden="true">{{ sv.icon|safe }}</span>
+            <span class="svc2-card__icon" aria-hidden="true"><img src="/static/img/service-{{ sv.slug }}.png" alt="{{ sv.title }} icon" loading="lazy" width="72" height="72"></span>
             <h3 class="svc2-card__title">{{ sv.title }}</h3>
             <div class="svc2-card__body">
               <p class="svc2-card__desc">{{ sv.short }}</p>
