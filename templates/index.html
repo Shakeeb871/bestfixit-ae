@@ -220,29 +220,24 @@
     <p class="svc2__eyebrow">Our Services</p>
     <h2 class="svc2__title">One trusted team for every fix in your home</h2>
   </div>
-  <div class="svc2__slider">
+  <div class="svc2__slider" role="region" aria-roledescription="carousel" aria-label="Our services" tabindex="0">
     <div class="svc2__stage">
-      <button type="button" class="svc2__arrow svc2__arrow--prev" data-svc2-prev aria-label="Previous services">
+      <button type="button" class="svc2__arrow svc2__arrow--prev" data-svc2-prev aria-label="Previous slides">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
       <div class="svc2__viewport">
       <div class="svc2__track" data-svc2-track>
         {% for sv in all_services %}
-        <article class="svc2-card" tabindex="0">
-          <div class="svc2-card__inner">
-            <span class="svc2-card__num" aria-hidden="true">{{ sv.num }}</span>
-            <span class="svc2-card__icon" aria-hidden="true"><img src="/static/img/service-{{ sv.slug }}.png" alt="{{ sv.title }} icon" loading="lazy" width="72" height="72"></span>
-            <h3 class="svc2-card__title">{{ sv.title }}</h3>
-            <div class="svc2-card__body">
-              <p class="svc2-card__desc">{{ sv.short }}</p>
-            </div>
-          </div>
-          <a class="btn-skew svc2-card__cta" href="/services/{{ sv.slug }}">Get Offer
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></a>
-        </article>
+        <a class="svc-slide" href="/services/{{ sv.slug }}" aria-label="{{ sv.title }}">
+          <span class="svc-slide__badge" aria-hidden="true">
+            <img src="/static/img/service-{{ sv.slug }}.png" alt="" loading="lazy" width="90" height="90">
+          </span>
+          <h3 class="svc-slide__title">{{ sv.title }}</h3>
+          <span class="svc-slide__desc">{{ sv.short }}</span>
+        </a>
         {% endfor %}
       </div>
       </div>
-      <button type="button" class="svc2__arrow svc2__arrow--next" data-svc2-next aria-label="Next services">
+      <button type="button" class="svc2__arrow svc2__arrow--next" data-svc2-next aria-label="Next slides">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
     </div>
     <div class="svc2__nav">

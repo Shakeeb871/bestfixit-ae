@@ -328,26 +328,14 @@ class Component extends DCLogic {
     }
   });
 
-  // Service cards: on touch devices (no hover) tap the card to reveal its
-  // detail list; links/buttons stay clickable and don't toggle the card.
-  if (window.matchMedia && window.matchMedia('(hover: none)').matches) {
-    var svCards = document.querySelectorAll('.svc2-card');
-    svCards.forEach(function(card){
-      card.addEventListener('click', function(e){
-        if (e.target.closest('a')) return;
-        var wasOpen = card.classList.contains('is-open');
-        svCards.forEach(function(c){ c.classList.remove('is-open'); });
-        if (!wasOpen) card.classList.add('is-open');
-      });
-    });
-  }
-
-  // Services slider: seamless infinite loop, advances one card at a time
-  // right-to-left, pauses on hover, rebuilds on resize (3 / 2 / 1 per view).
-  // Cloned edge cards let it wrap in either direction with no rewind jump.
+  // Services carousel: seamless infinite loop (cloned edges), advances one
+  // card at a time right-to-left, responsive per-view (6/4/3/2/1). Supports
+  // arrows, clickable dots, keyboard, drag/swipe, autoplay (pause on hover /
+  // focus / touch / hidden tab) and reduced-motion.
   document.querySelectorAll('[data-svc2-track]').forEach(function(track){
     var slider = track.closest('.svc2__slider');
     if (!slider) return;
+    var viewport = slider.querySelector('.svc2__viewport') || track.parentNode;
     var real = Array.prototype.slice.call(track.children);
     var n = real.length;
     if (!n) return;
@@ -355,18 +343,20 @@ class Component extends DCLogic {
     var prev = slider.querySelector('[data-svc2-prev]');
     var next = slider.querySelector('[data-svc2-next]');
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var TR = 'transform .6s cubic-bezier(.4,0,.2,1)';
+    var TR = 'transform .58s cubic-bezier(.22,1,.36,1)';
 
-    if (n < 2){
-      if (prev) prev.style.display = 'none';
-      if (next) next.style.display = 'none';
-      return;
+    var perView = 6, di = null, animating = false, safety = null, timer = null, restartT = null;
+    var clones = [], hovered = false, focused = false, dragging = false;
+
+    function calcPerView(){
+      var w = window.innerWidth;
+      if (w <= 519) return 1;
+      if (w <= 759) return 2;
+      if (w <= 1079) return 3;
+      if (w <= 1359) return 4;
+      return 6;
     }
-
-    var perView = 3, di = null, animating = false, safety = null, timer = null;
-    var clones = [];
-
-    function calcPerView(){ var w = window.innerWidth; return w <= 600 ? 1 : (w <= 900 ? 2 : 3); }
+    function loops(){ return n > perView; }
 
     function clearClones(){
       clones.forEach(function(c){ if (c.parentNode) c.parentNode.removeChild(c); });
@@ -374,37 +364,32 @@ class Component extends DCLogic {
     }
     function prep(c){
       c.setAttribute('aria-hidden', 'true');
-      c.classList.remove('is-open');
+      c.tabIndex = -1;
       c.querySelectorAll('a,button,[tabindex]').forEach(function(el){ el.tabIndex = -1; });
       clones.push(c);
     }
     function buildClones(){
       clearClones();
+      if (!loops()) return;
       var k = Math.min(perView, n);
-      // prepend clones of the last k real cards (in order), before real[0]
-      for (var i = 0; i < k; i++){
-        var head = real[n - k + i].cloneNode(true); prep(head);
-        track.insertBefore(head, real[0]);
-      }
-      // append clones of the first k real cards (in order)
-      for (var j = 0; j < k; j++){
-        var tail = real[j].cloneNode(true); prep(tail);
-        track.appendChild(tail);
-      }
+      for (var i = 0; i < k; i++){ var head = real[n - k + i].cloneNode(true); prep(head); track.insertBefore(head, real[0]); }
+      for (var j = 0; j < k; j++){ var tail = real[j].cloneNode(true); prep(tail); track.appendChild(tail); }
     }
+    function firstRealIndex(){ return loops() ? perView : 0; }
 
     function buildDots(){
       if (!dotsWrap) return;
       dotsWrap.innerHTML = '';
+      if (!loops()) return;
       for (var i = 0; i < n; i++){
         var d = document.createElement('button');
         d.type = 'button'; d.className = 'svc2__dot';
         d.setAttribute('aria-label', 'Go to service ' + (i + 1));
-        (function(idx){ d.addEventListener('click', function(){ goTo(idx); }); })(i);
+        (function(idx){ d.addEventListener('click', function(){ goTo(idx); bump(); }); })(i);
         dotsWrap.appendChild(d);
       }
     }
-    function realPos(){ return ((di - perView) % n + n) % n; }
+    function realPos(){ return ((di - firstRealIndex()) % n + n) % n; }
     function paintDots(){
       if (!dotsWrap) return;
       var ds = dotsWrap.children, p = realPos();
@@ -416,16 +401,22 @@ class Component extends DCLogic {
       track.style.transition = anim ? TR : 'none';
       track.style.transform = 'translateX(-' + child.offsetLeft + 'px)';
     }
+    function stride(){
+      var a = track.children[di], b = track.children[di + 1] || track.children[di - 1];
+      if (a && b) return Math.abs(b.offsetLeft - a.offsetLeft);
+      return a ? a.offsetWidth + 32 : 300;
+    }
     function settle(){
       if (!animating) return;
       if (safety){ clearTimeout(safety); safety = null; }
-      if (di >= perView + n){ di -= n; setX(false); }          // on a tail clone -> real
-      else if (di < perView){ di += n; setX(false); }          // on a head clone -> real
+      var base = firstRealIndex();
+      if (di >= base + n){ di -= n; setX(false); }
+      else if (di < base){ di += n; setX(false); }
       animating = false;
       paintDots();
     }
     function move(dir){
-      if (animating) return;
+      if (animating || !loops()) return;
       animating = true;
       di += dir;
       setX(!reduce);
@@ -433,39 +424,106 @@ class Component extends DCLogic {
       if (reduce){ settle(); } else { safety = setTimeout(settle, 720); }
     }
     function goTo(p){
-      if (animating) return;
-      var target = perView + p;
+      if (animating || !loops()) return;
+      var target = firstRealIndex() + p;
       if (target === di) return;
       animating = true;
       di = target;
       setX(!reduce);
       paintDots();
       if (reduce){ settle(); } else { safety = setTimeout(settle, 720); }
-      restart();
     }
 
     track.addEventListener('transitionend', function(e){ if (e.propertyName === 'transform') settle(); });
 
     function layout(){
-      var pos = (di === null) ? 0 : realPos();
+      var pos = (di === null || !loops()) ? 0 : realPos();
       perView = calcPerView();
       buildClones();
-      di = perView + pos;
+      buildDots();
+      di = firstRealIndex() + pos;
       setX(false);
       paintDots();
+      var showNav = loops();
+      if (prev) prev.style.display = showNav ? '' : 'none';
+      if (next) next.style.display = showNav ? '' : 'none';
+      if (dotsWrap) dotsWrap.style.display = showNav ? '' : 'none';
     }
 
-    function start(){ if (!reduce && !timer) timer = setInterval(function(){ move(1); }, 4200); }
+    // ── autoplay ──
+    function canPlay(){ return !reduce && loops() && !hovered && !focused && !dragging && !document.hidden; }
+    function start(){ if (timer || !canPlay()) return; timer = setInterval(function(){ move(1); }, 4500); }
     function stop(){ if (timer){ clearInterval(timer); timer = null; } }
-    function restart(){ stop(); start(); }
+    function bump(){ stop(); if (restartT) clearTimeout(restartT); restartT = setTimeout(start, 1400); }
 
-    if (prev) prev.addEventListener('click', function(){ move(-1); restart(); });
-    if (next) next.addEventListener('click', function(){ move(1); restart(); });
-    slider.addEventListener('mouseenter', stop);
-    slider.addEventListener('mouseleave', start);
-    var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(layout, 150); });
+    if (prev) prev.addEventListener('click', function(){ move(-1); bump(); });
+    if (next) next.addEventListener('click', function(){ move(1); bump(); });
+    slider.addEventListener('mouseenter', function(){ hovered = true; stop(); });
+    slider.addEventListener('mouseleave', function(){ hovered = false; start(); });
+    slider.addEventListener('focusin', function(){ focused = true; stop(); });
+    slider.addEventListener('focusout', function(){ focused = false; bump(); });
+    document.addEventListener('visibilitychange', function(){ if (document.hidden) stop(); else start(); });
 
-    buildDots();
+    // ── keyboard ──
+    slider.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight'){ e.preventDefault(); move(1); bump(); }
+      else if (e.key === 'ArrowLeft'){ e.preventDefault(); move(-1); bump(); }
+    });
+
+    // ── drag / swipe ──
+    var startX = 0, startY = 0, baseX = 0, dx = 0, horiz = false, startT = 0, didDrag = false;
+    function pointerX(child){ return child ? -child.offsetLeft : 0; }
+    // cancel the click that follows a horizontal swipe so cards don't navigate
+    track.addEventListener('click', function(e){
+      if (didDrag){ e.preventDefault(); e.stopPropagation(); didDrag = false; }
+    }, true);
+    viewport.addEventListener('pointerdown', function(e){
+      if (animating || !loops()) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.target.closest('.svc2__arrow')) return;
+      dragging = true; horiz = false; didDrag = false;
+      startX = e.clientX; startY = e.clientY; dx = 0; startT = Date.now();
+      baseX = pointerX(track.children[di]);
+      stop();
+    });
+    viewport.addEventListener('pointermove', function(e){
+      if (!dragging) return;
+      var mx = e.clientX - startX, my = e.clientY - startY;
+      if (!horiz){
+        if (Math.abs(mx) < 6 && Math.abs(my) < 6) return;
+        if (Math.abs(my) > Math.abs(mx)){ dragging = false; return; }  // vertical intent → let page scroll
+        horiz = true;
+        track.classList.add('is-dragging');
+      }
+      dx = mx;
+      e.preventDefault();
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(' + (baseX + mx) + 'px)';
+    });
+    function endDrag(){
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('is-dragging');
+      if (!horiz){ bump(); return; }
+      didDrag = true;
+      var s = stride() || 300;
+      var vel = Math.abs(dx) / Math.max(Date.now() - startT, 1);
+      if (Math.abs(dx) > s * 0.22 || (vel > 0.5 && Math.abs(dx) > 30)){
+        var steps = Math.max(1, Math.round(Math.abs(dx) / s));
+        var dir = dx < 0 ? 1 : -1;
+        animating = true; di += dir * steps; setX(!reduce); paintDots();
+        if (reduce){ settle(); } else { safety = setTimeout(settle, 720); }
+      } else {
+        setX(!reduce);   // snap back to current
+      }
+      bump();
+    }
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    viewport.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+    var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ layout(); }, 150); });
+
     layout();
     start();
   });
