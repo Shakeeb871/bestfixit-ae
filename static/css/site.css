@@ -675,38 +675,40 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     line-height:1.2; letter-spacing:-.01em; margin:0; color:#000; }
 
   /* ── carousel (reference-style: circular badge overlapping each card) ── */
-  .svc2__slider{ max-width:1600px; margin:0 auto; padding:0 clamp(16px,3vw,42px); }
+  .svc2__slider{ max-width:1480px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
   .svc2__stage{ position:relative;
-    --svc-gap:32px; --svc-vp-top:72px; --svc-card-h:206px; }
-  /* clip horizontally only; the top padding reserves room for the overlapping
-     badges so they are never clipped (only left/right overflow is hidden) */
+    --svc-gap:20px; --svc-vp-x:20px; --svc-vp-top:66px; --svc-card-h:200px; }
+  /* Horizontal padding equal to the gap gives the edge cards' shadows room
+     inside the clip box (so shadows aren't cut) while still hiding the next
+     off-screen card. Top padding holds the overlapping badges; only left/right
+     overflow is clipped. */
   .svc2__viewport{ overflow-x:clip; overflow-y:visible;
-    padding:var(--svc-vp-top) 4px 22px; }
+    padding:var(--svc-vp-top) var(--svc-vp-x) 24px; }
   .svc2__track{ position:relative; display:flex; align-items:stretch; gap:var(--svc-gap);
     transition:transform .58s cubic-bezier(.22,1,.36,1); will-change:transform;
     touch-action:pan-y; }
   .svc2__track.is-dragging{ transition:none; cursor:grabbing; user-select:none; }
 
-  /* slide / card */
-  .svc-slide{ flex:0 0 calc((100% - (var(--svc-gap) * 5)) / 6); box-sizing:border-box;
+  /* slide / card — 5 across on wide desktops */
+  .svc-slide{ flex:0 0 calc((100% - (var(--svc-gap) * 4)) / 5); box-sizing:border-box;
     position:relative; min-height:var(--svc-card-h);
     display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:92px 18px 22px; background:#fff; border-radius:11px; text-decoration:none;
+    padding:80px 18px 22px; background:#fff; border-radius:11px; text-decoration:none;
     color:inherit; outline:none;
-    box-shadow:0 20px 44px -14px rgba(20,40,80,.22), 0 6px 16px rgba(20,40,80,.05);
+    box-shadow:0 14px 26px -14px rgba(20,40,80,.30), 0 3px 9px -4px rgba(20,40,80,.12);
     transition:transform .25s ease, box-shadow .25s ease; }
   .svc-slide:hover{ transform:translateY(-5px);
-    box-shadow:0 28px 56px -14px rgba(20,40,80,.28), 0 8px 20px rgba(20,40,80,.07); }
-  .svc-slide:focus-visible{ box-shadow:0 0 0 3px #2c74c0, 0 20px 44px -14px rgba(20,40,80,.22); }
+    box-shadow:0 20px 34px -14px rgba(20,40,80,.34), 0 5px 12px -4px rgba(20,40,80,.14); }
+  .svc-slide:focus-visible{ box-shadow:0 0 0 3px #2c74c0, 0 14px 26px -14px rgba(20,40,80,.30); }
 
   /* circular badge sitting on the card's top edge (half above) */
-  .svc-slide__badge{ position:absolute; top:-63px; left:50%; transform:translateX(-50%);
-    width:126px; height:126px; border-radius:50%; z-index:3;
-    background:#fff; border:2px solid #e4e9f1; display:grid; place-items:center;
-    box-shadow:0 16px 22px -8px rgba(20,40,80,.30), 0 2px 6px rgba(20,40,80,.10);
+  .svc-slide__badge{ position:absolute; top:-54px; left:50%; transform:translateX(-50%);
+    width:108px; height:108px; border-radius:50%; z-index:3; overflow:hidden;
+    background:#fdfdfd; border:2px solid #e4e9f1; display:grid; place-items:center;
+    box-shadow:0 14px 20px -8px rgba(20,40,80,.28), 0 2px 6px rgba(20,40,80,.10);
     transition:transform .25s ease; }
   .svc-slide:hover .svc-slide__badge{ transform:translateX(-50%) scale(1.03); }
-  .svc-slide__badge img{ width:82%; height:82%; object-fit:contain; display:block; }
+  .svc-slide__badge img{ width:60%; height:60%; object-fit:contain; display:block; }
 
   .svc-slide__title{ margin:0 0 8px; color:#1c2836 !important;
     font-family:var(--font-heading); font-weight:800; font-size:18px; line-height:1.24;
@@ -737,18 +739,18 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc2__dot.is-active{ width:26px; border-radius:5px; background:#2c74c0; }
   .svc2__dot:focus-visible{ outline:2px solid #2c74c0; outline-offset:3px; }
 
-  /* ── responsive per-view: 6 / 4 / 3 / 2 / 1 ── */
-  @media (max-width:1359px){ .svc-slide{ flex-basis:calc((100% - (var(--svc-gap) * 3)) / 4); } }
-  @media (max-width:1079px){ .svc-slide{ flex-basis:calc((100% - (var(--svc-gap) * 2)) / 3); } }
+  /* ── responsive per-view: 5 / 4 / 3 / 2 / 1 ── */
+  @media (max-width:1279px){ .svc-slide{ flex-basis:calc((100% - (var(--svc-gap) * 3)) / 4); } }
+  @media (max-width:1039px){ .svc-slide{ flex-basis:calc((100% - (var(--svc-gap) * 2)) / 3); } }
   @media (max-width:759px){
-    .svc2__stage{ --svc-gap:24px; --svc-vp-top:66px; --svc-card-h:210px; }
+    .svc2__stage{ --svc-gap:18px; --svc-vp-x:18px; --svc-vp-top:64px; --svc-card-h:206px; }
     .svc-slide{ flex-basis:calc((100% - var(--svc-gap)) / 2); }
-    .svc-slide__badge{ width:112px; height:112px; top:-56px; }
-    .svc-slide{ padding-top:82px; }
   }
   @media (max-width:519px){
-    .svc2__stage{ --svc-gap:18px; --svc-vp-top:64px; --svc-card-h:210px; }
+    .svc2__stage{ --svc-gap:16px; --svc-vp-x:16px; --svc-vp-top:62px; --svc-card-h:206px; }
     .svc-slide{ flex-basis:86%; }
+    .svc-slide__badge{ width:100px; height:100px; top:-50px; }
+    .svc-slide{ padding-top:74px; }
     .svc2__arrow{ width:40px; height:40px; }
     .svc2__arrow--prev{ left:0; } .svc2__arrow--next{ right:0; }
   }
