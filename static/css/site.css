@@ -669,7 +669,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 
   /* ── slider ── */
   .svc2__slider{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,4vw,40px); }
-  .svc2__viewport{ overflow:hidden; padding-bottom:30px; }
+  /* clip only horizontally so card shadows & the protruding button aren't cut */
+  .svc2__viewport{ overflow-x:clip; overflow-y:visible; padding-bottom:30px; }
   .svc2__track{ position:relative; display:flex; align-items:flex-start; gap:26px;
     transition:transform .6s cubic-bezier(.4,0,.2,1); will-change:transform; }
 
