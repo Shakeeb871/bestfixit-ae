@@ -1,102 +1,70 @@
 {#
-  "Here For You" feature section — compact header (text left, branded van
-  right with a scroll-driven nudge) over a divider, then four promise cards
-  in a right-to-left infinite carousel. Circular image badge overlaps each
-  card's top edge; heading centred, description left-aligned. Data-driven
-  from ``why_choose``; card images are transparent PNGs.
+  "Here For You" feature section — compact header (heading 30% left, branded
+  van 70% right with a scroll-driven drive), a divider, then four simple
+  promise cards in a static grid. Circular image badge overlaps each card's
+  top edge; heading centred, description left-aligned. Data-driven from
+  ``why_choose``; card images are transparent PNGs.
 #}
 {% set wc = why_choose %}
 
 <style id="why-choose-style">
-.hfy{ position:relative; background:#f2f2f2; padding:clamp(52px,7vw,78px) 0 clamp(40px,5vw,58px);
-  font-family:var(--font-body,inherit); }
-.hfy__container{ max-width:980px; margin-inline:auto; padding-inline:clamp(16px,4vw,60px); }
+.hfy{ position:relative; background:#f2f2f2; padding:clamp(52px,7vw,80px) 0 clamp(48px,6vw,72px);
+  font-family:var(--font-body,inherit); overflow:hidden; }
+.hfy__container{ max-width:1200px; margin-inline:auto; padding-inline:clamp(20px,4vw,44px); }
 
-/* ── header: text left, van right ── */
-.hfy__head{ display:flex; align-items:flex-end; justify-content:space-between; gap:20px;
-  min-height:118px; }
-.hfy__head-text{ min-width:0; padding-bottom:6px; }
+/* ── header: heading 30% left, van 70% right ── */
+.hfy__head{ display:flex; align-items:flex-end; gap:20px; min-height:118px; }
+.hfy__head-text{ flex:0 0 30%; max-width:30%; min-width:0; padding-bottom:6px; }
 .hfy__eyebrow{ display:block; margin:0 0 4px; color:#2c74c0;
   font-family:var(--font-heading,inherit); font-weight:800; font-size:15px; letter-spacing:.04em; }
 .hfy__title{ margin:0; font-family:var(--font-heading,inherit); font-weight:800;
-  font-size:clamp(26px,3.6vw,40px) !important; line-height:1.08 !important; white-space:nowrap; }
-.hfy__van{ flex:none; width:clamp(200px,30vw,320px); align-self:flex-end; }
-.hfy__van img{ width:100%; height:auto; display:block; will-change:transform;
+  font-size:clamp(24px,3.2vw,38px) !important; line-height:1.08 !important; }
+.hfy__van{ flex:0 0 70%; max-width:70%; display:flex; justify-content:flex-start;
+  align-items:flex-end; overflow:visible; }
+.hfy__van img{ width:clamp(230px,42%,330px); height:auto; display:block; will-change:transform;
   transform:translateX(var(--van-x,0px)); }
 .hfy__divider{ height:1px; background:#b7bfc9; margin-top:8px; }
 
-/* ── carousel ── */
-.hfy__slider{ position:relative; --hfy-gap:14px; --hfy-vpx:14px; --hfy-card-h:264px; --hfy-badge:80px; }
-.hfy__viewport{ overflow-x:clip; overflow-y:visible; padding:52px var(--hfy-vpx) 6px; }
-.hfy__track{ display:flex; align-items:stretch; gap:var(--hfy-gap);
-  transition:transform .58s cubic-bezier(.22,1,.36,1); will-change:transform; touch-action:pan-y; }
-.hfy__track.is-dragging{ transition:none; cursor:grabbing; user-select:none; }
-
-.hfy-slide{ flex:0 0 calc((100% - (var(--hfy-gap) * 3)) / 4); box-sizing:border-box;
-  position:relative; min-height:var(--hfy-card-h);
+/* ── cards grid ── */
+.hfy__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px 16px; padding-top:48px; }
+.hfy-card{ position:relative; min-height:262px; box-sizing:border-box;
   display:flex; flex-direction:column; align-items:stretch;
   padding:66px 0 18px; background:#fff; border-radius:7px; text-decoration:none; color:inherit;
-  outline:none; box-shadow:0 12px 24px -12px rgba(20,40,80,.30), 0 3px 8px -4px rgba(20,40,80,.12);
+  box-shadow:0 12px 24px -12px rgba(20,40,80,.30), 0 3px 8px -4px rgba(20,40,80,.12);
   transition:transform .24s ease, box-shadow .24s ease; }
-.hfy-slide:hover{ transform:translateY(-5px);
+.hfy-card:hover{ transform:translateY(-5px);
   box-shadow:0 18px 32px -12px rgba(20,40,80,.34), 0 5px 12px -4px rgba(20,40,80,.14); }
-.hfy-slide:focus-visible{ box-shadow:0 0 0 3px #2c74c0, 0 12px 24px -12px rgba(20,40,80,.30); }
 
 /* circular image badge overlapping the top edge */
-.hfy-slide__badge{ position:absolute; top:calc(-1 * var(--hfy-badge) / 2); left:50%;
-  transform:translateX(-50%); width:var(--hfy-badge); height:var(--hfy-badge); border-radius:50%;
-  z-index:3; overflow:hidden; background:#fff; border:2px solid #e4e9f1; display:grid; place-items:center;
+.hfy-card__badge{ position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+  width:80px; height:80px; border-radius:50%; z-index:3; overflow:hidden;
+  background:#fff; border:2px solid #e4e9f1; display:grid; place-items:center;
   box-shadow:0 12px 16px -6px rgba(20,40,80,.30), 0 2px 5px rgba(20,40,80,.10);
   transition:transform .24s ease; }
-.hfy-slide:hover .hfy-slide__badge{ transform:translateX(-50%) scale(1.03); }
-.hfy-slide__badge img{ width:62%; height:62%; object-fit:contain; display:block; }
+.hfy-card:hover .hfy-card__badge{ transform:translateX(-50%) scale(1.03); }
+.hfy-card__badge img{ width:62%; height:62%; object-fit:contain; display:block; }
 
-/* heading centred (fixed area so every description starts at the same line) */
-.hfy-slide__title{ margin:0; padding:0 18px; text-align:center; color:#1c2836 !important;
+.hfy-card__title{ margin:0; padding:0 18px; text-align:center; color:#1c2836 !important;
   font-family:var(--font-heading,inherit); font-weight:800; font-size:17px; line-height:1.22;
   min-height:calc(1.22em * 2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
   overflow:hidden; }
-/* description left-aligned */
-.hfy-slide__desc{ margin:15px 0 0; padding:0 20px; text-align:left; color:#5a616b;
+.hfy-card__desc{ margin:15px 0 0; padding:0 20px; text-align:left; color:#5a616b;
   font-size:14px; line-height:1.55;
   display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden; }
 
-/* arrows — centred on the card bodies */
-.hfy__arrow{ position:absolute; top:calc(52px + var(--hfy-card-h) / 2); transform:translateY(-50%);
-  z-index:6; width:44px; height:44px; border-radius:50%; border:1.6px solid #cdd8e8; background:#fff;
-  color:#1c2836; display:grid; place-items:center; cursor:pointer; padding:0;
-  transition:background-color .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease; }
-.hfy__arrow--prev{ left:-16px; } .hfy__arrow--next{ right:-16px; }
-.hfy__arrow:hover{ background:#024d87; border-color:#024d87; color:#fff; box-shadow:0 12px 26px rgba(2,77,135,.3); }
-.hfy__arrow:focus-visible{ outline:3px solid #2c74c0; outline-offset:2px; }
-.hfy__arrow svg{ width:19px; height:19px; }
-
-/* dots */
-.hfy__nav{ display:flex; justify-content:center; margin-top:22px; }
-.hfy__dots{ display:flex; align-items:center; gap:8px; }
-.hfy__dot{ width:9px; height:9px; border-radius:50%; background:#c6d0e2; border:none; padding:0;
-  cursor:pointer; transition:width .3s ease, background-color .3s ease; }
-.hfy__dot.is-active{ width:24px; border-radius:5px; background:#2c74c0; }
-.hfy__dot:focus-visible{ outline:2px solid #2c74c0; outline-offset:3px; }
-
-/* ── responsive: 4 / 3 / 2 / 1 ── */
-@media (max-width:1023px){ .hfy-slide{ flex-basis:calc((100% - (var(--hfy-gap) * 2)) / 3); } }
-@media (max-width:767px){
-  .hfy__slider{ --hfy-badge:74px; --hfy-vpx:14px; }
-  .hfy-slide{ flex-basis:calc((100% - var(--hfy-gap)) / 2); padding-top:60px; }
+/* ── responsive ── */
+@media (max-width:900px){
+  .hfy__grid{ grid-template-columns:repeat(2,1fr); gap:52px 20px; }
 }
 @media (max-width:560px){
   .hfy__head{ flex-direction:column; align-items:flex-start; gap:14px; min-height:0; }
-  .hfy__title{ white-space:normal; }
-  .hfy__van{ align-self:flex-end; width:clamp(200px,60vw,300px); }
-  .hfy__slider{ --hfy-gap:12px; }
-  .hfy-slide{ flex-basis:86%; }
-  .hfy__arrow{ width:40px; height:40px; }
-  .hfy__arrow--prev{ left:0; } .hfy__arrow--next{ right:0; }
+  .hfy__head-text{ flex-basis:auto; max-width:100%; }
+  .hfy__van{ flex-basis:auto; max-width:100%; width:100%; justify-content:flex-end; }
+  .hfy__van img{ width:clamp(200px,64vw,290px); }
+  .hfy__grid{ grid-template-columns:1fr; gap:56px; max-width:340px; margin-inline:auto; }
 }
 @media (prefers-reduced-motion:reduce){
-  .hfy__track{ transition:transform .12s ease; }
-  .hfy-slide, .hfy-slide__badge, .hfy__van img{ transition:none; }
+  .hfy-card, .hfy-card__badge, .hfy__van img{ transition:none; }
 }
 </style>
 
@@ -109,33 +77,24 @@
         <span class="hfy__eyebrow">{{ wc.title_lead }}</span>
         <h2 id="hfy-heading" class="hfy__title">{{ wc.title_highlight }}!</h2>
       </div>
-      <div class="hfy__van" aria-hidden="true">
+      <div class="hfy__van" data-van-col aria-hidden="true">
         <img src="{{ url_for('static', filename='img/Best Fix It Maintenance Company VAN.webp') }}"
-             alt="" width="320" height="159" data-van fetchpriority="high">
+             alt="" width="330" height="164" data-van fetchpriority="high">
       </div>
     </div>
     <div class="hfy__divider" aria-hidden="true"></div>
 
-    <!-- carousel -->
-    <div class="hfy__slider" role="region" aria-roledescription="carousel" aria-label="What you can count on" tabindex="0">
-      <button type="button" class="hfy__arrow hfy__arrow--prev" data-hfy-prev aria-label="Previous cards">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
-      <div class="hfy__viewport">
-        <div class="hfy__track" data-hfy-track>
-          {% for card in wc.cards %}
-          <article class="hfy-slide" tabindex="0">
-            <span class="hfy-slide__badge" aria-hidden="true">
-              <img src="{{ url_for('static', filename='img/' + card.image) }}" alt="" loading="lazy" width="80" height="80">
-            </span>
-            <h3 class="hfy-slide__title">{{ card.title }}</h3>
-            <p class="hfy-slide__desc">{{ card.text }}</p>
-          </article>
-          {% endfor %}
-        </div>
-      </div>
-      <button type="button" class="hfy__arrow hfy__arrow--next" data-hfy-next aria-label="Next cards">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
-      <div class="hfy__nav"><div class="hfy__dots" data-hfy-dots></div></div>
+    <!-- cards -->
+    <div class="hfy__grid" data-reveal>
+      {% for card in wc.cards %}
+      <article class="hfy-card">
+        <span class="hfy-card__badge" aria-hidden="true">
+          <img src="{{ url_for('static', filename='img/' + card.image) }}" alt="" loading="lazy" width="80" height="80">
+        </span>
+        <h3 class="hfy-card__title">{{ card.title }}</h3>
+        <p class="hfy-card__desc">{{ card.text }}</p>
+      </article>
+      {% endfor %}
     </div>
 
   </div>
