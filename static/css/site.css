@@ -68,15 +68,13 @@ x-dc,helmet{display:block;} helmet{display:none;}
    backgrounds. Text sitting on a coloured / dark background keeps the light
    colour set on that section (those colours are not touched). Every heading
    is rendered in Title Case (first letter of each word capitalised). */
-/* Site typography — headings: PT Sans Narrow 700, black. Body & content:
-   PT Sans 400, black, 16px / 24px line-height. Text on dark / coloured
-   sections stays white (re-assert list below). Fonts load from Google
-   Fonts (linked in the base head). */
+/* Typography — headings keep the previous face (Museo Sans stack → Poppins
+   fallback) at #303236 / weight 700, sizes from their own component rules.
+   Body & content text: PT Sans, 400, #000, 16px / 24px line-height. Text on
+   dark / coloured sections stays white (re-assert list below). */
 body{ color:#000; font-family:'PT Sans',system-ui,Arial,sans-serif; }
-h1,h2,h3,h4,h5,h6{ font-family:'PT Sans Narrow','Arial Narrow',Arial,sans-serif !important;
-  color:#000 !important; font-weight:700 !important; text-transform:capitalize !important; }
-/* main headings follow the 48px / tight line-height spec, scaled responsively */
-h1,h2{ font-size:clamp(30px,5vw,48px) !important; line-height:1.05 !important; }
+h1,h2,h3,h4,h5,h6{ font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif !important;
+  color:#303236 !important; font-weight:700 !important; text-transform:capitalize !important; }
 p:not([class*="eyebrow"]):not([class*="badge"]), li{
   font-family:'PT Sans',system-ui,Arial,sans-serif !important;
   color:#000 !important; font-weight:400 !important; font-size:16px !important; line-height:1.5 !important; }
@@ -311,7 +309,7 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
   --color-accent-2-800: #71261b;
   --color-accent-2-900: #471d16;
 
-  --font-heading: "PT Sans Narrow", "Arial Narrow", Arial, sans-serif;
+  --font-heading: "Museo Sans", "Poppins", "Archivo", system-ui, sans-serif;
   --font-heading-weight: 700;
   --font-body: "PT Sans", system-ui, Arial, sans-serif;
 
