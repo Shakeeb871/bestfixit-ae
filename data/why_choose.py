@@ -18,6 +18,7 @@ WHY_CHOOSE = {
     "cards": [
         {
             "icon": "clock",
+            "image": "Round the Clock Availability.png",
             "title": "Round-the-Clock Availability",
             "text": (
                 "Whatever goes wrong and whenever it happens, our team is "
@@ -27,6 +28,7 @@ WHY_CHOOSE = {
         },
         {
             "icon": "shield",
+            "image": "Workmanship Guarantee.png",
             "title": "Two-Year Workmanship Guarantee",
             "text": (
                 "We stand behind our parts, labour and craftsmanship for a "
@@ -36,6 +38,7 @@ WHY_CHOOSE = {
         },
         {
             "icon": "tag",
+            "image": "Clear, Upfront Pricing.png",
             "title": "Clear, Upfront Pricing",
             "text": (
                 "Before any work starts, we talk you through your options "
@@ -45,6 +48,7 @@ WHY_CHOOSE = {
         },
         {
             "icon": "calendar",
+            "image": "On Time, or It's On Us.png",
             "title": "On Time, or It's On Us",
             "text": (
                 "Your time matters. We arrive within the appointment window "

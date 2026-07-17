@@ -528,6 +528,141 @@ class Component extends DCLogic {
     start();
   });
 
+  // "Here For You" carousel — same seamless infinite loop as the services
+  // carousel, but per-view is derived by measuring how many cards fit (so it
+  // follows the component's own CSS breakpoints: 4/3/2/1).
+  document.querySelectorAll('[data-hfy-track]').forEach(function(track){
+    var slider = track.closest('.hfy__slider');
+    if (!slider) return;
+    var viewport = slider.querySelector('.hfy__viewport') || track.parentNode;
+    var real = Array.prototype.slice.call(track.children);
+    var n = real.length;
+    if (!n) return;
+    var dotsWrap = slider.querySelector('[data-hfy-dots]');
+    var prev = slider.querySelector('[data-hfy-prev]');
+    var next = slider.querySelector('[data-hfy-next]');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var TR = 'transform .58s cubic-bezier(.22,1,.36,1)';
+    var perView = 4, di = null, animating = false, safety = null, timer = null, restartT = null;
+    var clones = [], hovered = false, focused = false, dragging = false;
+
+    function calcPerView(){
+      var card = real[0]; if (!card) return 1;
+      var sw = card.getBoundingClientRect().width;
+      var vs = getComputedStyle(viewport);
+      var cw = viewport.clientWidth - parseFloat(vs.paddingLeft) - parseFloat(vs.paddingRight);
+      var gap = parseFloat(getComputedStyle(track).gap) || 0;
+      if (!sw) return 1;
+      return Math.max(1, Math.min(n, Math.round((cw + gap) / (sw + gap))));
+    }
+    function loops(){ return n > perView; }
+    function clearClones(){ clones.forEach(function(c){ if (c.parentNode) c.parentNode.removeChild(c); }); clones = []; }
+    function prep(c){ c.setAttribute('aria-hidden','true'); c.tabIndex = -1;
+      c.querySelectorAll('a,button,[tabindex]').forEach(function(el){ el.tabIndex = -1; }); clones.push(c); }
+    function buildClones(){ clearClones(); if (!loops()) return; var k = Math.min(perView, n);
+      for (var i = 0; i < k; i++){ var h = real[n - k + i].cloneNode(true); prep(h); track.insertBefore(h, real[0]); }
+      for (var j = 0; j < k; j++){ var t = real[j].cloneNode(true); prep(t); track.appendChild(t); } }
+    function firstReal(){ return loops() ? perView : 0; }
+    function buildDots(){ if (!dotsWrap) return; dotsWrap.innerHTML = ''; if (!loops()) return;
+      for (var i = 0; i < n; i++){ var d = document.createElement('button'); d.type = 'button'; d.className = 'hfy__dot';
+        d.setAttribute('aria-label', 'Go to card ' + (i + 1));
+        (function(idx){ d.addEventListener('click', function(){ goTo(idx); bump(); }); })(i); dotsWrap.appendChild(d); } }
+    function realPos(){ return ((di - firstReal()) % n + n) % n; }
+    function paintDots(){ if (!dotsWrap) return; var ds = dotsWrap.children, p = realPos();
+      for (var i = 0; i < ds.length; i++) ds[i].classList.toggle('is-active', i === p); }
+    function setX(anim){ var c = track.children[di]; if (!c) return;
+      track.style.transition = anim ? TR : 'none'; track.style.transform = 'translateX(-' + c.offsetLeft + 'px)'; }
+    function stride(){ var a = track.children[di], b = track.children[di + 1] || track.children[di - 1];
+      if (a && b) return Math.abs(b.offsetLeft - a.offsetLeft); return a ? a.offsetWidth + 14 : 240; }
+    function settle(){ if (!animating) return; if (safety){ clearTimeout(safety); safety = null; }
+      var base = firstReal(); if (di >= base + n){ di -= n; setX(false); } else if (di < base){ di += n; setX(false); }
+      animating = false; paintDots(); }
+    function move(dir){ if (animating || !loops()) return; animating = true; di += dir; setX(!reduce); paintDots();
+      if (reduce){ settle(); } else { safety = setTimeout(settle, 720); } }
+    function goTo(p){ if (animating || !loops()) return; var t = firstReal() + p; if (t === di) return;
+      animating = true; di = t; setX(!reduce); paintDots(); if (reduce){ settle(); } else { safety = setTimeout(settle, 720); } }
+    track.addEventListener('transitionend', function(e){ if (e.propertyName === 'transform') settle(); });
+
+    function layout(){ var pos = (di === null || !loops()) ? 0 : realPos(); perView = calcPerView();
+      buildClones(); buildDots(); di = firstReal() + pos; setX(false); paintDots();
+      var show = loops();
+      if (prev) prev.style.display = show ? '' : 'none';
+      if (next) next.style.display = show ? '' : 'none';
+      if (dotsWrap) dotsWrap.parentNode.style.display = show ? '' : 'none'; }
+
+    function canPlay(){ return !reduce && loops() && !hovered && !focused && !dragging && !document.hidden; }
+    function start(){ if (timer || !canPlay()) return; timer = setInterval(function(){ move(1); }, 4500); }
+    function stop(){ if (timer){ clearInterval(timer); timer = null; } }
+    function bump(){ stop(); if (restartT) clearTimeout(restartT); restartT = setTimeout(start, 1400); }
+
+    if (prev) prev.addEventListener('click', function(){ move(-1); bump(); });
+    if (next) next.addEventListener('click', function(){ move(1); bump(); });
+    slider.addEventListener('mouseenter', function(){ hovered = true; stop(); });
+    slider.addEventListener('mouseleave', function(){ hovered = false; start(); });
+    slider.addEventListener('focusin', function(){ focused = true; stop(); });
+    slider.addEventListener('focusout', function(){ focused = false; bump(); });
+    document.addEventListener('visibilitychange', function(){ if (document.hidden) stop(); else start(); });
+    slider.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight'){ e.preventDefault(); move(1); bump(); }
+      else if (e.key === 'ArrowLeft'){ e.preventDefault(); move(-1); bump(); } });
+
+    // drag / swipe
+    var sx = 0, sy = 0, bx = 0, dx = 0, horiz = false, st = 0, didDrag = false;
+    track.addEventListener('click', function(e){ if (didDrag){ e.preventDefault(); e.stopPropagation(); didDrag = false; } }, true);
+    viewport.addEventListener('pointerdown', function(e){
+      if (animating || !loops()) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.target.closest('.hfy__arrow')) return;
+      dragging = true; horiz = false; didDrag = false; sx = e.clientX; sy = e.clientY; dx = 0; st = Date.now();
+      var c = track.children[di]; bx = c ? -c.offsetLeft : 0; stop(); });
+    viewport.addEventListener('pointermove', function(e){
+      if (!dragging) return; var mx = e.clientX - sx, my = e.clientY - sy;
+      if (!horiz){ if (Math.abs(mx) < 6 && Math.abs(my) < 6) return; if (Math.abs(my) > Math.abs(mx)){ dragging = false; return; }
+        horiz = true; track.classList.add('is-dragging'); }
+      dx = mx; e.preventDefault(); track.style.transition = 'none'; track.style.transform = 'translateX(' + (bx + mx) + 'px)'; });
+    function endDrag(){ if (!dragging) return; dragging = false; track.classList.remove('is-dragging');
+      if (!horiz){ bump(); return; } didDrag = true; var s = stride() || 240;
+      var vel = Math.abs(dx) / Math.max(Date.now() - st, 1);
+      if (Math.abs(dx) > s * 0.22 || (vel > 0.5 && Math.abs(dx) > 30)){
+        var steps = Math.max(1, Math.round(Math.abs(dx) / s)); var dir = dx < 0 ? 1 : -1;
+        animating = true; di += dir * steps; setX(!reduce); paintDots();
+        if (reduce){ settle(); } else { safety = setTimeout(settle, 720); }
+      } else { setX(!reduce); } bump(); }
+    viewport.addEventListener('pointerup', endDrag);
+    viewport.addEventListener('pointercancel', endDrag);
+    viewport.addEventListener('dragstart', function(e){ e.preventDefault(); });
+
+    var rt; window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ layout(); }, 150); });
+    layout(); start();
+  });
+
+  // Scroll-driven van nudge in the "Here For You" header.
+  (function(){
+    var section = document.querySelector('[data-hfy-section]');
+    var van = section && section.querySelector('[data-van]');
+    if (!van) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var target = 0, cur = 0, ticking = false;
+    function maxTravel(){ var w = window.innerWidth; return w <= 560 ? 26 : (w <= 1023 ? 66 : 116); }
+    function onScroll(){
+      var r = section.getBoundingClientRect(), vh = window.innerHeight || 800;
+      if (r.bottom < -50 || r.top > vh + 50) return;         // skip when far off-screen
+      var p = (vh - r.top) / (r.height + vh);
+      p = Math.max(0, Math.min(1, p));
+      target = p * maxTravel();
+      if (!ticking){ ticking = true; requestAnimationFrame(tick); }
+    }
+    function tick(){
+      cur += (target - cur) * 0.16;
+      if (Math.abs(target - cur) < 0.3){ cur = target; ticking = false; }
+      van.style.setProperty('--van-x', cur.toFixed(1) + 'px');
+      if (ticking) requestAnimationFrame(tick);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+
   // border-draw hover animation: inject 4 line spans into every button
   document.querySelectorAll('.btn-skew').forEach(function(b){
     if(b.querySelector('.bd-frame')) return;
