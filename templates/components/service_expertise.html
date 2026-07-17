@@ -30,7 +30,7 @@
 }
 .service-expertise__layout{
   display:grid; grid-template-columns:1fr 1fr;
-  gap:clamp(60px,8vw,105px); align-items:center;
+  gap:clamp(28px,3.5vw,52px); align-items:center;
 }
 
 /* ---- left visual ---- */
@@ -157,18 +157,6 @@
           {{ se.title_lead }} <span>{{ se.title_highlight }}</span>
         </h2>
         <p class="service-expertise__description">{{ se.description }}</p>
-
-        <ul class="service-expertise__features">
-          {% for f in se.features %}
-          <li class="service-feature">
-            <span class="service-feature__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                   stroke-linecap="round" stroke-linejoin="round">{{ SE_ICONS.get(f.icon, SE_ICONS['check'])|safe }}</svg>
-            </span>
-            <span class="service-feature__label">{{ f.label }}</span>
-          </li>
-          {% endfor %}
-        </ul>
 
         <div class="service-expertise__actions">
           <a class="btn btn-primary service-expertise__cta btn-skew" href="{{ se.cta_url }}">
