@@ -47,6 +47,7 @@ from data.process import (
 )
 from data.testimonials import TESTIMONIAL_SHOWCASE
 from data.feature_cards import FEATURE_CARDS
+from data.why_choose import WHY_CHOOSE
 from data.services import (
     SERVICE_AREAS,
     SERVICE_BY_SLUG,
@@ -110,6 +111,7 @@ def inject_globals():
         "blog": BLOG,
         "stats": STATS,
         "feature_cards": FEATURE_CARDS,
+        "why_choose": WHY_CHOOSE,
         "css_version": _css_version(),
     }
 

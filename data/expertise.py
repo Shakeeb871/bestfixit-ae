@@ -12,12 +12,15 @@ A single team photo is shown (``main_image``).
 SERVICE_EXPERTISE = {
     "eyebrow_badge": "Quality Handyman",
     "eyebrow_text": "Solution",
-    "title_lead": "We are Expert in All",
-    "title_highlight": "Handyman Solutions",
+    "title_lead": "Responsive, Reliable Maintenance Help",
+    "title_highlight": "When You Need It Most",
     "description": (
-        "From fixing leaks and faulty wiring to AC servicing and full home "
-        "maintenance, our licensed Dubai technicians handle every job with "
-        "the right tools and genuine care — done right the first time."
+        "What we really deliver is peace of mind. As a local Dubai team you "
+        "can count on, we pair fast, dependable service with honest, upfront "
+        "pricing — no hidden charges and no surprises when the bill arrives. "
+        "It is the punctuality, care and skilled workmanship behind every "
+        "visit that keep our customers coming back and recommending us right "
+        "across the emirate."
     ),
     "main_image": "/static/img/professional-maintenance-team.webp",
     "main_image_alt": "Our professional Best Fix maintenance team in Dubai",

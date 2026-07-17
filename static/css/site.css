@@ -658,6 +658,14 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 @media (max-width:560px){
   .hero-arrow{ width:42px; height:42px; }
 }
+/* hero Google rating trust badge */
+.hero-rating{ display:inline-flex; align-items:center; gap:10px; margin-top:26px;
+    padding:9px 16px; border-radius:40px; background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); }
+.hero-rating__g{ display:inline-flex; }
+.hero-rating__stars{ color:#fbbc04; font-size:15px; letter-spacing:1.5px; line-height:1; }
+.hero-rating__meta{ font-size:13px; color:rgba(255,255,255,.9); white-space:nowrap; }
+.hero-rating__meta strong{ color:#fff; font-weight:700; }
 
 .svc2{ position:relative; background:#f4f6f9; overflow:hidden;
     padding:clamp(56px,7vw,84px) 0 clamp(70px,8vw,96px); }
