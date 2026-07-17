@@ -14,13 +14,12 @@
 
 <style id="why-choose-style">
 .why-choose{
-  --wc-bg:#ffffff;
+  --wc-bg:#f2f2f2;
   --wc-surface:#ffffff;
   --wc-heading:#303236;
   --wc-muted:#292a2b;
   --wc-accent:var(--color-accent,#024d87);
   --wc-accent-2:#2c74c0;
-  --wc-border:#e6ebf3;
 
   position:relative; background:var(--wc-bg);
   padding:clamp(58px,7vw,86px) 0;
@@ -30,7 +29,7 @@
   max-width:1180px; margin-inline:auto; padding-inline:clamp(20px,4vw,32px);
 }
 .why-choose__head{
-  max-width:720px; margin:0 auto clamp(40px,5vw,56px); text-align:center;
+  max-width:720px; margin:0 auto clamp(40px,5vw,54px); text-align:center;
 }
 .why-choose__eyebrow{
   display:inline-block; margin:0 0 14px;
@@ -45,54 +44,44 @@
 .why-choose__title span{ color:var(--wc-accent); }
 .why-choose__intro{ margin:0; color:var(--wc-muted); font-size:15px; line-height:1.75; }
 
+/* extra top room so the overlapping icon badges have space above the cards */
 .why-choose__grid{
-  display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:26px; padding-top:46px;
 }
 .why-card{
-  position:relative; overflow:hidden;
-  background:var(--wc-surface); border:1px solid var(--wc-border);
-  border-radius:12px; padding:34px 26px 30px;
-  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-}
-/* accent bar that grows on hover */
-.why-card::after{
-  content:""; position:absolute; left:0; bottom:0; height:4px; width:0;
-  background:linear-gradient(90deg,var(--wc-accent),var(--wc-accent-2));
-  transition:width .4s ease;
+  position:relative; text-align:center;
+  background:var(--wc-surface); border-radius:14px;
+  padding:58px 26px 34px;
+  box-shadow:0 10px 30px rgba(20,40,80,.06);
+  transition:transform .35s ease, box-shadow .35s ease;
 }
 .why-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 22px 44px rgba(2,77,135,.13);
-  border-color:transparent;
+  transform:translateY(-7px);
+  box-shadow:0 26px 48px rgba(2,77,135,.15);
 }
-.why-card:hover::after{ width:100%; }
-
+/* circular icon badge sitting on the top edge of the card */
 .why-card__icon{
-  width:58px; height:58px; border-radius:14px; margin-bottom:20px;
+  position:absolute; top:0; left:50%; transform:translate(-50%,-50%);
+  width:80px; height:80px; border-radius:50%;
   display:grid; place-items:center;
   background:linear-gradient(135deg,var(--wc-accent),var(--wc-accent-2));
-  color:#fff; box-shadow:0 10px 22px rgba(2,77,135,.22);
-  transition:transform .35s ease;
+  color:#fff; box-shadow:0 12px 26px rgba(2,77,135,.30);
+  transition:transform .4s ease;
 }
-.why-card:hover .why-card__icon{ transform:scale(1.06) rotate(-3deg); }
-.why-card__icon svg{ width:27px; height:27px; }
+.why-card:hover .why-card__icon{ transform:translate(-50%,-50%) scale(1.07); }
+.why-card__icon svg{ width:34px; height:34px; }
 
 .why-card__title{
-  margin:0 0 11px; color:var(--wc-heading);
+  margin:0 0 12px; color:var(--wc-heading);
   font-family:var(--font-heading,inherit); font-weight:800;
-  font-size:18px; line-height:1.3;
+  font-size:18px; line-height:1.32;
 }
 .why-card__text{ margin:0; color:var(--wc-muted); font-size:14px; line-height:1.7; }
 
-/* faint watermark number in the corner */
-.why-card__num{
-  position:absolute; top:14px; right:20px; z-index:0; pointer-events:none;
-  font-family:var(--font-heading,inherit); font-weight:800; font-size:44px;
-  line-height:1; color:rgba(2,77,135,.05);
+@media (max-width:980px){
+  .why-choose__grid{ grid-template-columns:repeat(2,1fr); gap:26px 24px; row-gap:56px; }
 }
-
-@media (max-width:980px){ .why-choose__grid{ grid-template-columns:repeat(2,1fr); } }
-@media (max-width:540px){ .why-choose__grid{ grid-template-columns:1fr; } }
+@media (max-width:540px){ .why-choose__grid{ grid-template-columns:1fr; row-gap:56px; } }
 </style>
 
 <section class="why-choose" aria-labelledby="why-choose-heading">
@@ -108,7 +97,6 @@
     <div class="why-choose__grid" data-reveal>
       {% for card in wc.cards %}
       <article class="why-card">
-        <span class="why-card__num" aria-hidden="true">{{ '%02d' % loop.index }}</span>
         <span class="why-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                stroke-linecap="round" stroke-linejoin="round">{{ WC_ICONS.get(card.icon, WC_ICONS['clock'])|safe }}</svg>
