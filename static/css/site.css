@@ -68,17 +68,18 @@ x-dc,helmet{display:block;} helmet{display:none;}
    backgrounds. Text sitting on a coloured / dark background keeps the light
    colour set on that section (those colours are not touched). Every heading
    is rendered in Title Case (first letter of each word capitalised). */
-/* Museo Sans typography — headings #303236 / weight 700, body & paragraph
-   text #58595b / weight 500. Text on dark / coloured sections stays white
-   (re-assert list below). Museo Sans is a licensed font: add your embed
-   (Adobe Fonts kit <link> or self-hosted @font-face) for it to render —
-   until then the Poppins fallback shows. */
-body{ color:#292a2b; font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif; }
-h1,h2,h3,h4,h5,h6{ font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif !important;
-  color:#303236 !important; font-weight:700 !important; text-transform:capitalize !important; }
+/* Site typography — headings: PT Sans Narrow 700, black. Body & content:
+   PT Sans 400, black, 16px / 24px line-height. Text on dark / coloured
+   sections stays white (re-assert list below). Fonts load from Google
+   Fonts (linked in the base head). */
+body{ color:#000; font-family:'PT Sans',system-ui,Arial,sans-serif; }
+h1,h2,h3,h4,h5,h6{ font-family:'PT Sans Narrow','Arial Narrow',Arial,sans-serif !important;
+  color:#000 !important; font-weight:700 !important; text-transform:capitalize !important; }
+/* main headings follow the 48px / tight line-height spec, scaled responsively */
+h1,h2{ font-size:clamp(30px,5vw,48px) !important; line-height:1.05 !important; }
 p:not([class*="eyebrow"]):not([class*="badge"]), li{
-  font-family:'Museo Sans','Poppins','Archivo',system-ui,sans-serif !important;
-  color:#292a2b !important; font-weight:400 !important; font-size:15px !important; }
+  font-family:'PT Sans',system-ui,Arial,sans-serif !important;
+  color:#000 !important; font-weight:400 !important; font-size:16px !important; line-height:1.5 !important; }
 /* keep light text on dark / coloured sections (prefixed to out-specify the
    body-copy rule above) */
 [data-bf-root] [data-ink-light] :is(h1,h2,h3,h4,h5,h6,p,li),
@@ -310,9 +311,9 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
   --color-accent-2-800: #71261b;
   --color-accent-2-900: #471d16;
 
-  --font-heading: "Museo Sans", "Poppins", "Archivo", system-ui, sans-serif;
+  --font-heading: "PT Sans Narrow", "Arial Narrow", Arial, sans-serif;
   --font-heading-weight: 700;
-  --font-body: "Museo Sans", "Poppins", "Archivo", system-ui, sans-serif;
+  --font-body: "PT Sans", system-ui, Arial, sans-serif;
 
   --space-1: 4.0px;
   --space-2: 8.0px;
