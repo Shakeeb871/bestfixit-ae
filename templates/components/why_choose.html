@@ -86,12 +86,15 @@
 
 <section class="why-choose" aria-labelledby="why-choose-heading">
   <div class="why-choose__container">
-    <div class="why-choose__head" data-reveal>
-      <span class="why-choose__eyebrow">{{ wc.eyebrow }}</span>
-      <h2 id="why-choose-heading" class="why-choose__title">
-        {{ wc.title_lead }} <span>{{ wc.title_highlight }}</span>
-      </h2>
-      <p class="why-choose__intro">{{ wc.intro }}</p>
+    <div class="sec-head" data-reveal>
+      <div class="sec-head__row">
+        <div class="sec-head__text">
+          <span class="sec-head__eyebrow">{{ wc.eyebrow }}</span>
+          <h2 id="why-choose-heading" class="sec-head__title">{{ wc.title_lead }} {{ wc.title_highlight }}</h2>
+        </div>
+        <a class="sec-head__btn btn-skew" href="/contact">Book A Service</a>
+      </div>
+      <p class="sec-head__desc">{{ wc.intro }}</p>
     </div>
 
     <div class="why-choose__grid" data-reveal>

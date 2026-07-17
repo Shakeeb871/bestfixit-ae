@@ -666,13 +666,25 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 .hero-rating__meta{ font-size:13px; color:rgba(255,255,255,.9); white-space:nowrap; }
 .hero-rating__meta strong{ color:#fff; font-weight:700; }
 
+/* ── shared section header: eyebrow + title (left), button (right), rule ── */
+.sec-head{ margin:0 auto clamp(32px,4vw,48px); }
+.sec-head__row{ display:flex; align-items:flex-end; justify-content:space-between; gap:22px;
+    padding-bottom:16px; border-bottom:1px solid #b7bfc9; }
+.sec-head__text{ min-width:0; }
+.sec-head__eyebrow{ display:block; margin:0 0 7px; color:#2c74c0;
+    font-family:var(--font-heading); font-weight:800; font-size:14px; letter-spacing:.05em; }
+.sec-head__title{ margin:0; font-family:var(--font-heading); font-weight:800;
+    font-size:clamp(26px,3.3vw,40px) !important; line-height:1.12 !important; }
+.sec-head__btn.btn-skew{ flex:none; align-self:center; }
+.sec-head__desc{ margin:18px 0 0; max-width:720px; }
+@media (max-width:640px){
+  .sec-head__row{ flex-direction:column; align-items:flex-start; gap:16px; }
+  .sec-head__btn.btn-skew{ align-self:flex-start; }
+}
+
 .svc2{ position:relative; background:#f2f2f2; overflow:hidden;
     padding:clamp(56px,7vw,84px) 0 clamp(70px,8vw,96px); }
-  .svc2__head{ text-align:center; max-width:760px; margin:0 auto clamp(34px,4vw,48px); padding:0 20px; }
-  .svc2__eyebrow{ font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em;
-    text-transform:uppercase; color:#2c74c0; margin:0 0 14px; }
-  .svc2__title{ font-family:var(--font-heading); font-weight:800; font-size:clamp(24px,2.8vw,34px);
-    line-height:1.2; letter-spacing:-.01em; margin:0; color:#000; }
+  .svc2__head{ max-width:1480px; margin:0 auto clamp(30px,3.5vw,44px); padding:0 clamp(16px,3vw,40px); }
 
   /* ── carousel (reference-style: circular badge overlapping each card) ── */
   .svc2__slider{ max-width:1480px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
