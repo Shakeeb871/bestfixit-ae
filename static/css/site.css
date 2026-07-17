@@ -705,7 +705,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc-slide{ flex:0 0 calc((100% - (var(--svc-gap) * 4)) / 5); box-sizing:border-box;
     position:relative; min-height:var(--svc-card-h);
     display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:80px 18px 22px; background:#fff; border-radius:11px; text-decoration:none;
+    padding:70px 18px 22px; background:#fff; border-radius:11px; text-decoration:none;
     color:inherit; outline:none;
     box-shadow:0 14px 26px -14px rgba(20,40,80,.30), 0 3px 9px -4px rgba(20,40,80,.12);
     transition:transform .25s ease, box-shadow .25s ease; }
@@ -714,13 +714,13 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc-slide:focus-visible{ box-shadow:0 0 0 3px #2c74c0, 0 14px 26px -14px rgba(20,40,80,.30); }
 
   /* circular badge sitting on the card's top edge (half above) */
-  .svc-slide__badge{ position:absolute; top:-54px; left:50%; transform:translateX(-50%);
-    width:108px; height:108px; border-radius:50%; z-index:3; overflow:hidden;
+  .svc-slide__badge{ position:absolute; top:-45px; left:50%; transform:translateX(-50%);
+    width:90px; height:90px; border-radius:50%; z-index:3; overflow:hidden;
     background:#fdfdfd; border:2px solid #e4e9f1; display:grid; place-items:center;
-    box-shadow:0 14px 20px -8px rgba(20,40,80,.28), 0 2px 6px rgba(20,40,80,.10);
+    box-shadow:-2px 6px 0px 0px #4d4d4d, 0 0px 0px rgba(20,40,80,.10);
     transition:transform .25s ease; }
   .svc-slide:hover .svc-slide__badge{ transform:translateX(-50%) scale(1.03); }
-  .svc-slide__badge img{ width:60%; height:60%; object-fit:contain; display:block; }
+  .svc-slide__badge img{ width:75%; height:75%; object-fit:contain; display:block; }
 
   .svc-slide__title{ margin:0 0 8px; color:#1c2836 !important;
     font-family:var(--font-heading); font-weight:800; font-size:18px; line-height:1.24;
@@ -759,10 +759,10 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     .svc-slide{ flex-basis:calc((100% - var(--svc-gap)) / 2); }
   }
   @media (max-width:519px){
-    .svc2__stage{ --svc-gap:16px; --svc-vp-x:16px; --svc-vp-top:62px; --svc-card-h:206px; }
+    .svc2__stage{ --svc-gap:16px; --svc-vp-x:16px; --svc-vp-top:56px; --svc-card-h:206px; }
     .svc-slide{ flex-basis:86%; }
-    .svc-slide__badge{ width:100px; height:100px; top:-50px; }
-    .svc-slide{ padding-top:74px; }
+    .svc-slide__badge{ width:80px; height:80px; top:-40px; }
+    .svc-slide{ padding-top:62px; }
     .svc2__arrow{ width:40px; height:40px; }
     .svc2__arrow--prev{ left:0; } .svc2__arrow--next{ right:0; }
   }
