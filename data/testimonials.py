@@ -3,10 +3,7 @@
 Plain Python data (no database) driving the dark testimonial slider
 rendered by ``components/testimonial_showcase.html``. The two left stat
 circles are static; only ``items`` are cycled by the slider. Each item's
-``image`` is a portrait shown on the right, synced to its text.
-
-NOTE: portraits currently reuse the team photo as a placeholder — drop
-real customer photos into static/img/ and update each ``image`` path.
+``image`` is a customer photo shown on the right, synced to its quote.
 """
 
 TESTIMONIAL_SHOWCASE = {
@@ -35,7 +32,7 @@ TESTIMONIAL_SHOWCASE = {
             "name": "Aisha R.",
             "role": "Home Repair Client · Dubai Marina",
             "rating": 5.0,
-            "image": "/static/img/hero-team.webp",
+            "image": "/static/img/testimonial-plumbing.webp",
             "review_url": "#bfc",
         },
         {
@@ -48,7 +45,7 @@ TESTIMONIAL_SHOWCASE = {
             "name": "James M.",
             "role": "AC Service Client · Jumeirah",
             "rating": 5.0,
-            "image": "/static/img/hero-team.webp",
+            "image": "/static/img/testimonial-ac.webp",
             "review_url": "#bfc",
         },
         {
@@ -61,7 +58,7 @@ TESTIMONIAL_SHOWCASE = {
             "name": "Fatima K.",
             "role": "Handyman Client · Abu Dhabi",
             "rating": 5.0,
-            "image": "/static/img/hero-team.webp",
+            "image": "/static/img/testimonial-handyman.webp",
             "review_url": "#bfc",
         },
     ],
