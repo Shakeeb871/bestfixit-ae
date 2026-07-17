@@ -6,9 +6,7 @@ image path and link is data-driven — nothing is hardcoded in the
 template. ``features[].icon`` is a key into the template's allow-list of
 inline SVGs, never raw markup.
 
-NOTE: ``secondary_image`` currently reuses the main team photo as a
-placeholder. Drop a second photo into static/img/ (e.g.
-img/expertise-detail.webp) and point ``secondary_image`` at it.
+A single team photo is shown (``main_image``).
 """
 
 SERVICE_EXPERTISE = {
@@ -21,10 +19,8 @@ SERVICE_EXPERTISE = {
         "maintenance, our licensed Dubai technicians handle every job with "
         "the right tools and genuine care — done right the first time."
     ),
-    "main_image": "/static/img/hero-team.webp",
-    "main_image_alt": "Best Fix technicians on a home service call",
-    "secondary_image": "/static/img/hero-team.webp",
-    "secondary_image_alt": "Technician repairing an appliance",
+    "main_image": "/static/img/professional-maintenance-team.webp",
+    "main_image_alt": "Our professional Best Fix maintenance team in Dubai",
     "features": [
         {"label": "Reliable Repairs", "icon": "check"},
         {"label": "Quickly Repair", "icon": "check"},

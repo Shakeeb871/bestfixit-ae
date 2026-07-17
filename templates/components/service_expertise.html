@@ -44,12 +44,6 @@
 .service-expertise__main-image img{
   width:100%; height:100%; object-fit:cover; object-position:center; display:block;
 }
-.service-expertise__secondary-image{
-  position:absolute; right:-84px; top:55%; z-index:2;
-  width:130px; height:130px; object-fit:cover; object-position:center;
-  border:4px solid var(--se-surface); border-radius:10px;
-  box-shadow:0 14px 30px rgba(2,77,135,.18);
-}
 
 /* ---- right content ---- */
 .service-expertise__content{ max-width:508px; }
@@ -126,12 +120,10 @@
 /* ---- responsive ---- */
 @media (max-width:1100px){
   .service-expertise__layout{ gap:64px; }
-  .service-expertise__secondary-image{ right:-56px; width:114px; height:114px; }
 }
 @media (max-width:900px){
   .service-expertise__layout{ grid-template-columns:1fr; gap:78px; justify-items:center; }
   .service-expertise__visual{ max-width:560px; }
-  .service-expertise__secondary-image{ right:-24px; width:118px; height:118px; }
   .service-expertise__content{ max-width:600px; width:100%; }
 }
 @media (max-width:640px){
@@ -139,9 +131,6 @@
   .service-expertise__container{ padding-inline:20px; }
   .service-expertise__title{ font-size:clamp(29px,7.5vw,35px); max-width:100%; }
   .service-expertise__title span{ display:inline; }
-  .service-expertise__secondary-image{
-    right:14px; top:auto; bottom:14px; width:96px; height:96px; border-width:3px;
-  }
   .service-expertise__features{ grid-template-columns:1fr; }
   .service-expertise__actions{ flex-direction:column; align-items:flex-start; gap:26px; }
   .service-expertise__cta.btn{ width:min(100%,260px); }
@@ -157,9 +146,6 @@
           <img src="{{ se.main_image }}" alt="{{ se.main_image_alt }}"
                width="460" height="438" loading="lazy">
         </div>
-        <img class="service-expertise__secondary-image"
-             src="{{ se.secondary_image }}" alt="{{ se.secondary_image_alt }}"
-             width="130" height="130" loading="lazy">
       </figure>
 
       <div class="service-expertise__content">
