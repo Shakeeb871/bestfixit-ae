@@ -66,8 +66,10 @@
     {% for c in feature_cards %}
     <div class="hfeat-card">
       <span class="hfeat-card__icon" aria-hidden="true">{{ c.icon|safe }}</span>
-      <h3 class="hfeat-card__title">{{ c.title }}</h3>
-      <span class="hfeat-card__text">{{ c.text }}</span>
+      <div class="hfeat-card__body">
+        <h3 class="hfeat-card__title">{{ c.title }}</h3>
+        <span class="hfeat-card__text">{{ c.text }}</span>
+      </div>
     </div>
     {% endfor %}
   </div>
