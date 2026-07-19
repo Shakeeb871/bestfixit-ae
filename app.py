@@ -101,6 +101,7 @@ def inject_globals():
         "cta_badge": CTA_BANNER["badge"],
         "cta_eyebrow": CTA_BANNER["eyebrow"],
         "cta_title": CTA_BANNER["title"],
+        "cta_subtext": CTA_BANNER["subtext"],
         "cta_primary_label": CTA_BANNER["primary_label"],
         "cta_primary_url": CTA_BANNER["primary_url"],
         "cta_secondary_label": CTA_BANNER["secondary_label"],

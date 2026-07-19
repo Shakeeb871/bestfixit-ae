@@ -1,142 +1,62 @@
 {#
-  Full-width call-to-action banner.
-  Reusable component: every string, link and the background image are
-  passed in (with sensible fallbacks). Colours, buttons and typography
-  come from the site theme, not the reference screenshot. No JavaScript.
+  Slim full-width call-to-action bar (heading · subtext · button on one row).
+  Colours come from the site theme: a navy #024d87 band, white copy and a
+  green booking button — not the reference screenshot's colours. No JS.
 
   Expects (all optional — fall back to defaults):
-    cta_badge, cta_eyebrow, cta_title,
-    cta_primary_label, cta_primary_url,
-    cta_secondary_label, cta_secondary_url,
-    cta_background  (image path/URL)
+    cta_title, cta_subtext, cta_primary_label, cta_primary_url
 #}
-{% set _badge     = cta_badge     | default('Feel Free') %}
-{% set _eyebrow   = cta_eyebrow   | default('To Contact Us') %}
-{% set _title     = cta_title     | default('Get Premium Handyman Service From Us!') %}
-{% set _p_label   = cta_primary_label   | default('Get Our Service') %}
-{% set _p_url     = cta_primary_url     | default('#') %}
-{% set _s_label   = cta_secondary_label | default('Contact Us') %}
-{% set _s_url     = cta_secondary_url   | default('#') %}
-{% set _bg        = cta_background | default('/static/img/hero-team.webp') %}
+{% set _title   = cta_title         | default('Service You Can Trust!') %}
+{% set _subtext = cta_subtext       | default('Let us know how we can help you today.') %}
+{% set _label   = cta_primary_label | default('Easy Online Booking') %}
+{% set _url     = cta_primary_url   | default('/contact') %}
 
 <style id="cta-banner-style">
 .cta-banner{
-  /* light-theme callout — soft tinted band, dark text, colour accent line */
-  --cta-heading:#0f1a2b;
-  --cta-eyebrow:#5a616b;
-  --cta-badge-bg:var(--color-accent,#024d87);
-  --cta-badge-text:#ffffff;
-
-  position:relative; overflow:hidden; isolation:isolate;
-  width:100%; min-height:230px;
-  padding:clamp(46px,6vw,62px) 0;
-  background:#eef3f9;                 /* gentle light callout tint */
+  position:relative; width:100%;
+  background:#024d87;                 /* brand navy band */
+  padding:clamp(26px,3.4vw,40px) 0;
   font-family:var(--font-body,inherit);
 }
-/* branded top accent line (navy → blue → teal → green) echoing the
-   Working Process palette, keeping the section light but distinctive. */
-.cta-banner::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:4px; z-index:2;
-  pointer-events:none;
-  background:linear-gradient(90deg,#024d87,#2c74c0,#1594ac,#1f9d55);
-}
-/* the banner already carries its own diagonal accents — no extra panels */
-.cta-banner__deco{ display:none; }
-
 .cta-banner__container{
-  position:relative; z-index:3;
-  max-width:1120px; margin-inline:auto;
-  padding-inline:clamp(24px,4vw,32px);
-}
-/* centred content — the background is a full cover with an empty middle */
-.cta-banner__layout{
-  display:flex; flex-direction:column; align-items:center; text-align:center;
-  gap:clamp(22px,3vw,30px); min-height:150px;
-}
-/* ---- content ---- */
-.cta-banner__content{ max-width:720px; }
-.cta-banner__eyebrow{
-  display:inline-flex; align-items:center; justify-content:center; gap:6px; margin:0 0 18px;
-}
-.cta-banner__eyebrow .cta-banner__badge{
-  display:inline-block; padding:4px 8px; border-radius:3px;
-  background:var(--cta-badge-bg); color:var(--cta-badge-text);
-  font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-}
-.cta-banner__eyebrow span{
-  color:var(--cta-eyebrow); font-size:10.5px; font-weight:700;
-  letter-spacing:.14em; text-transform:uppercase;
+  max-width:1240px; margin-inline:auto;
+  padding-inline:clamp(20px,4vw,48px);
+  display:flex; align-items:center; gap:clamp(18px,2.6vw,40px); flex-wrap:wrap;
 }
 .cta-banner__title{
-  margin:0 auto; color:var(--cta-heading);
+  margin:0; flex:0 0 auto; color:#fff !important;
   font-family:var(--font-heading,inherit);
-  font-weight:800; font-size:clamp(25px,2.9vw,33px); line-height:1.2;
-  max-width:640px;
+  font-weight:800; font-size:clamp(24px,2.9vw,40px); line-height:1.05;
 }
-/* ---- actions ---- */
-.cta-banner__actions{
-  display:flex; align-items:center; justify-content:center;
-  gap:14px; flex-wrap:wrap;
+.cta-banner__subtext{
+  flex:1 1 auto; min-width:180px;
+  color:rgba(255,255,255,.9); font-size:clamp(15px,1.35vw,19px); line-height:1.4;
 }
-.cta-banner__actions .btn{
-  min-height:44px; padding-inline:24px; font-size:13px;
-  transition:background .2s ease, color .2s ease, border-color .2s ease;
+.cta-banner__btn{
+  flex:0 0 auto; display:inline-flex; align-items:center; gap:10px;
+  background:#1f9d55; color:#fff;
+  font-family:var(--font-heading,inherit); font-weight:800; font-size:15px; letter-spacing:.01em;
+  padding:15px 28px; border-radius:8px; text-decoration:none; white-space:nowrap;
+  box-shadow:0 14px 26px -12px rgba(0,0,0,.4);
+  transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-.cta-banner__actions .btn-primary{ min-width:140px; }
-/* secondary: navy skewed outline on the light banner (override btn-skew) */
-.cta-banner__actions .btn-secondary{
-  min-width:118px; color:#024d87 !important;
-}
-.cta-banner__actions .btn-secondary::before{
-  background:transparent !important; border:2px solid #024d87 !important;
-}
-.cta-banner__actions .btn-secondary:hover{ color:#fff !important; }
-.cta-banner__actions .btn-secondary:hover::before{ background:#024d87 !important; }
+.cta-banner__btn svg{ width:18px; height:18px; flex:none; }
+.cta-banner__btn:hover{ background:#178048; transform:translateY(-2px); box-shadow:0 18px 30px -12px rgba(0,0,0,.45); }
 
-/* ---- responsive ---- */
-@media (max-width:1000px){
-  .cta-banner__layout{ gap:24px; }
-  .cta-banner__title{ font-size:clamp(24px,3.6vw,29px); }
-}
-@media (max-width:850px){
-  .cta-banner{ padding:clamp(52px,8vw,62px) 0; }
-  .cta-banner__layout{ grid-template-columns:1fr; text-align:center; gap:30px; }
-  .cta-banner__content{ max-width:100%; }
-  .cta-banner__eyebrow{ justify-content:center; }
-  .cta-banner__title{ max-width:100%; margin-inline:auto; }
-  .cta-banner__actions{ justify-content:center; }
-}
-@media (max-width:640px){
-  .cta-banner{ padding:58px 0; background-position:center; }
-  .cta-banner__container{ padding-inline:20px; }
-  .cta-banner__title{ font-size:clamp(23px,6.4vw,28px); }
-  .cta-banner__deco{ display:none; }
-}
-@media (max-width:480px){
-  .cta-banner__actions{ flex-direction:column; }
-  .cta-banner__actions .btn{ width:min(100%,260px); }
+@media (max-width:900px){
+  .cta-banner__container{ flex-direction:column; align-items:flex-start; text-align:left; gap:16px; }
+  .cta-banner__subtext{ flex-basis:auto; }
+  .cta-banner__btn{ width:100%; justify-content:center; }
 }
 </style>
 
-<section class="cta-banner" aria-labelledby="cta-heading"
-         style="--cta-bg-image:url('{{ _bg }}');">
-  <span class="cta-banner__deco" aria-hidden="true"></span>
+<section class="cta-banner" aria-labelledby="cta-heading">
   <div class="cta-banner__container">
-    <div class="cta-banner__layout">
-
-      <div class="cta-banner__content">
-        <p class="cta-banner__eyebrow">
-          <span class="cta-banner__badge">{{ _badge }}</span>
-          <span>{{ _eyebrow }}</span>
-        </p>
-        <h2 id="cta-heading" class="cta-banner__title">{{ _title }}</h2>
-      </div>
-
-      <div class="cta-banner__actions">
-        <a class="btn btn-primary btn-skew btn-skew--arrow" href="{{ _p_url }}">{{ _p_label }}</a>
-        <a class="btn btn-secondary btn-skew btn-skew--arrow btn-skew--outline" href="{{ _s_url }}">{{ _s_label }}</a>
-      </div>
-
-    </div>
+    <h2 id="cta-heading" class="cta-banner__title">{{ _title }}</h2>
+    <span class="cta-banner__subtext">{{ _subtext }}</span>
+    <a class="cta-banner__btn" href="{{ _url }}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+      {{ _label }}
+    </a>
   </div>
 </section>

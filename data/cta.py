@@ -8,9 +8,10 @@ all data-driven — nothing is hardcoded in the template. Consumed by
 CTA_BANNER = {
     "badge": "Feel Free",
     "eyebrow": "To Contact Us",
-    "title": "Get Premium Handyman Service From Us!",
-    "primary_label": "Get Our Service",
-    "primary_url": "#services",
+    "title": "Service You Can Trust!",
+    "subtext": "Let us know how we can help you today.",
+    "primary_label": "Easy Online Booking",
+    "primary_url": "/contact",
     "secondary_label": "Contact Us",
     "secondary_url": "#bfc",
     "background": "/static/img/cta-banner-bg.webp",
