@@ -68,9 +68,11 @@
 .bfh__phone{ display:inline-flex; align-items:center; gap:9px; margin-top:4px; color:#0f1a2b; font-size:26px; font-weight:800; text-decoration:none; letter-spacing:.01em; }
 .bfh__phone svg{ width:19px; height:26px; color:#2c74c0; }
 .bfh__phone:hover{ color:#024d87; }
-.bfh__schedule{ flex:0 0 auto; display:inline-flex; align-items:center; gap:9px; background:#024d87; color:#fff; font-size:14px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; text-decoration:none; padding:14px 26px; border-radius:40px; box-shadow:0 10px 22px rgba(2,77,135,.28); transition:background .2s ease, transform .2s ease; }
+.bfh__schedule{ position:relative; z-index:0; flex:0 0 auto; display:inline-flex; align-items:center; gap:9px; color:#fff; font-size:14px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; text-decoration:none; padding:15px 32px; background:transparent; transition:transform .2s ease; }
+.bfh__schedule::before{ content:""; position:absolute; inset:0; z-index:-1; background:#024d87; transform:skewX(-11deg); box-shadow:0 10px 22px rgba(2,77,135,.28); transition:background .2s ease; }
 .bfh__schedule svg{ width:17px; height:17px; }
-.bfh__schedule:hover{ background:#013a63; transform:translateY(-2px); }
+.bfh__schedule:hover{ transform:translateY(-2px); }
+.bfh__schedule:hover::before{ background:#013a63; }
 .bfh__burger, .bfh__phone-circle{ display:none; }
 
 /* Row 3 · primary nav */

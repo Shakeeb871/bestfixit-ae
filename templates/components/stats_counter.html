@@ -1,73 +1,65 @@
 {#
-  Animated stats counters. A circle sits behind each number covering roughly
-  half of it; on hover the circle slides to the right and changes colour.
-  Numbers count up when the section scrolls into view. Dark themed section.
+  Company stat cards. Each card: a soft tinted icon, a count-up number and a
+  label — coloured with the site's coordinated palette (navy → blue → teal →
+  green), matching the process cards and badges. Numbers count up on scroll.
 #}
 <style id="stats-counter-style">
 .stats-counter{
-  --sc-circle:transparent;         /* no circle by default */
-  --sc-circle-hover:#2c74c0;       /* theme blue on hover */
-  position:relative; isolation:isolate;
-  margin-top:clamp(12px,1.8vw,22px); padding-top:clamp(16px,2vw,26px);
-  margin-bottom:clamp(22px,3.2vw,40px);
-  border-top:1px solid #e6ebf3;
-  background:transparent; color:#000; font-family:var(--font-body,inherit);
+  position:relative; margin-top:clamp(30px,4vw,52px);
+  font-family:var(--font-body,inherit);
 }
 .stats-counter__container{
-  position:relative; z-index:1; max-width:1160px; margin:0 auto;
-  padding-inline:clamp(20px,4vw,40px);
-  display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(20px,3vw,40px);
+  max-width:1160px; margin:0 auto; padding-inline:clamp(20px,4vw,40px);
+  display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(16px,1.8vw,26px);
 }
-.stat{ position:relative; text-align:center; }
-.stat:not(:last-child)::after{
-  content:""; position:absolute; right:calc(clamp(20px,3vw,40px) / -2); top:50%;
-  transform:translateY(-50%); width:1px; height:64px; background:rgba(20,40,80,.14);
+.stat-card{
+  background:#fff; border:1px solid #eef1f6; border-radius:16px;
+  padding:clamp(26px,2.6vw,36px) 18px clamp(22px,2.2vw,30px);
+  text-align:center;
+  box-shadow:0 18px 40px -24px rgba(20,40,80,.30);
+  transition:transform .25s ease, box-shadow .25s ease;
 }
-.stat__figure{ position:relative; display:inline-flex; justify-content:center; align-items:center; }
-.stat__circle{
-  position:absolute; top:50%; left:0; width:86px; height:86px; border-radius:50%;
-  background:var(--sc-circle); transform:translateY(-50%); z-index:0;
-  transition:left .5s cubic-bezier(.4,0,.2,1), background-color .5s ease;
+.stat-card:hover{ transform:translateY(-6px); box-shadow:0 28px 52px -24px rgba(20,40,80,.36); }
+.stat-card__icon{
+  width:64px; height:64px; border-radius:16px; margin:0 auto 20px;
+  display:grid; place-items:center;
 }
-.stat:hover .stat__circle{ left:calc(100% - 86px); background:var(--sc-circle-hover); }
-.stat__num{
-  position:relative; z-index:1; display:inline-block;
+.stat-card__icon svg{ width:30px; height:30px; }
+.stat-card__num{
   font-family:var(--font-heading,inherit); font-weight:800;
-  font-size:clamp(40px,4.4vw,56px); line-height:1; color:#000; letter-spacing:.5px;
+  font-size:clamp(32px,3.3vw,44px); line-height:1; color:#0f1a2b; letter-spacing:.01em;
 }
-/* coordinated palette across the four stats (navy -> blue -> teal -> green) */
-.stat:nth-child(4n+1) .stat__num{ color:var(--pal-1); }
-.stat:nth-child(4n+2) .stat__num{ color:var(--pal-2); }
-.stat:nth-child(4n+3) .stat__num{ color:var(--pal-3); }
-.stat:nth-child(4n+4) .stat__num{ color:var(--pal-4); }
-.stat__label{
-  margin-top:12px; font-family:var(--font-heading,inherit); font-weight:700;
-  font-size:14px; color:#000;
+.stat-card__label{
+  margin-top:11px; font-family:var(--font-heading,inherit); font-weight:700; font-size:14px;
 }
+/* coordinated palette per card (navy · blue · teal · green) */
+.stat-card:nth-child(1) .stat-card__icon{ background:#e7eef6; color:#024d87; }
+.stat-card:nth-child(2) .stat-card__icon{ background:#e8f0fb; color:#2c74c0; }
+.stat-card:nth-child(3) .stat-card__icon{ background:#e2f2f5; color:#1594ac; }
+.stat-card:nth-child(4) .stat-card__icon{ background:#e6f6ee; color:#1f9d55; }
+.stat-card:nth-child(1) .stat-card__label{ color:#024d87; }
+.stat-card:nth-child(2) .stat-card__label{ color:#2c74c0; }
+.stat-card:nth-child(3) .stat-card__label{ color:#1594ac; }
+.stat-card:nth-child(4) .stat-card__label{ color:#1f9d55; }
 
 @media (max-width:820px){
-  .stats-counter__container{ grid-template-columns:1fr 1fr; gap:44px 20px; }
-  .stat:not(:last-child)::after{ display:none; }
-  .stat:nth-child(odd)::after{ content:""; display:block; right:calc(-10px); }
+  .stats-counter__container{ grid-template-columns:1fr 1fr; gap:16px; }
 }
-@media (max-width:480px){
-  .stats-counter__container{ grid-template-columns:1fr; gap:38px; }
-  .stat:nth-child(odd)::after{ display:none; }
+@media (max-width:440px){
+  .stats-counter__container{ grid-template-columns:1fr; max-width:320px; }
 }
 @media (prefers-reduced-motion:reduce){
-  .stat__circle{ transition:background-color .3s ease; }
+  .stat-card{ transition:none; }
 }
 </style>
 
 <section class="stats-counter" aria-label="Company statistics">
   <div class="stats-counter__container">
     {% for s in stats %}
-    <div class="stat">
-      <div class="stat__figure">
-        <span class="stat__circle" aria-hidden="true"></span>
-        <span class="stat__num"><span class="stat__count" data-target="{{ s.number }}">{{ s.number }}</span>{{ s.suffix }}</span>
-      </div>
-      <div class="stat__label">{{ s.label }}</div>
+    <div class="stat-card">
+      <span class="stat-card__icon" aria-hidden="true">{{ s.icon|safe }}</span>
+      <div class="stat-card__num"><span class="stat__count" data-target="{{ s.number }}">{{ s.number }}</span>{{ s.suffix }}</div>
+      <div class="stat-card__label">{{ s.label }}</div>
     </div>
     {% endfor %}
   </div>
