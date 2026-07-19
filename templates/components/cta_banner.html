@@ -37,15 +37,19 @@
   background-size:cover; background-position:center;
   font-family:var(--font-body,inherit);
 }
-/* readability overlay — a soft centre vignette: darkens the middle just
-   enough to guarantee text contrast while keeping the green corner
-   accents of the banner vivid. */
+/* navy-unify overlay — a flat brand-navy wash shifts the near-black photo
+   toward the site's dark navy (#0f1a2b) so the CTA belongs to the same dark
+   family as the testimonials and footer, and tones the green diagonals down
+   from a full field to a quiet accent. A soft centre vignette on top keeps
+   the headline contrast crisp. */
 .cta-banner::before{
   content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
-  background:radial-gradient(ellipse 78% 130% at 50% 50%,
-    rgba(6,12,20,.55) 0%,
-    rgba(6,12,20,.34) 62%,
-    rgba(6,12,20,.10) 100%);
+  background:
+    radial-gradient(ellipse 78% 130% at 50% 50%,
+      rgba(6,12,20,.42) 0%,
+      rgba(6,12,20,.24) 62%,
+      rgba(6,12,20,.06) 100%),
+    linear-gradient(0deg, rgba(15,26,43,.60), rgba(15,26,43,.60));
 }
 /* the banner already carries its own diagonal accents — no extra panels */
 .cta-banner__deco{ display:none; }

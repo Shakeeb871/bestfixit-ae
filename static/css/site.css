@@ -682,7 +682,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 .hfeat-card__icon{ width:50px; height:50px; border-radius:50%; display:grid; place-items:center;
     background:var(--pal-1); color:#fff; flex:none; }
 .hfeat-card:nth-child(2) .hfeat-card__icon{ background:var(--pal-2); }
-.hfeat-card:nth-child(3) .hfeat-card__icon{ background:var(--pal-4); }
+.hfeat-card:nth-child(3) .hfeat-card__icon{ background:var(--pal-3); }
 .hfeat-card__icon svg{ width:24px; height:24px; }
 .hfeat-card__body{ min-width:0; }
 .hfeat-card__title{ margin:0 0 6px; color:#000; font-family:var(--font-heading);
@@ -864,7 +864,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 #bfc .bfc-formwrap{ position:relative; margin-top:80px; }
 #bfc .bfc-form{ position:relative; box-sizing:border-box; width:100%; max-width:452px;
   min-height:568px; margin-left:auto;
-  background:linear-gradient(160deg,#024d87,#013a63);
+  background:linear-gradient(160deg,#024d87,#0f1a2b);
   color:#fff; border-radius:12px;
   padding:74px 40px 64px 62px;
   box-shadow:var(--shadow);
