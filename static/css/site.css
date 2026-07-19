@@ -80,17 +80,17 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
   color:#000 !important; font-weight:400 !important; font-size:16px !important; line-height:1.5 !important; }
 /* keep light text on dark / coloured sections (prefixed to out-specify the
    body-copy rule above) */
-[data-bf-root] [data-ink-light] :is(h1,h2,h3,h4,h5,h6,p,li),
+/* white text only where the background is genuinely a photo/colour block:
+   the hero photo, the navy booking-form panel, and other-page heroes.
+   The site is otherwise a light theme — topbar, testimonials, CTA and
+   footer render dark text on light backgrounds. */
 [data-bf-root] #top :is(h1,h2,h3,h4,h5,h6,p,li),
-[data-bf-root] #testimonials :is(h1,h2,h3,h4,h5,h6,p,li),
-[data-bf-root] .cta-banner :is(h1,h2,h3,h4,h5,h6,p,li),
-[data-bf-root] .site-footer :is(h1,h2,h3,h4,h5,h6,p,li),
 [data-bf-root] .elementor-element-a2ef090 :is(h1,h2,h3,h4,h5,h6,p,li),
 [data-bf-root] .pagehero :is(h1,h2,h3,h4,h5,h6,p,li),
 [data-bf-root] .blog-cta :is(h1,h2,h3,h4,h5,h6,p,li),
 [data-bf-root] #bfc .bfc-form :is(h1,h2,h3,h4,h5,h6,p,li){ color:#fff !important; }
-[data-bf-root] .site-footer__legal a{ color:rgba(255,255,255,.6) !important; }
-[data-bf-root] .site-footer__legal a:hover{ color:#fff !important; }
+[data-bf-root] .site-footer__legal a{ color:#6b7280 !important; }
+[data-bf-root] .site-footer__legal a:hover{ color:#024d87 !important; }
 
 .pagehero{ position:relative; overflow:hidden; background:linear-gradient(120deg,#04345f,#024d87); padding:clamp(46px,8vw,88px) 0; }
 .pagehero::after{ content:""; position:absolute; right:-90px; top:-90px; width:320px; height:320px; border:2px solid rgba(255,255,255,.09); border-radius:50%; pointer-events:none; }
@@ -533,26 +533,19 @@ details[open]::details-content{ block-size:auto; content-visibility:visible; }
 details[open] .bf-faq-chev{ transform:rotate(180deg); }
 
 .site-footer{
-  --sf-overlay:#0f1a2b;
-  --sf-heading:#ffffff;
-  --sf-text:rgba(255,255,255,.72);
-  --sf-muted:rgba(255,255,255,.5);
-  --sf-accent:#3a86d6;
-  --sf-border:rgba(255,255,255,.15);
+  --sf-overlay:#f2f2f2;             /* light theme footer */
+  --sf-heading:#0f1a2b;
+  --sf-text:#4d5560;
+  --sf-muted:#7d8590;
+  --sf-accent:#024d87;             /* brand navy */
+  --sf-border:rgba(2,77,135,.14);
   position:relative; overflow:hidden; isolation:isolate;
   background:var(--sf-overlay); color:var(--sf-text);
+  border-top:1px solid #e2e6ea;
   font-family:var(--font-body,inherit);
 }
-.site-footer__bg{
-  position:absolute; inset:0; z-index:0;
-  background-image:url('/static/img/hero-team.webp');
-  background-size:cover; background-position:center right;
-}
-.site-footer__bg::after{
-  content:""; position:absolute; inset:0;
-  background:linear-gradient(90deg, var(--sf-overlay) 30%,
-    color-mix(in srgb,var(--sf-overlay) 82%, transparent) 100%);
-}
+/* light theme: no dark photo behind the footer */
+.site-footer__bg{ display:none; }
 .site-footer__container{
   position:relative; z-index:1; max-width:1240px; margin:0 auto;
   padding-inline:clamp(20px,5vw,60px);
@@ -564,7 +557,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 }
 .site-footer__divider{ width:1px; background:var(--sf-border); }
 .site-footer__brand{ align-self:center; justify-self:start; display:inline-flex;
-  background:#ffffff; padding:16px 22px; border-radius:12px; box-shadow:0 14px 32px rgba(0,0,0,.28); }
+  background:#ffffff; padding:16px 22px; border-radius:12px; box-shadow:0 14px 32px rgba(20,40,80,.14); }
 .site-footer__brand img{ width:clamp(138px,13vw,172px); height:auto; display:block; }
 .site-footer__cta{
   margin:0; color:var(--sf-heading);
@@ -612,7 +605,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   position:absolute; z-index:2; right:clamp(18px,4vw,40px); bottom:clamp(74px,8vw,92px);
   width:46px; height:46px; border-radius:50%; border:0; cursor:pointer;
   background:var(--sf-accent); color:#fff; display:grid; place-items:center;
-  box-shadow:0 10px 24px rgba(0,0,0,.35); transition:filter .18s ease, transform .18s ease; text-decoration:none;
+  box-shadow:0 10px 24px rgba(2,77,135,.28); transition:filter .18s ease, transform .18s ease; text-decoration:none;
 }
 .site-footer__totop:hover{ filter:brightness(1.1); transform:translateY(-2px); }
 .site-footer__totop svg{ width:20px; height:20px; }
@@ -864,7 +857,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 #bfc .bfc-formwrap{ position:relative; margin-top:80px; }
 #bfc .bfc-form{ position:relative; box-sizing:border-box; width:100%; max-width:452px;
   min-height:568px; margin-left:auto;
-  background:linear-gradient(160deg,#024d87,#0f1a2b);
+  background:linear-gradient(160deg,#024d87,#013a63);
   color:#fff; border-radius:12px;
   padding:74px 40px 64px 62px;
   box-shadow:var(--shadow);

@@ -21,35 +21,24 @@
 
 <style id="cta-banner-style">
 .cta-banner{
-  /* component tokens derived from the site theme */
-  --cta-overlay:#0f1a2b;              /* dark brand navy, unifies the graphic */
-  --cta-heading:#ffffff;
-  --cta-eyebrow:#eef2f8;
+  /* light-theme callout — soft tinted band, dark text, colour accent line */
+  --cta-heading:#0f1a2b;
+  --cta-eyebrow:#5a616b;
   --cta-badge-bg:var(--color-accent,#024d87);
   --cta-badge-text:#ffffff;
-  --cta-shape:rgba(255,255,255,.05);
 
   position:relative; overflow:hidden; isolation:isolate;
-  width:100%; min-height:280px;
+  width:100%; min-height:230px;
   padding:clamp(46px,6vw,62px) 0;
-  background-color:#0f1a2b;           /* fallback + fills any letterboxing */
-  background-image:var(--cta-bg-image);
-  background-size:cover; background-position:center;
+  background:#eef3f9;                 /* gentle light callout tint */
   font-family:var(--font-body,inherit);
 }
-/* navy-unify overlay — a flat brand-navy wash shifts the near-black photo
-   toward the site's dark navy (#0f1a2b) so the CTA belongs to the same dark
-   family as the testimonials and footer, and tones the green diagonals down
-   from a full field to a quiet accent. A soft centre vignette on top keeps
-   the headline contrast crisp. */
+/* branded top accent line (navy → blue → teal → green) echoing the
+   Working Process palette, keeping the section light but distinctive. */
 .cta-banner::before{
-  content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
-  background:
-    radial-gradient(ellipse 78% 130% at 50% 50%,
-      rgba(6,12,20,.42) 0%,
-      rgba(6,12,20,.24) 62%,
-      rgba(6,12,20,.06) 100%),
-    linear-gradient(0deg, rgba(15,26,43,.60), rgba(15,26,43,.60));
+  content:""; position:absolute; top:0; left:0; right:0; height:4px; z-index:2;
+  pointer-events:none;
+  background:linear-gradient(90deg,#024d87,#2c74c0,#1594ac,#1f9d55);
 }
 /* the banner already carries its own diagonal accents — no extra panels */
 .cta-banner__deco{ display:none; }
@@ -69,7 +58,7 @@
 .cta-banner__eyebrow{
   display:inline-flex; align-items:center; justify-content:center; gap:6px; margin:0 0 18px;
 }
-.cta-banner__badge{
+.cta-banner__eyebrow .cta-banner__badge{
   display:inline-block; padding:4px 8px; border-radius:3px;
   background:var(--cta-badge-bg); color:var(--cta-badge-text);
   font-size:10.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
@@ -94,14 +83,15 @@
   transition:background .2s ease, color .2s ease, border-color .2s ease;
 }
 .cta-banner__actions .btn-primary{ min-width:140px; }
-/* secondary needs a light outline on the dark banner */
+/* secondary: navy skewed outline on the light banner (override btn-skew) */
 .cta-banner__actions .btn-secondary{
-  min-width:118px; color:#fff; border-color:rgba(255,255,255,.65);
-  background:rgba(11,26,56,.34);      /* faint scrim keeps text readable on the bright side */
+  min-width:118px; color:#024d87 !important;
 }
-.cta-banner__actions .btn-secondary:hover{
-  background:rgba(255,255,255,.16); border-color:#fff;
+.cta-banner__actions .btn-secondary::before{
+  background:transparent !important; border:2px solid #024d87 !important;
 }
+.cta-banner__actions .btn-secondary:hover{ color:#fff !important; }
+.cta-banner__actions .btn-secondary:hover::before{ background:#024d87 !important; }
 
 /* ---- responsive ---- */
 @media (max-width:1000px){
