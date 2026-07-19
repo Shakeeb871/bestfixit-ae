@@ -162,61 +162,96 @@
 })();
 </script>
 
-<section id="about" data-screen-label="About" style="position:relative; padding:7vh 0; background:#fff; overflow:hidden;">
-  <!-- faint geometric decorations -->
-  <svg aria-hidden="true" width="260" height="260" viewBox="0 0 120 120" style="position:absolute; top:-30px; right:-40px; color:#f1f4f9; z-index:0;" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M30 20 60 5 90 20 90 50 60 65 30 50Z"></path><path d="M60 65 90 50 120 65 120 95 90 110 60 95Z"></path><path d="M0 65 30 50 60 65 60 95 30 110 0 95Z"></path></svg>
-  <svg aria-hidden="true" width="220" height="220" viewBox="0 0 120 120" style="position:absolute; bottom:-40px; left:-30px; color:#f1f4f9; z-index:0;" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M30 20 60 5 90 20 90 50 60 65 30 50Z"></path><path d="M0 65 30 50 60 65 60 95 30 110 0 95Z"></path></svg>
-  <span aria-hidden="true" style="position:absolute; top:40px; left:16%; width:22px; height:22px; border:2px solid #cdd7e6; border-radius:50%; z-index:0;"></span>
+<section id="about" data-screen-label="About" style="position:relative; padding:clamp(56px,8vw,90px) 0 clamp(30px,4vw,44px); background:#fff; overflow:hidden;">
+  <style>
+  #about .abtx__wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+  /* ── heading (Top-Ranked style, centred, above the content) ── */
+  #about .abtx__head{ text-align:center; max-width:920px; margin:0 auto clamp(40px,5vw,64px); }
+  #about .abtx__eyebrow{ display:block; margin:0 0 14px; color:#1f9d55; font-family:var(--font-heading);
+    font-weight:800; font-size:14px; letter-spacing:.22em; text-transform:uppercase; }
+  #about .abtx__title{ margin:0; font-family:var(--font-heading); }
+  #about .abtx__title span{ display:block; }
+  #about .abtx__title-1{ color:#1f9d55 !important; font-weight:900 !important; text-transform:uppercase !important;
+    font-size:clamp(38px,6.4vw,76px); line-height:.98; letter-spacing:-.01em; }
+  #about .abtx__title-2{ color:#0f1a2b !important; font-weight:800 !important; text-transform:uppercase !important;
+    font-size:clamp(19px,2.7vw,33px); line-height:1.12; margin-top:8px; }
+  #about .abtx__title-3{ color:#7d8590 !important; font-weight:600 !important; text-transform:uppercase !important;
+    font-size:clamp(14px,1.8vw,21px); line-height:1.2; letter-spacing:.02em; margin-top:8px; }
+  /* ── two-column body ── */
+  #about .abtx__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,4.5vw,64px); align-items:center; }
+  /* left: two staggered portrait rectangles */
+  #about .abtx__media{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,1.6vw,20px); align-items:start; }
+  #about .abtx__img{ border-radius:7px; overflow:hidden; aspect-ratio:0.72; background:#eef2f7;
+    box-shadow:0 24px 46px -20px rgba(20,40,80,.34); }
+  #about .abtx__img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  #about .abtx__img--a{ margin-top:0; }
+  #about .abtx__img--b{ margin-top:clamp(30px,4vw,52px); }
+  /* right: copy */
+  #about .abtx__p{ color:#454e5a !important; font-size:16px !important; line-height:1.8 !important; margin:0 0 18px; }
+  #about .abtx__p:last-of-type{ margin-bottom:0; }
+  #about .abtx__contact{ display:flex; align-items:center; gap:15px; margin:28px 0 26px; }
+  #about .abtx__contact-ic{ width:54px; height:54px; border-radius:50%; flex:none; display:grid; place-items:center;
+    background:#eafaf1; border:1.5px solid #cdeddb; color:#1f9d55; }
+  #about .abtx__contact-ic svg{ width:22px; height:22px; }
+  #about .abtx__contact small{ display:block; color:#7d8590; font-size:13px; margin-bottom:3px; font-family:var(--font-heading); }
+  #about .abtx__contact a{ color:#0f1a2b; font-family:var(--font-heading); font-weight:800; font-size:22px; text-decoration:none; letter-spacing:.01em; }
+  #about .abtx__contact a:hover{ color:#1f9d55; }
+  #about .abtx__btn{ display:inline-flex; align-items:center; gap:10px; background:#1f9d55; color:#fff;
+    font-family:var(--font-heading); font-weight:800; font-size:14px; letter-spacing:.02em;
+    padding:14px 28px; border-radius:6px; text-decoration:none;
+    box-shadow:0 14px 26px -12px rgba(31,157,85,.55); transition:background .2s ease, transform .2s ease, box-shadow .2s ease; }
+  #about .abtx__btn svg{ width:16px; height:16px; }
+  #about .abtx__btn:hover{ background:#178048; transform:translateY(-2px); box-shadow:0 18px 30px -12px rgba(31,157,85,.6); }
+  @media (max-width:900px){
+    #about .abtx__grid{ grid-template-columns:1fr; gap:clamp(30px,6vw,44px); }
+    #about .abtx__media{ max-width:520px; margin-inline:auto; width:100%; }
+  }
+  @media (max-width:460px){
+    #about .abtx__img--b{ margin-top:26px; }
+  }
+  </style>
 
-  <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:0 clamp(20px,5vw,56px);">
-    <!-- heading -->
-    <div class="sec-head" data-reveal style="margin-bottom:clamp(40px,5vw,60px);">
-      <div class="sec-head__row">
-        <div class="sec-head__text">
-          <span class="sec-head__eyebrow">About Us</span>
-          <h2 class="sec-head__title">Welcome To Best Fix Technical Services</h2>
-        </div>
-        <a class="sec-head__btn btn-skew" href="/about">About Best Fix</a>
-      </div>
+  <div class="abtx__wrap">
+    <!-- heading above the content -->
+    <div class="abtx__head" data-reveal>
+      <span class="abtx__eyebrow">About Us</span>
+      <h2 class="abtx__title">
+        <span class="abtx__title-1">Top-Rated</span>
+        <span class="abtx__title-2">Plumbing, Electrical, AC &amp; Home Maintenance</span>
+        <span class="abtx__title-3">In Dubai &amp; the UAE</span>
+      </h2>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr)); gap:clamp(40px,5vw,72px); align-items:start;">
-      <!-- LEFT: tabs + panels -->
-      <div data-reveal="">
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px;">
-          <button type="button" data-bf-tab="0" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#024d87; color:#fff;">Why Choose us?<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:block;"></span></button>
-          <button type="button" data-bf-tab="1" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#f1f4f9; color:#000;">Mission<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:none;"></span></button>
-          <button type="button" data-bf-tab="2" style="position:relative; border:0; cursor:pointer; white-space:nowrap; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 22px; background:#f1f4f9; color:#000;">Company Goal<span data-bf-ptr="" aria-hidden="true" style="position:absolute; left:50%; bottom:-9px; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:9px solid #024d87; display:none;"></span></button>
+    <!-- two-column body -->
+    <div class="abtx__grid">
+      <!-- LEFT: two staggered portrait rectangles -->
+      <div class="abtx__media" data-reveal>
+        <div class="abtx__img abtx__img--a">
+          <img src="{{ url_for('static', filename='img/hero-team.webp') }}" alt="Best Fix technician on a home service call in Dubai" width="420" height="580" loading="lazy">
         </div>
-        <div data-bf-panel="0" style="display:block;">
-          <ul style="list-style:none; margin:0; padding:0; display:grid; gap:18px;">
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Experienced, time-served technicians</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>A genuine commitment to customer service</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>We take the stress out of your project</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Flexibility in timing to suit you</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Service across Dubai and the wider UAE</li>
-            <li style="display:flex; align-items:flex-start; gap:13px; font-family:var(--font-heading); font-weight:700; font-size:16px; color:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#024d87" stroke-width="2" style="flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="#024d87" stroke="none"></circle></svg>Willing to go the extra mile for a quality job</li>
-          </ul>
-        </div>
-        <div data-bf-panel="1" style="display:none;">
-          <p style="font-size:16px; line-height:1.75; margin:0 0 16px; color:#000;">Our mission is simple: make reliable home maintenance effortless for every household in Dubai. We show up on time, quote honestly, and finish the job cleanly — so a fix stays fixed.</p>
-          <p style="font-size:16px; line-height:1.75; margin:0; color:#000;">We invest in training and genuine parts because we'd rather earn the next call than win a one-off.</p>
-        </div>
-        <div data-bf-panel="2" style="display:none;">
-          <p style="font-size:16px; line-height:1.75; margin:0 0 16px; color:#000;">Our goal is to be the most trusted technical services team in the UAE — the number you save once and call for everything, from a dripping tap to a full renovation.</p>
-          <p style="font-size:16px; line-height:1.75; margin:0; color:#000;">We grow through referrals, so every visit is a chance to prove it all over again.</p>
+        <div class="abtx__img abtx__img--b">
+          <img src="{{ url_for('static', filename='img/professional-maintenance-team.webp') }}" alt="Best Fix professional maintenance team" width="420" height="580" loading="lazy">
         </div>
       </div>
 
-      <!-- RIGHT: copy + service experience + team member -->
-      <div data-reveal="">
-        <p style="font-family:var(--font-heading); font-weight:800; font-size:17px; line-height:1.4; margin:0 0 20px; color:#024d87;">On time, every time — or the call-out is on us.</p>
-        <p style="font-size:16px; line-height:1.8; margin:0 0 18px; color:#000;">When Dubai homeowners want a home that simply works — cool, safe and cared for, without the constant worry — they call Best Fix. We've grown into one of the emirate's most relied-upon maintenance teams for a straightforward reason: your comfort genuinely matters to us.</p>
-        <p style="font-size:16px; line-height:1.8; margin:0; color:#000;">We respect you, we respect your time, and above all we respect the trust you place in us to look after your home. It's why every job is backed by a two-year workmanship guarantee — and why we turn up exactly when we say we will.</p>
-        <div style="margin-top:36px;">
-          <div style="font-family:var(--font-heading); font-weight:800; font-size:16px; color:#000;">Service Experience</div>
-          <div style="height:8px; background:#eef1f7; margin-top:14px; overflow:hidden;"><div style="width:92%; height:100%; background:#024d87;"></div></div>
+      <!-- RIGHT: copy + contact + CTA -->
+      <div class="abtx__content" data-reveal>
+        <p class="abtx__p">When Dubai homeowners want a home that simply works — cool, safe and cared for, without the constant worry — they call Best Fix. We've grown into one of the emirate's most relied-upon maintenance teams for a straightforward reason: your comfort genuinely matters to us.</p>
+        <p class="abtx__p">From plumbing, electrical and AC to painting, carpentry and full fit-outs, every job is handled by experienced, time-served technicians — finished cleanly, on time, and backed by a two-year workmanship guarantee.</p>
+
+        <div class="abtx__contact">
+          <span class="abtx__contact-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </span>
+          <span>
+            <small>Book a Service</small>
+            <a href="tel:0547393716">054 739 3716</a>
+          </span>
         </div>
+
+        <a class="abtx__btn" href="/about">Learn More
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
       </div>
     </div>
   </div>
