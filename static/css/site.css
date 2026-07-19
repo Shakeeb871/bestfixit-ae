@@ -270,7 +270,7 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
 
 
 :root {
-  --color-bg: #f2f2f2;
+  --color-bg: #eef3f9;
   --color-surface: #eae9e9;
   --color-text: #292a2b;
   --color-accent: #024d87;
@@ -533,7 +533,7 @@ details[open]::details-content{ block-size:auto; content-visibility:visible; }
 details[open] .bf-faq-chev{ transform:rotate(180deg); }
 
 .site-footer{
-  --sf-overlay:#f2f2f2;             /* light theme footer */
+  --sf-overlay:#eef3f9;             /* light theme footer */
   --sf-heading:#0f1a2b;
   --sf-text:#4d5560;
   --sf-muted:#7d8590;
@@ -666,7 +666,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 
 /* ── feature strip: full-width light band, 3 columns, linked to the hero ── */
 .hfeat{ position:relative; z-index:3; width:100%; margin-top:-64px; }
-.hfeat-row{ width:100%; background:#f2f2f2;
+.hfeat-row{ width:100%; background:#eef3f9;
     display:grid; grid-template-columns:repeat(3,1fr);
     box-shadow:0 24px 50px -24px rgba(20,40,80,.30); }
 .hfeat-card{ box-sizing:border-box; display:flex; flex-direction:row; align-items:center;
@@ -703,7 +703,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .sec-head__btn.btn-skew{ align-self:flex-start; }
 }
 
-.svc2{ position:relative; background:#f2f2f2; overflow:hidden;
+.svc2{ position:relative; background:#eef3f9; overflow:hidden;
     padding:clamp(56px,7vw,84px) 0 clamp(70px,8vw,96px); }
   .svc2__head{ max-width:1480px; margin:0 auto clamp(30px,3.5vw,44px); padding:0 clamp(16px,3vw,40px); }
 
@@ -794,7 +794,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   }
 
 #bfc{
-  --section-background:#f2f2f2;
+  --section-background:#eef3f9;
   --surface:#ffffff;
   --primary-text:#303236;
   --muted-text:#292a2b;
