@@ -270,7 +270,7 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
 
 
 :root {
-  --color-bg: #f3f2f2;
+  --color-bg: #f2f2f2;
   --color-surface: #eae9e9;
   --color-text: #292a2b;
   --color-accent: #024d87;
@@ -794,7 +794,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   }
 
 #bfc{
-  --section-background:#eef2f8;
+  --section-background:#f2f2f2;
   --surface:#ffffff;
   --primary-text:#303236;
   --muted-text:#292a2b;
