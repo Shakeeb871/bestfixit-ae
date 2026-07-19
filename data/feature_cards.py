@@ -10,6 +10,7 @@ are managed in one place instead of being hardcoded in the template.
 FEATURE_CARDS = [
     {
         "title": "Repair Services",
+        "image": "/static/img/maintenance-company-in-dubai.webp",
         "text": "Fast, reliable repairs across plumbing, electrical and "
                 "appliances — our licensed technicians diagnose the real "
                 "problem and fix it properly the first time.",
@@ -26,6 +27,7 @@ FEATURE_CARDS = [
     },
     {
         "title": "Residential Services",
+        "image": "/static/img/professional-maintenance-team.webp",
         "text": "Complete home maintenance for villas and apartments — from "
                 "AC servicing and plumbing to painting, carpentry and full "
                 "fit-outs by one trusted team.",
@@ -41,6 +43,7 @@ FEATURE_CARDS = [
     },
     {
         "title": "Maintenance & Installations",
+        "image": "/static/img/hero-team.webp",
         "text": "Scheduled upkeep and new installations done to code — genuine "
                 "parts, tidy work, clear pricing and a full twelve-month "
                 "warranty on every job.",

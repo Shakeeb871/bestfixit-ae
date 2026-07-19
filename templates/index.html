@@ -58,14 +58,16 @@
     <!-- slide dots -->
     <div class="hero-dots" data-hero-dots></div>
   </div>
-  <!-- overlapping service cards -->
-  <div data-reveal="" style="position:relative; z-index:3; max-width:1180px; margin:-130px auto 0; padding:0 clamp(20px,5vw,48px) clamp(56px,7vw,84px); display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:28px; align-items:start;">
+  <!-- overlapping feature cards (photo + blue duotone) -->
+  <div class="hfeat-row" data-reveal>
     {% for c in feature_cards %}
-    <div style="position:relative; color:#fff; padding:92px 30px 52px; text-align:center;">
-      <span aria-hidden="true" style="position:absolute; inset:0; z-index:0; background:{{ c.bg }}; clip-path:url(#bfCardTop);"></span>
-      <span style="position:absolute; top:38px; left:50%; transform:translate(-50%,-50%); width:74px; height:74px; border-radius:50%; background:{{ c.circle_bg }}; color:{{ c.icon_color }}; display:grid; place-items:center; box-shadow:0 8px 20px rgba(22,35,63,.25); z-index:2;">{{ c.icon|safe }}</span>
-      <h3 style="position:relative; z-index:1; font-family:var(--font-heading); font-weight:800; font-size:21px; margin:6px 0 14px;">{{ c.title }}</h3>
-      <p style="position:relative; z-index:1; font-size:16px; line-height:1.65; margin:0; color:rgba(255,255,255,.9);">{{ c.text }}</p>
+    <div class="hfeat-card" style="background-image:url('{{ c.image }}');">
+      <span class="hfeat-card__overlay" aria-hidden="true"></span>
+      <span class="hfeat-card__icon" aria-hidden="true">{{ c.icon|safe }}</span>
+      <div class="hfeat-card__foot">
+        <h3 class="hfeat-card__title">{{ c.title }}</h3>
+        <span class="hfeat-card__rule" aria-hidden="true"></span>
+      </div>
     </div>
     {% endfor %}
   </div>
