@@ -526,7 +526,9 @@ textarea.input { min-height: 90px; resize: vertical; }
 html{ scroll-behavior:smooth; }
 body{ margin:0; background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); -webkit-font-smoothing:antialiased; }
 a{ color:var(--color-accent); text-decoration:none; }
-a:hover{ color:var(--color-accent-700); }
+/* darken-on-hover applies to CONTENT links only — never to buttons/UI anchors
+   (those are <a> too and were turning dark on hover). */
+p a:hover, li a:hover, .prose a:hover, .pxl-item--description a:hover{ color:var(--color-accent-700); }
 ::selection{ background:color-mix(in srgb, var(--color-accent) 28%, transparent); }
 details::details-content{ block-size:0; overflow:hidden; transition:block-size .35s ease, content-visibility .35s allow-discrete; content-visibility:hidden; }
 details[open]::details-content{ block-size:auto; content-visibility:visible; }

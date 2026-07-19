@@ -157,27 +157,6 @@
           {{ se.title_lead }} <span>{{ se.title_highlight }}</span>
         </h2>
         <p class="service-expertise__description">{{ se.description }}</p>
-
-        <div class="service-expertise__actions">
-          <a class="btn btn-primary service-expertise__cta btn-skew" href="{{ se.cta_url }}">
-            {{ se.cta_label }}
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg>
-          </a>
-          <a class="service-phone" href="tel:{{ se.phone_tel }}"
-             aria-label="Call us for service at {{ se.phone_display }}">
-            <span class="service-phone__icon" aria-hidden="true">
-              <span class="service-phone__dot">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-              </span>
-            </span>
-            <span class="service-phone__text">
-              <small>{{ se.phone_label }}</small>
-              <strong>{{ se.phone_display }}</strong>
-            </span>
-          </a>
-        </div>
       </div>
 
     </div>
