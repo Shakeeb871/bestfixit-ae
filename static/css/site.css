@@ -274,6 +274,11 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
   --color-surface: #eae9e9;
   --color-text: #292a2b;
   --color-accent: #024d87;
+  /* coordinated brand palette (navy -> blue -> teal -> green) */
+  --pal-1: #024d87;
+  --pal-2: #2c74c0;
+  --pal-3: #1594ac;
+  --pal-4: #1f9d55;
   --color-accent-2: #2f5bb0;
   --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
 
@@ -675,7 +680,9 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     text-align:left; gap:15px; padding:clamp(22px,2.4vw,30px) clamp(18px,2.2vw,28px); }
 .hfeat-card + .hfeat-card{ border-left:1px solid #dbe2ec; }
 .hfeat-card__icon{ width:50px; height:50px; border-radius:50%; display:grid; place-items:center;
-    background:#024d87; color:#fff; flex:none; }
+    background:var(--pal-1); color:#fff; flex:none; }
+.hfeat-card:nth-child(2) .hfeat-card__icon{ background:var(--pal-2); }
+.hfeat-card:nth-child(3) .hfeat-card__icon{ background:var(--pal-4); }
 .hfeat-card__icon svg{ width:24px; height:24px; }
 .hfeat-card__body{ min-width:0; }
 .hfeat-card__title{ margin:0 0 6px; color:#000; font-family:var(--font-heading);

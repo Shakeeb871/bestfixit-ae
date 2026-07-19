@@ -35,6 +35,11 @@
   font-family:var(--font-heading,inherit); font-weight:800;
   font-size:clamp(40px,4.4vw,56px); line-height:1; color:#000; letter-spacing:.5px;
 }
+/* coordinated palette across the four stats (navy -> blue -> teal -> green) */
+.stat:nth-child(4n+1) .stat__num{ color:var(--pal-1); }
+.stat:nth-child(4n+2) .stat__num{ color:var(--pal-2); }
+.stat:nth-child(4n+3) .stat__num{ color:var(--pal-3); }
+.stat:nth-child(4n+4) .stat__num{ color:var(--pal-4); }
 .stat__label{
   margin-top:12px; font-family:var(--font-heading,inherit); font-weight:700;
   font-size:14px; color:#000;

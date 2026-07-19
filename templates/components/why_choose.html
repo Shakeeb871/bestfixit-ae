@@ -38,9 +38,12 @@
 /* circular image badge — identical to the services cards */
 .hfy-card__badge{ position:absolute; top:-45px; left:50%; transform:translateX(-50%);
   width:90px; height:90px; border-radius:50%; z-index:3; overflow:hidden;
-  background:#fdfdfd; border:2px solid #e4e9f1; display:grid; place-items:center;
+  background:#fdfdfd; border:2.5px solid var(--pal-1); display:grid; place-items:center;
   box-shadow:-2px 6px 0px 0px #4d4d4d, 0 0px 0px rgba(20,40,80,.10);
   transition:transform .24s ease; }
+.hfy-card:nth-child(2) .hfy-card__badge{ border-color:var(--pal-2); }
+.hfy-card:nth-child(3) .hfy-card__badge{ border-color:var(--pal-3); }
+.hfy-card:nth-child(4) .hfy-card__badge{ border-color:var(--pal-4); }
 .hfy-card:hover .hfy-card__badge{ transform:translateX(-50%) scale(1.03); }
 .hfy-card__badge img{ width:75%; height:75%; object-fit:contain; display:block; }
 
