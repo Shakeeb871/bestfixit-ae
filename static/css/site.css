@@ -45,6 +45,10 @@ x-dc,helmet{display:block;} helmet{display:none;}
    appears on hover via the border-draw animation. */
 .btn-skew--outline::before{ background:transparent; border:0; }
 .btn-skew--outline:hover::before{ filter:none; }
+/* colour variants — identical shape, size, typography and hover animation;
+   only the fill changes so every button stays on the same system. */
+.btn-skew--navy::before{ background:#024d87; }
+.btn-skew--green::before{ background:#1f9d55; }
 .btn-skew:focus-visible{ outline:2px solid #024d87; outline-offset:4px; }
 .btn-skew svg{ flex:none; }
 .btn-skew--arrow::after{ content:"\2192"; font-size:16px; line-height:1; margin-left:1px; }
@@ -686,13 +690,13 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 @media (max-width:760px){
   .hfeat{ margin-top:-44px; }
   .hfeat-row{ grid-template-columns:1fr; }
-  .hfeat-card + .hfeat-card{ border-left:0; border-top:1px solid #dbe2ec; }
+  .hfeat-card + .hfeat-card{ border-left:0; border-top:1px solid #e6ebf3; }
 }
 
 /* ── shared section header: eyebrow + title (left), button (right), rule ── */
 .sec-head{ margin:0 auto clamp(32px,4vw,48px); }
 .sec-head__row{ display:flex; align-items:flex-end; justify-content:space-between; gap:22px;
-    padding-bottom:16px; border-bottom:1px solid #b7bfc9; }
+    padding-bottom:16px; border-bottom:1px solid #e6ebf3; }
 .sec-head__text{ min-width:0; }
 .sec-head__eyebrow{ display:block; margin:0 0 7px; color:#2c74c0;
     font-family:var(--font-heading); font-weight:800; font-size:14px; letter-spacing:.05em; }
