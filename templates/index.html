@@ -58,16 +58,16 @@
     <!-- slide dots -->
     <div class="hero-dots" data-hero-dots></div>
   </div>
-  <!-- overlapping feature cards (photo + blue duotone) -->
+</section>
+
+<!-- feature strip: full-width light band linked to the hero -->
+<section class="hfeat" aria-label="What we do">
   <div class="hfeat-row" data-reveal>
     {% for c in feature_cards %}
-    <div class="hfeat-card" style="background-image:url('{{ c.image }}');">
-      <span class="hfeat-card__overlay" aria-hidden="true"></span>
+    <div class="hfeat-card">
       <span class="hfeat-card__icon" aria-hidden="true">{{ c.icon|safe }}</span>
-      <div class="hfeat-card__foot">
-        <h3 class="hfeat-card__title">{{ c.title }}</h3>
-        <span class="hfeat-card__rule" aria-hidden="true"></span>
-      </div>
+      <h3 class="hfeat-card__title">{{ c.title }}</h3>
+      <span class="hfeat-card__text">{{ c.text }}</span>
     </div>
     {% endfor %}
   </div>
