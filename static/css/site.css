@@ -736,7 +736,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   --accent-2:#2c74c0;
   position:relative;
   background:#fff;
-  padding:clamp(60px,9vw,100px) 0;
+  padding:clamp(60px,9vw,100px) 0 clamp(40px,5vw,60px);
   font-family:var(--font-body,inherit);
 }
 #bfc .bfc-wrap{ max-width:1180px; margin:0 auto;
@@ -770,11 +770,13 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   transition:transform .35s ease, background .25s ease; }
 #bfc .faq-q__icon svg{ width:16px; height:16px; }
 #bfc .faq-item.is-open .faq-q__icon{ transform:rotate(180deg); background:var(--accent-2); }
+/* when open, a light divider sits just under the question title */
+#bfc .faq-item.is-open .faq-q{ border-bottom:1px solid #e6eaf1; }
 /* smooth auto-height animation via grid-template-rows */
 #bfc .faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
 #bfc .faq-item.is-open .faq-a{ grid-template-rows:1fr; }
 #bfc .faq-a__inner{ overflow:hidden; }
-#bfc .faq-a p{ margin:0; padding:0 22px 20px; font-size:15px; line-height:1.65; }
+#bfc .faq-a p{ margin:0; padding:15px 22px 20px; font-size:15px; line-height:1.65; }
 
 /* ---- responsive ---- */
 @media (max-width:900px){
