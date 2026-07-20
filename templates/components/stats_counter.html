@@ -14,12 +14,11 @@
   display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(16px,1.8vw,26px);
 }
 .stat-card{
-  position:relative; background:#fff; border:1px solid #eef1f6; border-radius:16px;
+  position:relative; background:#fff; border:1px solid #00000017; border-radius:7px;
   overflow:hidden; text-align:center;
-  box-shadow:0 18px 40px -24px rgba(20,40,80,.30);
-  transition:transform .25s ease, box-shadow .25s ease;
+  transition:transform .25s ease;
 }
-.stat-card:hover{ transform:translateY(-6px); box-shadow:0 28px 52px -24px rgba(20,40,80,.36); }
+.stat-card:hover{ transform:translateY(-6px); }
 
 /* diagonally-cut coloured header */
 .stat-card__head{ position:relative; height:118px; display:grid; place-items:center; }

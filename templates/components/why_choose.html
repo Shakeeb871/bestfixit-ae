@@ -29,11 +29,9 @@
 .hfy__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px 16px; padding-top:70px; }
 .hfy-card{ position:relative; min-height:264px; box-sizing:border-box;
   display:flex; flex-direction:column; align-items:stretch;
-  padding:70px 0 18px; background:#fff; border-radius:11px; text-decoration:none; color:inherit;
-  box-shadow:0 12px 24px -12px rgba(20,40,80,.30), 0 3px 8px -4px rgba(20,40,80,.12);
-  transition:transform .24s ease, box-shadow .24s ease; }
-.hfy-card:hover{ transform:translateY(-5px);
-  box-shadow:0 18px 32px -12px rgba(20,40,80,.34), 0 5px 12px -4px rgba(20,40,80,.14); }
+  padding:70px 0 18px; background:#fff; border-radius:7px; border:1px solid #00000017;
+  text-decoration:none; color:inherit; transition:transform .24s ease; }
+.hfy-card:hover{ transform:translateY(-5px); }
 
 /* circular image badge — identical to the services cards */
 .hfy-card__badge{ position:absolute; top:-45px; left:50%; transform:translateX(-50%);
