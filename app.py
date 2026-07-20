@@ -58,6 +58,7 @@ from data.services import (
 )
 from data.stats import STATS
 from data.faq import FAQS
+from data.service_pages import SERVICE_PAGES
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -156,7 +157,10 @@ def service_detail(slug):
     # A few "other services" for cross-linking at the bottom of the page.
     others = [s for s in SERVICES if s["slug"] != slug][:4]
     return render_template(
-        "service_detail.html", service=service, others=others
+        "service_detail.html",
+        service=service,
+        others=others,
+        page=SERVICE_PAGES.get(slug),
     )
 
 
