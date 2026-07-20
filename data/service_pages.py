@@ -61,7 +61,7 @@ SERVICE_PAGES = {
                 "Here is the kind of issue our technicians fix every day."
             ),
             "rows": [
-                {"icon": "washer", "title": "Washing Machine Repair", "points": [
+                {"icon": "washer", "img": "washing machine repair.jpg", "title": "Washing Machine Repair", "points": [
                     "Will not spin, drain or switch on",
                     "Water not heating on a cycle",
                     "Loud banging or heavy vibration",
@@ -69,7 +69,7 @@ SERVICE_PAGES = {
                     "Leaking from the door or hoses",
                     "Error codes and control-board faults",
                 ]},
-                {"icon": "fridge", "title": "Fridge & Freezer Repair", "points": [
+                {"icon": "fridge", "img": "fridge repair.jpg", "title": "Fridge & Freezer Repair", "points": [
                     "Not cooling or not freezing",
                     "Gas top-up and compressor faults",
                     "Water leaking or pooling inside",
@@ -77,7 +77,7 @@ SERVICE_PAGES = {
                     "Noisy or non-stop running",
                     "Faulty thermostat, fan or sensor",
                 ]},
-                {"icon": "oven", "title": "Oven & Cooker Repair", "points": [
+                {"icon": "oven", "img": "cooking range, oven and stove repair.jpg", "title": "Oven & Cooker Repair", "points": [
                     "Dead or weak heating elements",
                     "Gas ignition not sparking",
                     "Uneven or wrong temperature",
@@ -85,7 +85,7 @@ SERVICE_PAGES = {
                     "Broken door seal or hinge",
                     "Control knob and switch faults",
                 ]},
-                {"icon": "dishwasher", "title": "Dishwasher Repair", "points": [
+                {"icon": "dishwasher", "img": "dishwasher repair.jpg", "title": "Dishwasher Repair", "points": [
                     "Not draining or not filling",
                     "Plates left dirty or filmy",
                     "Water leaking onto the floor",
@@ -93,7 +93,7 @@ SERVICE_PAGES = {
                     "Blocked spray arms or filter",
                     "Error codes and pump faults",
                 ]},
-                {"icon": "microwave", "title": "Small Appliance Repair", "points": [
+                {"icon": "microwave", "img": "small appliances repair.jpg", "title": "Small Appliance Repair", "points": [
                     "Microwaves not heating",
                     "Cooktops and hobs with dead zones",
                     "Water heaters and geysers",
@@ -101,7 +101,7 @@ SERVICE_PAGES = {
                     "Toasters, kettles and blenders",
                     "Vacuum cleaners and irons",
                 ]},
-                {"icon": "bolt", "title": "Emergency Call-Outs", "points": [
+                {"icon": "bolt", "img": "emergency repair service.jpg", "title": "Emergency Call-Outs", "points": [
                     "Water leaking from an appliance",
                     "Sparking or a burning smell",
                     "Appliance tripping the electrics",

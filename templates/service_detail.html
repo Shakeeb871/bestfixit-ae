@@ -136,26 +136,31 @@
 .svp-prose{ max-width:900px; margin:0; }
 .svp-prose p{ font-size:16px !important; line-height:1.85 !important; }
 
-/* ── card grids ── */
-.svp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,24px); }
-.svp-card{ background:#fff; border:1px solid #00000017; border-radius:7px; padding:clamp(24px,2.4vw,30px); }
-.svp-card__ic{ width:54px; height:54px; border-radius:12px; display:grid; place-items:center;
-  background:#eaf1fb; color:#024d87; margin-bottom:16px; }
-.svp-card__ic svg{ width:27px; height:27px; }
+/* ── card grids — homepage card design: circular badge on top ── */
+.svp-grid{ display:grid; grid-template-columns:repeat(3,1fr);
+  gap:clamp(56px,5.5vw,66px) clamp(16px,2vw,24px); padding-top:52px; }
+.svp-card{ position:relative; background:#fff; border:1px solid #00000017; border-radius:7px;
+  padding:64px clamp(20px,2vw,26px) clamp(22px,2.2vw,28px); text-align:center; }
+.svp-card__badge{ position:absolute; top:-45px; left:50%; transform:translateX(-50%);
+  width:90px; height:90px; border-radius:50%; overflow:hidden; z-index:2;
+  background:#fdfdfd; border:2px solid #e4e9f1; display:grid; place-items:center;
+  box-shadow:-2px 6px 0 0 #4d4d4d; }
+.svp-card__badge img{ width:100%; height:100%; object-fit:cover; display:block; }
+.svp-card__badge svg{ width:42px; height:42px; }
 .svp-card h3{ margin:0; font-family:var(--font-heading); font-weight:800; font-size:18px; color:#000; }
 /* detailed issue list */
-.svp-card__list{ list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:9px; }
+.svp-card__list{ list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:9px; text-align:left; }
 .svp-card__list li{ position:relative; padding-left:26px; font-size:14.5px !important; line-height:1.5; color:#000; }
 .svp-card__list li::before{ content:""; position:absolute; left:0; top:2px; width:17px; height:17px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f9d55' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat; }
-.svp-card p{ margin:12px 0 0; font-size:15px !important; line-height:1.6; }
+.svp-card p{ margin:12px 0 0; font-size:15px !important; line-height:1.6; text-align:left; }
 
-/* why-choose palette cycle */
+/* why-choose: palette-coloured badge icons */
 .svp-why{ grid-template-columns:repeat(4,1fr); }
-.svp-why .svp-card:nth-child(1) .svp-card__ic{ background:#eaf1fb; color:#024d87; }
-.svp-why .svp-card:nth-child(2) .svp-card__ic{ background:#e9f2fc; color:#2c74c0; }
-.svp-why .svp-card:nth-child(3) .svp-card__ic{ background:#e6f4f6; color:#1594ac; }
-.svp-why .svp-card:nth-child(4) .svp-card__ic{ background:#e8f6ee; color:#1f9d55; }
+.svp-why .svp-card:nth-child(1) .svp-card__badge svg{ color:#024d87; }
+.svp-why .svp-card:nth-child(2) .svp-card__badge svg{ color:#2c74c0; }
+.svp-why .svp-card:nth-child(3) .svp-card__badge svg{ color:#1594ac; }
+.svp-why .svp-card:nth-child(4) .svp-card__badge svg{ color:#1f9d55; }
 
 /* ── steps ── */
 .svp-steps{ grid-template-columns:repeat(4,1fr); }
@@ -304,7 +309,7 @@
       <div class="svp-grid">
         {% for a in page.appliances.rows %}
         <div class="svp-card">
-          <span class="svp-card__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{{ ICONS.get(a.icon,'')|safe }}</svg></span>
+          <span class="svp-card__badge"><img src="{{ url_for('static', filename='img/' + a.img) }}" alt="{{ a.title }} in Dubai" loading="lazy"></span>
           <h3>{{ a.title }}</h3>
           <ul class="svp-card__list">
             {% for pt in a.points %}<li>{{ pt }}</li>{% endfor %}
@@ -324,7 +329,7 @@
       <div class="svp-grid svp-why">
         {% for w in page.why.rows %}
         <div class="svp-card">
-          <span class="svp-card__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{{ ICONS.get(w.icon,'')|safe }}</svg></span>
+          <span class="svp-card__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{{ ICONS.get(w.icon,'')|safe }}</svg></span>
           <h3>{{ w.title }}</h3>
           <p>{{ w.text }}</p>
         </div>
