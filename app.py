@@ -36,7 +36,7 @@ except ImportError:
     pass
 
 from config import Config
-from data.blog import BLOG
+from data.blog import BLOG, POSTS, POST_BY_SLUG
 from data.cta import CTA_BANNER
 from data.expertise import SERVICE_EXPERTISE
 from data.process import (
@@ -153,6 +153,20 @@ def service_detail(slug):
     return render_template(
         "service_detail.html", service=service, others=others
     )
+
+
+@app.route("/blog")
+def blog():
+    return render_template("blog.html", posts=POSTS)
+
+
+@app.route("/blog/<slug>")
+def blog_post(slug):
+    post = POST_BY_SLUG.get(slug)
+    if post is None:
+        abort(404)
+    others = [p for p in POSTS if p["slug"] != slug][:3]
+    return render_template("blog_post.html", post=post, others=others)
 
 
 @app.route("/contact", methods=["GET", "POST"])

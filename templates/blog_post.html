@@ -1,0 +1,56 @@
+{% extends "site_base.html" %}
+{% block title %}{{ post.title }} — Best Fix Technical Services{% endblock %}
+{% block description %}{{ post.excerpt }}{% endblock %}
+{% block content %}
+<section class="pagehero">
+  <div class="pagehero__wrap">
+    <h1>{{ post.title }}</h1>
+    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; <a href="/blog">Blog</a></p>
+  </div>
+</section>
+
+<section class="pagewrap">
+  <style>
+    .blogx-article{ max-width:820px; margin:0 auto; }
+    .blogx-article__cover{ width:100%; aspect-ratio:16/8; object-fit:cover; border-radius:12px; display:block; margin-bottom:16px; }
+    .blogx-article__meta{ color:#2c74c0 !important; font-family:var(--font-heading); font-weight:700; font-size:13px !important; letter-spacing:.04em; text-transform:uppercase; margin:0 0 22px; }
+    .blogx-article h2{ font-size:23px; margin:30px 0 12px; }
+    .blogx-article p{ margin:0 0 16px; line-height:1.85; color:#333a44; }
+    .blogx-cta{ margin-top:32px; }
+    .blogx-more{ max-width:820px; margin:56px auto 0; padding-top:34px; border-top:1px solid #e6ebf3; }
+    .blogx-more h3{ font-size:20px; margin:0 0 20px; }
+    .blogx-more__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .blogx-more__item{ display:flex; flex-direction:column; gap:10px; text-decoration:none; }
+    .blogx-more__item img{ width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:10px; }
+    .blogx-more__item span{ color:#0f1a2b; font-family:var(--font-heading); font-weight:700; font-size:14.5px; line-height:1.35; }
+    .blogx-more__item:hover span{ color:#024d87; }
+    @media (max-width:640px){ .blogx-more__grid{ grid-template-columns:1fr; max-width:420px; } }
+  </style>
+
+  <article class="blogx-article prose">
+    <img class="blogx-article__cover" src="{{ post.image }}" alt="{{ post.image_alt }}" width="820" height="410" loading="lazy">
+    <p class="blogx-article__meta">{{ post.date }} &middot; {{ post.tags }}</p>
+    {% for s in post.sections %}
+      {% if s.heading %}<h2>{{ s.heading }}</h2>{% endif %}
+      {% for para in s.paras %}<p>{{ para }}</p>{% endfor %}
+    {% endfor %}
+    <div class="blogx-cta">
+      <a class="btn-skew btn-skew--arrow" href="/contact">Book a Service</a>
+    </div>
+  </article>
+
+  {% if others %}
+  <div class="blogx-more">
+    <h3>More From The Blog</h3>
+    <div class="blogx-more__grid">
+      {% for p in others %}
+      <a class="blogx-more__item" href="/blog/{{ p.slug }}">
+        <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
+        <span>{{ p.title }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}
