@@ -81,9 +81,18 @@ x-dc,helmet{display:block;} helmet{display:none;}
 body{ color:#000; font-family:'PT Sans',system-ui,Arial,sans-serif; }
 h1,h2,h3,h4,h5,h6{ font-family:'Poppins','Archivo',system-ui,sans-serif !important;
   color:#000 !important; font-weight:700 !important; text-transform:capitalize !important; }
+/* One body-copy standard across the whole site: PT Sans, 400, 15px / 1.6.
+   Applies to paragraphs, list items and (via the description rule below)
+   the <span>-based section and card descriptions, so every block of running
+   text is the same face and size. */
 p:not([class*="eyebrow"]):not([class*="badge"]), li{
   font-family:'PT Sans',system-ui,Arial,sans-serif !important;
-  color:#000 !important; font-weight:400 !important; font-size:16px !important; line-height:1.5 !important; }
+  color:#000 !important; font-weight:400 !important; font-size:15px !important; line-height:1.6 !important; }
+/* description spans used as body copy (they escape the p rule above) */
+.hero2__sub, .hfeat-card__text, .svc-slide__desc, .hfy-card__desc,
+.pwp__desc, .pwp__step-desc, .cta-banner__subtext{
+  font-family:'PT Sans',system-ui,Arial,sans-serif !important;
+  font-size:15px !important; line-height:1.6 !important; }
 /* keep light text on dark / coloured sections (prefixed to out-specify the
    body-copy rule above) */
 /* white text only where the background is genuinely a photo/colour block:
