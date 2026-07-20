@@ -1,6 +1,21 @@
 {% extends "site_base.html" %}
 {% block title %}Best Fix Technical Services — Maintenance Company in Dubai | AC, Plumbing, Electrical{% endblock %}
 {% block description %}Dubai's trusted maintenance company — one licensed team for AC, plumbing, electrical, painting, carpentry and home fit-outs. On time, fair pricing, guaranteed.{% endblock %}
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in faqs %}{
+      "@type": "Question",
+      "name": {{ item.q|tojson }},
+      "acceptedAnswer": { "@type": "Answer", "text": {{ item.a|tojson }} }
+    }{{ "," if not loop.last }}{% endfor %}
+  ]
+}
+</script>
+{% endblock %}
 {% block content %}
 
 <!-- ═══════════════ HERO (reference-style) ═══════════════ -->
@@ -299,91 +314,48 @@
 
 <!-- ═══════════════ SERVICE CONSULTATION ═══════════════ -->
 
-<section id="bfc" data-screen-label="Consultation">
-  <span class="bfc-shape" aria-hidden="true"></span>
+<section id="bfc" data-screen-label="FAQ" aria-labelledby="faq-heading">
   <div class="bfc-wrap">
 
-    <!-- LEFT: content -->
+    <!-- LEFT: intro -->
     <div class="bfc-left">
-      <div class="bfc-eyebrow"><i></i><span>Book A Service</span></div>
-      <h2 class="bfc-h2">Get Your All Kind Of Handy <br>Solution <span>From Us</span></h2>
-      <p class="bfc-lead">Tell us what needs fixing and choose a time that suits you — we'll confirm your appointment within the hour and send a vetted technician with the right tools and parts to sort it in a single visit. Simple booking, clear pricing, no call-backs.</p>
-      <div class="bfc-cards">
-        <div class="bfc-stat">
-          <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
-          <b>14+</b>
-          <small>Years Of Experience</small>
-        </div>
-        <div class="bfc-stat">
-          <span class="ic"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
-          <b>2,500+</b>
-          <small>Happy Customers</small>
-        </div>
-        <div class="bfc-imgcard">
-          <img src="/static/img/hero-team.webp" alt="Best Fix technician on a home service call" loading="lazy">
-        </div>
-      </div>
+      <span class="bfc-eyebrow">Frequently Asked Questions</span>
+      <h2 class="bfc-h2" id="faq-heading">Your Questions, <span>Answered</span></h2>
+      <p class="bfc-lead">Everything Dubai homeowners ask us before they book — coverage, call-out times, pricing and guarantees. Still not sure about something? Our team is one call away.</p>
+      <a class="bfc-call btn-skew btn-skew--navy btn-skew--arrow" href="tel:+971547393716">Call +971 54 739 3716</a>
     </div>
 
-    <!-- RIGHT: appointment form -->
-    <div class="bfc-formwrap">
-      <form class="bfc-form" method="POST" action="/contact" novalidate>
-        <h3>Pick The Service You Want</h3>
-        <p>Tell us what needs fixing and a convenient date — we'll confirm your appointment within the hour.</p>
-
-        <div class="bfc-field">
-          <label for="bfc-name" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your Name</label>
-          <input id="bfc-name" name="name" type="text" placeholder="Your Name" required>
+    <!-- RIGHT: FAQ accordion -->
+    <div class="bfc-faq" id="bfcFaq">
+      {% for item in faqs %}
+      <div class="faq-item{% if loop.first %} is-open{% endif %}">
+        <button type="button" class="faq-q" aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="faq-a-{{ loop.index }}">
+          <span class="faq-q__text">{{ item.q }}</span>
+          <span class="faq-q__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+          </span>
+        </button>
+        <div class="faq-a" id="faq-a-{{ loop.index }}" role="region">
+          <div class="faq-a__inner"><p>{{ item.a }}</p></div>
         </div>
-
-        <div class="bfc-row">
-          <div class="bfc-field">
-            <label for="bfc-phone" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Phone Number</label>
-            <input id="bfc-phone" name="phone" type="tel" placeholder="Phone Number" required>
-          </div>
-          <div class="bfc-field">
-            <label for="bfc-service" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Select Service</label>
-            <select id="bfc-service" name="service" required>
-              <option value="" disabled selected hidden>Select Service</option>
-              <option>AC &amp; HVAC</option>
-              <option>Plumbing</option>
-              <option>Electrical</option>
-              <option>Handyman &amp; Repairs</option>
-              <option>Painting</option>
-              <option>Carpentry</option>
-              <option>Appliance Repair</option>
-              <option>Home Renovation</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="bfc-field">
-          <label for="bfc-date" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Inspection Date</label>
-          <input id="bfc-date" name="date" type="date" placeholder="Inspection Date" required>
-        </div>
-
-        <div class="bfc-field">
-          <label for="bfc-address" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Your Address</label>
-          <input id="bfc-address" name="address" type="text" placeholder="Your Address" required>
-        </div>
-
-        <input type="hidden" name="message" value="">
-        <button type="submit" class="btn-skew btn-skew--arrow">Get Schedule</button>
-      </form>
+      </div>
+      {% endfor %}
     </div>
 
   </div>
 </section>
 <script>
 (function(){
-  var f=document.querySelector('#bfc .bfc-form'); if(!f) return;
-  var sel=f.querySelector('#bfc-service'), dt=f.querySelector('#bfc-date');
-  if(sel) sel.addEventListener('change',function(){ this.classList.toggle('filled', !!this.value); });
-  if(dt) dt.addEventListener('change',function(){ this.classList.toggle('filled', !!this.value); });
-  f.addEventListener('submit',function(){
-    var d=(dt&&dt.value)||'', a=(f.querySelector('#bfc-address')||{}).value||'';
-    var m=f.querySelector('input[name=message]');
-    if(m) m.value='Consultation request — Inspection date: '+d+' | Address: '+a;
+  var faq=document.getElementById('bfcFaq'); if(!faq) return;
+  faq.addEventListener('click',function(e){
+    var btn=e.target.closest('.faq-q'); if(!btn) return;
+    var item=btn.parentElement, open=item.classList.contains('is-open');
+    // single-open accordion: close the rest
+    faq.querySelectorAll('.faq-item.is-open').forEach(function(o){
+      if(o!==item){ o.classList.remove('is-open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); }
+    });
+    item.classList.toggle('is-open', !open);
+    btn.setAttribute('aria-expanded', String(!open));
   });
 })();
 </script>
