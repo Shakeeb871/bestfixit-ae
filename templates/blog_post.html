@@ -1,6 +1,27 @@
 {% extends "site_base.html" %}
 {% block title %}{{ post.title }} — Best Fix Technical Services{% endblock %}
 {% block description %}{{ post.excerpt }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}{{ post.image }}{% endblock %}
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ post.title|tojson }},
+  "description": {{ post.excerpt|tojson }},
+  "image": "https://{{ site_domain }}{{ post.image }}",
+  "datePublished": {{ post.iso_date|tojson }},
+  "author": { "@type": "Organization", "name": "Best Fix Technical Services" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Best Fix Technical Services",
+    "logo": { "@type": "ImageObject", "url": "https://{{ site_domain }}{{ url_for('static', filename='img/logo.webp') }}" }
+  },
+  "mainEntityOfPage": "https://{{ site_domain }}{{ request.path }}"
+}
+</script>
+{% endblock %}
 {% block content %}
 <section class="pagehero">
   <div class="pagehero__wrap">

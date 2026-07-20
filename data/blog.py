@@ -108,6 +108,15 @@ POSTS = [
     },
 ]
 
+from datetime import datetime
+
+# Derive an ISO 8601 date (for <time>/structured data) from the display date.
+for _p in POSTS:
+    try:
+        _p["iso_date"] = datetime.strptime(_p["date"], "%d %B %Y").strftime("%Y-%m-%d")
+    except ValueError:
+        _p["iso_date"] = ""
+
 POST_BY_SLUG = {p["slug"]: p for p in POSTS}
 
 

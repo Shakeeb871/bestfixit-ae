@@ -20,6 +20,7 @@ from email.message import EmailMessage
 
 from flask import (
     Flask,
+    Response,
     abort,
     flash,
     redirect,
@@ -220,6 +221,50 @@ def cookies():
 @app.route("/thank-you")
 def thank_you():
     return render_template("thank_you.html")
+
+
+@app.route("/robots.txt")
+def robots_txt():
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /thank-you",
+        f"Sitemap: https://{app.config['SITE_DOMAIN']}/sitemap.xml",
+    ]
+    return Response("\n".join(lines) + "\n", mimetype="text/plain")
+
+
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    """A simple, always-current XML sitemap of every indexable page."""
+    domain = app.config["SITE_DOMAIN"]
+    # (endpoint, priority) for static routes; dynamic ones are added below.
+    paths = [
+        ("/", "1.0"),
+        ("/about", "0.8"),
+        ("/services", "0.9"),
+        ("/blog", "0.7"),
+        ("/contact", "0.8"),
+        ("/mission", "0.4"),
+        ("/vision", "0.4"),
+        ("/privacy", "0.3"),
+        ("/terms", "0.3"),
+        ("/cookies", "0.3"),
+    ]
+    paths += [(f"/services/{s['slug']}", "0.8") for s in SERVICES]
+    paths += [(f"/blog/{p['slug']}", "0.6") for p in POSTS]
+
+    items = "".join(
+        f"<url><loc>https://{domain}{path}</loc>"
+        f"<priority>{prio}</priority></url>"
+        for path, prio in paths
+    )
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+        f"{items}</urlset>"
+    )
+    return Response(xml, mimetype="application/xml")
 
 
 @app.errorhandler(404)
