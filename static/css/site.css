@@ -88,11 +88,16 @@ h1,h2,h3,h4,h5,h6{ font-family:'Poppins','Archivo',system-ui,sans-serif !importa
 p:not([class*="eyebrow"]):not([class*="badge"]), li{
   font-family:'PT Sans',system-ui,Arial,sans-serif !important;
   color:#000 !important; font-weight:400 !important; font-size:15px !important; line-height:1.6 !important; }
-/* description spans used as body copy (they escape the p rule above) */
+/* description spans used as body copy (they escape the p rule above) —
+   same face and size everywhere. Colour is split: text over LIGHT sections
+   is the same #000 as paragraphs; text over DARK sections stays light. */
 .hero2__sub, .hfeat-card__text, .svc-slide__desc, .hfy-card__desc,
 .pwp__desc, .pwp__step-desc, .cta-banner__subtext{
   font-family:'PT Sans',system-ui,Arial,sans-serif !important;
   font-size:15px !important; line-height:1.6 !important; }
+/* body copy on light backgrounds — one shared colour (#000) */
+.hfeat-card__text, .svc-slide__desc, .hfy-card__desc,
+.pwp__desc, .pwp__step-desc{ color:#000 !important; }
 /* keep light text on dark / coloured sections (prefixed to out-specify the
    body-copy rule above) */
 /* white text only where the background is genuinely a photo/colour block:
