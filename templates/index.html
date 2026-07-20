@@ -3,33 +3,63 @@
 
 <!-- ═══════════════ HERO (reference-style) ═══════════════ -->
 
-<section id="top" data-screen-label="Hero" style="position:relative; background:#fff;">
-  <div class="hero-slider">
-    <div class="hero-slides" data-hero-track>
+<section id="top" data-screen-label="Hero" class="hero2">
+  <style>
+  .hero2{ position:relative; overflow:hidden; min-height:clamp(460px,58vh,620px); display:flex; align-items:center; }
+  .hero2__bg{ position:absolute; inset:0; z-index:0; }
+  .hero2__bg img{ width:100%; height:100%; object-fit:cover; object-position:center right; display:block; }
+  .hero2__overlay{ position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(90deg, rgba(9,20,38,.90) 0%, rgba(9,20,38,.66) 38%, rgba(9,20,38,.24) 68%, rgba(9,20,38,.05) 100%); }
+  .hero2__content{ position:relative; z-index:2; width:100%; max-width:1280px; margin:0 auto;
+    padding:clamp(40px,6vw,64px) clamp(20px,5vw,48px) clamp(96px,13vw,148px); }
+  .hero2__inner{ max-width:600px; }
+  .hero2__title{ margin:0; font-family:var(--font-heading,inherit); font-weight:800;
+    font-size:clamp(30px,4.6vw,52px) !important; line-height:1.08 !important; letter-spacing:-.01em; }
+  .hero2__title-accent{ display:block; color:#1f9d55 !important; }
+  .hero2__rule{ display:block; width:clamp(120px,16vw,200px); height:4px; margin:22px 0 0;
+    background:#2c74c0; border-radius:2px; }
+  .hero2__sub{ display:block; margin:20px 0 0; max-width:520px;
+    color:rgba(255,255,255,.86); font-size:clamp(15px,1.4vw,18px); line-height:1.65; }
+  .hero2__actions{ display:flex; align-items:center; gap:clamp(16px,2vw,26px); flex-wrap:wrap; margin-top:clamp(26px,3vw,34px); }
+  .hero2__rating{ display:inline-flex; align-items:center; gap:12px;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+    -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); border-radius:12px; padding:10px 16px; }
+  .hero2__rating-g{ display:inline-flex; }
+  .hero2__rating-g svg{ width:26px; height:26px; }
+  .hero2__rating-body{ display:flex; flex-direction:column; line-height:1.1; }
+  .hero2__rating-top{ display:inline-flex; align-items:center; gap:8px; }
+  .hero2__rating-top strong{ color:#fff; font-family:var(--font-heading,inherit); font-weight:800; font-size:18px; }
+  .hero2__rating-stars{ color:#fbbc04; font-size:14px; letter-spacing:1px; }
+  .hero2__rating-text{ color:rgba(255,255,255,.82); font-size:12px; margin-top:2px; }
+  @media (max-width:760px){
+    .hero2__overlay{ background:linear-gradient(90deg, rgba(9,20,38,.9) 0%, rgba(9,20,38,.72) 60%, rgba(9,20,38,.5) 100%); }
+    .hero2__content{ padding-bottom:clamp(80px,16vw,110px); }
+  }
+  </style>
 
-      <!-- single hero -->
-      <div class="hero-slide">
-        <div class="hero-slide__bg">
-          <img src="/static/img/maintenance-company-in-dubai.webp" onerror="this.onerror=null;this.src='/static/img/hero-team.webp';" alt="Maintenance company in Dubai — Best Fix technicians" style="width:100%; height:100%; object-fit:cover; object-position:center;">
-        </div>
-        <div aria-hidden="true" class="hero-slide__overlay"></div>
-        <div class="hero-slide__content">
-          <h1 style="font-family:var(--font-heading); font-weight:800; font-size:clamp(27px,4.4vw,46px); line-height:1.12; letter-spacing:-.01em; margin:0;">Dubai's trusted<br>maintenance company</h1>
-          <p style="font-size:clamp(15px,1.5vw,17px); line-height:1.65; max-width:620px; margin:22px auto 0; color:rgba(255,255,255,.82);">One licensed team for every fix in your home — AC, plumbing, electrical, painting and full fit-outs. On time, done right, and a spotless finish every visit.</p>
-          <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:34px;">
-            <a href="#services" class="btn-skew" style="display:inline-flex; align-items:center; gap:10px; background:#024d87; color:#fff; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#013a5e">Services <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
-            <a href="#contact" class="btn-skew btn-skew--outline" style="display:inline-flex; align-items:center; gap:10px; background:#fff; color:#000; font-family:var(--font-heading); font-weight:800; font-size:15px; padding:15px 32px; clip-path:polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);" style-hover="background:#2db34a">Contact us <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
-          </div>
-          <div class="hero-rating" aria-label="Rated 4.8 out of 5 on Google">
-            <span class="hero-rating__g" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg></span>
-            <span class="hero-rating__stars" aria-hidden="true">★★★★★</span>
-            <span class="hero-rating__meta"><strong>4.8</strong> Rated on Google</span>
-          </div>
+  <div class="hero2__bg">
+    <img src="{{ url_for('static', filename='img/best fix it mainetnance hero.webp') }}"
+         onerror="this.onerror=null;this.src='/static/img/maintenance-company-in-dubai.webp';"
+         alt="Best Fix maintenance van on the road in Dubai" fetchpriority="high">
+  </div>
+  <div class="hero2__overlay" aria-hidden="true"></div>
+
+  <div class="hero2__content">
+    <div class="hero2__inner">
+      <h1 class="hero2__title"><span class="hero2__title-accent">Dubai's Trusted</span>Maintenance Company</h1>
+      <span class="hero2__rule" aria-hidden="true"></span>
+      <span class="hero2__sub">One licensed team for every fix in your home — AC, plumbing, electrical, painting and full fit-outs. On time, done right, and a spotless finish every visit.</span>
+      <div class="hero2__actions">
+        <a class="btn-skew btn-skew--green btn-skew--arrow" href="/contact">Book a Service</a>
+        <div class="hero2__rating" aria-label="Rated 4.8 out of 5 on Google">
+          <span class="hero2__rating-g" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path></svg></span>
+          <span class="hero2__rating-body">
+            <span class="hero2__rating-top"><strong>4.8</strong><span class="hero2__rating-stars" aria-hidden="true">★★★★★</span></span>
+            <span class="hero2__rating-text">Rated on Google</span>
+          </span>
         </div>
       </div>
-
     </div>
-
   </div>
 </section>
 
