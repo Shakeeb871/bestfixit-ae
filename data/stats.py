@@ -33,8 +33,8 @@ _IC_PIN = (
 )
 
 STATS = [
-    {"number": 980, "suffix": "+", "label": "Successful Services", "icon": _IC_WRENCH},
-    {"number": 900, "suffix": "+", "label": "Satisfied Clients", "icon": _IC_HOME},
-    {"number": 250, "suffix": "+", "label": "Expert Technicians", "icon": _IC_HELMET},
+    {"number": 6500, "suffix": "+", "label": "Jobs Completed", "icon": _IC_WRENCH},
+    {"number": 2500, "suffix": "+", "label": "Happy Customers", "icon": _IC_HOME},
+    {"number": 40, "suffix": "+", "label": "Expert Technicians", "icon": _IC_HELMET},
     {"number": 120, "suffix": "+", "label": "Areas Covered", "icon": _IC_PIN},
 ]

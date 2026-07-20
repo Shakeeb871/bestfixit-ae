@@ -81,7 +81,7 @@
         if(start === null) start = ts;
         var p = Math.min((ts - start) / dur, 1);
         var eased = 1 - Math.pow(1 - p, 3);
-        c.textContent = Math.round(eased * target);
+        c.textContent = Math.round(eased * target).toLocaleString('en-US');
         if(p < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
