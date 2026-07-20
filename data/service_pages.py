@@ -52,22 +52,62 @@ SERVICE_PAGES = {
                 "cost in writing before any work starts."
             ),
         },
-        # 4 — Appliances grid
+        # 4 — Appliances grid (detailed issue points per appliance)
         "appliances": {
             "h2": "Washing Machine, Fridge, Oven and Dishwasher Repair We Handle",
+            "intro": (
+                "Whatever the fault, we repair it — not just the common ones. "
+                "Here is the kind of issue our technicians fix every day."
+            ),
             "rows": [
-                {"icon": "washer", "title": "Washing Machine Repair",
-                 "text": "Units that will not spin, drain or heat."},
-                {"icon": "fridge", "title": "Fridge & Freezer Repair",
-                 "text": "Leaks, ice build-up and no cooling."},
-                {"icon": "oven", "title": "Oven & Cooker Repair",
-                 "text": "Dead elements, faulty ignition, uneven heat."},
-                {"icon": "dishwasher", "title": "Dishwasher Repair",
-                 "text": "Machines that leave plates dirty or will not drain."},
-                {"icon": "microwave", "title": "Small Appliance Repair",
-                 "text": "Microwaves, cooktops and countertop units."},
-                {"icon": "bolt", "title": "Emergency Call-Outs",
-                 "text": "Leaking or sparking appliances that cannot wait."},
+                {"icon": "washer", "title": "Washing Machine Repair", "points": [
+                    "Will not spin, drain or switch on",
+                    "Water not heating on a cycle",
+                    "Loud banging or heavy vibration",
+                    "Door won't open or lock faults",
+                    "Leaking from the door or hoses",
+                    "Error codes and control-board faults",
+                ]},
+                {"icon": "fridge", "title": "Fridge & Freezer Repair", "points": [
+                    "Not cooling or not freezing",
+                    "Gas top-up and compressor faults",
+                    "Water leaking or pooling inside",
+                    "Excess ice or frost build-up",
+                    "Noisy or non-stop running",
+                    "Faulty thermostat, fan or sensor",
+                ]},
+                {"icon": "oven", "title": "Oven & Cooker Repair", "points": [
+                    "Dead or weak heating elements",
+                    "Gas ignition not sparking",
+                    "Uneven or wrong temperature",
+                    "Faulty thermostat or timer",
+                    "Broken door seal or hinge",
+                    "Control knob and switch faults",
+                ]},
+                {"icon": "dishwasher", "title": "Dishwasher Repair", "points": [
+                    "Not draining or not filling",
+                    "Plates left dirty or filmy",
+                    "Water leaking onto the floor",
+                    "Not heating or not drying",
+                    "Blocked spray arms or filter",
+                    "Error codes and pump faults",
+                ]},
+                {"icon": "microwave", "title": "Small Appliance Repair", "points": [
+                    "Microwaves not heating",
+                    "Cooktops and hobs with dead zones",
+                    "Water heaters and geysers",
+                    "Cooker hoods and extractor fans",
+                    "Toasters, kettles and blenders",
+                    "Vacuum cleaners and irons",
+                ]},
+                {"icon": "bolt", "title": "Emergency Call-Outs", "points": [
+                    "Water leaking from an appliance",
+                    "Sparking or a burning smell",
+                    "Appliance tripping the electrics",
+                    "Total breakdown before an event",
+                    "Same-day and after-hours visits",
+                    "Fast make-safe, then a full repair",
+                ]},
             ],
         },
         # 5 — Why choose
