@@ -28,7 +28,7 @@ SERVICE_PAGES = {
                 "technician finds the real fault and repairs it properly."
             ),
             "trust": "Rated 4.8 on Google · Two-year guarantee · Serving Dubai since 2012",
-            "image": None,  # hero photo — technician repairing an appliance
+            "image": "img/Professional Home appliances repair services.webp",
             "image_alt": "Best Fix technician repairing a home appliance in a Dubai home",
         },
         # 2 — Trust bar
