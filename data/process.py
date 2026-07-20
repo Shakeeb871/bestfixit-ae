@@ -7,9 +7,13 @@ template — never raw markup, so nothing here is rendered unescaped.
 """
 
 # Small, configurable header copy for the section.
-PROCESS_EYEBROW_PRIMARY = "Quality Handyman"
-PROCESS_EYEBROW_SECONDARY = "Solution"
-PROCESS_TITLE = "Easy Quick Following Steps"
+PROCESS_EYEBROW_PRIMARY = "Our Working Process"
+PROCESS_EYEBROW_SECONDARY = ""
+PROCESS_TITLE = "Four steps. One trusted team."
+PROCESS_DESC = (
+    "Every job — from a dripping tap to a full fit-out — runs through the "
+    "same tidy, honest process."
+)
 
 PROCESS_STEPS = [
     {
@@ -41,7 +45,7 @@ PROCESS_STEPS = [
     },
     {
         "number": "04",
-        "title": "Handover Clients",
+        "title": "Handover",
         "description": (
             "We test everything, tidy up, and hand back a job done right "
             "the first time — guaranteed."

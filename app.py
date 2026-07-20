@@ -40,6 +40,7 @@ from data.blog import BLOG, POSTS, POST_BY_SLUG
 from data.cta import CTA_BANNER
 from data.expertise import SERVICE_EXPERTISE
 from data.process import (
+    PROCESS_DESC,
     PROCESS_EYEBROW_PRIMARY,
     PROCESS_EYEBROW_SECONDARY,
     PROCESS_STEPS,
@@ -98,6 +99,7 @@ def inject_globals():
         "process_eyebrow_primary": PROCESS_EYEBROW_PRIMARY,
         "process_eyebrow_secondary": PROCESS_EYEBROW_SECONDARY,
         "process_title": PROCESS_TITLE,
+        "process_desc": PROCESS_DESC,
         "cta_badge": CTA_BANNER["badge"],
         "cta_eyebrow": CTA_BANNER["eyebrow"],
         "cta_title": CTA_BANNER["title"],

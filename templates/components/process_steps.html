@@ -1,132 +1,78 @@
 {#
-  Working-process section — "Easy Quick Following Steps".
-  Reusable component: drives four (or more) step cards from `process_steps`.
-  Colours come from the site theme variables, not the reference screenshot.
-  Icons are an allow-list mapping (key -> predefined inline SVG); no raw
-  markup is ever rendered from data.
+  Working-process section — an editorial 2×2 grid with large outlined step
+  numbers. Header: eyebrow + title on the left, a short description on the
+  right. Colours/typography follow the site theme: outlined numbers cycle the
+  coordinated palette (navy → blue → teal → green), grid lines use the site
+  divider colour. Content is data-driven from ``process_steps``.
 #}
 <style id="process-section-style">
-.process-section{
-  /* component tokens derived from the site theme (overridable) */
-  --ps-surface:#ffffff;
-  --ps-section-bg:#ffffff;
-  --ps-text:#303236;
-  --ps-muted:#292a2b;
-  --ps-accent:var(--color-accent,#024d87);
-  --ps-accent-2:#2c74c0;
-  --ps-icon-bg:#eaf1f9;
-  --ps-shadow:rgba(2,77,135,.16);
+.pwp{ background:#fff; padding:clamp(52px,7vw,84px) 0; font-family:var(--font-body,inherit); }
+.pwp__container{ max-width:1120px; margin:0 auto; padding:0 clamp(20px,4vw,40px); }
 
-  position:relative; isolation:isolate; overflow:hidden;
-  background:var(--ps-section-bg);
-  padding:clamp(48px,7vw,66px) 0 clamp(52px,7vw,68px);
-  font-family:var(--font-body,inherit);
-}
-/* very subtle depth only — no prominent shapes */
-.process-section__bg{
-  position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(ellipse 60% 55% at 50% 18%,
-    rgba(2,77,135,.06), transparent 70%);
-}
-.process-section__container{
-  position:relative; z-index:1;
-  max-width:1100px; margin:0 auto;
-  padding:0 clamp(20px,4vw,30px);
-}
-.process-section__header{ text-align:center; }
-.process-section__eyebrow{
-  display:inline-flex; align-items:center; gap:5px; margin:0 0 24px;
-}
-.process-section__eyebrow b{
-  display:inline-block; padding:4px 8px; border-radius:3px;
-  background:var(--ps-accent); color:#fff;
-  font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-}
-.process-section__eyebrow span{
-  font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--ps-accent);
-}
-.process-section__title{
-  margin:0; color:var(--ps-text);
-  font-family:var(--font-heading,inherit);
-  font-weight:800; font-size:clamp(28px,3.4vw,40px); line-height:1.2;
-  max-width:760px; margin-inline:auto;
-}
+/* ── header: title left, description right ── */
+.pwp__head{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:clamp(24px,4vw,60px);
+  align-items:end; margin-bottom:clamp(30px,4vw,46px); }
+.pwp__eyebrow{ display:block; margin:0 0 14px; color:#2c74c0; font-family:var(--font-heading,inherit);
+  font-weight:800; font-size:13px; letter-spacing:.18em; text-transform:uppercase; }
+.pwp__title{ margin:0; color:#0f1a2b !important; font-family:var(--font-heading,inherit);
+  font-weight:800; font-size:clamp(26px,3.3vw,42px) !important; line-height:1.12 !important; max-width:420px; }
+.pwp__desc{ display:block; margin:0 0 6px; color:#5a616b; font-size:clamp(15px,1.2vw,17px);
+  line-height:1.6; text-align:right; max-width:460px; justify-self:end; }
 
-.process-section__grid{
-  list-style:none; margin:44px 0 0; padding:0;
-  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px;
-}
+/* ── 2×2 grid with hairline dividers ── */
+.pwp__grid{ display:grid; grid-template-columns:1fr 1fr;
+  border:1px solid #979898; border-radius:14px; overflow:hidden; }
+.pwp__step{ display:flex; gap:clamp(16px,1.8vw,26px); align-items:flex-start;
+  padding:clamp(26px,3vw,40px); }
+.pwp__step:nth-child(odd){ border-right:1px solid #979898; }
+.pwp__step:nth-child(-n+2){ border-bottom:1px solid #979898; }
 
-/* ---- solid colour step cards (theme progression: navy -> blue -> teal -> green) ---- */
-.process-card{ position:relative; overflow:hidden; border-radius:16px;
-  min-height:252px; box-sizing:border-box; padding:30px 26px 40px; color:#fff;
-  display:flex; flex-direction:column; align-items:flex-start; text-align:left;
-  transition:transform .25s ease, box-shadow .25s ease;
-  box-shadow:0 16px 30px -16px rgba(20,40,80,.35); }
-.process-card:nth-child(4n+1){ background:#024d87; }
-.process-card:nth-child(4n+2){ background:#2c74c0; }
-.process-card:nth-child(4n+3){ background:#1594ac; }
-.process-card:nth-child(4n+4){ background:#1f9d55; }
-.process-card:hover{ transform:translateY(-6px); box-shadow:0 24px 44px -16px rgba(20,40,80,.45); }
-/* perforated ticks along the bottom edge */
-.process-card::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:12px;
-  background:repeating-linear-gradient(90deg, rgba(255,255,255,.30) 0 3px, transparent 3px 9px); }
-.process-card__num{ font-family:var(--font-heading,inherit); font-weight:800;
-  font-size:40px; line-height:1; margin-bottom:14px; color:#fff; }
-.process-card__title{ margin:0 0 10px; color:#fff !important;
-  font-family:var(--font-heading,inherit); font-weight:800; font-size:20px; line-height:1.22; }
-.process-card__description{ display:block; margin:0; color:rgba(255,255,255,.92);
-  font-size:14px; line-height:1.6; }
-@media (prefers-reduced-motion:reduce){
-  .process-card{ transition:none; }
-  .process-card:hover{ transform:none; }
-}
+.pwp__num{ flex:none; font-family:var(--font-heading,inherit); font-weight:800;
+  font-size:clamp(42px,4.6vw,62px); line-height:.9;
+  color:transparent; -webkit-text-stroke:2px #024d87; }
+.pwp__step:nth-child(1) .pwp__num{ -webkit-text-stroke-color:#024d87; }
+.pwp__step:nth-child(2) .pwp__num{ -webkit-text-stroke-color:#2c74c0; }
+.pwp__step:nth-child(3) .pwp__num{ -webkit-text-stroke-color:#1594ac; }
+.pwp__step:nth-child(4) .pwp__num{ -webkit-text-stroke-color:#1f9d55; }
+.pwp__body{ min-width:0; padding-top:5px; }
+.pwp__step-title{ margin:0 0 9px; color:#0f1a2b !important; font-family:var(--font-heading,inherit);
+  font-weight:800; font-size:clamp(17px,1.5vw,20px); line-height:1.25; }
+.pwp__step-desc{ display:block; margin:0; color:#5a616b; font-size:14.5px; line-height:1.6; }
 
-/* ---- tablet: 2 x 2 ---- */
-@media (max-width:1024px){
-  .process-section__grid{ grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:20px; max-width:600px; margin-inline:auto; }
+/* ── responsive ── */
+@media (max-width:820px){
+  .pwp__head{ grid-template-columns:1fr; gap:14px; align-items:start; }
+  .pwp__desc{ text-align:left; justify-self:start; }
 }
-/* ---- mobile: single column ---- */
 @media (max-width:560px){
-  .process-section{ padding:44px 0 50px; }
-  .process-section__container{ padding:0 20px; }
-  .process-section__grid{ grid-template-columns:1fr; gap:16px; max-width:360px; }
-  .process-section__bg{ display:none; }
+  .pwp__grid{ grid-template-columns:1fr; }
+  .pwp__step{ border-right:0 !important; border-bottom:0; }
+  .pwp__step:not(:last-child){ border-bottom:1px solid #979898; }
 }
 </style>
 
-{% set PS_ICONS = {
-  'clipboard': '<rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path>',
-  'search': '<circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path><path d="M11 8v3l2 1"></path>',
-  'gear': '<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>',
-  'package': '<path d="M16.5 9.4 7.55 4.24"></path><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path>'
-} %}
+<section class="pwp" aria-labelledby="process-heading">
+  <div class="pwp__container">
 
-<section class="process-section" aria-labelledby="process-heading">
-  <div class="process-section__bg" aria-hidden="true"></div>
-  <div class="process-section__container">
-
-    <div class="sec-head">
-      <div class="sec-head__row">
-        <div class="sec-head__text">
-          <span class="sec-head__eyebrow">Our Process</span>
-          <h2 id="process-heading" class="sec-head__title">{{ process_title }}</h2>
-        </div>
-        <a class="sec-head__btn btn-skew" href="/contact">Get Started</a>
+    <div class="pwp__head">
+      <div class="pwp__head-left">
+        <span class="pwp__eyebrow">{{ process_eyebrow_primary }}</span>
+        <h2 id="process-heading" class="pwp__title">{{ process_title }}</h2>
       </div>
+      <span class="pwp__desc">{{ process_desc }}</span>
     </div>
 
-    <ol class="process-section__grid">
+    <div class="pwp__grid">
       {% for step in process_steps %}
-      <li class="process-card">
-        <span class="process-card__num" aria-hidden="true">{{ '%02d' % loop.index }}</span>
-        <h3 class="process-card__title">{{ step.title }}</h3>
-        <span class="process-card__description">{{ step.description }}</span>
-      </li>
+      <div class="pwp__step">
+        <span class="pwp__num" aria-hidden="true">{{ '%02d' % loop.index }}</span>
+        <div class="pwp__body">
+          <h3 class="pwp__step-title">{{ step.title }}</h3>
+          <span class="pwp__step-desc">{{ step.description }}</span>
+        </div>
+      </div>
       {% endfor %}
-    </ol>
+    </div>
 
   </div>
 </section>
