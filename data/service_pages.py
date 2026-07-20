@@ -21,7 +21,8 @@ SERVICE_PAGES = {
         "breadcrumb": "Home Appliances Repair",
         # 1 — Hero
         "hero": {
-            "h1": "Home Appliance Repair in Dubai, Fixed Right the First Time",
+            "h1_accent": "Home Appliance Repair",
+            "h1": "In Dubai, Fixed Right the First Time",
             "sub": (
                 "When a fridge stops cooling or a washing machine floods the "
                 "floor, you want one call that ends it. A licensed Best Fix "

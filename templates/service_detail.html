@@ -98,10 +98,13 @@
 .svp-hero__content{ position:relative; z-index:2; width:100%; max-width:1180px; margin:0 auto;
   padding:clamp(40px,5vw,60px) clamp(20px,5vw,48px); }
 .svp-hero__inner{ max-width:640px; }
-.svp-hero__crumbs{ margin:0 0 16px; font-size:13px; color:rgba(255,255,255,.72); }
-.svp-hero__crumbs a{ color:#fff; font-weight:600; text-decoration:none; }
 .svp-hero h1{ margin:0; color:#fff !important; font-family:var(--font-heading); font-weight:800;
-  font-size:clamp(30px,4vw,48px) !important; line-height:1.1 !important; }
+  font-size:clamp(30px,4vw,48px) !important; line-height:1.1 !important; letter-spacing:-.01em; }
+.svp-hero__accent{ display:block; color:#1f9d55 !important; }
+.svp-hero__rule{ display:block; width:clamp(120px,16vw,200px); height:4px; margin:22px 0 0;
+  background:#2c74c0; border-radius:2px; }
+.svp-hero__crumbs{ margin:26px 0 0; font-size:13px; color:rgba(255,255,255,.72); }
+.svp-hero__crumbs a{ color:#fff; font-weight:600; text-decoration:none; }
 .svp-hero__sub{ display:block; margin:20px 0 0; max-width:560px; color:rgba(255,255,255,.88) !important;
   font-size:16px !important; line-height:1.7 !important; }
 .svp-hero__btns{ display:flex; flex-wrap:wrap; gap:16px; margin-top:30px; }
@@ -256,14 +259,15 @@
     <div class="svp-hero__overlay" aria-hidden="true"></div>
     <div class="svp-hero__content">
       <div class="svp-hero__inner">
-        <div class="svp-hero__crumbs"><a href="/">Home</a> &middot; <a href="/services">Services</a> &middot; {{ page.breadcrumb }}</div>
-        <h1>{{ page.hero.h1 }}</h1>
+        <h1>{% if page.hero.h1_accent %}<span class="svp-hero__accent">{{ page.hero.h1_accent }}</span> {% endif %}{{ page.hero.h1 }}</h1>
+        <span class="svp-hero__rule" aria-hidden="true"></span>
         <span class="svp-hero__sub">{{ page.hero.sub }}</span>
         <div class="svp-hero__btns">
           <a class="btn-skew btn-skew--green btn-skew--arrow" href="/contact">Book a Repair</a>
           <a class="btn-skew" href="tel:+971547393716">Call +971 54 739 3716</a>
         </div>
         <span class="svp-hero__trust">{{ page.hero.trust }}</span>
+        <div class="svp-hero__crumbs"><a href="/">Home</a> &middot; <a href="/services">Services</a> &middot; {{ page.breadcrumb }}</div>
       </div>
     </div>
   </section>
