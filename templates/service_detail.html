@@ -88,9 +88,22 @@
 <style>
 .svp{ font-family:var(--font-body,inherit); color:#000; }
 .svp .wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,48px); }
-.svp .eyebrow{ display:block; margin:0 0 12px; color:#2c74c0; font-family:var(--font-heading);
-  font-weight:800; font-size:13px; letter-spacing:.18em; text-transform:uppercase; }
+.svp .eyebrow{ display:inline-block; margin:0 0 14px; padding:7px 16px; background:#024d87;
+  color:#fff !important; border-radius:30px; font-family:var(--font-heading); font-weight:800;
+  font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
 .svp p{ font-size:15.5px !important; line-height:1.75 !important; }
+
+/* image-space placeholder (real photo dropped in later) */
+.svp-ph{ border-radius:12px; border:1.5px dashed #b7c3d6;
+  background:linear-gradient(135deg,#eef3f9,#dbe6f4); display:grid; place-items:center;
+  color:#6b7688; text-align:center; min-height:100%; }
+.svp-ph svg{ width:42px; height:42px; opacity:.5; }
+.svp-ph span{ display:block; margin-top:8px; font-size:12.5px; letter-spacing:.03em; }
+/* text + image-space two-column layout */
+.svp-textimg{ display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(28px,4vw,56px); align-items:center; }
+.svp-textimg--rev .svp-textimg__media{ order:2; }
+.svp-textimg__media{ align-self:stretch; }
+.svp-textimg .svp-ph{ aspect-ratio:4/3.4; }
 
 /* ── HERO — full-width background image, content left ── */
 .svp-hero{ position:relative; overflow:hidden; display:flex; align-items:center;
@@ -117,8 +130,9 @@
 
 /* ── section shell + header ── */
 .svp-sec{ padding:clamp(40px,4.6vw,60px) 0; background:#fff; }
+.svp-sec--tint{ background:#eef3f9; }
 .svp-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
-  padding-bottom:16px; border-bottom:1px solid #979898; margin-bottom:clamp(26px,3.2vw,38px); }
+  padding-bottom:16px; border-bottom:2px solid #024d87; margin-bottom:clamp(26px,3.2vw,38px); }
 .svp-head__text{ min-width:0; }
 .svp-head h2{ margin:0; font-family:var(--font-heading); font-weight:800;
   font-size:clamp(24px,2.8vw,34px) !important; line-height:1.18 !important; color:#000; max-width:760px; }
@@ -151,33 +165,40 @@
   gap:clamp(56px,5.5vw,66px) clamp(16px,2vw,22px); padding-top:52px; }
 .svp-card{ position:relative; background:#fff; border:1px solid #00000017; border-radius:7px;
   padding:60px clamp(18px,1.8vw,24px) clamp(22px,2.2vw,26px); text-align:center; }
-.svp-card__badge{ position:absolute; top:-45px; left:50%; transform:translateX(-50%);
-  width:90px; height:90px; border-radius:50%; overflow:hidden; z-index:2;
-  background:#fdfdfd; border:2px solid #e4e9f1; display:grid; place-items:center; box-shadow:-2px 6px 0 0 #4d4d4d; }
-.svp-card__badge svg{ width:40px; height:40px; }
+.svp-card__badge{ position:absolute; top:-42px; left:50%; transform:translateX(-50%);
+  width:84px; height:84px; border-radius:50%; overflow:hidden; z-index:2;
+  display:grid; place-items:center; background:#024d87; box-shadow:0 12px 26px -10px rgba(2,77,135,.6); }
+.svp-card__badge svg{ width:38px; height:38px; color:#fff !important; }
 .svp-card h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:17px; color:#000; }
 .svp-card p{ margin:0; font-size:14px !important; line-height:1.55 !important; text-align:left; }
-.svp-why .svp-card:nth-child(7n+1) .svp-card__badge svg{ color:#024d87; }
-.svp-why .svp-card:nth-child(7n+2) .svp-card__badge svg{ color:#2c74c0; }
-.svp-why .svp-card:nth-child(7n+3) .svp-card__badge svg{ color:#1594ac; }
-.svp-why .svp-card:nth-child(7n+4) .svp-card__badge svg{ color:#1f9d55; }
-.svp-why .svp-card:nth-child(7n+5) .svp-card__badge svg{ color:#024d87; }
-.svp-why .svp-card:nth-child(7n+6) .svp-card__badge svg{ color:#2c74c0; }
-.svp-why .svp-card:nth-child(7n+7) .svp-card__badge svg{ color:#1594ac; }
+.svp-why .svp-card{ border-top:3px solid #024d87; }
+.svp-why .svp-card:nth-child(7n+2){ border-top-color:#2c74c0; } .svp-why .svp-card:nth-child(7n+2) .svp-card__badge{ background:#2c74c0; box-shadow:0 12px 26px -10px rgba(44,116,192,.6); }
+.svp-why .svp-card:nth-child(7n+3){ border-top-color:#1594ac; } .svp-why .svp-card:nth-child(7n+3) .svp-card__badge{ background:#1594ac; box-shadow:0 12px 26px -10px rgba(21,148,172,.6); }
+.svp-why .svp-card:nth-child(7n+4){ border-top-color:#1f9d55; } .svp-why .svp-card:nth-child(7n+4) .svp-card__badge{ background:#1f9d55; box-shadow:0 12px 26px -10px rgba(31,157,85,.6); }
+.svp-why .svp-card:nth-child(7n+5) .svp-card__badge{ background:#024d87; }
+.svp-why .svp-card:nth-child(7n+6){ border-top-color:#2c74c0; } .svp-why .svp-card:nth-child(7n+6) .svp-card__badge{ background:#2c74c0; }
+.svp-why .svp-card:nth-child(7n+7){ border-top-color:#1594ac; } .svp-why .svp-card:nth-child(7n+7) .svp-card__badge{ background:#1594ac; }
 
 /* ── steps ── */
 .svp-steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,24px); }
-.svp-step{ background:#fff; border:1px solid #00000017; border-radius:7px; padding:clamp(22px,2.4vw,30px); }
-.svp-step__n{ font-family:var(--font-heading); font-weight:800; font-size:38px; line-height:.9;
-  color:transparent; -webkit-text-stroke:2px #024d87; display:block; margin-bottom:14px; }
-.svp-steps .svp-step:nth-child(3n+2) .svp-step__n{ -webkit-text-stroke-color:#2c74c0; }
-.svp-steps .svp-step:nth-child(3n+3) .svp-step__n{ -webkit-text-stroke-color:#1594ac; }
+.svp-step{ position:relative; background:#fff; border:1px solid #00000017; border-radius:7px;
+  padding:clamp(22px,2.4vw,30px); }
+.svp-step__n{ display:inline-flex; align-items:center; justify-content:center; width:54px; height:54px;
+  border-radius:15px; background:#024d87; color:#fff; font-family:var(--font-heading);
+  font-weight:800; font-size:20px; margin-bottom:16px; box-shadow:0 10px 22px -10px rgba(2,77,135,.55); }
+.svp-steps .svp-step:nth-child(3n+2) .svp-step__n{ background:#2c74c0; }
+.svp-steps .svp-step:nth-child(3n+3) .svp-step__n{ background:#1594ac; }
 .svp-step h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:17px; color:#000; }
 .svp-step p{ margin:0; font-size:14.5px !important; line-height:1.55 !important; }
 
-/* ── care cards ── */
+/* ── care cards (coloured top accent) ── */
 .svp-care{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,22px); }
-.svp-carecard{ background:#fff; border:1px solid #00000017; border-radius:7px; padding:clamp(22px,2.2vw,28px); }
+.svp-carecard{ background:#fff; border:1px solid #00000017; border-top:3px solid #1594ac;
+  border-radius:7px; padding:clamp(22px,2.2vw,28px); }
+.svp-care .svp-carecard:nth-child(4n+1){ border-top-color:#024d87; }
+.svp-care .svp-carecard:nth-child(4n+2){ border-top-color:#2c74c0; }
+.svp-care .svp-carecard:nth-child(4n+3){ border-top-color:#1594ac; }
+.svp-care .svp-carecard:nth-child(4n+4){ border-top-color:#1f9d55; }
 .svp-carecard h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:16.5px; color:#000; }
 .svp-carecard p{ margin:0; font-size:14.5px !important; line-height:1.55 !important; }
 
@@ -188,8 +209,10 @@
 
 /* ── area chips ── */
 .svp-chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
-.svp-chip{ display:inline-flex; align-items:center; padding:8px 15px; border:1px solid #00000017;
-  border-radius:7px; background:#fff; font-size:14px; font-weight:600; color:#024d87; }
+.svp-chip{ display:inline-flex; align-items:center; padding:9px 16px; border:1px solid #cfe0f5;
+  border-radius:30px; background:#eaf1fb; font-size:14px; font-weight:700; color:#024d87;
+  transition:background .2s ease, color .2s ease; }
+.svp-chip:hover{ background:#024d87; color:#fff; }
 
 /* ── FAQ ── */
 .svp-faq{ max-width:900px; display:flex; flex-direction:column; gap:12px; }
@@ -267,10 +290,15 @@
   <section class="svp-sec">
     <div class="wrap">
       {{ sechead('The Approach', page.diagnosis.h2) }}
-      <div class="svp-prose">
-        {% for p in page.diagnosis.paras %}<p>{{ p }}</p>{% endfor %}
-        <p class="svp-listtitle">{{ page.diagnosis.list_title }}</p>
-        {{ checklist(page.diagnosis.list) }}
+      <div class="svp-textimg">
+        <div>
+          {% for p in page.diagnosis.paras %}<p>{{ p }}</p>{% endfor %}
+          <p class="svp-listtitle">{{ page.diagnosis.list_title }}</p>
+          {{ checklist(page.diagnosis.list, '1') }}
+        </div>
+        <div class="svp-textimg__media">
+          <div class="svp-ph"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"></path></svg><span>Image space</span></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -319,18 +347,23 @@
   <section class="svp-sec">
     <div class="wrap">
       {{ sechead('Same-Day Service', page.sameday.h2) }}
-      <div class="svp-prose">
-        <p>{{ page.sameday.para }}</p>
-        <p class="svp-listtitle">{{ page.sameday.list_title }}</p>
-        {{ checklist(page.sameday.list) }}
-        <div class="svp-note"><p>{{ page.sameday.note }}</p></div>
-        <p style="margin-top:16px; font-weight:700;">{{ page.sameday.contact }}</p>
+      <div class="svp-textimg svp-textimg--rev">
+        <div>
+          <p>{{ page.sameday.para }}</p>
+          <p class="svp-listtitle">{{ page.sameday.list_title }}</p>
+          {{ checklist(page.sameday.list, '1') }}
+          <div class="svp-note"><p>{{ page.sameday.note }}</p></div>
+          <p style="margin-top:16px; font-weight:700;">{{ page.sameday.contact }}</p>
+        </div>
+        <div class="svp-textimg__media">
+          <div class="svp-ph"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"></path></svg><span>Image space</span></div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 6. WHY CHOOSE -->
-  <section class="svp-sec">
+  <section class="svp-sec svp-sec--tint">
     <div class="wrap">
       {{ sechead('Why Best Fix', page.why.h2) }}
       <div class="svp-grid svp-why">
@@ -346,7 +379,7 @@
   </section>
 
   <!-- 7. HOW IT WORKS -->
-  <section class="svp-sec">
+  <section class="svp-sec svp-sec--tint">
     <div class="wrap">
       {{ sechead('The Process', page.steps.h2) }}
       <div class="svp-steps">
@@ -387,11 +420,16 @@
   <section class="svp-sec">
     <div class="wrap">
       {{ sechead('Who We Help', page.properties.h2) }}
-      <div class="svp-prose">
-        {% for p in page.properties.paras %}<p>{{ p }}</p>{% endfor %}
-        <p class="svp-listtitle">{{ page.properties.list_title }}</p>
-        {{ checklist(page.properties.list) }}
-        <div class="svp-note"><p>{{ page.properties.note }}</p></div>
+      <div class="svp-textimg">
+        <div>
+          {% for p in page.properties.paras %}<p>{{ p }}</p>{% endfor %}
+          <p class="svp-listtitle">{{ page.properties.list_title }}</p>
+          {{ checklist(page.properties.list, '1') }}
+          <div class="svp-note"><p>{{ page.properties.note }}</p></div>
+        </div>
+        <div class="svp-textimg__media">
+          <div class="svp-ph"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"></path></svg><span>Image space</span></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -410,17 +448,22 @@
   <section class="svp-sec">
     <div class="wrap">
       {{ sechead('Guidance', page.repair_replace.h2) }}
-      <div class="svp-prose">
-        {% for p in page.repair_replace.paras %}<p>{{ p }}</p>{% endfor %}
-        <p class="svp-listtitle">{{ page.repair_replace.list_title }}</p>
-        {{ checklist(page.repair_replace.list) }}
-        <div class="svp-note"><p>{{ page.repair_replace.note }}</p></div>
+      <div class="svp-textimg svp-textimg--rev">
+        <div>
+          {% for p in page.repair_replace.paras %}<p>{{ p }}</p>{% endfor %}
+          <p class="svp-listtitle">{{ page.repair_replace.list_title }}</p>
+          {{ checklist(page.repair_replace.list, '1') }}
+          <div class="svp-note"><p>{{ page.repair_replace.note }}</p></div>
+        </div>
+        <div class="svp-textimg__media">
+          <div class="svp-ph"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"></path></svg><span>Image space</span></div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- 13. CARE TIPS -->
-  <section class="svp-sec">
+  <section class="svp-sec svp-sec--tint">
     <div class="wrap">
       {{ sechead('Maintenance', page.care.h2) }}
       <div class="svp-care">
