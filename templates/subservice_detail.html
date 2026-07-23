@@ -146,19 +146,21 @@
 .ssp-areas-intro{ margin:22px 0 0 !important; font-weight:700 !important; color:#0f1a2b !important; }
 
 /* error-code table */
-/* error codes — card grid: alert icon + code badges + meaning */
-.ssp-codes{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:6px; }
-.ssp-code{ display:flex; gap:14px; background:#fff; border:1px solid #e6eef7; border-left:3px solid #1f9d55;
-  border-radius:12px; padding:16px 18px; }
-.ssp-code__ic{ flex:none; width:38px; height:38px; border-radius:10px; background:#eaf6ee; color:#1f9d55;
-  display:grid; place-items:center; }
-.ssp-code__ic svg{ width:20px; height:20px; }
-.ssp-code__body{ min-width:0; }
-.ssp-code__tags{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:9px; }
-.ssp-code__tag{ display:inline-block; padding:4px 10px; border-radius:7px; background:#024d87; color:#fff;
-  font-family:var(--font-heading); font-weight:700; font-size:12px; letter-spacing:.02em; }
-.ssp .ssp-code__mean{ margin:0; font-size:14px !important; line-height:1.5 !important; color:#1a2430 !important; }
-@media (max-width:640px){ .ssp-codes{ grid-template-columns:1fr; } }
+/* error codes — proper responsive table (numbered, scrolls on small screens) */
+.ssp-codetable-wrap{ margin-top:6px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  border:1px solid #e2e8f1; border-radius:12px; }
+.ssp-codetable{ width:100%; border-collapse:collapse; min-width:480px; }
+.ssp-codetable thead th{ text-align:left; background:#024d87; color:#fff !important;
+  font-family:var(--font-heading); font-weight:700; font-size:12.5px; letter-spacing:.04em;
+  text-transform:uppercase; padding:12px 16px; white-space:nowrap; }
+.ssp-codetable tbody td{ padding:12px 16px; border-top:1px solid #e9edf3; font-size:14.5px;
+  color:#1a2430; vertical-align:top; }
+.ssp-codetable tbody tr:nth-child(even){ background:#f6f9fc; }
+.ssp-codetable__nh{ width:52px; }
+.ssp-codetable__n{ color:#8a93a2; font-weight:700; }
+.ssp-codetable__code{ font-family:var(--font-heading); font-weight:800; color:#024d87 !important;
+  white-space:nowrap; }
+.ssp-codetable__mean{ min-width:220px; }
 
 /* note callout */
 .ssp-note{ margin:0 0 18px; padding:14px 18px; border-left:3px solid #024d87; background:#f5f8fc;
@@ -166,16 +168,19 @@
 .ssp-note p{ margin:0; font-size:14.5px !important; line-height:1.65 !important; color:#3d4550 !important; }
 
 /* FAQ */
+.ssp-faqsec .ssp-head{ padding-bottom:14px; border-bottom:1px solid #979898; }
 .ssp-faq{ display:flex; flex-direction:column; gap:12px; }
-.ssp-faq .faq-item{ background:#fff; border:1px solid #00000017; border-radius:7px; overflow:hidden; transition:border-color .25s ease; }
-.ssp-faq .faq-item.is-open{ border-color:#2c74c0; }
+/* tinted background behind every FAQ item (page is white) — kept when open */
+.ssp-faq .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:9px; overflow:hidden;
+  transition:border-color .25s ease, background .25s ease; }
+.ssp-faq .faq-item.is-open{ background:#eaf1fb; border-color:#2c74c0; }
 .ssp-faq .faq-q{ width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between;
-  gap:16px; padding:16px 20px; background:transparent; border:0; cursor:pointer; text-align:left;
+  gap:16px; padding:15px 18px; background:transparent; border:0; cursor:pointer; text-align:left;
   font-family:var(--font-heading); font-weight:700; font-size:15.5px; line-height:1.35; color:#0f1a2b; }
-.ssp-faq .faq-item.is-open .faq-q{ border-bottom:1px solid #e6eaf1; }
-.ssp-faq .faq-q__ic{ flex:none; width:28px; height:28px; border-radius:50%; display:grid; place-items:center;
+.ssp-faq .faq-item.is-open .faq-q{ border-bottom:1px solid #d5e2f2; }
+.ssp-faq .faq-q__ic{ flex:none; width:22px; height:22px; border-radius:50%; display:grid; place-items:center;
   color:#fff; background:#024d87; transition:transform .35s ease, background .25s ease; }
-.ssp-faq .faq-q__ic svg{ width:15px; height:15px; }
+.ssp-faq .faq-q__ic svg{ width:12px; height:12px; }
 .ssp-faq .faq-item.is-open .faq-q__ic{ transform:rotate(180deg); background:#2c74c0; }
 .ssp-faq .faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
 .ssp-faq .faq-item.is-open .faq-a{ grid-template-rows:1fr; }
@@ -328,22 +333,27 @@
         <section class="ssp-sec">
           {{ sechead('Error Codes', sub.codes.h2) }}
           <div class="ssp-note"><p>{{ sub.codes.intro }}</p></div>
-          <div class="ssp-codes">
-            {% for c in sub.codes.rows %}
-            <div class="ssp-code">
-              <span class="ssp-code__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></span>
-              <div class="ssp-code__body">
-                <div class="ssp-code__tags">{% for code in c.code.split(', ') %}<span class="ssp-code__tag">{{ code }}</span>{% endfor %}</div>
-                <p class="ssp-code__mean">{{ c.meaning }}</p>
-              </div>
-            </div>
-            {% endfor %}
+          <div class="ssp-codetable-wrap">
+            <table class="ssp-codetable">
+              <thead>
+                <tr><th class="ssp-codetable__nh">#</th><th>Error Code(s)</th><th>What It Indicates</th></tr>
+              </thead>
+              <tbody>
+                {% for c in sub.codes.rows %}
+                <tr>
+                  <td class="ssp-codetable__n">{{ loop.index }}</td>
+                  <td class="ssp-codetable__code">{{ c.code }}</td>
+                  <td class="ssp-codetable__mean">{{ c.meaning }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </section>
         {% endif %}
 
         <!-- FAQ -->
-        <section class="ssp-sec">
+        <section class="ssp-sec ssp-faqsec">
           {{ sechead('FAQ', sub.faq_h2) }}
           <div class="ssp-faq" id="sspFaq">
             {% for f in sub.faqs %}
@@ -391,7 +401,7 @@
               <div class="fld"><label>Your Name</label><input type="text" name="name" placeholder="e.g. Sara Ahmed" required></div>
               <div class="fld"><label>Phone</label><input type="tel" name="phone" placeholder="+971 5X XXX XXXX" required></div>
               <div class="fld"><label>Email <span style="font-weight:600;color:#9aa3b0;">(optional)</span></label><input type="email" name="email" placeholder="you@example.com"></div>
-              <input type="hidden" name="service" value="Washing Machine Repair">
+              <input type="hidden" name="service" value="{{ sub.breadcrumb }}">
               <div class="fld"><label>What's wrong?</label><textarea name="message" placeholder="e.g. Front-loader not draining, leaking from the door…"></textarea></div>
               <button type="submit" class="ssp-form__btn">Request a Callback</button>
               <p class="ssp-form__note">Same-day slots where available &middot; No obligation</p>
