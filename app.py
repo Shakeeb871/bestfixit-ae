@@ -59,6 +59,12 @@ from data.services import (
 from data.stats import STATS
 from data.faq import FAQS
 from data.service_pages import SERVICE_PAGES
+from data.subservice_pages import (
+    APPLIANCE_PARENT,
+    APPLIANCE_SERVICES,
+    SUBSERVICE_PAGES,
+    SUBSERVICE_TESTIMONIALS,
+)
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -151,6 +157,18 @@ def services():
 
 @app.route("/services/<slug>/")
 def service_detail(slug):
+    # Appliance sub-service pages (two-column layout) are matched first so they
+    # keep the clean /services/<slug>/ URL shape.
+    sub = SUBSERVICE_PAGES.get(slug)
+    if sub is not None:
+        return render_template(
+            "subservice_detail.html",
+            sub=sub,
+            appliance_parent=APPLIANCE_PARENT,
+            appliance_services=APPLIANCE_SERVICES,
+            reviews=SUBSERVICE_TESTIMONIALS,
+        )
+
     service = SERVICE_BY_SLUG.get(slug)
     if service is None:
         abort(404)
@@ -258,6 +276,7 @@ def sitemap_xml():
         ("/cookies/", "0.3"),
     ]
     paths += [(f"/services/{s['slug']}/", "0.8") for s in SERVICES]
+    paths += [(f"/services/{slug}/", "0.7") for slug in SUBSERVICE_PAGES]
     paths += [(f"/blog/{p['slug']}/", "0.6") for p in POSTS]
 
     items = "".join(

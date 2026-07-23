@@ -1,0 +1,395 @@
+{% extends "site_base.html" %}
+{% block title %}{{ sub.meta_title }}{% endblock %}
+{% block description %}{{ sub.meta_description }}{% endblock %}
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://{{ site_domain }}/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://{{ site_domain }}/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Home Appliances Repair", "item": "https://{{ site_domain }}/services/home-appliances-repair/" },
+    { "@type": "ListItem", "position": 4, "name": {{ sub.breadcrumb|tojson }}, "item": "https://{{ site_domain }}{{ request.path }}" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Washing machine repair",
+  "name": {{ sub.breadcrumb|tojson }},
+  "description": {{ sub.meta_description|tojson }},
+  "provider": { "@type": "HomeAndConstructionBusiness", "name": "Best Fix Technical Services", "telephone": "+971547393716" },
+  "areaServed": [ { "@type": "City", "name": "Dubai" }, { "@type": "Country", "name": "United Arab Emirates" } ],
+  "url": "https://{{ site_domain }}{{ request.path }}"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for f in sub.faqs %}{ "@type": "Question", "name": {{ f.q|tojson }}, "acceptedAnswer": { "@type": "Answer", "text": {{ f.a|tojson }} } }{{ "," if not loop.last }}{% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+{% block content %}
+{% macro sechead(eyebrow, title) %}
+<div class="ssp-head"><span class="eyebrow">{{ eyebrow }}</span><h2>{{ title }}</h2></div>
+{% endmacro %}
+<style>
+.ssp{ font-family:var(--font-body,inherit); color:#000; }
+.ssp .wrap{ max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,48px); }
+.ssp .eyebrow{ display:inline-block; margin:0 0 12px; padding:7px 16px; background:#024d87;
+  color:#fff !important; border-radius:30px; font-family:var(--font-heading); font-weight:800;
+  font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+.ssp p{ font-size:15.5px !important; line-height:1.75 !important; }
+
+/* ── HERO ── */
+.ssp-hero{ position:relative; overflow:hidden; display:flex; align-items:center;
+  padding:clamp(46px,5.4vw,66px) 0; min-height:clamp(320px,32vw,420px); }
+.ssp-hero__bg{ position:absolute; inset:0; z-index:0; }
+.ssp-hero__bg img{ width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
+.ssp-hero__overlay{ position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(90deg, rgba(9,20,38,.93) 0%, rgba(9,20,38,.76) 46%, rgba(9,20,38,.36) 78%, rgba(9,20,38,.12) 100%); }
+.ssp-hero__content{ position:relative; z-index:2; width:100%; max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,48px); }
+.ssp-hero__inner{ max-width:680px; }
+.ssp-hero__trustline{ display:inline-block; margin:0 0 15px; padding:7px 15px;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+  border-radius:30px; color:#fff !important; font-family:var(--font-heading); font-weight:800;
+  font-size:11.5px; letter-spacing:.13em; text-transform:uppercase; }
+.ssp-hero h1{ margin:0; color:#fff !important; font-family:var(--font-heading); font-weight:800;
+  font-size:clamp(28px,3.6vw,44px) !important; line-height:1.12 !important; letter-spacing:-.01em; }
+.ssp-hero__accent{ display:block; color:#fff !important; }
+.ssp-hero h1 small{ display:block; margin-top:6px; color:#1f9d55 !important; font-size:.62em; font-weight:800; }
+.ssp-hero__rule{ display:block; width:clamp(120px,16vw,190px); height:4px; margin:18px 0 0; background:#2c74c0; border-radius:2px; }
+.ssp-hero__sub{ display:block; margin:18px 0 0; max-width:600px; color:#fff !important; font-size:16.5px !important; font-weight:600 !important; line-height:1.6 !important; }
+.ssp-hero__crumbs{ margin:22px 0 0; font-size:13px; color:rgba(255,255,255,.72); }
+.ssp-hero__crumbs a{ color:#fff; font-weight:600; text-decoration:none; }
+
+/* ── TWO-COLUMN LAYOUT ── */
+.ssp-layout{ display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:clamp(30px,4vw,54px);
+  padding:clamp(40px,5vw,64px) 0; align-items:start; }
+.ssp-main{ min-width:0; }
+
+/* section rhythm inside the main column */
+.ssp-sec + .ssp-sec{ margin-top:clamp(38px,4.5vw,54px); }
+.ssp-head{ padding-bottom:14px; border-bottom:2px solid #024d87; margin-bottom:22px; }
+.ssp-head h2{ margin:0; font-family:var(--font-heading); font-weight:800;
+  font-size:clamp(22px,2.4vw,30px) !important; line-height:1.2 !important; color:#000; }
+.ssp-lead{ border-left:4px solid #2c74c0; padding-left:clamp(16px,2vw,24px); }
+.ssp-lead p{ font-size:clamp(15.5px,1.4vw,17px) !important; line-height:1.75 !important; color:#1a2430 !important; }
+.ssp-lead p + p{ margin-top:13px; }
+.ssp-sec > p{ margin:0 0 14px; }
+
+/* type / brand chips */
+.ssp-chips{ display:flex; flex-wrap:wrap; gap:9px; margin-top:6px; }
+.ssp-chip{ display:inline-flex; align-items:center; padding:8px 15px; border:1px solid #d3e2f4;
+  border-radius:30px; background:#eaf1fb; font-size:13.5px; font-weight:700; color:#024d87; }
+
+/* service cards */
+.ssp-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.ssp-card{ background:#fff; border:1px solid #00000017; border-top:3px solid #024d87;
+  border-radius:7px; padding:18px 18px 20px; }
+.ssp-cards .ssp-card:nth-child(4n+2){ border-top-color:#2c74c0; }
+.ssp-cards .ssp-card:nth-child(4n+3){ border-top-color:#1594ac; }
+.ssp-cards .ssp-card:nth-child(4n+4){ border-top-color:#1f9d55; }
+.ssp-card h3{ margin:0 0 7px; font-family:var(--font-heading); font-weight:800; font-size:16px; color:#000; }
+.ssp-card p{ margin:0; font-size:14px !important; line-height:1.55 !important; }
+
+/* green-tick checklist */
+.ssp-check{ list-style:none; margin:6px 0 0; padding:0; display:grid; gap:11px; }
+.ssp-check.cols2{ grid-template-columns:repeat(2,1fr); gap:11px 24px; }
+.ssp-check li{ position:relative; padding-left:28px; font-size:15px; line-height:1.5; color:#000; }
+.ssp-check li::before{ content:""; position:absolute; left:0; top:1px; width:18px; height:18px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f9d55' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat; }
+
+/* highlight band */
+.ssp-band{ background:linear-gradient(120deg,#0a1f3a,#024d87); border-radius:12px;
+  padding:clamp(24px,3vw,32px); color:#fff; }
+.ssp-band h2{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800;
+  font-size:clamp(19px,2vw,23px) !important; color:#fff !important; line-height:1.25; }
+.ssp-band p{ margin:0; color:rgba(255,255,255,.9) !important; font-size:15px !important; }
+
+/* why-choose with inline image */
+.ssp-why__grid{ display:grid; grid-template-columns:1fr; gap:22px; }
+.ssp-why__img{ width:100%; aspect-ratio:16/8; object-fit:cover; border-radius:10px; border:1px solid #00000017; display:block; }
+.ssp-why p + p{ margin-top:13px; }
+.ssp-areas-intro{ margin:22px 0 0 !important; font-weight:700 !important; color:#0f1a2b !important; }
+
+/* error-code table */
+.ssp-codes{ border:1px solid #e2e8f1; border-radius:9px; overflow:hidden; margin-top:6px; }
+.ssp-codes__row{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); }
+.ssp-codes__row + .ssp-codes__row{ border-top:1px solid #e9edf3; }
+.ssp-codes__row:nth-child(even){ background:#f6f9fc; }
+.ssp-codes__code{ padding:12px 16px; font-family:var(--font-heading); font-weight:800; color:#024d87;
+  font-size:13.5px; border-right:1px solid #e9edf3; word-break:break-word; }
+.ssp-codes__mean{ padding:12px 16px; font-size:14.5px; color:#1a2430; align-self:center; }
+
+/* note callout */
+.ssp-note{ margin:0 0 18px; padding:14px 18px; border-left:3px solid #024d87; background:#f5f8fc;
+  border-radius:0 7px 7px 0; }
+.ssp-note p{ margin:0; font-size:14.5px !important; line-height:1.65 !important; color:#3d4550 !important; }
+
+/* FAQ */
+.ssp-faq{ display:flex; flex-direction:column; gap:12px; }
+.ssp-faq .faq-item{ background:#fff; border:1px solid #00000017; border-radius:7px; overflow:hidden; transition:border-color .25s ease; }
+.ssp-faq .faq-item.is-open{ border-color:#2c74c0; }
+.ssp-faq .faq-q{ width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:16px 20px; background:transparent; border:0; cursor:pointer; text-align:left;
+  font-family:var(--font-heading); font-weight:700; font-size:15.5px; line-height:1.35; color:#0f1a2b; }
+.ssp-faq .faq-item.is-open .faq-q{ border-bottom:1px solid #e6eaf1; }
+.ssp-faq .faq-q__ic{ flex:none; width:28px; height:28px; border-radius:50%; display:grid; place-items:center;
+  color:#fff; background:#024d87; transition:transform .35s ease, background .25s ease; }
+.ssp-faq .faq-q__ic svg{ width:15px; height:15px; }
+.ssp-faq .faq-item.is-open .faq-q__ic{ transform:rotate(180deg); background:#2c74c0; }
+.ssp-faq .faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+.ssp-faq .faq-item.is-open .faq-a{ grid-template-rows:1fr; }
+.ssp-faq .faq-a__in{ overflow:hidden; }
+.ssp-faq .faq-a p{ margin:0; padding:14px 20px 18px; font-size:14.5px !important; line-height:1.65 !important; }
+
+/* ── SIDEBAR ── */
+.ssp-side{ position:sticky; top:96px; display:flex; flex-direction:column; gap:20px; }
+.ssp-widget{ background:#fff; border:1px solid #e2e8f1; border-radius:11px; overflow:hidden; }
+.ssp-widget__hd{ padding:15px 20px; background:#0f1a2b; color:#fff;
+  font-family:var(--font-heading); font-weight:800; font-size:15px; letter-spacing:.01em; }
+.ssp-widget__bd{ padding:16px 20px 20px; }
+
+/* sidebar links */
+.ssp-links{ list-style:none; margin:0; padding:0; }
+.ssp-links li + li{ border-top:1px solid #eef1f6; }
+.ssp-links a{ display:flex; align-items:center; gap:10px; padding:12px 20px; text-decoration:none;
+  color:#1a2430; font-weight:600; font-size:14.5px; transition:background .18s ease, color .18s ease; }
+.ssp-links a::before{ content:""; flex:none; width:7px; height:7px; border-radius:50%; background:#2c74c0; }
+.ssp-links a:hover{ background:#f4f8fc; color:#024d87; }
+.ssp-links a.is-active{ background:#eaf1fb; color:#024d87; font-weight:800; }
+.ssp-links a.is-active::before{ background:#1f9d55; }
+.ssp-links--parent a{ background:#024d87; color:#fff; font-weight:800; }
+.ssp-links--parent a::before{ background:#7fb4e6; }
+.ssp-links--parent a:hover{ background:#023d6c; color:#fff; }
+
+/* booking form */
+.ssp-form label{ display:block; font-size:12.5px; font-weight:700; color:#0f1a2b;
+  margin:0 0 5px; letter-spacing:.02em; }
+.ssp-form .fld + .fld{ margin-top:12px; }
+.ssp-form input, .ssp-form textarea{ width:100%; box-sizing:border-box; padding:10px 12px;
+  border:1px solid #d5deea; border-radius:7px; font-family:inherit; font-size:14px; color:#0f1a2b;
+  background:#fbfcfe; }
+.ssp-form input:focus, .ssp-form textarea:focus{ outline:none; border-color:#2c74c0; background:#fff; }
+.ssp-form textarea{ resize:vertical; min-height:78px; }
+.ssp-form__btn{ width:100%; margin-top:14px; padding:12px 16px; border:0; border-radius:8px; cursor:pointer;
+  background:#1f9d55; color:#fff; font-family:var(--font-heading); font-weight:800; font-size:14.5px;
+  letter-spacing:.02em; transition:background .2s ease; }
+.ssp-form__btn:hover{ background:#188047; }
+.ssp-form__note{ margin:11px 0 0; font-size:11.5px; line-height:1.5; color:#7a8594; text-align:center; }
+
+/* testimonials */
+.ssp-rev + .ssp-rev{ margin-top:14px; padding-top:14px; border-top:1px solid #eef1f6; }
+.ssp-rev__stars{ color:#f5a623; font-size:13px; letter-spacing:1px; }
+.ssp-rev__text{ margin:6px 0 8px !important; font-size:13.5px !important; line-height:1.6 !important; color:#333a44; }
+.ssp-rev__who{ font-family:var(--font-heading); font-weight:800; font-size:13px; color:#0f1a2b; }
+.ssp-rev__who span{ font-weight:600; color:#7a8594; }
+
+/* ── responsive ── */
+@media (max-width:1000px){
+  .ssp-layout{ grid-template-columns:1fr; }
+  .ssp-side{ position:static; }
+}
+@media (max-width:560px){
+  .ssp-cards{ grid-template-columns:1fr; }
+  .ssp-check.cols2{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce){ .ssp-faq .faq-a, .ssp-faq .faq-q__ic{ transition:none; } }
+</style>
+
+<div class="ssp">
+
+  <!-- HERO -->
+  <section class="ssp-hero">
+    <div class="ssp-hero__bg">
+      <img src="{{ url_for('static', filename=sub.hero.image) }}" alt="{{ sub.hero.image_alt }}">
+    </div>
+    <div class="ssp-hero__overlay" aria-hidden="true"></div>
+    <div class="ssp-hero__content">
+      <div class="ssp-hero__inner">
+        <span class="ssp-hero__trustline">{{ sub.hero.eyebrow }}</span>
+        <h1><span class="ssp-hero__accent">{{ sub.hero.h1_accent }}</span><small>{{ sub.hero.h1 }}</small></h1>
+        <span class="ssp-hero__rule" aria-hidden="true"></span>
+        <span class="ssp-hero__sub">{{ sub.hero.subheading }}</span>
+        <div class="ssp-hero__crumbs">
+          <a href="/">Home</a> &middot; <a href="/services/">Services</a> &middot;
+          <a href="/services/home-appliances-repair/">Home Appliances Repair</a> &middot; {{ sub.breadcrumb }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="ssp-layout">
+
+      <!-- ══════════ MAIN COLUMN ══════════ -->
+      <div class="ssp-main">
+
+        <!-- Intro -->
+        <section class="ssp-sec">
+          <div class="ssp-lead">
+            {% for p in sub.intro %}<p>{{ p }}</p>{% endfor %}
+          </div>
+        </section>
+
+        <!-- Types -->
+        <section class="ssp-sec">
+          {{ sechead('Machine Types', sub.types.h2) }}
+          <p>{{ sub.types.intro }}</p>
+          <div class="ssp-chips">{% for t in sub.types.list %}<span class="ssp-chip">{{ t }}</span>{% endfor %}</div>
+        </section>
+
+        <!-- Services we provide -->
+        <section class="ssp-sec">
+          {{ sechead('What We Repair', sub.services.h2) }}
+          <p>{{ sub.services.intro }}</p>
+          <div class="ssp-cards">
+            {% for s in sub.services.rows %}
+            <div class="ssp-card"><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <!-- Common problems -->
+        <section class="ssp-sec">
+          {{ sechead('Symptoms', sub.problems.h2) }}
+          <p>{{ sub.problems.intro }}</p>
+          <ul class="ssp-check">{% for p in sub.problems.list %}<li>{{ p }}</li>{% endfor %}</ul>
+        </section>
+
+        <!-- Band CTA -->
+        <section class="ssp-sec">
+          <div class="ssp-band">
+            <h2>{{ sub.band.title }}</h2>
+            <p>{{ sub.band.text }}</p>
+          </div>
+        </section>
+
+        <!-- Why choose -->
+        <section class="ssp-sec ssp-why">
+          {{ sechead('Why Best Fix', sub.why.h2) }}
+          <div class="ssp-why__grid">
+            <img class="ssp-why__img" src="{{ url_for('static', filename=sub.why.image) }}" alt="{{ sub.why.image_alt }}" loading="lazy">
+            <div>
+              {% for p in sub.why.paras %}<p>{{ p }}</p>{% endfor %}
+              <p class="ssp-areas-intro">{{ sub.why.areas_intro }}</p>
+              <div class="ssp-chips">{% for a in sub.why.areas %}<span class="ssp-chip">{{ a }}</span>{% endfor %}</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Brands -->
+        <section class="ssp-sec">
+          {{ sechead('Brands', sub.brands.h2) }}
+          <p>{{ sub.brands.intro }}</p>
+          <div class="ssp-chips">{% for b in sub.brands.list %}<span class="ssp-chip">{{ b }}</span>{% endfor %}</div>
+        </section>
+
+        <!-- Error codes -->
+        <section class="ssp-sec">
+          {{ sechead('Error Codes', sub.codes.h2) }}
+          <div class="ssp-note"><p>{{ sub.codes.intro }}</p></div>
+          <div class="ssp-codes">
+            {% for c in sub.codes.rows %}
+            <div class="ssp-codes__row"><div class="ssp-codes__code">{{ c.code }}</div><div class="ssp-codes__mean">{{ c.meaning }}</div></div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="ssp-sec">
+          {{ sechead('FAQ', sub.faq_h2) }}
+          <div class="ssp-faq" id="sspFaq">
+            {% for f in sub.faqs %}
+            <div class="faq-item{% if loop.first %} is-open{% endif %}">
+              <button type="button" class="faq-q" aria-expanded="{{ 'true' if loop.first else 'false' }}">
+                <span>{{ f.q }}</span>
+                <span class="faq-q__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
+              </button>
+              <div class="faq-a"><div class="faq-a__in"><p>{{ f.a }}</p></div></div>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+
+        <!-- Maintenance tips -->
+        <section class="ssp-sec">
+          {{ sechead('Maintenance', sub.tips.h2) }}
+          <p>{{ sub.tips.intro }}</p>
+          <ul class="ssp-check cols2">{% for t in sub.tips.list %}<li>{{ t }}</li>{% endfor %}</ul>
+        </section>
+
+      </div>
+
+      <!-- ══════════ SIDEBAR ══════════ -->
+      <aside class="ssp-side">
+
+        <!-- Internal links -->
+        <div class="ssp-widget">
+          <div class="ssp-widget__hd">Appliance Repair Services</div>
+          <ul class="ssp-links ssp-links--parent">
+            <li><a href="{{ appliance_parent.href }}">{{ appliance_parent.name }}</a></li>
+          </ul>
+          <ul class="ssp-links">
+            {% for s in appliance_services %}
+            <li><a href="{{ s.href }}"{% if s.href == request.path %} class="is-active" aria-current="page"{% endif %}>{{ s.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Booking form -->
+        <div class="ssp-widget">
+          <div class="ssp-widget__hd">Book a Repair</div>
+          <div class="ssp-widget__bd">
+            <form class="ssp-form" action="/contact/" method="post" novalidate>
+              <div class="fld"><label>Your Name</label><input type="text" name="name" placeholder="e.g. Sara Ahmed" required></div>
+              <div class="fld"><label>Phone</label><input type="tel" name="phone" placeholder="+971 5X XXX XXXX" required></div>
+              <div class="fld"><label>Email <span style="font-weight:600;color:#9aa3b0;">(optional)</span></label><input type="email" name="email" placeholder="you@example.com"></div>
+              <input type="hidden" name="service" value="Washing Machine Repair">
+              <div class="fld"><label>What's wrong?</label><textarea name="message" placeholder="e.g. Front-loader not draining, leaking from the door…"></textarea></div>
+              <button type="submit" class="ssp-form__btn">Request a Callback</button>
+              <p class="ssp-form__note">Same-day slots where available &middot; No obligation</p>
+            </form>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="ssp-widget">
+          <div class="ssp-widget__hd">What Customers Say</div>
+          <div class="ssp-widget__bd">
+            {% for r in reviews %}
+            <div class="ssp-rev">
+              <div class="ssp-rev__stars" aria-label="{{ r.rating }} out of 5">{{ '★' * r.rating }}</div>
+              <p class="ssp-rev__text">{{ r.text }}</p>
+              <div class="ssp-rev__who">{{ r.name }} <span>· {{ r.area }}</span></div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+</div>
+<script>
+(function(){
+  var faq=document.getElementById('sspFaq');
+  if(faq){ faq.addEventListener('click',function(e){
+    var b=e.target.closest('.faq-q'); if(!b) return;
+    var it=b.parentElement, open=it.classList.contains('is-open');
+    faq.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==it){ o.classList.remove('is-open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); }});
+    it.classList.toggle('is-open', !open); b.setAttribute('aria-expanded', String(!open));
+  });}
+})();
+</script>
+{% endblock %}
