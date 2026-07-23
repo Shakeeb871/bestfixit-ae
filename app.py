@@ -62,6 +62,7 @@ from data.service_pages import SERVICE_PAGES
 from data.subservice_pages import (
     APPLIANCE_PARENT,
     APPLIANCE_SERVICES,
+    GOOGLE_RATING,
     SERVICE_SUBLINKS,
     SUBSERVICE_PAGES,
     SUBSERVICE_TESTIMONIALS,
@@ -168,7 +169,8 @@ def service_detail(slug):
             sub=sub,
             appliance_parent=APPLIANCE_PARENT,
             appliance_services=APPLIANCE_SERVICES,
-            reviews=SUBSERVICE_TESTIMONIALS,
+            reviews=sub.get("reviews", SUBSERVICE_TESTIMONIALS),
+            google=GOOGLE_RATING,
         )
 
     service = SERVICE_BY_SLUG.get(slug)

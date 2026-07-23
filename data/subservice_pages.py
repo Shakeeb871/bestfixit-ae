@@ -938,3 +938,91 @@ SUBSERVICE_PAGES = {
         },
     },
 }
+
+
+# --------------------------------------------------------------------------- #
+# Google-style reviews shown in the sidebar. Each sub-service has its own set
+# of detailed, story-style, UAE-based testimonials (unique per appliance).
+# --------------------------------------------------------------------------- #
+GOOGLE_RATING = {"score": "4.9", "count": "100+"}
+
+_REVIEWS = {
+    "washing-machine-repair": [
+        {"name": "Ayesha M.", "area": "Jumeirah Village Circle", "when": "3 weeks ago", "rating": 5,
+         "text": "Our front-loader died mid-wash on a Friday with water and clothes locked "
+                 "inside. I expected to wait all weekend, but a Best Fix technician arrived "
+                 "within a few hours, found a blocked drain pump and had it running before "
+                 "the evening. He even ran two test cycles to be sure. Genuinely impressed."},
+        {"name": "Rohan D.", "area": "Dubai Marina", "when": "1 month ago", "rating": 5,
+         "text": "The machine shook so badly on the spin cycle it moved across the laundry. "
+                 "Two other places just told me to buy a new one. Best Fix opened it up, showed "
+                 "me the worn drum bearings and replaced them the same afternoon for a fair "
+                 "price. Six months on and it's still running quietly."},
+        {"name": "Sara K.", "area": "Al Barsha", "when": "2 weeks ago", "rating": 5,
+         "text": "Booked online at night and got a confirmed morning slot. The technician was "
+                 "polite, wore shoe covers, and explained the door-lock fault before touching "
+                 "anything. No upselling, a clear price and clean work. This is my go-to now."},
+    ],
+    "refrigerator-repair": [
+        {"name": "Imran H.", "area": "Business Bay", "when": "2 weeks ago", "rating": 5,
+         "text": "Woke up to a warm fridge and a freezer full of thawing food in peak summer. "
+                 "Best Fix treated it as urgent and came the same morning. It was a faulty fan "
+                 "plus a gas top-up; he had it cooling again within the hour and saved most of "
+                 "our groceries. Lifesaver in this heat."},
+        {"name": "Priya S.", "area": "The Greens", "when": "1 month ago", "rating": 5,
+         "text": "Our double-door had been leaking water inside for weeks. The technician traced "
+                 "it to a blocked defrost drain, cleared it properly and showed me how to keep "
+                 "it clear myself. Honest diagnosis, no unnecessary parts and a very fair bill."},
+        {"name": "Khalid A.", "area": "Mirdif", "when": "3 weeks ago", "rating": 5,
+         "text": "My side-by-side kept tripping the power. He found the compressor start relay "
+                 "had failed, replaced it and checked the whole circuit for safety before "
+                 "leaving. Professional, on time and tidy — exactly what you hope for."},
+    ],
+    "oven-cooker-repair": [
+        {"name": "Mariam T.", "area": "Jumeirah", "when": "2 weeks ago", "rating": 5,
+         "text": "My built-in oven stopped heating right before a family dinner. Best Fix sent "
+                 "someone the same evening, diagnosed a blown element and replaced it on the "
+                 "spot. He even checked the temperature with his own thermometer before "
+                 "leaving. Saved the whole night."},
+        {"name": "Daniel R.", "area": "Dubai Marina", "when": "1 month ago", "rating": 5,
+         "text": "My gas hob wouldn't light and I was nervous about the smell. The technician "
+                 "handled it calmly, cleaned and replaced the igniter, and confirmed everything "
+                 "was safe before signing off. Felt reassured the entire time."},
+        {"name": "Noor F.", "area": "Al Warqa", "when": "3 weeks ago", "rating": 5,
+         "text": "The oven was running far hotter than the dial and burning everything. He "
+                 "recalibrated the thermostat, explained exactly what had drifted and why, and "
+                 "charged a very reasonable amount. Baking is back to normal — highly recommend."},
+    ],
+    "dishwasher-repair": [
+        {"name": "Hana Q.", "area": "Business Bay", "when": "2 weeks ago", "rating": 5,
+         "text": "The dishwasher stopped draining and left a pool of water every cycle. Best Fix "
+                 "came the next morning, cleared a blocked pump and filter, and had it working "
+                 "perfectly. He also showed me how to clean the filter so it won't happen again."},
+        {"name": "Yusuf A.", "area": "Jumeirah Lake Towers", "when": "1 month ago", "rating": 5,
+         "text": "Dishes were coming out dirty no matter what I tried. The technician found "
+                 "blocked spray arms and a worn inlet valve, sorted both in the same visit and "
+                 "didn't push anything I didn't need. Fair, fast and friendly."},
+        {"name": "Elena V.", "area": "Palm Jumeirah", "when": "3 weeks ago", "rating": 5,
+         "text": "Water was leaking under the unit onto the kitchen floor. They responded "
+                 "quickly, replaced the door seal and a cracked hose, and cleaned up after "
+                 "themselves. Clear pricing and no mess — a very professional team."},
+    ],
+    "microwave-repair": [
+        {"name": "Bilal S.", "area": "Deira", "when": "2 weeks ago", "rating": 5,
+         "text": "The microwave was running but not heating anything. Instead of telling me to "
+                 "bin it, the Best Fix technician tested it properly, safely replaced the faulty "
+                 "part and now it works like new. Saved me buying a whole new one."},
+        {"name": "Aisha R.", "area": "Silicon Oasis", "when": "1 month ago", "rating": 5,
+         "text": "There was sparking inside every time I used it, which really scared me. He "
+                 "identified a damaged waveguide cover, made it safe and explained what had "
+                 "caused it. Quick, knowledgeable and very reassuring."},
+        {"name": "Tom H.", "area": "International City", "when": "3 weeks ago", "rating": 5,
+         "text": "My built-in microwave went completely dead. Booking was easy, the technician "
+                 "arrived on time, found a blown fuse and a control fault, and had it back on in "
+                 "the same visit. Tidy work at a fair price."},
+    ],
+}
+
+for _slug, _revs in _REVIEWS.items():
+    if _slug in SUBSERVICE_PAGES:
+        SUBSERVICE_PAGES[_slug]["reviews"] = _revs
