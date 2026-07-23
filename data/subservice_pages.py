@@ -399,7 +399,22 @@ SUBSERVICE_PAGES = {
                      "Dubai, with same-day support wherever possible:",
             "list": _BRANDS,
         },
-        "codes": None,
+        "codes": {
+            "h2": "Common Error Codes in Smart Refrigerators We Fix",
+            "intro": "Refrigerator error codes are a useful starting point, but they are not "
+                     "a complete diagnosis — the same code can mean slightly different things "
+                     "depending on the brand and model. We check the model number, service "
+                     "history, symptoms and live behaviour before recommending any repair.",
+            "rows": [
+                {"code": "1E, 5E, rS, rt, FS, Ft", "meaning": "Temperature-sensor fault"},
+                {"code": "21E, 22E, 23E, FF, rF, IF", "meaning": "Fan-motor fault (freezer, fridge or condenser)"},
+                {"code": "24E, 25E, 26E, dH", "meaning": "Defrost-system fault"},
+                {"code": "40E, 41E", "meaning": "Ice-maker fault"},
+                {"code": "84C, 85C, 86C", "meaning": "Compressor or inverter fault"},
+                {"code": "OF OF, O FF", "meaning": "Cooling-off or demo mode enabled"},
+                {"code": "CO, 88 88, PC ER", "meaning": "Communication or control-board error"},
+            ],
+        },
         "faq_h2": "Refrigerator Repair FAQs",
         "faqs": [
             {"q": "My fridge is running but not cooling. What could be wrong?",
