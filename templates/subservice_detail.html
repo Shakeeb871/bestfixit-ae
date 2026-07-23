@@ -114,31 +114,6 @@
 .ssp-check li::before{ content:""; position:absolute; left:0; top:1px; width:18px; height:18px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f9d55' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat; }
 
-/* CTA — newsletter template (dark). Text selectors are deliberately scoped
-   with `.ssp .ssp-news …` (two classes + element) so they out-specify the
-   global `p:not(...)`/`h1..h6` #000 !important rules and stay readable. */
-.ssp-news{ background:#1e1e21; border-radius:20px; padding:clamp(26px,3.4vw,44px);
-  display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,44px); align-items:center; overflow:hidden; }
-.ssp .ssp-news__label{ display:inline-block; margin:0 0 14px; color:#f5a623 !important;
-  font-family:var(--font-heading); font-weight:800; font-size:13px; letter-spacing:.14em; text-transform:uppercase; }
-.ssp .ssp-news h2{ margin:0 0 14px; color:#ffffff !important; font-family:var(--font-heading); font-weight:800;
-  font-size:clamp(23px,2.6vw,32px) !important; line-height:1.15 !important; }
-.ssp .ssp-news p{ margin:0 0 22px; color:#c7d0dd !important; font-size:15px !important;
-  line-height:1.7 !important; max-width:440px; }
-.ssp-news__form{ display:flex; max-width:460px; background:#fff; border-radius:12px; padding:6px; gap:6px; }
-.ssp-news__form input[type=email]{ flex:1; min-width:0; border:0; background:transparent; padding:12px 14px;
-  font-family:inherit; font-size:14.5px; color:#0f1a2b !important; }
-.ssp-news__form input[type=email]:focus{ outline:none; }
-.ssp-news__form button{ flex:none; border:0; border-radius:9px; background:#2c74c0; color:#fff;
-  font-family:var(--font-heading); font-weight:800; font-size:14.5px; padding:12px 26px; cursor:pointer;
-  transition:background .2s ease; }
-.ssp-news__form button:hover{ background:#245f9e; }
-.ssp-news__media{ align-self:stretch; }
-.ssp-news__media img{ width:100%; height:100%; min-height:230px; object-fit:cover; border-radius:14px; display:block; }
-@media (max-width:760px){
-  .ssp-news{ grid-template-columns:1fr; }
-  .ssp-news__media img{ min-height:180px; }
-}
 
 /* why-choose with inline image */
 .ssp-why__grid{ display:grid; grid-template-columns:1fr; gap:22px; }
@@ -289,26 +264,6 @@
           {{ sechead('Symptoms', sub.problems.h2) }}
           <p>{{ sub.problems.intro }}</p>
           <ul class="ssp-check">{% for p in sub.problems.list %}<li>{{ p }}</li>{% endfor %}</ul>
-        </section>
-
-        <!-- CTA — newsletter template -->
-        <section class="ssp-sec">
-          <div class="ssp-news">
-            <div class="ssp-news__text">
-              <span class="ssp-news__label">Newsletter</span>
-              <h2 class="ssp-news__h2">Subscribe to our newsletter for updates</h2>
-              <p class="ssp-news__desc">Get seasonal maintenance tips, service reminders and Best Fix offers straight to your inbox. No spam — just useful advice for keeping your home running smoothly.</p>
-              <form class="ssp-news__form" action="/contact/" method="post" novalidate>
-                <input type="email" name="email" placeholder="Enter mail address…" aria-label="Email address" required>
-                <input type="hidden" name="service" value="Newsletter Subscription">
-                <input type="hidden" name="message" value="Newsletter subscription request from a service page.">
-                <button type="submit">Subscribe</button>
-              </form>
-            </div>
-            <div class="ssp-news__media">
-              <img src="{{ url_for('static', filename='img/best fix it mainetnance fixerman.webp') }}" alt="Best Fix maintenance service in Dubai" loading="lazy">
-            </div>
-          </div>
         </section>
 
         <!-- Why choose -->
