@@ -38,7 +38,7 @@
 {% endblock %}
 {% block content %}
 {% macro sechead(eyebrow, title) %}
-<div class="ssp-head"><span class="eyebrow">{{ eyebrow }}</span><h2>{{ title }}</h2></div>
+<div class="ssp-head"><h2>{{ title }}</h2></div>
 {% endmacro %}
 <style>
 .ssp{ font-family:var(--font-body,inherit); color:#000; }
@@ -75,9 +75,10 @@
   padding:clamp(40px,5vw,64px) 0; align-items:start; }
 .ssp-main{ min-width:0; }
 
-/* section rhythm inside the main column */
-.ssp-sec + .ssp-sec{ margin-top:clamp(38px,4.5vw,54px); }
-.ssp-head{ padding-bottom:14px; border-bottom:2px solid #024d87; margin-bottom:22px; }
+/* section rhythm — a divider BETWEEN sections (not under each heading) */
+.ssp-sec + .ssp-sec{ margin-top:clamp(34px,4vw,48px); padding-top:clamp(34px,4vw,48px);
+  border-top:1px solid #979898; }
+.ssp-head{ margin-bottom:20px; }
 .ssp-head h2{ margin:0; font-family:var(--font-heading); font-weight:800;
   font-size:clamp(22px,2.4vw,30px) !important; line-height:1.2 !important; color:#000; }
 .ssp-lead{ border-left:4px solid #2c74c0; padding-left:clamp(16px,2vw,24px); }
@@ -97,15 +98,30 @@
 .ssp-brand img{ max-width:100%; max-height:100%; object-fit:contain; }
 @media (max-width:560px){ .ssp-brands{ grid-template-columns:repeat(3,1fr); } }
 
-/* service cards */
-.ssp-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-.ssp-card{ background:#fff; border:1px solid #00000017; border-top:3px solid #024d87;
-  border-radius:7px; padding:18px 18px 20px; }
-.ssp-cards .ssp-card:nth-child(4n+2){ border-top-color:#2c74c0; }
-.ssp-cards .ssp-card:nth-child(4n+3){ border-top-color:#1594ac; }
-.ssp-cards .ssp-card:nth-child(4n+4){ border-top-color:#1f9d55; }
-.ssp-card h3{ margin:0 0 7px; font-family:var(--font-heading); font-weight:800; font-size:16px; color:#000; }
+/* service cards — soft pastel fills, no border (colours cycle across cards) */
+.ssp-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.ssp-card{ background:#f2f4f6; border:0; border-radius:14px; padding:20px 22px 22px; }
+.ssp-cards .ssp-card:nth-child(6n+1){ background:#fbfbe6; }
+.ssp-cards .ssp-card:nth-child(6n+2){ background:#fdf0f4; }
+.ssp-cards .ssp-card:nth-child(6n+3){ background:#f2f4f6; }
+.ssp-cards .ssp-card:nth-child(6n+4){ background:#eef4fb; }
+.ssp-cards .ssp-card:nth-child(6n+5){ background:#fdf3ed; }
+.ssp-cards .ssp-card:nth-child(6n+6){ background:#edf6f2; }
+.ssp-card h3{ margin:0 0 7px; font-family:var(--font-heading); font-weight:800; font-size:16px; color:#0f1a2b; }
 .ssp-card p{ margin:0; font-size:14px !important; line-height:1.55 !important; }
+
+/* problem cards — same soft pastel treatment as image reference */
+.ssp-probs{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:6px; }
+.ssp-prob{ background:#f2f4f6; border:0; border-radius:14px; padding:20px 22px;
+  font-size:14.5px; line-height:1.6; color:#0f1a2b; }
+.ssp-probs .ssp-prob:nth-child(6n+1){ background:#fbfbe6; }
+.ssp-probs .ssp-prob:nth-child(6n+2){ background:#fdf0f4; }
+.ssp-probs .ssp-prob:nth-child(6n+3){ background:#f2f4f6; }
+.ssp-probs .ssp-prob:nth-child(6n+4){ background:#eef4fb; }
+.ssp-probs .ssp-prob:nth-child(6n+5){ background:#fdf3ed; }
+.ssp-probs .ssp-prob:nth-child(6n+6){ background:#edf6f2; }
+@media (max-width:640px){ .ssp-probs{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:440px){ .ssp-probs{ grid-template-columns:1fr; } }
 
 /* green-tick checklist */
 .ssp-check{ list-style:none; margin:6px 0 0; padding:0; display:grid; gap:11px; }
@@ -216,7 +232,6 @@
     <div class="ssp-hero__overlay" aria-hidden="true"></div>
     <div class="ssp-hero__content">
       <div class="ssp-hero__inner">
-        <span class="ssp-hero__trustline">{{ sub.hero.eyebrow }}</span>
         <h1><span class="ssp-hero__accent">{{ sub.hero.h1_accent }}</span><small>{{ sub.hero.h1 }}</small></h1>
         <span class="ssp-hero__rule" aria-hidden="true"></span>
         <span class="ssp-hero__sub">{{ sub.hero.subheading }}</span>
@@ -263,7 +278,7 @@
         <section class="ssp-sec">
           {{ sechead('Symptoms', sub.problems.h2) }}
           <p>{{ sub.problems.intro }}</p>
-          <ul class="ssp-check">{% for p in sub.problems.list %}<li>{{ p }}</li>{% endfor %}</ul>
+          <div class="ssp-probs">{% for p in sub.problems.list %}<div class="ssp-prob">{{ p }}</div>{% endfor %}</div>
         </section>
 
         <!-- Why choose -->
