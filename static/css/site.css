@@ -216,7 +216,10 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
 
 
 :root {
-  --color-bg: #eef3f9;
+  /* Site standard: the page background is WHITE everywhere. Only specific
+     sections opt into a tint via their own background (e.g. .svp-sec--tint,
+     .hfeat-row). Sub-service pages stay fully white. */
+  --color-bg: #ffffff;
   --color-surface: #eae9e9;
   --color-text: #292a2b;
   --color-accent: #024d87;

@@ -90,6 +90,13 @@
 .ssp-chip{ display:inline-flex; align-items:center; padding:8px 15px; border:1px solid #d3e2f4;
   border-radius:30px; background:#eaf1fb; font-size:13.5px; font-weight:700; color:#024d87; }
 
+/* brand logo wall */
+.ssp-brands{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-top:6px; }
+.ssp-brand{ background:#fff; border:1px solid #00000017; border-radius:7px; aspect-ratio:1.7;
+  display:grid; place-items:center; padding:12px; }
+.ssp-brand img{ max-width:100%; max-height:100%; object-fit:contain; }
+@media (max-width:560px){ .ssp-brands{ grid-template-columns:repeat(3,1fr); } }
+
 /* service cards */
 .ssp-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
 .ssp-card{ background:#fff; border:1px solid #00000017; border-top:3px solid #024d87;
@@ -107,12 +114,14 @@
 .ssp-check li::before{ content:""; position:absolute; left:0; top:1px; width:18px; height:18px;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f9d55' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat; }
 
-/* highlight band */
-.ssp-band{ background:linear-gradient(120deg,#0a1f3a,#024d87); border-radius:12px;
-  padding:clamp(24px,3vw,32px); color:#fff; }
-.ssp-band h2{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800;
-  font-size:clamp(19px,2vw,23px) !important; color:#fff !important; line-height:1.25; }
-.ssp-band p{ margin:0; color:rgba(255,255,255,.9) !important; font-size:15px !important; }
+/* CTA band (dark) — text is always light for readability */
+.ssp-band{ background:linear-gradient(120deg,#0a1f3a,#024d87); border-radius:14px;
+  padding:clamp(24px,3vw,36px); }
+.ssp .ssp-band h2{ margin:0 0 10px; font-family:var(--font-heading); font-weight:800;
+  font-size:clamp(20px,2.2vw,26px) !important; color:#ffffff !important; line-height:1.22 !important; }
+/* .ssp .ssp-band p out-specifies the global `p:not(...)` #000 !important rule
+   so CTA copy stays light and readable on the dark band. */
+.ssp .ssp-band p{ margin:0; color:#eaf1fb !important; font-size:15.5px !important; line-height:1.7 !important; }
 
 /* why-choose with inline image */
 .ssp-why__grid{ display:grid; grid-template-columns:1fr; gap:22px; }
@@ -265,7 +274,7 @@
           <ul class="ssp-check">{% for p in sub.problems.list %}<li>{{ p }}</li>{% endfor %}</ul>
         </section>
 
-        <!-- Band CTA -->
+        <!-- CTA band -->
         <section class="ssp-sec">
           <div class="ssp-band">
             <h2>{{ sub.band.title }}</h2>
@@ -290,7 +299,11 @@
         <section class="ssp-sec">
           {{ sechead('Brands', sub.brands.h2) }}
           <p>{{ sub.brands.intro }}</p>
-          <div class="ssp-chips">{% for b in sub.brands.list %}<span class="ssp-chip">{{ b }}</span>{% endfor %}</div>
+          <div class="ssp-brands">
+            {% for b in sub.brands.logos %}
+            <div class="ssp-brand"><img src="{{ url_for('static', filename='img/' + b.img) }}" alt="{{ b.name }} appliance repair Dubai" loading="lazy"></div>
+            {% endfor %}
+          </div>
         </section>
 
         <!-- Error codes -->

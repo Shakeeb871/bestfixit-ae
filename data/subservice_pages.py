@@ -23,13 +23,11 @@ _AREAS = [
     "International City", "Silicon Oasis", "JVC", "JBR",
 ]
 
-# Common home-appliance brands we repair.
-_BRANDS = [
-    "Samsung", "LG", "Bosch", "Siemens", "Whirlpool", "Hoover",
-    "Electrolux", "Haier", "Beko", "Panasonic", "Hitachi", "Miele",
-    "Ariston", "Nikai", "Daewoo", "Nobel", "Super General", "Elekta",
-    "Hisense", "Kenwood", "Toshiba", "Sharp",
-]
+# Common home-appliance brands we repair — shown as logos (reusing the same
+# brand-logo set as the core appliance page for a consistent brand wall).
+from data.service_pages import _BRANDS as _BRAND_TUPLES
+
+_BRAND_LOGOS = [{"name": n, "img": "Brands/" + f} for n, f in _BRAND_TUPLES]
 
 # --------------------------------------------------------------------------- #
 # Sidebar / navigation: sub-service pages grouped under each core service.
@@ -214,7 +212,7 @@ SUBSERVICE_PAGES = {
             "h2": "Washing Machine Brands We Repair",
             "intro": "We provide repair and servicing for all major washing machine brands "
                      "in Dubai, with same-day support wherever possible:",
-            "list": _BRANDS[:20],
+            "logos": _BRAND_LOGOS,
         },
         "codes": {
             "h2": "Common Error Codes in Smart Washing Machines We Fix",
@@ -397,7 +395,7 @@ SUBSERVICE_PAGES = {
             "h2": "Refrigerator Brands We Repair",
             "intro": "We repair and service all major refrigerator and freezer brands in "
                      "Dubai, with same-day support wherever possible:",
-            "list": _BRANDS,
+            "logos": _BRAND_LOGOS,
         },
         "codes": {
             "h2": "Common Error Codes in Smart Refrigerators We Fix",
@@ -572,7 +570,7 @@ SUBSERVICE_PAGES = {
             "h2": "Oven & Cooker Brands We Repair",
             "intro": "We repair and service all major oven, cooker and hob brands in Dubai, "
                      "with same-day support wherever possible:",
-            "list": _BRANDS,
+            "logos": _BRAND_LOGOS,
         },
         "codes": None,
         "faq_h2": "Oven & Cooker Repair FAQs",
@@ -726,7 +724,7 @@ SUBSERVICE_PAGES = {
             "h2": "Dishwasher Brands We Repair",
             "intro": "We repair and service all major dishwasher brands in Dubai, with "
                      "same-day support wherever possible:",
-            "list": _BRANDS[:20],
+            "logos": _BRAND_LOGOS,
         },
         "codes": {
             "h2": "Common Dishwasher Error Codes We Fix",
@@ -898,7 +896,7 @@ SUBSERVICE_PAGES = {
             "h2": "Microwave Brands We Repair",
             "intro": "We repair and service all major microwave brands in Dubai, with "
                      "same-day support wherever possible:",
-            "list": _BRANDS[:20],
+            "logos": _BRAND_LOGOS,
         },
         "codes": None,
         "faq_h2": "Microwave Repair FAQs",
