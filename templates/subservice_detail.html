@@ -91,6 +91,14 @@
 .ssp-chip{ display:inline-flex; align-items:center; padding:8px 15px; border:1px solid #d3e2f4;
   border-radius:30px; background:#eaf1fb; font-size:13.5px; font-weight:700; color:#024d87; }
 
+/* areas served — professional 3-column icon list (pin + name) */
+.ssp-arealist{ list-style:none; margin:14px 0 0; padding:0;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px 26px; }
+.ssp-arealist li{ display:flex; align-items:center; gap:9px; font-size:14.5px; line-height:1.4; color:#1a2430; }
+.ssp-arealist svg{ flex:none; width:17px; height:17px; color:#024d87; }
+@media (max-width:640px){ .ssp-arealist{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:420px){ .ssp-arealist{ grid-template-columns:1fr; } }
+
 /* brand logo wall */
 .ssp-brands{ display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-top:6px; }
 .ssp-brand{ background:#fff; border:1px solid #00000017; border-radius:7px; aspect-ratio:1.7;
@@ -289,7 +297,11 @@
             <div>
               {% for p in sub.why.paras %}<p>{{ p }}</p>{% endfor %}
               <p class="ssp-areas-intro">{{ sub.why.areas_intro }}</p>
-              <div class="ssp-chips">{% for a in sub.why.areas %}<span class="ssp-chip">{{ a }}</span>{% endfor %}</div>
+              <ul class="ssp-arealist">
+                {% for a in sub.why.areas %}
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>{{ a }}</span></li>
+                {% endfor %}
+              </ul>
             </div>
           </div>
         </section>
