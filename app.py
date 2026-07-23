@@ -132,24 +132,24 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/hero-demo")
+@app.route("/hero-demo/")
 def hero_demo():
     # Preview-only page (not linked from the homepage). Deploy to the
     # homepage later on request.
     return render_template("hero_demo.html")
 
 
-@app.route("/about")
+@app.route("/about/")
 def about():
     return render_template("about.html")
 
 
-@app.route("/services")
+@app.route("/services/")
 def services():
     return render_template("services.html", services=SERVICES)
 
 
-@app.route("/services/<slug>")
+@app.route("/services/<slug>/")
 def service_detail(slug):
     service = SERVICE_BY_SLUG.get(slug)
     if service is None:
@@ -164,12 +164,12 @@ def service_detail(slug):
     )
 
 
-@app.route("/blog")
+@app.route("/blog/")
 def blog():
     return render_template("blog.html", posts=POSTS)
 
 
-@app.route("/blog/<slug>")
+@app.route("/blog/<slug>/")
 def blog_post(slug):
     post = POST_BY_SLUG.get(slug)
     if post is None:
@@ -178,7 +178,7 @@ def blog_post(slug):
     return render_template("blog_post.html", post=post, others=others)
 
 
-@app.route("/contact", methods=["GET", "POST"])
+@app.route("/contact/", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
         form = {
@@ -199,32 +199,32 @@ def contact():
     return render_template("contact.html")
 
 
-@app.route("/privacy")
+@app.route("/privacy/")
 def privacy():
     return render_template("privacy.html")
 
 
-@app.route("/terms")
+@app.route("/terms/")
 def terms():
     return render_template("terms.html")
 
 
-@app.route("/mission")
+@app.route("/mission/")
 def mission():
     return render_template("mission.html")
 
 
-@app.route("/vision")
+@app.route("/vision/")
 def vision():
     return render_template("vision.html")
 
 
-@app.route("/cookies")
+@app.route("/cookies/")
 def cookies():
     return render_template("cookies.html")
 
 
-@app.route("/thank-you")
+@app.route("/thank-you/")
 def thank_you():
     return render_template("thank_you.html")
 
@@ -234,7 +234,7 @@ def robots_txt():
     lines = [
         "User-agent: *",
         "Allow: /",
-        "Disallow: /thank-you",
+        "Disallow: /thank-you/",
         f"Sitemap: https://{app.config['SITE_DOMAIN']}/sitemap.xml",
     ]
     return Response("\n".join(lines) + "\n", mimetype="text/plain")
@@ -247,18 +247,18 @@ def sitemap_xml():
     # (endpoint, priority) for static routes; dynamic ones are added below.
     paths = [
         ("/", "1.0"),
-        ("/about", "0.8"),
-        ("/services", "0.9"),
-        ("/blog", "0.7"),
-        ("/contact", "0.8"),
-        ("/mission", "0.4"),
-        ("/vision", "0.4"),
-        ("/privacy", "0.3"),
-        ("/terms", "0.3"),
-        ("/cookies", "0.3"),
+        ("/about/", "0.8"),
+        ("/services/", "0.9"),
+        ("/blog/", "0.7"),
+        ("/contact/", "0.8"),
+        ("/mission/", "0.4"),
+        ("/vision/", "0.4"),
+        ("/privacy/", "0.3"),
+        ("/terms/", "0.3"),
+        ("/cookies/", "0.3"),
     ]
-    paths += [(f"/services/{s['slug']}", "0.8") for s in SERVICES]
-    paths += [(f"/blog/{p['slug']}", "0.6") for p in POSTS]
+    paths += [(f"/services/{s['slug']}/", "0.8") for s in SERVICES]
+    paths += [(f"/blog/{p['slug']}/", "0.6") for p in POSTS]
 
     items = "".join(
         f"<url><loc>https://{domain}{path}</loc>"

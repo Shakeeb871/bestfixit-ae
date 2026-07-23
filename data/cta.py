@@ -11,7 +11,7 @@ CTA_BANNER = {
     "title": "Service You Can Trust!",
     "subtext": "Let us know how we can help you today.",
     "primary_label": "Easy Online Booking",
-    "primary_url": "/contact",
+    "primary_url": "/contact/",
     "secondary_label": "Contact Us",
     "secondary_url": "#bfc",
     "background": "/static/img/cta-banner-bg.webp",

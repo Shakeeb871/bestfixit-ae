@@ -216,7 +216,7 @@
       <nav class="bfh__utility-right" aria-label="Quick links">
         <a href="/">Home</a>
         <a href="/#testimonials">Reviews</a>
-        <a href="/contact">Contact Us</a>
+        <a href="/contact/">Contact Us</a>
         <span class="bfh__utility-social">
           <a aria-label="WhatsApp" href="https://wa.me/971547393716"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.05 24l1.7-6.16a11.9 11.9 0 1 1 4.32 4.24L.05 24ZM6.4 20.1l.37.22a9.9 9.9 0 1 0-3.35-3.28l.24.38-1 3.65 3.74-.97Zm11.5-5.5c-.15-.25-.55-.4-1.15-.7s-1.35-.65-1.55-.72c-.2-.08-.35-.12-.5.12s-.57.72-.7.87c-.13.15-.26.17-.5.06a7.9 7.9 0 0 1-2.32-1.43 8.7 8.7 0 0 1-1.6-2c-.17-.3 0-.45.12-.6l.4-.47c.13-.16.17-.27.26-.45.08-.18.04-.34-.02-.47-.06-.13-.5-1.22-.7-1.67-.18-.43-.37-.37-.5-.38l-.43-.01a.83.83 0 0 0-.6.28 2.5 2.5 0 0 0-.79 1.87A4.4 4.4 0 0 0 7.9 11c.13.18 1.8 2.75 4.36 3.86.6.26 1.08.42 1.45.54.6.2 1.16.17 1.6.1.48-.07 1.48-.6 1.69-1.19.2-.58.2-1.08.15-1.18Z"></path></svg></a>
         </span>
@@ -241,7 +241,7 @@
         </a>
       </div>
 
-      <a class="bfh__schedule btn-skew btn-skew--navy" href="/contact">
+      <a class="bfh__schedule btn-skew btn-skew--navy" href="/contact/">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
         Schedule Service
       </a>
@@ -257,32 +257,32 @@
     <ul class="bfh__nav-inner">
       {% for s in all_services %}
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}">{{ nav_labels.get(s.slug, s.title) }}{{ _chevd|safe }}</a>
+        <a class="bfh__nav-link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}{{ _chevd|safe }}</a>
         <div class="bfh__dd">
           {% for p in s.points %}
-          <a class="bfh__dd-link" href="/services/{{ s.slug }}">{{ p }}</a>
+          <a class="bfh__dd-link" href="/services/{{ s.slug }}/">{{ p }}</a>
           {% endfor %}
-          <a class="bfh__dd-all" href="/services/{{ s.slug }}">View All {{ nav_labels.get(s.slug, s.title) }}{{ _arrow|safe }}</a>
+          <a class="bfh__dd-all" href="/services/{{ s.slug }}/">View All {{ nav_labels.get(s.slug, s.title) }}{{ _arrow|safe }}</a>
         </div>
       </li>
       {% endfor %}
 
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link" href="/contact">Service Areas{{ _chevd|safe }}</a>
+        <a class="bfh__nav-link" href="/contact/">Service Areas{{ _chevd|safe }}</a>
         <div class="bfh__dd">
           {% for a in service_areas %}
-          <a class="bfh__dd-link" href="/contact">{{ a }}</a>
+          <a class="bfh__dd-link" href="/contact/">{{ a }}</a>
           {% endfor %}
         </div>
       </li>
 
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link {{ 'is-active' if request.path in ['/about','/mission','/vision'] }}" href="/about">About Us{{ _chevd|safe }}</a>
+        <a class="bfh__nav-link {{ 'is-active' if request.path in ['/about','/mission','/vision'] }}" href="/about/">About Us{{ _chevd|safe }}</a>
         <div class="bfh__dd">
-          <a class="bfh__dd-link" href="/about">About Us</a>
-          <a class="bfh__dd-link" href="/mission">Our Mission</a>
-          <a class="bfh__dd-link" href="/vision">Our Vision</a>
-          <a class="bfh__dd-all" href="/contact">Contact Us{{ _arrow|safe }}</a>
+          <a class="bfh__dd-link" href="/about/">About Us</a>
+          <a class="bfh__dd-link" href="/mission/">Our Mission</a>
+          <a class="bfh__dd-link" href="/vision/">Our Vision</a>
+          <a class="bfh__dd-all" href="/contact/">Contact Us{{ _arrow|safe }}</a>
         </div>
       </li>
     </ul>
@@ -311,9 +311,9 @@
         </button>
         <div class="bfh-acc__panel"><div class="bfh-acc__inner">
           {% for p in s.points %}
-          <a href="/services/{{ s.slug }}">{{ p }}</a>
+          <a href="/services/{{ s.slug }}/">{{ p }}</a>
           {% endfor %}
-          <a class="bfh-acc__all" href="/services/{{ s.slug }}">View All {{ nav_labels.get(s.slug, s.title) }} ›</a>
+          <a class="bfh-acc__all" href="/services/{{ s.slug }}/">View All {{ nav_labels.get(s.slug, s.title) }} ›</a>
         </div></div>
       </div>
       {% endfor %}
@@ -324,7 +324,7 @@
           <svg class="bfh-acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
         </button>
         <div class="bfh-acc__panel"><div class="bfh-acc__inner">
-          {% for a in service_areas %}<a href="/contact">{{ a }}</a>{% endfor %}
+          {% for a in service_areas %}<a href="/contact/">{{ a }}</a>{% endfor %}
         </div></div>
       </div>
 
@@ -334,13 +334,13 @@
           <svg class="bfh-acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
         </button>
         <div class="bfh-acc__panel"><div class="bfh-acc__inner">
-          <a href="/about">About Us</a>
-          <a href="/mission">Our Mission</a>
-          <a href="/vision">Our Vision</a>
+          <a href="/about/">About Us</a>
+          <a href="/mission/">Our Mission</a>
+          <a href="/vision/">Our Vision</a>
         </div></div>
       </div>
 
-      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/contact' }}" href="/contact">Contact Us</a>
+      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/contact' }}" href="/contact/">Contact Us</a>
     </nav>
 
     <div class="bfh-drawer__foot">
@@ -348,7 +348,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
         +971 54 739 3716
       </a>
-      <a class="bfh-drawer__schedule btn-skew btn-skew--navy" href="/contact">Schedule Service</a>
+      <a class="bfh-drawer__schedule btn-skew btn-skew--navy" href="/contact/">Schedule Service</a>
     </div>
   </aside>
 </div>
@@ -381,12 +381,12 @@
             <h3>Quick links</h3>
             <ul class="site-footer__links">
               <li><a href="/">Home</a></li>
-              <li><a href="/services">Our Services</a></li>
-              <li><a href="/about">About Us</a></li>
-              <li><a href="/blog">Blog</a></li>
-              <li><a href="/mission">Our Mission</a></li>
-              <li><a href="/vision">Our Vision</a></li>
-              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/services/">Our Services</a></li>
+              <li><a href="/about/">About Us</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/mission/">Our Mission</a></li>
+              <li><a href="/vision/">Our Vision</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
             </ul>
           </div>
 
@@ -414,7 +414,7 @@
 
   <div class="site-footer__bottom">
     <div class="site-footer__copy">Copyright &copy; {{ current_year }} Best Fix Technical Services. All Rights Reserved.
-      <span class="site-footer__legal"><a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms &amp; Conditions</a> &middot; <a href="/cookies">Cookies</a></span>
+      <span class="site-footer__legal"><a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms &amp; Conditions</a> &middot; <a href="/cookies/">Cookies</a></span>
     </div>
     <div class="site-footer__social">
       <a href="https://wa.me/971547393716" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.16c-.24.68-1.42 1.31-1.96 1.35-.52.05-1.01.24-3.41-.71-2.87-1.13-4.7-4.08-4.85-4.27-.14-.19-1.15-1.53-1.15-2.92s.73-2.07 1-2.35c.24-.27.53-.34.71-.34.18 0 .36.01.51.02.16.01.39-.06.6.46.24.56.81 1.94.88 2.08.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.28.72 1.18 1.54 1.91 1.06.95 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.16-.19.69-.81.87-1.08.18-.28.36-.23.6-.14.24.09 1.55.73 1.81.87.27.14.44.21.51.32.07.12.07.68-.17 1.36z"></path></svg></a>

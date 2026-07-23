@@ -63,6 +63,7 @@ SERVICE_PAGES = {
 
         # ── 2. Diagnosis ──
         "diagnosis": {
+            "image": "img/Appliance Repair Should Begin With Evidence, Not Guesswork.webp",
             "h2": "Appliance Repair Should Begin With Evidence, Not Guesswork",
             "paras": [
                 "A fault code or visible symptom does not always reveal the "
@@ -319,6 +320,7 @@ SERVICE_PAGES = {
 
         # ── 5. Same-day ──
         "sameday": {
+            "image": "img/Same-Day Appliance Repair Without Empty Promises.webp",
             "h2": "Same-Day Appliance Repair Without Empty Promises",
             "lead": "A clear appointment window and an honest assessment.",
             "para": (
@@ -430,6 +432,7 @@ SERVICE_PAGES = {
 
         # ── 10. Properties ──
         "properties": {
+            "image": "img/Appliance Repair for Homes and Managed Properties.webp",
             "h2": "Appliance Repair for Homes and Managed Properties",
             "list_title": "Our service is suitable for:",
             "list": [
@@ -470,6 +473,7 @@ SERVICE_PAGES = {
 
         # ── 12. Repair or replace ──
         "repair_replace": {
+            "image": "img/Repair or Replace the Appliance.webp",
             "h2": "Repair or Replace the Appliance?",
             "para": (
                 "A repair may be worthwhile when the appliance is otherwise in "

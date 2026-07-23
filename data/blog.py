@@ -122,7 +122,7 @@ POST_BY_SLUG = {p["slug"]: p for p in POSTS}
 
 def _card(p):
     """Homepage-card view of a post (adds the article URL)."""
-    return {**p, "url": "/blog/" + p["slug"]}
+    return {**p, "url": "/blog/" + p["slug"] + "/"}
 
 
 # Homepage blog section: intro + one featured post + three related posts.
@@ -142,5 +142,5 @@ BLOG = {
     "related": [_card(p) for p in POSTS[1:4]],
     "foot_link_label": "Read",
     "foot_text": "all articles on our blog.",
-    "foot_url": "/blog",
+    "foot_url": "/blog/",
 }

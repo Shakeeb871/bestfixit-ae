@@ -32,14 +32,14 @@
   <div class="blogx-grid">
     {% for p in posts %}
     <article class="blogx-card">
-      <a class="blogx-card__img" href="/blog/{{ p.slug }}" aria-label="{{ p.title }}">
+      <a class="blogx-card__img" href="/blog/{{ p.slug }}/" aria-label="{{ p.title }}">
         <img src="{{ p.image }}" alt="{{ p.image_alt }}" width="440" height="275" loading="lazy">
       </a>
       <div class="blogx-card__body">
         <span class="blogx-card__meta">{{ p.date }} &middot; {{ p.tags }}</span>
-        <h2 class="blogx-card__title"><a href="/blog/{{ p.slug }}">{{ p.title }}</a></h2>
+        <h2 class="blogx-card__title"><a href="/blog/{{ p.slug }}/">{{ p.title }}</a></h2>
         <p class="blogx-card__excerpt">{{ p.excerpt }}</p>
-        <a class="btn-skew btn-skew--arrow" href="/blog/{{ p.slug }}">Read More</a>
+        <a class="btn-skew btn-skew--arrow" href="/blog/{{ p.slug }}/">Read More</a>
       </div>
     </article>
     {% endfor %}

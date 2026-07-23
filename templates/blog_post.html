@@ -26,7 +26,7 @@
 <section class="pagehero">
   <div class="pagehero__wrap">
     <h1>{{ post.title }}</h1>
-    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; <a href="/blog">Blog</a></p>
+    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; <a href="/blog/">Blog</a></p>
   </div>
 </section>
 
@@ -56,7 +56,7 @@
       {% for para in s.paras %}<p>{{ para }}</p>{% endfor %}
     {% endfor %}
     <div class="blogx-cta">
-      <a class="btn-skew btn-skew--arrow" href="/contact">Book a Service</a>
+      <a class="btn-skew btn-skew--arrow" href="/contact/">Book a Service</a>
     </div>
   </article>
 
@@ -65,7 +65,7 @@
     <h3>More From The Blog</h3>
     <div class="blogx-more__grid">
       {% for p in others %}
-      <a class="blogx-more__item" href="/blog/{{ p.slug }}">
+      <a class="blogx-more__item" href="/blog/{{ p.slug }}/">
         <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
         <span>{{ p.title }}</span>
       </a>
