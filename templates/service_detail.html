@@ -244,15 +244,6 @@
 .svp-faq .faq-a__in{ overflow:hidden; }
 .svp-faq .faq-a p{ margin:0; padding:15px 22px 20px; font-size:15px !important; line-height:1.65 !important; }
 
-/* ── final CTA (navy) ── */
-.svp-cta{ background:#024d87; padding:clamp(48px,6vw,72px) 0; }
-.svp-cta__grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,4vw,56px); align-items:center; }
-.svp-cta h2{ margin:0; font-family:var(--font-heading); font-weight:800; font-size:clamp(26px,3vw,36px) !important; line-height:1.15 !important; color:#fff !important; }
-.svp-cta__sub{ display:block; margin:16px 0 0; color:rgba(255,255,255,.85) !important; font-size:16px !important; line-height:1.7 !important; max-width:520px; }
-.svp-cta__list{ list-style:none; margin:22px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; }
-.svp-cta__list li{ color:rgba(255,255,255,.86); font-size:14.5px; padding-left:20px; position:relative; }
-.svp-cta__list li::before{ content:""; position:absolute; left:0; top:7px; width:7px; height:7px; border-radius:50%; background:#1f9d55; }
-.svp-cta__btns{ display:flex; flex-wrap:wrap; gap:16px; margin-top:28px; }
 
 /* ── responsive ── */
 @media (max-width:1040px){
@@ -265,7 +256,6 @@
   .svp-grid{ grid-template-columns:repeat(2,1fr); }
   .svp-steps, .svp-care{ grid-template-columns:repeat(2,1fr); }
   .svp-brands__grid{ grid-template-columns:repeat(5,1fr); }
-  .svp-cta__grid{ grid-template-columns:1fr; }
 }
 @media (max-width:600px){
   .svp-check--2, .svp-check--3{ grid-template-columns:1fr; }
@@ -519,25 +509,6 @@
           <div class="faq-a"><div class="faq-a__in"><p>{{ f.a }}</p></div></div>
         </div>
         {% endfor %}
-      </div>
-    </div>
-  </section>
-
-  <!-- 15. FINAL CTA -->
-  <section class="svp-cta">
-    <div class="wrap">
-      <div class="svp-cta__grid">
-        <div>
-          <h2>{{ page.cta.h2 }}</h2>
-          <span class="svp-cta__sub">{{ page.cta.sub }}</span>
-          <div class="svp-cta__btns">
-            <a class="btn-skew btn-skew--green btn-skew--arrow" href="/contact">Book Same-Day Appliance Repair</a>
-            <a class="btn-skew" href="tel:+971547393716">Call a Technician</a>
-          </div>
-        </div>
-        <ul class="svp-cta__list">
-          {% for c in page.cta.contact %}<li>{{ c }}</li>{% endfor %}
-        </ul>
       </div>
     </div>
   </section>
