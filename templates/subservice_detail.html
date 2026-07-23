@@ -294,6 +294,7 @@
         </section>
 
         <!-- Error codes -->
+        {% if sub.codes %}
         <section class="ssp-sec">
           {{ sechead('Error Codes', sub.codes.h2) }}
           <div class="ssp-note"><p>{{ sub.codes.intro }}</p></div>
@@ -303,6 +304,7 @@
             {% endfor %}
           </div>
         </section>
+        {% endif %}
 
         <!-- FAQ -->
         <section class="ssp-sec">

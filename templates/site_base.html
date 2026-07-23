@@ -150,6 +150,7 @@
 .bfh__nav-item:last-child .bfh__dd, .bfh__nav-item:nth-last-child(2) .bfh__dd{ left:auto; right:0; }
 .bfh__dd-link{ display:block; padding:10px 14px; color:#303236; font-size:14px; font-weight:600; text-decoration:none; border-radius:8px; transition:background .16s ease, color .16s ease, padding-left .16s ease; }
 .bfh__dd-link:hover{ background:#f2f6fb; color:#024d87; padding-left:18px; }
+.bfh__dd-link.is-active{ background:#eaf1fb; color:#024d87; font-weight:800; }
 .bfh__dd-all{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:6px; padding:11px 14px; color:#024d87; font-size:12.5px; font-weight:800; text-decoration:none; border-top:1px solid #eef1f6; text-transform:uppercase; letter-spacing:.03em; }
 .bfh__dd-all svg{ width:15px; height:15px; transition:transform .18s ease; }
 .bfh__dd-all:hover svg{ transform:translateX(4px); }
@@ -259,9 +260,15 @@
       <li class="bfh__nav-item">
         <a class="bfh__nav-link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}{{ _chevd|safe }}</a>
         <div class="bfh__dd">
+          {% if nav_subservices.get(s.slug) %}
+          {% for sub in nav_subservices.get(s.slug) %}
+          <a class="bfh__dd-link {{ 'is-active' if request.path == '/services/' + sub.slug }}" href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
+          {% endfor %}
+          {% else %}
           {% for p in s.points %}
           <a class="bfh__dd-link" href="/services/{{ s.slug }}/">{{ p }}</a>
           {% endfor %}
+          {% endif %}
           <a class="bfh__dd-all" href="/services/{{ s.slug }}/">View All {{ nav_labels.get(s.slug, s.title) }}{{ _arrow|safe }}</a>
         </div>
       </li>
@@ -310,9 +317,15 @@
           <svg class="bfh-acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
         </button>
         <div class="bfh-acc__panel"><div class="bfh-acc__inner">
+          {% if nav_subservices.get(s.slug) %}
+          {% for sub in nav_subservices.get(s.slug) %}
+          <a href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
+          {% endfor %}
+          {% else %}
           {% for p in s.points %}
           <a href="/services/{{ s.slug }}/">{{ p }}</a>
           {% endfor %}
+          {% endif %}
           <a class="bfh-acc__all" href="/services/{{ s.slug }}/">View All {{ nav_labels.get(s.slug, s.title) }} ›</a>
         </div></div>
       </div>

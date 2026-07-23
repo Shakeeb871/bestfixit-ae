@@ -62,6 +62,7 @@ from data.service_pages import SERVICE_PAGES
 from data.subservice_pages import (
     APPLIANCE_PARENT,
     APPLIANCE_SERVICES,
+    SERVICE_SUBLINKS,
     SUBSERVICE_PAGES,
     SUBSERVICE_TESTIMONIALS,
 )
@@ -125,6 +126,7 @@ def inject_globals():
         "faqs": FAQS,
         "feature_cards": FEATURE_CARDS,
         "why_choose": WHY_CHOOSE,
+        "nav_subservices": SERVICE_SUBLINKS,
         "css_version": _css_version(),
     }
 
