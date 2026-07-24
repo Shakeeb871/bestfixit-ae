@@ -622,16 +622,25 @@ def _icon_for(title):
             return ic
     return "gear"
 
+# Electrical keeps all its uploaded images; every other core service uses the
+# 2-image standard (hero + diagnosis) and icon panels everywhere else.
+_FULL_IMAGE_PAGES = {"electrical-services"}
+
 for _slug, _p in SERVICE_PAGES.items():
+    _keep = _slug in _FULL_IMAGE_PAGES
     for _b in _p.get("services", {}).get("blocks", []):
-        _b.pop("img", None)
-        _b["icon"] = _icon_for(_b.get("title", ""))
+        if not _keep:
+            _b.pop("img", None)
+        if not _b.get("img"):
+            _b["icon"] = _icon_for(_b.get("title", ""))
     for _k, _ic in (("emergency", "alert"), ("sameday", "check"),
                     ("properties", "building"), ("repair_replace", "leaf")):
         _s = _p.get(_k)
         if isinstance(_s, dict):
-            _s.pop("image", None); _s.pop("img", None)
-            _s["icon"] = _ic
+            if not _keep:
+                _s.pop("image", None); _s.pop("img", None)
+            if not _s.get("image") and not _s.get("img"):
+                _s["icon"] = _ic
     _d = _p.get("diagnosis")
     if isinstance(_d, dict) and not _d.get("image"):
         _d["icon"] = _SERVICE_ICON.get(_slug, "gear")

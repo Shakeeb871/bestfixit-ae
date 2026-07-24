@@ -620,8 +620,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 .hfeat-card + .hfeat-card{ border-left:1px solid #979898; }
 .hfeat-card__icon{ width:80px; height:80px; border-radius:50%; display:grid; place-items:center;
     background:var(--pal-1); color:#fff; flex:none; }
-.hfeat-card:nth-child(2) .hfeat-card__icon{ background:var(--pal-2); }
-.hfeat-card:nth-child(3) .hfeat-card__icon{ background:var(--pal-3); }
+/* single brand colour for all feature-card icons (no colour cycling) */
 .hfeat-card__icon svg{ width:34px; height:34px; }
 .hfeat-card__body{ min-width:0; }
 .hfeat-card__title{ margin:0 0 6px; color:#000; font-family:var(--font-heading);

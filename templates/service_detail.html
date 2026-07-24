@@ -216,17 +216,11 @@
 .svp-card__badge svg{ width:34px; height:34px; color:#fff !important; }
 .svp-card h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:17px; color:#000; }
 .svp-card p{ margin:0; font-size:14px !important; line-height:1.55 !important; text-align:left; }
-/* colour comes from the icon badges (navy / blue / teal / green) */
-.svp-why .svp-card:nth-child(7n+2) .svp-card__badge{ background:#2c74c0; }
-.svp-why .svp-card:nth-child(7n+3) .svp-card__badge{ background:#1594ac; }
-.svp-why .svp-card:nth-child(7n+4) .svp-card__badge{ background:#1f9d55; }
-.svp-why .svp-card:nth-child(7n+5) .svp-card__badge{ background:#024d87; }
-.svp-why .svp-card:nth-child(7n+6) .svp-card__badge{ background:#2c74c0; }
-.svp-why .svp-card:nth-child(7n+7) .svp-card__badge{ background:#1594ac; }
+/* single brand colour for every icon badge (no colour cycling) */
 
 /* ── icon panel (replaces images in icon-based sections) ── */
 .svp-iconpanel{ aspect-ratio:1/1; border-radius:7px; display:grid; place-items:center;
-  background:linear-gradient(135deg,#0a2f57 0%,#024d87 55%,#1594ac 100%); color:#fff; }
+  background:#024d87; color:#fff; }
 .svp-iconpanel--sq{ aspect-ratio:1/1; }
 .svp-iconpanel svg{ width:38%; height:38%; max-width:120px; max-height:120px; opacity:.97; }
 
