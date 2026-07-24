@@ -124,13 +124,7 @@ SERVICES = [
             "equipment and building systems — motors, pumps, control panels "
             "and generators kept running reliably."
         ),
-        "points": [
-            "Motors & Pumps",
-            "Control Panels",
-            "Generators",
-            "Preventive Maintenance",
-            "System Upgrades",
-        ],
+        "points": [],
     },
     {
         "slug": "hvac-services",

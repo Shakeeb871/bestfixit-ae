@@ -257,11 +257,13 @@
   <nav class="bfh__nav" aria-label="Primary">
     <ul class="bfh__nav-inner">
       {% for s in all_services %}
+      {% set _subs = nav_subservices.get(s.slug) %}
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}{{ _chevd|safe }}</a>
+        <a class="bfh__nav-link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}{% if _subs or s.points %}{{ _chevd|safe }}{% endif %}</a>
+        {% if _subs or s.points %}
         <div class="bfh__dd">
-          {% if nav_subservices.get(s.slug) %}
-          {% for sub in nav_subservices.get(s.slug) %}
+          {% if _subs %}
+          {% for sub in _subs %}
           <a class="bfh__dd-link {{ 'is-active' if request.path == '/services/' + sub.slug }}" href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
           {% endfor %}
           {% else %}
@@ -270,6 +272,7 @@
           {% endfor %}
           {% endif %}
         </div>
+        {% endif %}
       </li>
       {% endfor %}
 
@@ -310,14 +313,16 @@
       <a class="bfh-drawer__link {{ 'is-active' if request.path == '/' }}" href="/">Home</a>
 
       {% for s in all_services %}
+      {% set _subs = nav_subservices.get(s.slug) %}
+      {% if _subs or s.points %}
       <div class="bfh-acc" data-acc>
         <button class="bfh-acc__trigger" type="button" data-acc-trigger>
           {{ nav_labels.get(s.slug, s.title) }}
           <svg class="bfh-acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
         </button>
         <div class="bfh-acc__panel"><div class="bfh-acc__inner">
-          {% if nav_subservices.get(s.slug) %}
-          {% for sub in nav_subservices.get(s.slug) %}
+          {% if _subs %}
+          {% for sub in _subs %}
           <a href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
           {% endfor %}
           {% else %}
@@ -327,6 +332,9 @@
           {% endif %}
         </div></div>
       </div>
+      {% else %}
+      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}</a>
+      {% endif %}
       {% endfor %}
 
       <div class="bfh-acc" data-acc>

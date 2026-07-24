@@ -130,11 +130,11 @@
 .svp-ph svg{ width:42px; height:42px; opacity:.5; }
 .svp-ph span{ display:block; margin-top:8px; font-size:12.5px; letter-spacing:.03em; }
 /* text + image-space two-column layout */
-.svp-textimg{ display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(28px,4vw,56px); align-items:center; }
+.svp-textimg{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,56px); align-items:center; }
 .svp-textimg--rev .svp-textimg__media{ order:2; }
 .svp-textimg__media{ align-self:stretch; }
-.svp-textimg .svp-ph{ aspect-ratio:4/3.4; }
-.svp-textimg__img{ width:100%; aspect-ratio:4/3.4; object-fit:cover; border-radius:12px;
+.svp-textimg .svp-ph{ aspect-ratio:1/1; }
+.svp-textimg__img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:7px;
   border:1px solid #00000017; display:block; }
 
 /* ── HERO — full-width background image, content left ── */
@@ -193,10 +193,10 @@
 .svp-note p{ margin:0; font-size:14.5px !important; line-height:1.6 !important; color:#3d4550 !important; }
 
 /* ── alternating image / text blocks ── */
-.svp-block{ display:grid; grid-template-columns:minmax(0,340px) 1fr; gap:clamp(26px,4vw,50px); align-items:start; }
+.svp-block{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(26px,4vw,50px); align-items:start; }
 .svp-block + .svp-block{ margin-top:clamp(40px,5vw,60px); padding-top:clamp(40px,5vw,60px); border-top:1px solid #d9dee7; }
 .svp-block__media{ position:sticky; top:96px; }
-.svp-block__media img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; border:1px solid #00000017; display:block; }
+.svp-block__media img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:7px; border:1px solid #00000017; display:block; }
 .svp-block--rev .svp-block__media{ order:2; }
 .svp-block h3{ margin:0 0 12px; font-family:var(--font-heading); font-weight:800; font-size:clamp(20px,2vw,24px); color:#000; }
 .svp-block__comp{ margin:16px 0 0 !important; font-size:14.5px !important; color:#3d4550 !important; }
@@ -225,7 +225,7 @@
 .svp-why .svp-card:nth-child(7n+7) .svp-card__badge{ background:#1594ac; }
 
 /* ── icon panel (replaces images in icon-based sections) ── */
-.svp-iconpanel{ aspect-ratio:4/3.4; border-radius:7px; display:grid; place-items:center;
+.svp-iconpanel{ aspect-ratio:1/1; border-radius:7px; display:grid; place-items:center;
   background:linear-gradient(135deg,#0a2f57 0%,#024d87 55%,#1594ac 100%); color:#fff; }
 .svp-iconpanel--sq{ aspect-ratio:1/1; }
 .svp-iconpanel svg{ width:38%; height:38%; max-width:120px; max-height:120px; opacity:.97; }
