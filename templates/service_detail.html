@@ -187,12 +187,12 @@
 /* ── badge feature cards (why-choose) — flat, no border, no shadow ── */
 .svp-grid{ display:grid; grid-template-columns:repeat(4,1fr);
   gap:clamp(56px,5.5vw,66px) clamp(16px,2vw,22px); padding-top:52px; }
-.svp-card{ position:relative; background:#fff; border:0; border-radius:14px;
-  padding:60px clamp(18px,1.8vw,24px) clamp(22px,2.2vw,26px); text-align:center; }
-.svp-card__badge{ position:absolute; top:-42px; left:50%; transform:translateX(-50%);
-  width:84px; height:84px; border-radius:50%; overflow:hidden; z-index:2;
+.svp-card{ position:relative; background:#fff; border:0; border-radius:7px;
+  padding:44px clamp(18px,1.8vw,24px) clamp(22px,2.2vw,26px); text-align:center; }
+.svp-card__badge{ position:absolute; top:-28px; left:50%; transform:translateX(-50%);
+  width:56px; height:56px; border-radius:50%; overflow:hidden; z-index:2;
   display:grid; place-items:center; background:#024d87; }
-.svp-card__badge svg{ width:38px; height:38px; color:#fff !important; }
+.svp-card__badge svg{ width:26px; height:26px; color:#fff !important; }
 .svp-card h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:17px; color:#000; }
 .svp-card p{ margin:0; font-size:14px !important; line-height:1.55 !important; text-align:left; }
 /* colour comes from the icon badges (navy / blue / teal / green) */
@@ -205,7 +205,7 @@
 
 /* ── steps — flat, no border, no shadow ── */
 .svp-steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,24px); }
-.svp-step{ position:relative; background:#fff; border:0; border-radius:14px;
+.svp-step{ position:relative; background:#fff; border:0; border-radius:7px;
   padding:clamp(22px,2.4vw,30px); }
 .svp-step__n{ display:inline-flex; align-items:center; justify-content:center; width:54px; height:54px;
   border-radius:15px; background:#024d87; color:#fff; font-family:var(--font-heading);
@@ -217,7 +217,7 @@
 
 /* ── cards — soft pastel fills, no border (site-wide standard) ── */
 .svp-care{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,20px); }
-.svp-carecard{ background:#f2f4f6; border:0; border-radius:14px; padding:clamp(20px,2.2vw,26px); }
+.svp-carecard{ background:#f2f4f6; border:0; border-radius:7px; padding:clamp(20px,2.2vw,26px); }
 .svp-care .svp-carecard:nth-child(6n+1){ background:#fbfbe6; }
 .svp-care .svp-carecard:nth-child(6n+2){ background:#fdf0f4; }
 .svp-care .svp-carecard:nth-child(6n+3){ background:#f2f4f6; }
@@ -242,7 +242,7 @@
 
 /* ── FAQ ── */
 .svp-faq{ max-width:900px; display:flex; flex-direction:column; gap:12px; }
-.svp-faq .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:9px; overflow:hidden; transition:border-color .25s ease, background .25s ease; }
+.svp-faq .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:7px; overflow:hidden; transition:border-color .25s ease, background .25s ease; }
 .svp-faq .faq-item.is-open{ background:#eaf1fb; border-color:#2c74c0; }
 .svp-faq .faq-q{ width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between;
   gap:16px; padding:15px 18px; background:transparent; border:0; cursor:pointer; text-align:left;

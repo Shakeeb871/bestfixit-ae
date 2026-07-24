@@ -108,7 +108,7 @@
 
 /* service cards — soft pastel fills, no border (colours cycle across cards) */
 .ssp-cards{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
-.ssp-card{ background:#f2f4f6; border:0; border-radius:14px; padding:20px 22px 22px; }
+.ssp-card{ background:#f2f4f6; border:0; border-radius:7px; padding:20px 22px 22px; }
 .ssp-cards .ssp-card:nth-child(6n+1){ background:#fbfbe6; }
 .ssp-cards .ssp-card:nth-child(6n+2){ background:#fdf0f4; }
 .ssp-cards .ssp-card:nth-child(6n+3){ background:#f2f4f6; }
@@ -120,7 +120,7 @@
 
 /* problem cards — same soft pastel treatment as image reference */
 .ssp-probs{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:6px; }
-.ssp-prob{ background:#f2f4f6; border:0; border-radius:14px; padding:20px 22px;
+.ssp-prob{ background:#f2f4f6; border:0; border-radius:7px; padding:20px 22px;
   font-size:14.5px; line-height:1.6; color:#0f1a2b; }
 .ssp-probs .ssp-prob:nth-child(6n+1){ background:#fbfbe6; }
 .ssp-probs .ssp-prob:nth-child(6n+2){ background:#fdf0f4; }
@@ -148,7 +148,7 @@
 /* error-code table */
 /* error codes — proper responsive table (numbered, scrolls on small screens) */
 .ssp-codetable-wrap{ margin-top:6px; overflow-x:auto; -webkit-overflow-scrolling:touch;
-  border:1px solid #e2e8f1; border-radius:12px; }
+  border:1px solid #e2e8f1; border-radius:7px; }
 .ssp-codetable{ width:100%; border-collapse:collapse; min-width:480px; }
 .ssp-codetable thead th{ text-align:left; background:#024d87; color:#fff !important;
   font-family:var(--font-heading); font-weight:700; font-size:12.5px; letter-spacing:.04em;
@@ -171,7 +171,7 @@
 .ssp-faqsec .ssp-head{ padding-bottom:14px; border-bottom:1px solid #979898; }
 .ssp-faq{ display:flex; flex-direction:column; gap:12px; }
 /* tinted background behind every FAQ item (page is white) — kept when open */
-.ssp-faq .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:9px; overflow:hidden;
+.ssp-faq .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:7px; overflow:hidden;
   transition:border-color .25s ease, background .25s ease; }
 .ssp-faq .faq-item.is-open{ background:#eaf1fb; border-color:#2c74c0; }
 .ssp-faq .faq-q{ width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:space-between;
@@ -190,7 +190,7 @@
 /* ── SIDEBAR ── (scrolls with the page — no sticky, so the tall testimonials
    list never jumps in awkwardly at the end of the column) */
 .ssp-side{ display:flex; flex-direction:column; gap:20px; align-self:start; }
-.ssp-widget{ background:#fff; border:1px solid #e2e8f1; border-radius:11px; overflow:hidden; }
+.ssp-widget{ background:#fff; border:1px solid #e2e8f1; border-radius:7px; overflow:hidden; }
 .ssp-widget__hd{ padding:15px 20px; background:#0f1a2b; color:#fff;
   font-family:var(--font-heading); font-weight:800; font-size:15px; letter-spacing:.01em; }
 .ssp-widget__bd{ padding:16px 20px 20px; }

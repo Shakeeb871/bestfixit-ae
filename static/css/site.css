@@ -614,7 +614,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 .hfeat{ position:relative; z-index:3; width:100%; margin-top:-64px; }
 .hfeat-row{ width:100%; background:#eef3f9;
     display:grid; grid-template-columns:repeat(3,1fr);
-    border-radius:7px; border:1px solid #00000017; overflow:hidden; }
+    border:0; overflow:hidden; }
 .hfeat-card{ box-sizing:border-box; display:flex; flex-direction:row; align-items:center;
     text-align:left; gap:15px; padding:clamp(22px,2.4vw,30px) clamp(18px,2.2vw,28px); }
 .hfeat-card + .hfeat-card{ border-left:1px solid #979898; }
@@ -672,17 +672,16 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc-slide{ flex:0 0 calc((100% - (var(--svc-gap) * 4)) / 5); box-sizing:border-box;
     position:relative; min-height:var(--svc-card-h);
     display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:70px 18px 22px; background:#fff; border-radius:7px; border:1px solid #00000017;
+    padding:48px 18px 22px; background:#fff; border-radius:7px; border:1px solid #00000017;
     text-decoration:none; color:inherit; outline:none;
     transition:transform .25s ease; }
   .svc-slide:hover{ transform:translateY(-5px); }
   .svc-slide:focus-visible{ outline:3px solid #2c74c0; outline-offset:2px; }
 
   /* circular badge sitting on the card's top edge (half above) */
-  .svc-slide__badge{ position:absolute; top:-45px; left:50%; transform:translateX(-50%);
-    width:90px; height:90px; border-radius:50%; z-index:3; overflow:hidden;
-    background:#fdfdfd; border:2px solid #e4e9f1; display:grid; place-items:center;
-    box-shadow:-2px 6px 0px 0px #4d4d4d, 0 0px 0px rgba(20,40,80,.10);
+  .svc-slide__badge{ position:absolute; top:-28px; left:50%; transform:translateX(-50%);
+    width:56px; height:56px; border-radius:50%; z-index:3; overflow:hidden;
+    background:#fdfdfd; border:0; display:grid; place-items:center;
     transition:transform .25s ease; }
   .svc-slide:hover .svc-slide__badge{ transform:translateX(-50%) scale(1.03); }
   .svc-slide__badge img{ width:75%; height:75%; object-fit:contain; display:block; }
@@ -726,8 +725,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   @media (max-width:519px){
     .svc2__stage{ --svc-gap:16px; --svc-vp-x:16px; --svc-vp-top:56px; --svc-card-h:206px; }
     .svc-slide{ flex-basis:86%; }
-    .svc-slide__badge{ width:80px; height:80px; top:-40px; }
-    .svc-slide{ padding-top:62px; }
+    .svc-slide__badge{ width:56px; height:56px; top:-28px; }
+    .svc-slide{ padding-top:48px; }
     .svc2__arrow{ width:40px; height:40px; }
     .svc2__arrow--prev{ left:0; } .svc2__arrow--next{ right:0; }
   }
@@ -765,7 +764,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 /* Site-wide FAQ standard (matches the sub-service pages): tinted item
    background kept when open, and a smaller toggle icon. */
 #bfc .bfc-faq{ display:flex; flex-direction:column; gap:12px; }
-#bfc .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:9px;
+#bfc .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:7px;
   overflow:hidden; transition:border-color .25s ease, background .25s ease; }
 #bfc .faq-item.is-open{ background:#eaf1fb; border-color:var(--accent-2); }
 #bfc .faq-q{ width:100%; box-sizing:border-box; display:flex; align-items:center;
