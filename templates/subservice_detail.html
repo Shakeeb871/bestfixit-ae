@@ -187,8 +187,9 @@
 .ssp-faq .faq-a__in{ overflow:hidden; }
 .ssp-faq .faq-a p{ margin:0; padding:14px 20px 18px; font-size:14.5px !important; line-height:1.65 !important; }
 
-/* ── SIDEBAR ── */
-.ssp-side{ position:sticky; top:96px; display:flex; flex-direction:column; gap:20px; }
+/* ── SIDEBAR ── (scrolls with the page — no sticky, so the tall testimonials
+   list never jumps in awkwardly at the end of the column) */
+.ssp-side{ display:flex; flex-direction:column; gap:20px; align-self:start; }
 .ssp-widget{ background:#fff; border:1px solid #e2e8f1; border-radius:11px; overflow:hidden; }
 .ssp-widget__hd{ padding:15px 20px; background:#0f1a2b; color:#fff;
   font-family:var(--font-heading); font-weight:800; font-size:15px; letter-spacing:.01em; }

@@ -43,7 +43,9 @@ SERVICE_SUBLINKS = {
         {"name": "Refrigerator & Freezer Repair", "slug": "refrigerator-repair"},
         {"name": "Oven, Cooker & Hob Repair", "slug": "oven-cooker-repair"},
         {"name": "Dishwasher Repair", "slug": "dishwasher-repair"},
-        {"name": "Microwave & Small Appliance Repair", "slug": "microwave-repair"},
+        {"name": "Dryer Repair", "slug": "dryer-repair"},
+        {"name": "Microwave Repair", "slug": "microwave-repair"},
+        {"name": "Small Appliance Repair", "slug": "small-appliance-repair"},
     ],
 }
 
@@ -786,62 +788,58 @@ SUBSERVICE_PAGES = {
     },
 
     # ===================================================================== #
-    # 5 · MICROWAVE & SMALL APPLIANCES
+    # 5 · MICROWAVE
     # ===================================================================== #
     "microwave-repair": {
         "parent_slug": "home-appliances-repair",
-        "meta_title": "Microwave & Small Appliance Repair in Dubai | Best Fix",
+        "meta_title": "Microwave Repair in Dubai — Same-Day Service | Best Fix",
         "meta_description": (
-            "Same-day microwave and small-appliance repair in Dubai by Best Fix. "
-            "Not-heating, turntable, door, sparking and control faults fixed for all "
-            "brands by experienced technicians at a fair price."
+            "Same-day microwave repair in Dubai by Best Fix. Not-heating, turntable, "
+            "door, sparking and control faults fixed safely for all brands by "
+            "experienced technicians at a fair price."
         ),
-        "breadcrumb": "Microwave & Small Appliance Repair",
+        "breadcrumb": "Microwave Repair",
         "hero": {
             "eyebrow": "Microwave Repair",
-            "h1_accent": "Microwave & Small Appliance Repair in Dubai",
+            "h1_accent": "Microwave Repair in Dubai",
             "h1": "Fast, Same-Day Repairs",
             "subheading": (
-                "Microwaves that won't heat, spark or respond — plus everyday small "
-                "appliances — diagnosed properly and repaired at a fair price."
+                "Microwaves that won't heat, spark or respond — diagnosed properly and "
+                "repaired safely at a fair, transparent price."
             ),
-            "image": "img/small appliances repair.jpg",
+            "image": "img/Professional Home appliances repair services.webp",
             "image_alt": "Best Fix technician repairing a microwave in Dubai",
         },
         "intro": [
             "Need quick microwave repair in Dubai? Best Fix Technical Services provides "
-            "complete microwave and small-appliance diagnosis, repair and servicing across "
-            "the city — often on the same day and always at a reasonable, clearly explained "
-            "cost.",
+            "complete microwave diagnosis, repair and servicing across the city — often on "
+            "the same day and always at a reasonable, clearly explained cost.",
             "Our technicians work on every major type and brand and begin each visit with a "
-            "proper inspection. Alongside microwaves we repair the full range of home "
-            "appliances, so one trusted team can look after your whole home. Book now for "
-            "quick help and a confirmed slot.",
+            "proper inspection, working safely around the high-voltage parts inside a "
+            "microwave. Alongside microwaves we repair the full range of home appliances, so "
+            "one trusted team can look after your whole home. Book now for a confirmed slot.",
         ],
         "types": {
-            "h2": "Repair Support for All Microwave & Small-Appliance Types",
-            "intro": "We service every microwave configuration, plus a wide range of small "
-                     "kitchen appliances:",
+            "h2": "Repair Support for All Microwave Types",
+            "intro": "We service every microwave configuration found in UAE homes:",
             "list": [
                 "Solo microwaves",
                 "Grill microwaves",
                 "Convection microwaves",
                 "Built-in microwaves",
-                "Kettles and toasters",
-                "Blenders and food processors",
-                "Coffee machines",
-                "Other small kitchen appliances",
+                "Over-the-range microwaves",
+                "Countertop microwaves",
             ],
         },
         "services": {
-            "h2": "Microwave & Small-Appliance Repair Services We Provide",
-            "intro": "From a microwave that won't heat to a small appliance that won't power "
-                     "on, we cover the full range of faults:",
+            "h2": "Microwave Repair Services We Provide",
+            "intro": "From a microwave that won't heat to one that's completely dead, we cover "
+                     "the full range of faults:",
             "rows": [
                 {"title": "Not-Heating Repair",
                  "text": "A microwave that runs but won't heat usually has a magnetron, diode "
-                         "or high-voltage fault. We test the heating components and advise on "
-                         "the best repair."},
+                         "or high-voltage fault. We test the heating components safely and "
+                         "advise on the best repair."},
                 {"title": "Turntable Fault Repair",
                  "text": "A turntable that won't rotate often has a motor, coupler or roller "
                          "fault. We inspect and restore smooth rotation."},
@@ -858,39 +856,35 @@ SUBSERVICE_PAGES = {
                  "text": "Loud humming or grinding can come from the motor, fan or turntable. "
                          "We trace the noise and correct it."},
                 {"title": "Fuse & Power Fault Repair",
-                 "text": "A microwave that's completely dead often has a blown fuse or power "
+                 "text": "A microwave that's completely dead often has a blown fuse or a power "
                          "fault. We carry out safe fault-finding and repair."},
-                {"title": "Small-Appliance Repair",
-                 "text": "Kettles, toasters, blenders, coffee machines and more — we repair "
-                         "everyday small appliances where it's safe and cost-effective to do so."},
             ],
         },
         "problems": {
             "h2": "Common Microwave Problems We Fix",
-            "intro": "These are the microwave and small-appliance faults we're called out "
-                     "for most:",
+            "intro": "These are the microwave faults we're called out for most:",
             "list": [
                 "The microwave runs but does not heat the food.",
                 "The turntable does not rotate during cooking.",
                 "The microwave sparks or arcs inside the cavity.",
                 "The buttons or display are unresponsive.",
                 "The microwave is completely dead and won't switch on.",
-                "A small appliance has stopped working or is tripping the power.",
+                "The microwave makes loud humming or buzzing sounds while running.",
             ],
         },
         "band": {
-            "title": "Skilled Microwave & Small-Appliance Repair Across Dubai",
-            "text": "Book your service now for quick, affordable and professional repairs — "
-                    "with an honest diagnosis before any work begins.",
+            "title": "Skilled Microwave Repair Across Dubai",
+            "text": "Book your service now for quick, affordable and professional microwave "
+                    "repairs — with an honest diagnosis before any work begins.",
         },
         "why": {
             "h2": "Why Choose Best Fix for Microwave Repair",
             "image": "img/Appliance Repair Should Begin With Evidence, Not Guesswork.webp",
             "image_alt": "Best Fix technician repairing a microwave in Dubai",
-            **_why("microwave and small-appliance",
+            **_why("microwave",
                    "Best Fix is built around doorstep, quick and reliable appliance repair "
-                   "in Dubai. Our technicians are highly experienced across microwaves and "
-                   "everyday small appliances, and always work safely around high-voltage parts."),
+                   "in Dubai. Our technicians are highly experienced with microwaves and "
+                   "always work safely around the high-voltage components inside."),
         },
         "brands": {
             "h2": "Microwave Brands We Repair",
@@ -914,9 +908,9 @@ SUBSERVICE_PAGES = {
             {"q": "Is it safe to repair a microwave myself?",
              "a": "No. Microwaves store high voltage even when unplugged, so internal repairs "
                   "should always be left to a qualified technician."},
-            {"q": "Do you repair small kitchen appliances too?",
-             "a": "Yes. We repair kettles, toasters, blenders, coffee machines and other small "
-                  "appliances where it's safe and cost-effective to do so."},
+            {"q": "Why does my microwave stop partway through cooking?",
+             "a": "This often points to a door-switch, thermal-cutout or control-board fault. "
+                  "A technician can test the safety circuit and identify the cause."},
             {"q": "How soon can you come out?",
              "a": "We offer same-day appointments across Dubai wherever the schedule allows."},
         ],
@@ -932,12 +926,334 @@ SUBSERVICE_PAGES = {
                 "Cover food to reduce splatter and keep the cavity clean.",
                 "Keep the vents clear so the appliance doesn't overheat.",
                 "Stop using it immediately if you see sparking or hear loud humming.",
-                "Unplug small appliances when not in use and keep them dry.",
+                "Wipe up spills promptly so they don't bake onto the cavity.",
                 "Book an inspection at the first sign of heating, door or power faults.",
             ],
         },
     },
+
+    # ===================================================================== #
+    # 6 · DRYER
+    # ===================================================================== #
+    "dryer-repair": {
+        "parent_slug": "home-appliances-repair",
+        "meta_title": "Dryer Repair in Dubai — Same-Day Service | Best Fix",
+        "meta_description": (
+            "Same-day dryer repair in Dubai by Best Fix. Not-heating, not-drying, "
+            "no-tumble, overheating and sensor faults fixed for vented, condenser and "
+            "heat-pump dryers of all brands at a fair price."
+        ),
+        "breadcrumb": "Dryer Repair",
+        "hero": {
+            "eyebrow": "Dryer Repair",
+            "h1_accent": "Dryer Repair in Dubai",
+            "h1": "Same-Day Diagnosis and Repair",
+            "subheading": (
+                "Vented, condenser and heat-pump dryers, every major brand — clothes coming "
+                "out damp, dryers that won't heat or won't tumble, diagnosed and repaired."
+            ),
+            "image": "img/washing machine repair.jpg",
+            "image_alt": "Best Fix technician repairing a clothes dryer in Dubai",
+        },
+        "intro": [
+            "Looking for reliable dryer repair in Dubai? Best Fix Technical Services provides "
+            "complete tumble-dryer diagnosis, repair and servicing across the city — often on "
+            "the same day and always at a reasonable, clearly explained cost.",
+            "Our technicians work on every major type and brand and start each visit with a "
+            "proper inspection. Alongside dryers we repair the full range of home appliances, "
+            "so one trusted team can look after your whole laundry and home. Book now for a "
+            "confirmed slot.",
+        ],
+        "types": {
+            "h2": "Repair Support for All Dryer Types",
+            "intro": "We service every tumble-dryer configuration found in UAE homes and "
+                     "apartments:",
+            "list": [
+                "Vented tumble dryers",
+                "Condenser tumble dryers",
+                "Heat-pump dryers",
+                "Gas dryers",
+                "Washer-dryer combination units",
+                "Freestanding and stackable dryers",
+            ],
+        },
+        "services": {
+            "h2": "Dryer Repair Services We Provide",
+            "intro": "From a dryer that won't heat to one that won't tumble, we cover the full "
+                     "range of dryer faults:",
+            "rows": [
+                {"title": "Not-Heating Repair",
+                 "text": "Clothes coming out cold and damp usually means a failed heating "
+                         "element, thermostat or thermal fuse. We test the heating circuit and "
+                         "replace the faulty part."},
+                {"title": "Not-Drying / Long-Drying Repair",
+                 "text": "A dryer that runs but takes hours often has a blocked vent, a clogged "
+                         "filter or a weak element. We restore proper airflow and drying times."},
+                {"title": "No-Tumble / Drum Repair",
+                 "text": "A drum that won't turn usually points to a snapped belt, a seized "
+                         "roller or a motor fault. We inspect the drive system and put it right."},
+                {"title": "Overheating Repair",
+                 "text": "A dryer that gets too hot or cuts out mid-cycle can be a thermostat, "
+                         "airflow or sensor fault — and a safety risk. We diagnose and correct it."},
+                {"title": "Noise & Vibration Repair",
+                 "text": "Squealing, thumping or grinding usually comes from worn rollers, a "
+                         "loose belt or failing bearings. We trace the noise and quieten it."},
+                {"title": "Moisture-Sensor Repair",
+                 "text": "Sensor dryers that stop too early or run too long often have a dirty "
+                         "or faulty moisture sensor. We clean or replace it for accurate cycles."},
+                {"title": "Vent & Airflow Repair",
+                 "text": "Restricted venting is a common cause of poor drying and overheating. "
+                         "We clear the ducting and filters and check airflow end to end."},
+                {"title": "Door-Switch Repair",
+                 "text": "A dryer that won't start or stops when the door is closed often has a "
+                         "door-switch or latch fault. We inspect and replace the mechanism."},
+                {"title": "Power & Control Fault Repair",
+                 "text": "A dryer that won't switch on, or stops partway through, may have an "
+                         "electrical or control-board fault. We carry out safe fault-finding."},
+            ],
+        },
+        "problems": {
+            "h2": "Common Dryer Problems We Fix",
+            "intro": "These are the dryer faults we're called out for most across Dubai:",
+            "list": [
+                "The dryer runs but the clothes come out damp or cold.",
+                "The drum does not tumble when the dryer is switched on.",
+                "The dryer takes far too long to dry a normal load.",
+                "The dryer overheats or shuts off partway through the cycle.",
+                "The dryer makes loud squealing, thumping or grinding noises.",
+                "The dryer will not start, or stops before the cycle finishes.",
+            ],
+        },
+        "band": {
+            "title": "Skilled Dryer Inspection and Repair Across Dubai",
+            "text": "Book your service now for quick, affordable and professional dryer "
+                    "repairs — with an honest diagnosis before any work begins.",
+        },
+        "why": {
+            "h2": "Why Choose Best Fix for Dryer Repair",
+            "image": "img/Same-Day Appliance Repair Without Empty Promises.webp",
+            "image_alt": "Best Fix technician servicing a tumble dryer in Dubai",
+            **_why("dryer",
+                   "Best Fix is built around doorstep, quick and reliable appliance repair "
+                   "in Dubai. Our technicians are highly experienced across vented, condenser "
+                   "and heat-pump dryers of every major brand."),
+        },
+        "brands": {
+            "h2": "Dryer Brands We Repair",
+            "intro": "We repair and service all major dryer brands in Dubai, with same-day "
+                     "support wherever possible:",
+            "logos": _BRAND_LOGOS,
+        },
+        "codes": {
+            "h2": "Common Error Codes in Smart Dryers We Fix",
+            "intro": "Dryer error codes are a useful starting point, but they aren't a "
+                     "complete diagnosis — the same code can mean slightly different things "
+                     "depending on the brand and model. We check the model, symptoms and live "
+                     "behaviour before recommending any repair.",
+            "rows": [
+                {"code": "tE, tO, tC", "meaning": "Temperature-sensor (thermistor) fault"},
+                {"code": "HE, hot, E4", "meaning": "Heater or overheating fault"},
+                {"code": "dE, dO, dC", "meaning": "Door-lock or door-switch error"},
+                {"code": "dF, dC, F0", "meaning": "Airflow, duct or filter blockage"},
+                {"code": "bE, E3, EL", "meaning": "Belt or motor fault"},
+                {"code": "AE, CE, C8", "meaning": "Communication or control-board error"},
+                {"code": "5C, 9C1, PS", "meaning": "Condenser or water-tank fault"},
+            ],
+        },
+        "faq_h2": "Dryer Repair FAQs",
+        "faqs": [
+            {"q": "Why is my dryer not heating up?",
+             "a": "A dryer that tumbles but won't heat usually has a failed heating element, "
+                  "thermostat or thermal fuse. We test the heating circuit and replace the "
+                  "faulty part."},
+            {"q": "Why is my dryer taking so long to dry clothes?",
+             "a": "Long drying times are often caused by a blocked vent, a clogged lint filter "
+                  "or a weak heating element. Clearing the airflow and checking the element "
+                  "usually restores normal drying."},
+            {"q": "Why won't my dryer drum turn?",
+             "a": "A drum that won't tumble usually has a snapped drive belt, a seized roller "
+                  "or a motor fault. We inspect the drive system and carry out the repair."},
+            {"q": "My dryer is getting too hot. Is that dangerous?",
+             "a": "Overheating can be a fire risk and usually points to restricted airflow or "
+                  "a faulty thermostat. Stop using it and book an inspection so it can be made "
+                  "safe."},
+            {"q": "Why does my dryer stop before the clothes are dry?",
+             "a": "Sensor dryers can stop early if the moisture sensor is dirty or faulty, or "
+                  "if a thermal cutout is tripping. We test the sensor and safety circuit."},
+            {"q": "How soon can you repair my dryer?",
+             "a": "We offer same-day appointments across Dubai wherever the schedule allows."},
+        ],
+        "tips": {
+            "h2": "Maintenance Tips to Keep Your Dryer at Its Best",
+            "intro": "A little routine care keeps a dryer drying efficiently and safely:",
+            "list": [
+                "Clean the lint filter before or after every load — this is the biggest cause of poor drying.",
+                "Check and clear the vent ducting regularly so air can flow freely.",
+                "Empty the water tank on condenser and heat-pump dryers after each cycle.",
+                "Clean the condenser unit periodically as recommended for your model.",
+                "Don't overload the drum — clothes need room to tumble and dry evenly.",
+                "Avoid drying items with foam, rubber or plastic backing that can overheat.",
+                "Wipe the door seal and moisture sensor to keep cycles accurate.",
+                "Give the dryer space so it can pull in and release air properly.",
+                "Stop using the dryer if it overheats, smells hot or won't stop tumbling.",
+                "Book an inspection at the first sign of heating, tumbling or airflow faults.",
+            ],
+        },
+    },
+
+    # ===================================================================== #
+    # 7 · SMALL APPLIANCES
+    # ===================================================================== #
+    "small-appliance-repair": {
+        "parent_slug": "home-appliances-repair",
+        "meta_title": "Small Appliance Repair in Dubai | Best Fix",
+        "meta_description": (
+            "Same-day small appliance repair in Dubai by Best Fix. Kettles, toasters, "
+            "blenders, coffee machines, air fryers and more — heating, motor, power and "
+            "switch faults fixed by experienced technicians at a fair price."
+        ),
+        "breadcrumb": "Small Appliance Repair",
+        "hero": {
+            "eyebrow": "Small Appliance Repair",
+            "h1_accent": "Small Appliance Repair in Dubai",
+            "h1": "Fast, Fair Repairs",
+            "subheading": (
+                "Kettles, toasters, blenders, coffee machines, air fryers and more — "
+                "diagnosed properly and repaired where it's safe and worthwhile."
+            ),
+            "image": "img/small appliances repair.jpg",
+            "image_alt": "Best Fix technician repairing small kitchen appliances in Dubai",
+        },
+        "intro": [
+            "Looking for reliable small appliance repair in Dubai? Best Fix Technical "
+            "Services repairs and services everyday small kitchen appliances across the city "
+            "— often on the same day and always at a reasonable, clearly explained cost.",
+            "Our technicians work on every major type and brand and always begin with a "
+            "proper inspection, telling you honestly when a repair is worthwhile and when "
+            "replacement makes more sense. Alongside small appliances we repair the full "
+            "range of home appliances, so one trusted team can look after your whole home.",
+        ],
+        "types": {
+            "h2": "Small Appliances We Repair",
+            "intro": "We service a wide range of everyday small kitchen and home appliances:",
+            "list": [
+                "Kettles and toasters",
+                "Blenders and food processors",
+                "Coffee machines",
+                "Air fryers",
+                "Mixers and juicers",
+                "Irons and garment steamers",
+                "Rice cookers and slow cookers",
+                "Sandwich makers and grills",
+            ],
+        },
+        "services": {
+            "h2": "Small Appliance Repair Services We Provide",
+            "intro": "From an appliance that won't heat to one that won't power on, we cover "
+                     "the full range of small-appliance faults:",
+            "rows": [
+                {"title": "Heating-Element Repair",
+                 "text": "Kettles, toasters, irons and sandwich makers that won't heat usually "
+                         "have a failed element or thermal cutout. We test and repair where it's "
+                         "safe and cost-effective."},
+                {"title": "Motor Repair",
+                 "text": "Blenders, food processors, mixers and juicers that stall, hum or won't "
+                         "spin often have a motor, gear or coupling fault. We inspect and repair "
+                         "the drive."},
+                {"title": "Power & Switch Repair",
+                 "text": "An appliance that's completely dead often has a switch, fuse or "
+                         "internal-connection fault. We carry out safe fault-finding and repair."},
+                {"title": "Coffee-Machine Repair",
+                 "text": "Weak flow, leaks, no pressure or a machine that won't heat usually "
+                         "needs pump, seal or descaling work. We service and repair coffee "
+                         "machines of most types."},
+                {"title": "Air-Fryer Repair",
+                 "text": "Air fryers that won't heat, won't switch on or run noisily often have "
+                         "an element, fan or control fault. We diagnose and put them right."},
+                {"title": "Thermostat & Overheat Repair",
+                 "text": "Appliances that overheat, cut out or won't reach temperature usually "
+                         "have a thermostat or thermal-cutout fault. We test and replace it."},
+                {"title": "Blade & Attachment Repair",
+                 "text": "Blenders, processors and mixers with damaged blades, seals or "
+                         "attachments are repaired with the correct parts for safe use."},
+                {"title": "Cord & Plug Repair",
+                 "text": "A frayed cord, loose plug or intermittent connection is a common — and "
+                         "unsafe — fault. We replace it and check the appliance is safe to use."},
+            ],
+        },
+        "problems": {
+            "h2": "Common Small Appliance Problems We Fix",
+            "intro": "These are the small-appliance faults we're called out for most:",
+            "list": [
+                "A kettle, toaster or iron has stopped heating.",
+                "A blender or food processor hums but the blade won't spin.",
+                "A coffee machine leaks, won't pump or won't heat the water.",
+                "An air fryer won't switch on or won't heat up.",
+                "The appliance is completely dead and won't power on.",
+                "An appliance trips the power or has a damaged cord or plug.",
+            ],
+        },
+        "band": {
+            "title": "Skilled Small Appliance Repair Across Dubai",
+            "text": "Book your service now for quick, affordable and professional repairs — "
+                    "with an honest diagnosis before any work begins.",
+        },
+        "why": {
+            "h2": "Why Choose Best Fix for Small Appliance Repair",
+            "image": "img/Appliance Repair for Homes and Managed Properties.webp",
+            "image_alt": "Best Fix technician repairing a small kitchen appliance in Dubai",
+            **_why("small appliance",
+                   "Best Fix is built around doorstep, quick and reliable appliance repair "
+                   "in Dubai. Our technicians are experienced across everyday small kitchen "
+                   "appliances and will always tell you honestly when a repair is worthwhile."),
+        },
+        "brands": {
+            "h2": "Small Appliance Brands We Repair",
+            "intro": "We repair and service all major small-appliance brands in Dubai, with "
+                     "same-day support wherever possible:",
+            "logos": _BRAND_LOGOS,
+        },
+        "codes": None,
+        "faq_h2": "Small Appliance Repair FAQs",
+        "faqs": [
+            {"q": "Is it worth repairing a small appliance?",
+             "a": "It depends on the appliance, the fault and the cost of parts. We give an "
+                  "honest assessment so you can decide between a cost-effective repair and "
+                  "replacing the unit."},
+            {"q": "My blender hums but the blade won't spin. What's wrong?",
+             "a": "This usually points to a jammed or worn coupling, a gear fault or a motor "
+                  "problem. We inspect the drive and repair or replace the affected part."},
+            {"q": "Why has my kettle or toaster stopped heating?",
+             "a": "A no-heat fault is normally a failed heating element or a tripped thermal "
+                  "cutout. We test it and repair where it's safe and cost-effective."},
+            {"q": "Can you fix my coffee machine?",
+             "a": "Yes. We repair most coffee machines — weak flow, leaks, no pressure and "
+                  "heating faults often need pump, seal or descaling work."},
+            {"q": "The cord on my appliance is damaged. Can it be repaired?",
+             "a": "Yes. A frayed cord or loose plug is unsafe and should not be used. We "
+                  "replace it and confirm the appliance is safe before returning it."},
+            {"q": "How soon can you come out?",
+             "a": "We offer same-day appointments across Dubai wherever the schedule allows."},
+        ],
+        "tips": {
+            "h2": "Maintenance Tips to Keep Your Small Appliances at Their Best",
+            "intro": "A little care keeps small appliances working safely and lasting longer:",
+            "list": [
+                "Descale kettles and coffee machines regularly to prevent limescale build-up.",
+                "Empty toaster crumb trays often to reduce fire risk and improve toasting.",
+                "Let motors rest during heavy blending or processing to avoid overheating.",
+                "Don't exceed the maximum fill line on kettles, blenders and coffee machines.",
+                "Clean blades and attachments after each use and dry them fully.",
+                "Keep cords away from heat and water, and never wrap them too tightly.",
+                "Unplug appliances when not in use and before cleaning.",
+                "Use the correct settings and never force jammed blades or attachments.",
+                "Stop using any appliance with a damaged cord, plug or burning smell.",
+                "Book an inspection at the first sign of heating, motor or power faults.",
+            ],
+        },
+    },
 }
+
 
 
 # --------------------------------------------------------------------------- #
@@ -1020,6 +1336,34 @@ _REVIEWS = {
          "text": "My built-in microwave went completely dead. Booking was easy, the technician "
                  "arrived on time, found a blown fuse and a control fault, and had it back on in "
                  "the same visit. Tidy work at a fair price."},
+    ],
+    "dryer-repair": [
+        {"name": "Layla H.", "area": "Arabian Ranches", "when": "2 weeks ago", "rating": 5,
+         "text": "Our dryer was running full cycles but the clothes came out damp every time. "
+                 "The Best Fix technician found a blocked vent and a weak heating element, sorted "
+                 "both the same visit, and drying is back to twenty minutes. Really thorough."},
+        {"name": "George M.", "area": "The Springs", "when": "1 month ago", "rating": 5,
+         "text": "The drum stopped turning completely. He diagnosed a snapped belt within "
+                 "minutes, had the part on his van and replaced it there and then. On time, "
+                 "clean and a fair price — couldn't ask for more."},
+        {"name": "Sana F.", "area": "Dubai Silicon Oasis", "when": "3 weeks ago", "rating": 5,
+         "text": "My heat-pump dryer kept stopping mid-cycle and getting very hot. He explained "
+                 "it was an airflow and sensor issue, cleaned it out properly and made it safe. "
+                 "Reassuring to have someone who actually knew the machine."},
+    ],
+    "small-appliance-repair": [
+        {"name": "Omar B.", "area": "Al Nahda", "when": "2 weeks ago", "rating": 5,
+         "text": "My espresso machine had stopped pushing water through and was leaking at the "
+                 "base. Best Fix serviced the pump, replaced a seal and descaled it — it's "
+                 "pulling shots like new again. Honest advice and no pressure to replace it."},
+        {"name": "Nadia K.", "area": "Jumeirah", "when": "1 month ago", "rating": 5,
+         "text": "My blender just hummed and wouldn't spin. Rather than tell me to buy a new "
+                 "one, the technician found a stripped coupling, replaced it cheaply and it works "
+                 "perfectly. Genuinely appreciated the honesty."},
+        {"name": "Ahmed R.", "area": "Mirdif", "when": "3 weeks ago", "rating": 5,
+         "text": "The air fryer wouldn't heat and the kettle had died the same week. He looked "
+                 "at both in one visit, fixed the fryer's element and replaced a faulty cord on "
+                 "the kettle. Quick, friendly and very fair on price."},
     ],
 }
 
