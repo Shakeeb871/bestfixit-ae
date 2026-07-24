@@ -774,22 +774,24 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 #bfc .bfc-call{ margin-top:30px; }
 
 /* ---- RIGHT column: FAQ accordion ---- */
+/* Site-wide FAQ standard (matches the sub-service pages): tinted item
+   background kept when open, and a smaller toggle icon. */
 #bfc .bfc-faq{ display:flex; flex-direction:column; gap:12px; }
-#bfc .faq-item{ background:#fff; border:1px solid #00000017; border-radius:7px;
-  overflow:hidden; transition:border-color .25s ease; }
-#bfc .faq-item.is-open{ border-color:var(--accent-2); }
+#bfc .faq-item{ background:#f4f7fb; border:1px solid #e4ebf4; border-radius:9px;
+  overflow:hidden; transition:border-color .25s ease, background .25s ease; }
+#bfc .faq-item.is-open{ background:#eaf1fb; border-color:var(--accent-2); }
 #bfc .faq-q{ width:100%; box-sizing:border-box; display:flex; align-items:center;
-  justify-content:space-between; gap:18px; padding:18px 22px;
+  justify-content:space-between; gap:16px; padding:15px 18px;
   background:transparent; border:0; cursor:pointer; text-align:left;
-  font-family:var(--font-heading,inherit); font-weight:700; font-size:16px;
+  font-family:var(--font-heading,inherit); font-weight:700; font-size:15.5px;
   line-height:1.35; color:#0f1a2b; }
-#bfc .faq-q__icon{ flex:none; width:30px; height:30px; border-radius:50%;
+#bfc .faq-q__icon{ flex:none; width:22px; height:22px; border-radius:50%;
   display:grid; place-items:center; color:#fff; background:var(--accent);
   transition:transform .35s ease, background .25s ease; }
-#bfc .faq-q__icon svg{ width:16px; height:16px; }
+#bfc .faq-q__icon svg{ width:12px; height:12px; }
 #bfc .faq-item.is-open .faq-q__icon{ transform:rotate(180deg); background:var(--accent-2); }
 /* when open, a light divider sits just under the question title */
-#bfc .faq-item.is-open .faq-q{ border-bottom:1px solid #e6eaf1; }
+#bfc .faq-item.is-open .faq-q{ border-bottom:1px solid #d5e2f2; }
 /* smooth auto-height animation via grid-template-rows */
 #bfc .faq-a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
 #bfc .faq-item.is-open .faq-a{ grid-template-rows:1fr; }
