@@ -34,137 +34,211 @@ def _areas(trade):
 EXTRA_SERVICE_PAGES = {
 
     # ===================================================================== #
-    # ELECTRICAL
+    # ELECTRICAL  (competitor-researched + gap-filled)
     # ===================================================================== #
     "electrical-services": {
         "meta_title": "Electrical Services in Dubai | Licensed Electricians — Best Fix",
         "meta_description": (
-            "Licensed electrical services in Dubai by Best Fix — wiring, DB boards, "
-            "lighting, sockets, fault-finding and emergency repairs to DEWA standards. "
-            "Same-day electricians, clear pricing, safe work."
+            "Professional, DEWA-compliant electrical services in Dubai by Best Fix — "
+            "wiring, distribution boards, lighting, sockets, fault-finding, EV chargers "
+            "and 24/7 emergency repairs by licensed electricians for homes and businesses."
         ),
         "breadcrumb": "Electrical Services",
         "hero": {
-            "trustline": "Licensed Electricians · DEWA-Compliant · Emergency Support",
+            "trustline": "Licensed Electricians · DEWA-Compliant · 24/7 Emergency Support",
             "h1_accent": "Electrical Services in Dubai",
-            "h1": "Done Safely, Done Right",
-            "subheading": "Wiring, distribution boards, lighting, sockets and fault-finding for homes and businesses.",
+            "h1": "Licensed, Safe and Reliable",
+            "subheading": "Wiring, distribution boards, lighting, sockets, fault-finding and emergency repairs for homes and businesses.",
             "paras": [
-                "Electrical faults are rarely just an inconvenience — a tripping breaker, "
-                "a warm socket or a flickering light can be the first sign of a wiring "
-                "problem that shouldn't be ignored.",
-                "Best Fix provides licensed electrical services across Dubai for apartments, "
-                "villas, offices and managed properties. Every job is carried out to DEWA "
-                "standards by qualified electricians who test, diagnose and explain the fault "
-                "before any work begins.",
-                "From a single socket to a full rewire or a new distribution board, we work "
-                "cleanly, price clearly and leave the installation safe and certified.",
+                "Finding an electrician you can trust in Dubai isn't easy. Whether it's a "
+                "socket that needs replacing, a breaker that keeps tripping or a full rewire, "
+                "the work should only ever be done by a properly trained, qualified technician.",
+                "Best Fix provides professional, DEWA-compliant electrical services across "
+                "Dubai for apartments, villas, offices and managed properties. Our licensed "
+                "electricians diagnose the fault first, explain it clearly, and carry out the "
+                "repair or installation safely — for both residential and commercial customers.",
+                "From a single light fitting to switchboards, EV chargers and large "
+                "renovations, we work cleanly, price transparently and leave every "
+                "installation safe and to standard.",
             ],
-            "note": "Emergency support is available for tripping boards, burning smells, "
+            "note": "24/7 emergency support is available for tripping boards, burning smells, "
                     "sparks and total power loss.",
             "cta_label": "Book an Electrician",
         },
         "diagnosis": {
-            "h2": "A Proper Diagnosis Before Any Electrical Work",
+            "h2": "We Diagnose the Root Cause First",
             "paras": [
-                "Electrical work is only as safe as the diagnosis behind it. Our electricians "
-                "start by testing the circuit, checking the load and inspecting connections, "
-                "earthing and breaker ratings before touching anything.",
-                "That means you get the actual cause of the fault — a loose connection, an "
-                "overloaded circuit, ageing wiring or a failed component — not a guess, and a "
-                "repair that's correct and compliant the first time.",
+                "Electrical work is only as safe as the diagnosis behind it. Every situation "
+                "is different, so our electricians start with a proper inspection — testing "
+                "the circuit, checking the load, and examining connections, earthing and "
+                "breaker ratings before touching anything.",
+                "Often we can identify the likely issue during the first call, so the "
+                "technician arrives prepared. Either way, you get the real cause of the fault "
+                "— a loose connection, an overloaded circuit, ageing wiring or a failed "
+                "component — and a repair that's correct, compliant and safe the first time.",
             ],
         },
         "services": {
             "h2": "Electrical Services We Provide",
             "blocks": [
                 {"title": "Wiring & Rewiring",
-                 "intro": "New wiring, partial rewires and full rewires for homes and offices, "
-                          "installed to DEWA standards with the correct cable ratings and earthing.",
-                 "types_title": "Where we help:", "types": ["New wiring points", "Partial rewires", "Full property rewires", "Concealed & surface wiring", "Cable upgrades"],
-                 "note": "Ageing or overloaded wiring is a fire risk — we replace it safely and certify the work."},
+                 "intro": "New wiring, extensions, partial rewires and full rewires for homes "
+                          "and offices, installed to DEWA standards with the correct cable "
+                          "ratings and earthing.",
+                 "types_title": "Where we help:", "types": ["New wiring points", "Extensions & additions", "Partial rewires", "Full property rewires", "Concealed & surface wiring", "Cable upgrades"],
+                 "note": "Ageing, overheating or overloaded wiring is a fire risk — we replace it safely and leave it certified."},
                 {"title": "Distribution Boards & Breakers",
-                 "intro": "DB board installation, upgrades and repairs — nuisance tripping, "
-                          "under-rated breakers, RCD/RCBO protection and safe load balancing.",
-                 "types_title": "Common work:", "types": ["New DB boards", "Breaker replacement", "RCD / RCBO protection", "Load balancing", "Trip fault-finding"],
-                 "note": "A board that trips repeatedly is protecting you from a fault — we find the cause, not just reset it."},
-                {"title": "Lighting Installation",
+                 "intro": "Distribution board (DB) installation, upgrades and repairs — nuisance "
+                          "tripping, under-rated breakers, RCD/RCBO protection and safe load "
+                          "balancing for modern power demands.",
+                 "types_title": "Common work:", "types": ["New DB boards", "Breaker replacement", "RCD / RCBO protection", "Load balancing", "Trip fault-finding", "Board upgrades"],
+                 "note": "A board that keeps tripping is protecting you from a real fault — we find the cause, not just reset it."},
+                {"title": "Lighting Installation & Repair",
                  "intro": "Indoor and outdoor lighting — downlights, chandeliers, LED upgrades, "
-                          "dimmers, garden and facade lighting, wired and controlled cleanly.",
-                 "types_title": "We install:", "types": ["Downlights & spotlights", "Chandeliers", "LED upgrades", "Dimmers & controls", "Outdoor & garden lighting"],
-                 "note": "Switching to LED lowers your DEWA bill and the heat load on your home."},
-                {"title": "Sockets, Switches & Fault-Finding",
-                 "intro": "New and faulty sockets and switches, tingling or warm outlets, dead "
-                          "circuits and intermittent faults traced back to the source.",
-                 "types_title": "Typical calls:", "types": ["New sockets & switches", "Warm / discoloured outlets", "Dead circuits", "Intermittent faults", "USB & smart sockets"],
+                          "dimmers, garden and facade lighting — wired, controlled and finished "
+                          "cleanly.",
+                 "types_title": "We install & repair:", "types": ["Downlights & spotlights", "Chandeliers", "LED upgrades", "Dimmers & controls", "Outdoor & garden lighting", "Flickering & failed fittings"],
+                 "note": "Switching to LED lowers your DEWA bill and reduces the heat load in your home."},
+                {"title": "Sockets, Switches & Fixtures",
+                 "intro": "New and faulty sockets and switches, tingling or warm outlets, and "
+                          "the repair or installation of fans, water pumps, motors and other "
+                          "fixed electrical fixtures.",
+                 "types_title": "Typical work:", "types": ["New sockets & switches", "Warm / sparking outlets", "USB & smart sockets", "Fans & exhausts", "Water pumps & motors", "Fixture install & repair"],
                  "note": "A warm socket or a mild tingle is urgent — switch the circuit off and call a licensed electrician."},
+                {"title": "Smart Home & EV Charger Installation",
+                 "intro": "Modern electrical upgrades — home EV charger installation, smart "
+                          "switches, automated lighting and home-automation wiring — installed "
+                          "safely and to standard.",
+                 "types_title": "We set up:", "types": ["Home EV chargers", "Smart switches & plugs", "Automated lighting", "Home automation wiring", "Smart DB monitoring"],
+                 "note": "Planning an EV charger or smart-home upgrade? We'll check your board has the capacity to support it."},
             ],
         },
+        "checkfirst": {
+            "h2": "Common Electrical Problems We Fix",
+            "rows": [
+                {"title": "Tripping Circuit Breakers", "text": "A breaker that keeps tripping is reacting to an overloaded circuit, a faulty appliance, moisture or a wiring fault. We find the cause rather than just resetting it."},
+                {"title": "Faulty Outlets & Switches", "text": "Dead outlets, loose switches or sparking usually point to internal wiring issues, wear or poor installation — important to fix promptly."},
+                {"title": "Flickering or Blown Bulbs", "text": "Persistent flickering or bulbs that keep failing can mean loose wiring, poor connections or a deeper fault that needs professional attention."},
+                {"title": "Partial Power Loss", "text": "When some parts of a home lose power while others keep working, it usually points to a wiring fault, a damaged circuit or a failed breaker."},
+                {"title": "Overloaded Circuits", "text": "Relying on multi-plug adaptors and extension leads causes overheating and fire risk. We add proper outlets or rewire safely to spread the load."},
+                {"title": "Electric Shocks", "text": "Even a mild shock from a socket or appliance signals a wiring or earthing fault. It's never something to ignore — switch it off and call us."},
+                {"title": "Buzzing from Outlets", "text": "Buzzing or humming is not normal — it can indicate loose wiring, a bad connection or arcing, which is a serious fire hazard."},
+                {"title": "Warm or Discoloured Sockets", "text": "A socket or switch plate that feels warm or looks discoloured usually means overheating behind the wall — it needs inspecting before it becomes dangerous."},
+            ],
+            "note": "Any burning smell, spark or scorch mark means stop using the circuit and call us straight away.",
+        },
         "emergency": {
-            "h2": "Emergency Electrical Support",
+            "h2": "24/7 Emergency Electrical Support",
             "lead": "Some electrical faults can't wait for a scheduled visit.",
             "para": "If your board keeps tripping, you can smell burning, you see sparks or "
                     "you've lost power completely, treat it as urgent. Switch off at the main "
-                    "board where it's safe to do so and call us.",
+                    "board where it's safe to do so, keep clear of the fault and call us — our "
+                    "emergency team is available around the clock.",
             "list_title": "Call us straight away for:",
-            "list": ["A distribution board that keeps tripping", "A burning smell from sockets, switches or the board", "Sparks or scorch marks", "A total or partial power loss", "A socket or appliance giving a mild shock"],
+            "list": ["A distribution board that keeps tripping", "A burning smell from sockets, switches or the board", "Sparks or scorch marks", "A total or partial power loss", "A socket or appliance giving an electric shock"],
             "note": "Do not keep resetting a breaker that trips repeatedly — it is protecting the circuit from a real fault.",
-            "explain_title": "What we do on an emergency call:",
-            "explain": ["Make the installation safe first", "Isolate and identify the faulty circuit", "Explain the fault and the fix before proceeding"],
-            "note2": "Once it's safe, we give you a clear picture of the repair and the cost before continuing.",
+            "explain_title": "What to do while you wait:",
+            "explain": ["Switch off the affected circuit at the main board if it's safe", "Unplug appliances on that circuit", "Keep people and water away from the fault"],
+            "note2": "Once it's safe, we make the installation safe first, then explain the fault and the cost before carrying out any repair.",
         },
-        "checkfirst": {
-            "h2": "Common Electrical Situations We Handle",
-            "rows": [
-                {"title": "When a Breaker Keeps Tripping", "text": "We test for overloaded circuits, a faulty appliance, moisture ingress or a failing breaker before deciding on the fix."},
-                {"title": "When Lights Flicker or Dim", "text": "Flickering often points to a loose connection or an overloaded circuit — we trace it back rather than mask it."},
-                {"title": "When a Socket Feels Warm", "text": "A warm or discoloured socket usually means a loose connection or overload. We isolate it and repair it safely."},
-                {"title": "When You're Renovating", "text": "New wiring, extra points, lighting and a suitable board are planned around your layout and future load."},
+        "sameday": {
+            "h2": "The Benefits of Professional Electrical Work",
+            "lead": "Proper electrical work does more than fix the immediate fault.",
+            "para": "Done by a qualified electrician, it protects your home, your appliances "
+                    "and your DEWA bill — and keeps small issues from becoming dangerous ones.",
+            "list_title": "What you gain:",
+            "list": [
+                "Safety & fire prevention — correct wiring, earthing and breaker ratings reduce the risk of shock and fire.",
+                "Lower running costs — efficient circuits and LED lighting cut wasted power and unexpected bills.",
+                "Protected appliances — a balanced, correctly rated system protects your electronics and appliances.",
+                "System longevity — routine care keeps your electrical installation working safely for longer.",
+                "Compliance & peace of mind — work carried out to DEWA and safety standards.",
             ],
-            "note": "Every visit ends with the circuit tested and left safe — no live wire left guessed at.",
+            "note": "Catching a loose connection or an overloaded circuit early is far cheaper — and safer — than dealing with the failure later.",
+        },
+        "properties": {
+            "h2": "Residential, Commercial & Managed Properties",
+            "list_title": "We provide electrical services for:",
+            "list": [
+                "Apartments and villas",
+                "Offices and retail units",
+                "Restaurants and cafes",
+                "Warehouses and light industrial units",
+                "Holiday homes and short-lets",
+                "Buildings and managed property portfolios",
+            ],
+            "notes": [
+                "For businesses and managed properties we can arrange scheduled maintenance and priority call-outs to keep downtime to a minimum.",
+                "Whether it's a single fault in one apartment or planned electrical work across a whole building, one trusted team handles it.",
+            ],
         },
         "why": {
             "h2": "Why Choose Best Fix for Electrical Work",
             "intro": "Electrical work is not the place to cut corners. Here's why Dubai homeowners and businesses call us.",
             "rows": [
-                {"icon": "shield", "title": "Licensed & Compliant", "text": "Work carried out to DEWA standards by qualified electricians — correct ratings, wiring and earthing."},
-                {"icon": "check", "title": "Proper Fault-Finding", "text": "We diagnose the real cause with testing, not guesswork, so the fix holds."},
-                {"icon": "gear", "title": "Clean, Certified Work", "text": "Tidy installation, safe connections and a clear account of what was done."},
+                {"icon": "shield", "title": "Licensed & DEWA-Compliant", "text": "Work carried out to DEWA standards by qualified electricians — correct ratings, wiring and earthing."},
+                {"icon": "check", "title": "Diagnosis First", "text": "We find the real cause with proper testing, not guesswork, so the fix holds."},
+                {"icon": "pin", "title": "24/7 & Same-Day", "text": "Round-the-clock emergency response, with same-day slots wherever possible."},
                 {"icon": "users", "title": "Homes & Businesses", "text": "Apartments, villas, offices, retail and managed properties across Dubai."},
-                {"icon": "pin", "title": "Same-Day & Emergency", "text": "Fast response for urgent faults, with same-day slots wherever possible."},
-                {"icon": "tag", "title": "Clear Pricing", "text": "You know the cost before we start — no surprises on the invoice."},
+                {"icon": "gear", "title": "Clean, Certified Work", "text": "Tidy installation, safe connections and a clear account of what was done."},
+                {"icon": "tag", "title": "Transparent Pricing", "text": "You know the cost before we start — no surprises on the invoice."},
             ],
         },
         "steps": {
-            "h2": "How It Works",
+            "h2": "How We Work",
             "rows": [
-                {"n": "1", "title": "Book a Visit", "text": "Call or message us with the fault or the job and we'll arrange a slot."},
+                {"n": "1", "title": "Get in Touch", "text": "Call or message us with the fault or the job — we often diagnose the likely issue on the call."},
                 {"n": "2", "title": "On-Site Testing", "text": "The electrician tests and inspects to find the real cause."},
-                {"n": "3", "title": "Clear Quote", "text": "You get the fault explained and a clear price before work starts."},
-                {"n": "4", "title": "Safe Repair", "text": "We carry out the work to standard and test the circuit."},
+                {"n": "3", "title": "Clear Quote", "text": "You get the fault explained and a clear price before any work begins."},
+                {"n": "4", "title": "Safe Repair", "text": "We carry out the work to DEWA standards and test the circuit."},
                 {"n": "5", "title": "Left Certified", "text": "The installation is left safe, tidy and working as it should."},
             ],
+        },
+        "repair_replace": {
+            "h2": "Energy-Efficient & Smart Electrical Upgrades",
+            "para": "Beyond repairs, the right upgrades lower your DEWA bill and make your home "
+                    "safer and more convenient. Many older Dubai homes also have boards and "
+                    "wiring that were never sized for today's appliances, EV chargers and "
+                    "smart devices.",
+            "list_title": "Upgrades worth considering:",
+            "list": [
+                "LED lighting to cut lighting costs and heat",
+                "Smart switches, dimmers and automated lighting",
+                "Home EV charger installation",
+                "Distribution-board upgrades for modern loads",
+                "RCD / RCBO protection for added safety",
+                "Energy-saving controls and timers",
+            ],
+            "para2": "We'll assess your existing board and wiring first and tell you honestly "
+                     "what it can support and what's worth upgrading — no unnecessary work.",
+            "note": "An upgrade planned properly today avoids nuisance tripping and rewiring headaches later.",
         },
         "areas": _areas("Electrical Services"),
         "care": {
             "h2": "Simple Electrical Safety Tips",
             "rows": [
-                {"title": "Don't Overload Sockets", "text": "Avoid daisy-chaining extension leads on one outlet, especially with high-load appliances."},
+                {"title": "Don't Overload Sockets", "text": "Avoid daisy-chaining extension leads on one outlet, especially with high-load appliances like heaters and kettles."},
                 {"title": "Act on Warm Sockets", "text": "A warm, buzzing or discoloured socket needs checking — switch it off and call an electrician."},
-                {"title": "Test Your RCD", "text": "If your board has a test button, press it occasionally to confirm the safety trip works."},
-                {"title": "Mind Water & Power", "text": "Keep sockets and appliances away from water, and never handle them with wet hands."},
+                {"title": "Test Your RCD", "text": "If your board has a test button, press it occasionally to confirm the safety trip still works."},
+                {"title": "Keep Water Away", "text": "Keep sockets and appliances away from water and never handle them with wet hands."},
                 {"title": "Use the Right Bulbs", "text": "Stay within the fitting's rated wattage and switch to LED to cut heat and cost."},
                 {"title": "Never Ignore a Burning Smell", "text": "A burning smell or scorch mark means stop using the circuit and get it inspected immediately."},
             ],
         },
         "faq_h2": "Electrical Services FAQs",
         "faqs": [
-            {"q": "Why does my breaker keep tripping?", "a": "A breaker that trips repeatedly is usually reacting to an overloaded circuit, a faulty appliance, moisture or a wiring fault. We test the circuit to find the exact cause rather than simply resetting it."},
-            {"q": "Are your electricians licensed?", "a": "Yes. Our electrical work is carried out to DEWA standards by qualified electricians, with correct breaker ratings, wiring and earthing."},
-            {"q": "Can you help in an emergency?", "a": "Yes. For tripping boards, burning smells, sparks or total power loss we prioritise the call, make the installation safe first, then diagnose and repair."},
-            {"q": "Do you handle both homes and offices?", "a": "We work across apartments, villas, offices, retail units and managed properties throughout Dubai."},
-            {"q": "Can you upgrade my lighting to LED?", "a": "Yes. LED upgrades lower your DEWA bill and reduce heat. We handle downlights, chandeliers, dimmers and outdoor lighting."},
-            {"q": "Will you give me a price before starting?", "a": "Always. After testing we explain the fault and give you a clear price before any work begins."},
+            {"q": "What electrical services do you offer?", "a": "We cover the full range — wiring and rewiring, distribution boards and breakers, lighting, sockets and switches, fixtures, fault-finding, EV chargers and smart-home upgrades, plus 24/7 emergency repairs for homes and businesses across Dubai."},
+            {"q": "Are your electricians licensed and DEWA-compliant?", "a": "Yes. Our electrical work is carried out to DEWA standards by qualified electricians, with the correct breaker ratings, wiring and earthing."},
+            {"q": "Do you offer 24/7 emergency electrical services?", "a": "Yes. For tripping boards, burning smells, sparks or total power loss we're available around the clock — we make the installation safe first, then diagnose and repair."},
+            {"q": "What should I do if my circuit breaker keeps tripping?", "a": "Don't keep resetting it — a breaker that trips repeatedly is protecting the circuit from a real fault such as an overload, a faulty appliance or a wiring issue. Switch off the affected circuit and call us to test it."},
+            {"q": "Why do my lights flicker or bulbs keep blowing?", "a": "Persistent flickering or repeated bulb failures usually point to a loose connection, poor wiring or the wrong type of bulb, and can sometimes signal a more serious fault. It's worth having it checked."},
+            {"q": "Is a mild electric shock from a socket serious?", "a": "Yes. Even a mild shock indicates a wiring or earthing fault and should never be ignored. Stop using the socket or appliance and have it inspected."},
+            {"q": "Do you work on both homes and businesses?", "a": "Yes. We cover apartments, villas, offices, retail units and managed properties, and can arrange scheduled maintenance and priority call-outs for businesses."},
+            {"q": "Can you install EV chargers and smart-home systems?", "a": "Yes. We install home EV chargers, smart switches, automated lighting and home-automation wiring, and we'll first confirm your distribution board can support the extra load."},
+            {"q": "Can you help lower my electricity bill?", "a": "Yes. LED upgrades, efficient controls and a correctly balanced system reduce wasted power. We'll advise on the upgrades that make the most difference."},
+            {"q": "Do you help relocate electrical points during a renovation?", "a": "Yes. We add, move and re-route sockets, switches, lighting and wiring to suit a new layout, planned around your renovation."},
+            {"q": "How quickly can you respond?", "a": "We prioritise emergencies and offer same-day appointments wherever possible; non-urgent work is booked to a convenient slot."},
+            {"q": "Will I get a price before you start?", "a": "Always. After testing we explain the fault and give you a clear price before any work begins."},
         ],
     },
 
