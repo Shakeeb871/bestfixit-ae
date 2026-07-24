@@ -571,3 +571,8 @@ SERVICE_PAGES = {
         },
     },
 }
+
+
+# Merge in the rich pages for the remaining core services.
+from data.service_pages_extra import EXTRA_SERVICE_PAGES
+SERVICE_PAGES.update(EXTRA_SERVICE_PAGES)
