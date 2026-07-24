@@ -137,7 +137,7 @@
 .bfh__nav{ background:#024d87; }
 .bfh__nav-inner{ max-width:1280px; margin:0 auto; padding:0 clamp(8px,2vw,26px); list-style:none; display:flex; align-items:stretch; justify-content:center; }
 .bfh__nav-item{ position:relative; }
-.bfh__nav-link{ display:inline-flex; align-items:center; gap:5px; height:48px; padding:0 clamp(9px,1vw,15px); color:rgba(255,255,255,.92); font-size:13px; font-weight:700; letter-spacing:.02em; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:background .18s ease, color .18s ease; }
+.bfh__nav-link{ display:inline-flex; align-items:center; gap:5px; height:48px; padding:0 clamp(9px,1vw,15px); color:rgba(255,255,255,.92); font-family:var(--font-heading); font-size:14px; font-weight:600; letter-spacing:.01em; text-decoration:none; white-space:nowrap; transition:background .18s ease, color .18s ease; }
 .bfh__nav-link .bfh-chev{ width:12px; height:12px; opacity:.8; transition:transform .25s ease; }
 .bfh__nav-item:hover > .bfh__nav-link, .bfh__nav-link.is-active{ background:rgba(255,255,255,.13); color:#fff; }
 .bfh__nav-item:hover > .bfh__nav-link .bfh-chev{ transform:rotate(180deg); }
@@ -148,7 +148,7 @@
   transition:opacity .22s ease, transform .22s ease, visibility .22s; z-index:20; border-top:3px solid #1f9d55; }
 .bfh__nav-item:hover > .bfh__dd{ opacity:1; visibility:visible; transform:translateY(0); }
 .bfh__nav-item:last-child .bfh__dd, .bfh__nav-item:nth-last-child(2) .bfh__dd{ left:auto; right:0; }
-.bfh__dd-link{ display:block; padding:10px 14px; color:#303236; font-size:14px; font-weight:600; text-decoration:none; border-radius:8px; transition:background .16s ease, color .16s ease, padding-left .16s ease; }
+.bfh__dd-link{ display:block; padding:10px 14px; color:#303236; font-family:var(--font-heading); font-size:14px; font-weight:600; letter-spacing:.01em; text-decoration:none; border-radius:8px; transition:background .16s ease, color .16s ease, padding-left .16s ease; }
 .bfh__dd-link:hover{ background:#f2f6fb; color:#024d87; padding-left:18px; }
 .bfh__dd-link.is-active{ background:#eaf1fb; color:#024d87; font-weight:800; }
 .bfh__dd-all{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:6px; padding:11px 14px; color:#024d87; font-size:12.5px; font-weight:800; text-decoration:none; border-top:1px solid #eef1f6; text-transform:uppercase; letter-spacing:.03em; }
@@ -269,7 +269,6 @@
           <a class="bfh__dd-link" href="/services/{{ s.slug }}/">{{ p }}</a>
           {% endfor %}
           {% endif %}
-          <a class="bfh__dd-all" href="/services/{{ s.slug }}/">View All {{ nav_labels.get(s.slug, s.title) }}{{ _arrow|safe }}</a>
         </div>
       </li>
       {% endfor %}
@@ -326,7 +325,6 @@
           <a href="/services/{{ s.slug }}/">{{ p }}</a>
           {% endfor %}
           {% endif %}
-          <a class="bfh-acc__all" href="/services/{{ s.slug }}/">View All {{ nav_labels.get(s.slug, s.title) }} ›</a>
         </div></div>
       </div>
       {% endfor %}
