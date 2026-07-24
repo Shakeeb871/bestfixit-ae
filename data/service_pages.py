@@ -576,3 +576,62 @@ SERVICE_PAGES = {
 # Merge in the rich pages for the remaining core services.
 from data.service_pages_extra import EXTRA_SERVICE_PAGES
 SERVICE_PAGES.update(EXTRA_SERVICE_PAGES)
+
+
+# --------------------------------------------------------------------------- #
+# Standard: a core-service page shows at most TWO images (hero + diagnosis).
+# Every other media slot uses a service-related icon instead of a photo.
+# This post-processing strips extra image keys and assigns icons.
+# --------------------------------------------------------------------------- #
+_SERVICE_ICON = {
+    "home-appliances-repair": "gear", "electrical-services": "bolt",
+    "hvac-services": "wind", "plumbing-services": "droplet",
+    "electromechanical-services": "gear", "swimming-pool-services": "pool",
+    "painting-cleaning-services": "brush", "false-ceiling-partition-services": "ruler",
+}
+_BLOCK_ICONS = [
+    (("rewir", "wiring"), "bolt"),
+    (("board", "breaker", "distribution", "panel"), "gear"),
+    (("light",), "bulb"),
+    (("socket", "switch", "fixture", "plug"), "plug"),
+    (("smart", "ev ", "charger"), "ev"),
+    (("wash",), "droplet"),
+    (("fridge", "refriger", "freez"), "snow"),
+    (("oven", "cook", "hob", "stove"), "flame"),
+    (("dishwash",), "droplet"),
+    (("microwav",), "bolt"),
+    (("dryer", "tumble"), "wind"),
+    (("duct", "vent", "airflow"), "wind"),
+    (("gas",), "flame"),
+    (("cool", "air", "a/c"), "snow"),
+    (("servic", "maintenance", "preventive"), "wrench"),
+    (("leak",), "droplet"),
+    (("drain", "block"), "droplet"),
+    (("heater", "heat"), "flame"),
+    (("tap", "toilet", "inlet", "sanitary", "water"), "droplet"),
+    (("pump", "filter"), "gear"),
+    (("pool", "chemical", "chlorin"), "pool"),
+    (("paint", "wall", "prep"), "brush"),
+    (("clean",), "spray"),
+    (("ceiling", "partition", "gypsum", "cove", "fit-out", "finish"), "ruler"),
+]
+def _icon_for(title):
+    t = (title or "").lower()
+    for kws, ic in _BLOCK_ICONS:
+        if any(k in t for k in kws):
+            return ic
+    return "gear"
+
+for _slug, _p in SERVICE_PAGES.items():
+    for _b in _p.get("services", {}).get("blocks", []):
+        _b.pop("img", None)
+        _b["icon"] = _icon_for(_b.get("title", ""))
+    for _k, _ic in (("emergency", "alert"), ("sameday", "check"),
+                    ("properties", "building"), ("repair_replace", "leaf")):
+        _s = _p.get(_k)
+        if isinstance(_s, dict):
+            _s.pop("image", None); _s.pop("img", None)
+            _s["icon"] = _ic
+    _d = _p.get("diagnosis")
+    if isinstance(_d, dict) and not _d.get("image"):
+        _d["icon"] = _SERVICE_ICON.get(_slug, "gear")

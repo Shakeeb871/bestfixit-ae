@@ -63,10 +63,10 @@ EXTRA_SERVICE_PAGES = {
             ],
             "note": "24/7 emergency support is available for tripping boards, burning smells, "
                     "sparks and total power loss.",
-            "cta_label": "Book an Electrician",
+            "image": "img/Electrical Services in Dubai Licensed, Safe and Reliable.webp", "image_alt": "Licensed electrician at work in Dubai — Best Fix", "cta_label": "Book an Electrician",
         },
         "diagnosis": {
-            "h2": "We Diagnose the Root Cause First",
+            "h2": "We Diagnose the Root Cause First", "image": "img/We Diagnose the Root Cause First.webp",
             "paras": [
                 "Electrical work is only as safe as the diagnosis behind it. Every situation "
                 "is different, so our electricians start with a proper inspection — testing "
@@ -81,31 +81,31 @@ EXTRA_SERVICE_PAGES = {
         "services": {
             "h2": "Electrical Services We Provide",
             "blocks": [
-                {"title": "Wiring & Rewiring",
+                {"title": "Wiring & Rewiring", "img": "Wiring & Rewiring.webp",
                  "intro": "New wiring, extensions, partial rewires and full rewires for homes "
                           "and offices, installed to DEWA standards with the correct cable "
                           "ratings and earthing.",
                  "types_title": "Where we help:", "types": ["New wiring points", "Extensions & additions", "Partial rewires", "Full property rewires", "Concealed & surface wiring", "Cable upgrades"],
                  "note": "Ageing, overheating or overloaded wiring is a fire risk — we replace it safely and leave it certified."},
-                {"title": "Distribution Boards & Breakers",
+                {"title": "Distribution Boards & Breakers", "img": "Distribution Boards & Breakers.webp",
                  "intro": "Distribution board (DB) installation, upgrades and repairs — nuisance "
                           "tripping, under-rated breakers, RCD/RCBO protection and safe load "
                           "balancing for modern power demands.",
                  "types_title": "Common work:", "types": ["New DB boards", "Breaker replacement", "RCD / RCBO protection", "Load balancing", "Trip fault-finding", "Board upgrades"],
                  "note": "A board that keeps tripping is protecting you from a real fault — we find the cause, not just reset it."},
-                {"title": "Lighting Installation & Repair",
+                {"title": "Lighting Installation & Repair", "img": "Lighting Installation & Repair.webp",
                  "intro": "Indoor and outdoor lighting — downlights, chandeliers, LED upgrades, "
                           "dimmers, garden and facade lighting — wired, controlled and finished "
                           "cleanly.",
                  "types_title": "We install & repair:", "types": ["Downlights & spotlights", "Chandeliers", "LED upgrades", "Dimmers & controls", "Outdoor & garden lighting", "Flickering & failed fittings"],
                  "note": "Switching to LED lowers your DEWA bill and reduces the heat load in your home."},
-                {"title": "Sockets, Switches & Fixtures",
+                {"title": "Sockets, Switches & Fixtures", "img": "Sockets, Switches & Fixtures.webp",
                  "intro": "New and faulty sockets and switches, tingling or warm outlets, and "
                           "the repair or installation of fans, water pumps, motors and other "
                           "fixed electrical fixtures.",
                  "types_title": "Typical work:", "types": ["New sockets & switches", "Warm / sparking outlets", "USB & smart sockets", "Fans & exhausts", "Water pumps & motors", "Fixture install & repair"],
                  "note": "A warm socket or a mild tingle is urgent — switch the circuit off and call a licensed electrician."},
-                {"title": "Smart Home & EV Charger Installation",
+                {"title": "Smart Home & EV Charger Installation", "img": "Smart Home & EV Charger Installation.webp",
                  "intro": "Modern electrical upgrades — home EV charger installation, smart "
                           "switches, automated lighting and home-automation wiring — installed "
                           "safely and to standard.",
@@ -128,7 +128,7 @@ EXTRA_SERVICE_PAGES = {
             "note": "Any burning smell, spark or scorch mark means stop using the circuit and call us straight away.",
         },
         "emergency": {
-            "h2": "24/7 Emergency Electrical Support",
+            "h2": "24/7 Emergency Electrical Support", "img": "247 Emergency Electrical Support.webp",
             "lead": "Some electrical faults can't wait for a scheduled visit.",
             "para": "If your board keeps tripping, you can smell burning, you see sparks or "
                     "you've lost power completely, treat it as urgent. Switch off at the main "
@@ -142,7 +142,7 @@ EXTRA_SERVICE_PAGES = {
             "note2": "Once it's safe, we make the installation safe first, then explain the fault and the cost before carrying out any repair.",
         },
         "sameday": {
-            "h2": "The Benefits of Professional Electrical Work",
+            "h2": "The Benefits of Professional Electrical Work", "image": "img/The Benefits of Professional Electrical Work.webp",
             "lead": "Proper electrical work does more than fix the immediate fault.",
             "para": "Done by a qualified electrician, it protects your home, your appliances "
                     "and your DEWA bill — and keeps small issues from becoming dangerous ones.",
@@ -157,7 +157,7 @@ EXTRA_SERVICE_PAGES = {
             "note": "Catching a loose connection or an overloaded circuit early is far cheaper — and safer — than dealing with the failure later.",
         },
         "properties": {
-            "h2": "Residential, Commercial & Managed Properties",
+            "h2": "Residential, Commercial & Managed Properties", "image": "img/Residential, Commercial & Managed Properties.webp",
             "list_title": "We provide electrical services for:",
             "list": [
                 "Apartments and villas",
@@ -195,7 +195,7 @@ EXTRA_SERVICE_PAGES = {
             ],
         },
         "repair_replace": {
-            "h2": "Energy-Efficient & Smart Electrical Upgrades",
+            "h2": "Energy-Efficient & Smart Electrical Upgrades", "image": "img/Energy-Efficient & Smart Electrical Upgrades.webp",
             "para": "Beyond repairs, the right upgrades lower your DEWA bill and make your home "
                     "safer and more convenient. Many older Dubai homes also have boards and "
                     "wiring that were never sized for today's appliances, EV chargers and "
