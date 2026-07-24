@@ -631,7 +631,7 @@ for _slug, _p in SERVICE_PAGES.items():
     for _b in _p.get("services", {}).get("blocks", []):
         if not _keep:
             _b.pop("img", None)
-        if not _b.get("img"):
+        if not _b.get("img") and not _b.get("icon"):
             _b["icon"] = _icon_for(_b.get("title", ""))
     for _k, _ic in (("emergency", "alert"), ("sameday", "check"),
                     ("properties", "building"), ("repair_replace", "leaf")):

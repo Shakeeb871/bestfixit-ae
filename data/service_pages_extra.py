@@ -511,118 +511,105 @@ EXTRA_SERVICE_PAGES = {
     # ELECTROMECHANICAL
     # ===================================================================== #
     "electromechanical-services": {
-        "meta_title": "Electromechanical Services in Dubai | MEP & Maintenance — Best Fix",
+        "meta_title": "Electromechanical (MEP) Services in Dubai | Best Fix",
         "meta_description": (
-            "Electromechanical (MEP) services in Dubai by Best Fix — combined electrical, "
-            "mechanical, HVAC and plumbing installation and maintenance for homes, "
-            "offices, retail and managed properties. One trusted team."
+            "Electromechanical (MEP) services in Dubai by Best Fix — installation, "
+            "maintenance and repair of mechanical, electrical, plumbing and ELV systems "
+            "for offices, retail, villas and managed properties. One coordinated team."
         ),
         "breadcrumb": "Electromechanical Services",
         "hero": {
-            "trustline": "MEP Installation & Maintenance · One Coordinated Team",
-            "h1_accent": "Electromechanical Services in Dubai",
-            "h1": "MEP, Handled by One Team",
-            "subheading": "Combined electrical, mechanical, HVAC and plumbing work for homes, offices, retail and managed properties.",
+            "trustline": "Mechanical \u00b7 Electrical \u00b7 Plumbing \u00b7 One MEP Team",
+            "h1_accent": "Electromechanical (MEP) Services in Dubai",
+            "h1": "Mechanical, Electrical & Plumbing, Under One Team",
+            "subheading": "Installation, maintenance and repair of mechanical, electrical and plumbing systems for offices, retail, villas and managed properties.",
             "paras": [
-                "Most buildings don't fail one system at a time — a fit-out, a maintenance "
-                "contract or a fault often touches electrical, mechanical, HVAC and plumbing "
-                "together. Coordinating separate contractors is where things slip.",
-                "Best Fix provides electromechanical (MEP) services across Dubai, bringing "
-                "electrical, HVAC, plumbing and mechanical work under one coordinated team — "
-                "for installation, maintenance and fault-finding.",
-                "That means fewer handoffs, one point of contact and work that's planned so the "
-                "systems actually work together, cleanly and to standard.",
+                "Mechanical, electrical and plumbing systems are the backbone of every "
+                "building. When one of them falters, comfort, safety and day-to-day "
+                "operations are all affected \u2014 often at the same time.",
+                "Best Fix delivers complete electromechanical (MEP) services across Dubai, "
+                "keeping these systems running safely and efficiently. From air-handling "
+                "units and electrical panels to internal drainage and water networks, one "
+                "coordinated team handles the whole scope.",
+                "The result is reliable performance, fewer unplanned shutdowns and clean, "
+                "standards-compliant work \u2014 whether you need a new installation, a "
+                "maintenance contract or a fast repair.",
             ],
-            "note": "Ideal for offices, retail units, villas and managed properties needing coordinated MEP work.",
-            "cta_label": "Discuss Your Project",
+            "note": "Serving offices, retail units, villas and managed properties across Dubai.",
+            "cta_label": "Contact Best Fix",
         },
         "diagnosis": {
-            "h2": "One Team That Sees the Whole Picture",
+            "h2": "Complete MEP Support From a Trusted Contractor",
             "paras": [
-                "When electrical, cooling and plumbing all meet — a new office, a villa "
-                "refurbishment, a retail fit-out — the value is in coordination. We assess the "
-                "whole scope first so systems are planned together, not patched around each other.",
-                "For maintenance, one team that understands every system means faults are "
-                "diagnosed faster and nothing falls between contractors.",
+                "MEP systems are central to both the daily running and the long-term "
+                "sustainability of any facility. Our teams bring technical skill and "
+                "hands-on field experience to every site \u2014 covering everything from "
+                "air-handling units and electrical panels to internal drainage and water "
+                "systems.",
+                "All work is carried out in line with compliance standards and backed by "
+                "structured quality control, ongoing technician training and a genuine "
+                "focus on energy performance. That combination helps extend the life of "
+                "critical assets, cut energy waste and keep your building compliant.",
             ],
         },
         "services": {
-            "h2": "Electromechanical Services We Provide",
+            "h2": "What Our MEP Services Cover",
             "blocks": [
-                {"title": "Electrical Systems",
-                 "intro": "Wiring, distribution boards, lighting, power points and fault-finding, "
-                          "installed and maintained to DEWA standards.",
-                 "types_title": "Includes:", "types": ["Wiring & rewiring", "DB boards & breakers", "Lighting & power points", "Fault-finding", "Testing & certification"],
-                 "note": "Delivered as part of a coordinated MEP scope or as standalone electrical work."},
-                {"title": "HVAC & Mechanical",
-                 "intro": "Air-conditioning, ventilation and mechanical systems installed, "
-                          "serviced and repaired for comfort and efficiency.",
-                 "types_title": "Includes:", "types": ["AC install & service", "Ventilation", "Ducting", "Exhaust & fresh-air systems", "Preventive maintenance"],
-                 "note": "Correctly sized and maintained systems keep running costs down."},
-                {"title": "Plumbing & Water Systems",
-                 "intro": "Water supply, drainage, heaters and sanitary fittings installed and "
-                          "maintained cleanly and to standard.",
-                 "types_title": "Includes:", "types": ["Water supply & drainage", "Water heaters", "Pumps", "Sanitary fittings", "Leak & blockage repair"],
-                 "note": "Planned alongside electrical and HVAC so everything is coordinated."},
-                {"title": "Planned & Preventive Maintenance",
-                 "intro": "Scheduled maintenance contracts that keep electrical, HVAC and "
-                          "plumbing systems running reliably across a property.",
-                 "types_title": "Covers:", "types": ["Scheduled inspections", "Preventive servicing", "Priority call-outs", "Facilities support", "Reporting"],
-                 "note": "One contract, one team — ideal for offices, retail and managed properties."},
+                {"title": "Mechanical Systems", "icon": "fan",
+                 "intro": "Maintenance of the key mechanical components that keep a building "
+                          "moving \u2014 pumps, air-handling units and ventilation \u2014 with "
+                          "regular inspection and corrective work to prevent unplanned shutdowns.",
+                 "types_title": "Includes:", "types": ["Pumps", "Air-handling units", "Ventilation systems", "Motors & drives", "Preventive inspections"],
+                 "note": "All activity follows the relevant safety and compliance standards."},
+                {"title": "Electrical Systems", "icon": "bolt",
+                 "intro": "Electrical work covering distribution boards, control panels, "
+                          "capacitor banks, lighting and generator equipment, delivered with a "
+                          "strong focus on reliability and risk reduction.",
+                 "types_title": "Includes:", "types": ["Distribution boards", "Control panels", "Capacitor banks", "Lighting systems", "Generators & transfer switches"],
+                 "note": "Specialised installations such as automatic transfer switches are handled in-house."},
+                {"title": "Plumbing Systems", "icon": "droplet",
+                 "intro": "Servicing and maintenance of complete internal plumbing networks \u2014 "
+                          "drainage, sump and sewage pumps and rainwater infrastructure \u2014 with "
+                          "pressure and flow managed to meet demand during peak use.",
+                 "types_title": "Includes:", "types": ["Water supply & drainage", "Sump & sewage pumps", "Rainwater systems", "Pressure & flow control", "Leak & blockage repair"],
+                 "note": "Effective monitoring keeps performance steady when the building is busiest."},
+                {"title": "ELV (Extra-Low Voltage) Systems", "icon": "shield",
+                 "intro": "Installation and maintenance of extra-low-voltage systems that support "
+                          "building security and automation, with proper configuration, regular "
+                          "testing and a fast response to faults.",
+                 "types_title": "Includes:", "types": ["CCTV", "Intrusion alarms", "Motion sensors", "Door access systems", "Testing & configuration"],
+                 "note": "Correctly configured ELV systems keep a property secure and connected."},
             ],
         },
         "checkfirst": {
-            "h2": "Where Electromechanical Work Helps",
+            "h2": "Our Wider Facilities Portfolio",
             "rows": [
-                {"title": "Office & Retail Fit-Outs", "text": "Electrical, lighting, AC and plumbing planned and installed together for a clean handover."},
-                {"title": "Villa Refurbishments", "text": "Coordinated MEP work so cooling, power and water systems fit the new layout."},
-                {"title": "Managed Properties", "text": "One maintenance team covering every system across a building or portfolio."},
-                {"title": "Recurring Faults", "text": "A team that understands the whole system finds root causes that single trades can miss."},
+                {"title": "HVAC Systems Maintenance", "text": "Regular servicing of heating, ventilation and air-conditioning systems to protect indoor air quality and energy efficiency."},
+                {"title": "Civil & Fit-Out Works", "text": "Structural repairs, renovations and general building maintenance that preserve the integrity and appearance of your facility."},
+                {"title": "Infrastructure Maintenance", "text": "Upkeep of essential elements \u2014 lighting, signage and utility systems \u2014 that keep communities and commercial spaces running smoothly."},
+                {"title": "Consultancy & Planning", "text": "Practical facilities-management advice that aligns your operations with recognised best practices and standards."},
             ],
-            "note": "One point of contact means fewer delays and no gaps between contractors.",
+            "note": "One provider across MEP, HVAC, civil and infrastructure means fewer handoffs and a single point of contact.",
         },
         "why": {
-            "h2": "Why Choose Best Fix for MEP",
-            "intro": "Coordinated MEP work removes the friction of juggling separate trades. Here's what you get.",
+            "h2": "Why Partner With Best Fix for MEP",
+            "intro": "Choosing Best Fix means working with a partner that understands the cost of downtime and the value of prevention.",
             "rows": [
-                {"icon": "users", "title": "One Coordinated Team", "text": "Electrical, HVAC and plumbing under one contact — fewer handoffs."},
-                {"icon": "shield", "title": "To Standard", "text": "Work carried out to DEWA and industry standards, safely and cleanly."},
-                {"icon": "gear", "title": "Full MEP Scope", "text": "Installation, maintenance and fault-finding across every system."},
-                {"icon": "home", "title": "Homes & Commercial", "text": "Villas, offices, retail units and managed properties across Dubai."},
-                {"icon": "check", "title": "Planned Properly", "text": "Systems designed to work together, not patched around each other."},
-                {"icon": "tag", "title": "Clear Scope & Pricing", "text": "A clear scope and price up front, with tidy delivery."},
-            ],
-        },
-        "steps": {
-            "h2": "How It Works",
-            "rows": [
-                {"n": "1", "title": "Tell Us the Scope", "text": "Share your project or maintenance needs and we'll assess the full picture."},
-                {"n": "2", "title": "Survey & Plan", "text": "We survey the site and plan the coordinated MEP works."},
-                {"n": "3", "title": "Clear Proposal", "text": "You get a clear scope and price before work begins."},
-                {"n": "4", "title": "Coordinated Delivery", "text": "One team delivers electrical, HVAC and plumbing together."},
-                {"n": "5", "title": "Tested & Handed Over", "text": "Systems are tested, certified where needed and handed over clean."},
-            ],
-        },
-        "areas": _areas("Electromechanical Services"),
-        "care": {
-            "h2": "Getting the Most From Your MEP Systems",
-            "rows": [
-                {"title": "Plan Maintenance", "text": "Scheduled servicing prevents most breakdowns and extends system life."},
-                {"title": "Keep One Record", "text": "A single maintenance record across systems makes faults quicker to diagnose."},
-                {"title": "Act on Small Signs", "text": "Minor issues in one system often signal a wider problem — worth an early check."},
-                {"title": "Size It Right", "text": "Correctly sized AC, power and water systems run more efficiently and cost less."},
-                {"title": "Coordinate Changes", "text": "Plan layout changes across all systems together to avoid rework."},
-                {"title": "Use One Team", "text": "A single team that knows your building responds faster and misses less."},
+                {"icon": "gear", "title": "Full MEP Scope", "text": "Mechanical, electrical, plumbing and ELV systems handled by one coordinated team."},
+                {"icon": "shield", "title": "Compliant & Safe", "text": "Work delivered to the relevant safety and compliance standards, with structured quality control."},
+                {"icon": "clock", "title": "Less Downtime", "text": "Planned, preventive maintenance that catches faults early and keeps critical assets running."},
+                {"icon": "leaf", "title": "Energy Efficiency", "text": "Smarter systems and early intervention that reduce energy waste and running costs."},
+                {"icon": "users", "title": "Skilled Technicians", "text": "Specialised teams with real field experience and ongoing training."},
+                {"icon": "check", "title": "Responsive Support", "text": "Fast technical response and clear communication whenever you need it."},
             ],
         },
         "faq_h2": "Electromechanical Services FAQs",
         "faqs": [
-            {"q": "What are electromechanical (MEP) services?", "a": "MEP covers the mechanical, electrical and plumbing systems in a building — air-conditioning, power, lighting, water and drainage — installed and maintained together as one coordinated scope."},
-            {"q": "Do you handle both installation and maintenance?", "a": "Yes. We deliver new MEP installation for fit-outs and refurbishments, and ongoing planned maintenance for homes, offices and managed properties."},
-            {"q": "Can you take on office and retail fit-outs?", "a": "Yes. We coordinate electrical, lighting, AC and plumbing for office, retail and commercial fit-outs, delivered by one team."},
-            {"q": "Do you offer maintenance contracts?", "a": "Yes. We provide scheduled preventive maintenance with priority call-outs, ideal for managed properties and businesses."},
-            {"q": "Is the work done to standard?", "a": "Yes. Electrical work follows DEWA standards, and all systems are installed and tested to the relevant industry requirements."},
-            {"q": "Why use one team instead of separate contractors?", "a": "One coordinated team means fewer handoffs, a single point of contact, faster fault diagnosis and systems planned to work together."},
+            {"q": "Who are MEP services suitable for?", "a": "MEP services suit any building that relies on mechanical, electrical and plumbing systems \u2014 offices, retail units, villas, residential towers and managed properties. The scope is tailored to the facility, from one-off repairs to full maintenance contracts."},
+            {"q": "How does Best Fix ensure quality and compliance?", "a": "Every job follows the relevant safety and compliance standards and is supported by structured quality control, trained technicians and clear reporting, so you can be confident the work is done correctly."},
+            {"q": "How do MEP services help reduce downtime?", "a": "Planned, preventive maintenance identifies wear and small faults before they turn into failures. Catching issues early keeps systems running and avoids costly, unplanned shutdowns."},
+            {"q": "What makes Best Fix different from other MEP providers?", "a": "One coordinated team across mechanical, electrical, plumbing and ELV systems, combined with field experience, responsive support and a focus on energy efficiency \u2014 you get reliability and a single point of contact."},
+            {"q": "Why is MEP coordination important?", "a": "Mechanical, electrical and plumbing systems interact constantly. Coordinating them under one team means they are planned to work together, faults are diagnosed faster, and nothing falls between separate contractors."},
         ],
     },
 
