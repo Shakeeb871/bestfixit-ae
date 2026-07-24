@@ -215,15 +215,16 @@
 .svp-step h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:17px; color:#000; }
 .svp-step p{ margin:0; font-size:14.5px !important; line-height:1.55 !important; }
 
-/* ── care cards (coloured top accent) ── */
-.svp-care{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,22px); }
-.svp-carecard{ background:#fff; border:1px solid #00000017; border-top:3px solid #1594ac;
-  border-radius:7px; padding:clamp(22px,2.2vw,28px); }
-.svp-care .svp-carecard:nth-child(4n+1){ border-top-color:#024d87; }
-.svp-care .svp-carecard:nth-child(4n+2){ border-top-color:#2c74c0; }
-.svp-care .svp-carecard:nth-child(4n+3){ border-top-color:#1594ac; }
-.svp-care .svp-carecard:nth-child(4n+4){ border-top-color:#1f9d55; }
-.svp-carecard h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:16.5px; color:#000; }
+/* ── cards — soft pastel fills, no border (site-wide standard) ── */
+.svp-care{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,20px); }
+.svp-carecard{ background:#f2f4f6; border:0; border-radius:14px; padding:clamp(20px,2.2vw,26px); }
+.svp-care .svp-carecard:nth-child(6n+1){ background:#fbfbe6; }
+.svp-care .svp-carecard:nth-child(6n+2){ background:#fdf0f4; }
+.svp-care .svp-carecard:nth-child(6n+3){ background:#f2f4f6; }
+.svp-care .svp-carecard:nth-child(6n+4){ background:#eef4fb; }
+.svp-care .svp-carecard:nth-child(6n+5){ background:#fdf3ed; }
+.svp-care .svp-carecard:nth-child(6n+6){ background:#edf6f2; }
+.svp-carecard h3{ margin:0 0 8px; font-family:var(--font-heading); font-weight:800; font-size:16.5px; color:#0f1a2b; }
 .svp-carecard p{ margin:0; font-size:14.5px !important; line-height:1.55 !important; }
 
 /* ── brands ── */
@@ -231,12 +232,13 @@
 .svp-brand{ background:#fff; border:1px solid #00000017; border-radius:7px; aspect-ratio:1.6; display:grid; place-items:center; padding:12px; }
 .svp-brand img{ max-width:100%; max-height:100%; object-fit:contain; }
 
-/* ── area chips ── */
-.svp-chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
-.svp-chip{ display:inline-flex; align-items:center; padding:9px 16px; border:1px solid #cfe0f5;
-  border-radius:30px; background:#eaf1fb; font-size:14px; font-weight:700; color:#024d87;
-  transition:background .2s ease, color .2s ease; }
-.svp-chip:hover{ background:#024d87; color:#fff; }
+/* ── areas served — professional 3-column icon list (green pin + name) ── */
+.svp-arealist{ list-style:none; margin:22px 0 0; padding:0;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px 26px; }
+.svp-arealist li{ display:flex; align-items:center; gap:9px; font-size:14.5px; line-height:1.4; color:#1a2430; }
+.svp-arealist svg{ flex:none; width:17px; height:17px; color:#1f9d55; }
+@media (max-width:640px){ .svp-arealist{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:420px){ .svp-arealist{ grid-template-columns:1fr; } }
 
 /* ── FAQ ── */
 .svp-faq{ max-width:900px; display:flex; flex-direction:column; gap:12px; }
@@ -336,7 +338,7 @@
           <h3>{{ blk.title }}</h3>
           <p>{{ blk.intro }}</p>
           <p class="svp-listtitle">{{ blk.types_title }}</p>
-          <div class="svp-tags">{% for t in blk.types %}<span class="svp-tag">{{ t }}</span>{% endfor %}</div>
+          {{ checklist(blk.types, '2') }}
           {% if blk.faults %}
           <p class="svp-listtitle">{{ blk.faults_title }}</p>
           {{ checklist(blk.faults) }}
@@ -464,7 +466,11 @@
     <div class="wrap">
       {{ sechead('Coverage', page.areas.h2) }}
       <div class="svp-prose"><p>{{ page.areas.intro }}</p></div>
-      <div class="svp-chips">{% for c in page.areas.list %}<span class="svp-chip">{{ c }}</span>{% endfor %}</div>
+      <ul class="svp-arealist">
+        {% for c in page.areas.list %}
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg><span>{{ c }}</span></li>
+        {% endfor %}
+      </ul>
       <div class="svp-note" style="max-width:900px;"><p>{{ page.areas.note }}</p></div>
     </div>
   </section>
