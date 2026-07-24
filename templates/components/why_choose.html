@@ -29,13 +29,13 @@
 .hfy__grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px 16px; padding-top:70px; }
 .hfy-card{ position:relative; min-height:264px; box-sizing:border-box;
   display:flex; flex-direction:column; align-items:stretch;
-  padding:56px 0 18px; background:#fff; border-radius:7px; border:1px solid #00000017;
+  padding:60px 0 18px; background:#fff; border-radius:7px; border:1px solid #00000017;
   text-decoration:none; color:inherit; transition:transform .24s ease; }
 .hfy-card:hover{ transform:translateY(-5px); }
 
 /* circular image badge — identical to the services cards */
-.hfy-card__badge{ position:absolute; top:-35px; left:50%; transform:translateX(-50%);
-  width:70px; height:70px; border-radius:50%; z-index:3; overflow:hidden;
+.hfy-card__badge{ position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+  width:80px; height:80px; border-radius:50%; z-index:3; overflow:hidden;
   background:#fdfdfd; border:0; display:grid; place-items:center;
   transition:transform .24s ease; }
 .hfy-card:hover .hfy-card__badge{ transform:translateX(-50%) scale(1.03); }
@@ -59,8 +59,8 @@
   .hfy__van{ flex-basis:auto; max-width:100%; width:100%; justify-content:flex-end; }
   .hfy__van img{ width:clamp(200px,64vw,290px); }
   .hfy__grid{ grid-template-columns:1fr; gap:52px; max-width:340px; margin-inline:auto; }
-  .hfy-card__badge{ width:70px; height:70px; top:-35px; }
-  .hfy-card{ padding-top:56px; }
+  .hfy-card__badge{ width:80px; height:80px; top:-40px; }
+  .hfy-card{ padding-top:60px; }
 }
 @media (prefers-reduced-motion:reduce){
   .hfy-card, .hfy-card__badge, .hfy__van img{ transition:none; }
