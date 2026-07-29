@@ -163,10 +163,14 @@
 .svp-hero__crumbs a{ color:#fff; font-weight:600; text-decoration:none; }
 
 /* ── section shell + header ── */
-.svp-sec{ padding:clamp(40px,4.6vw,60px) 0; background:#fff; }
+.svp-sec{ padding:clamp(44px,4.8vw,62px) 0; background:#fff; position:relative; }
 .svp-sec--tint{ background:#eef3f9; }
-/* intro lead paragraphs right after the hero */
-.svp-intro{ padding-bottom:0; }
+/* standard hairline divider between every section — uniform separation */
+.svp-sec + .svp-sec::before{ content:""; position:absolute; top:0; left:50%;
+  transform:translateX(-50%); width:min(1180px, calc(100% - 2*clamp(20px,5vw,48px)));
+  height:1px; background:#d9dee7; }
+/* intro lead paragraphs right after the hero (kept tight to the hero, no divider) */
+.svp-intro{ padding-top:clamp(34px,4vw,48px); }
 .svp-lead{ max-width:940px; border-left:4px solid #2c74c0; padding-left:clamp(18px,2.4vw,28px); }
 .svp-lead p{ font-size:clamp(16px,1.5vw,18px) !important; line-height:1.75 !important; color:#1a2430 !important; }
 .svp-lead p + p{ margin-top:14px; }
