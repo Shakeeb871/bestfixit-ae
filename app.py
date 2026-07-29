@@ -98,6 +98,18 @@ app.jinja_env.auto_reload = True
 
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
+# Map every service page slug (core, sub-service and level-3) back to its core
+# service, so the top-level nav item highlights on the core page and any of its
+# child pages.
+_SLUG_TO_CORE = {}
+for _s in SERVICES:
+    _SLUG_TO_CORE[_s["slug"]] = _s["slug"]
+for _core_slug, _items in SERVICE_SUBLINKS.items():
+    for _it in _items:
+        _SLUG_TO_CORE[_it["slug"]] = _core_slug
+        for _c in _it.get("children", []):
+            _SLUG_TO_CORE[_c["slug"]] = _core_slug
+
 
 def _service_badges() -> set:
     """Slugs that have a slider badge PNG (static/img/service-<slug>.png).
@@ -169,6 +181,9 @@ def inject_globals():
         "feature_cards": FEATURE_CARDS,
         "why_choose": WHY_CHOOSE,
         "nav_subservices": SERVICE_SUBLINKS,
+        "nav_active_core": _SLUG_TO_CORE.get(
+            request.path[len("/services/"):].strip("/"), ""
+        ) if request.path.startswith("/services/") else "",
         "service_badges": _SERVICE_BADGES,
         "amc_plans": AMC_PLANS,
         "css_version": _css_version(),

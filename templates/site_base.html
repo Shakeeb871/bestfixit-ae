@@ -272,7 +272,7 @@
       {% for s in all_services %}
       {% set _subs = nav_subservices.get(s.slug) %}
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}{% if _subs or s.points %}{{ _chevd|safe }}{% endif %}</a>
+        <a class="bfh__nav-link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}{% if _subs or s.points %}{{ _chevd|safe }}{% endif %}</a>
         {% if _subs or s.points %}
         <div class="bfh__dd">
           {% if _subs %}
@@ -301,7 +301,7 @@
       {% endfor %}
 
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link {{ 'is-active' if request.path in ['/about','/mission','/vision'] }}" href="/about/">About Us{{ _chevd|safe }}</a>
+        <a class="bfh__nav-link {{ 'is-active' if request.path in ['/about/','/mission/','/vision/'] }}" href="/about/">About Us{{ _chevd|safe }}</a>
         <div class="bfh__dd">
           <a class="bfh__dd-link" href="/about/">About Us</a>
           <a class="bfh__dd-link" href="/mission/">Our Mission</a>
@@ -354,7 +354,7 @@
         </div></div>
       </div>
       {% else %}
-      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}</a>
+      <a class="bfh-drawer__link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}</a>
       {% endif %}
       {% endfor %}
 
@@ -370,7 +370,7 @@
         </div></div>
       </div>
 
-      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/contact' }}" href="/contact/">Contact Us</a>
+      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/contact/' }}" href="/contact/">Contact Us</a>
     </nav>
 
     <div class="bfh-drawer__foot">
