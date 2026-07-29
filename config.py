@@ -21,6 +21,10 @@ class Config:
     # Where contact-form enquiries are appended (simple, DB-free storage).
     LEADS_FILE = os.environ.get("LEADS_FILE", "leads.jsonl")
 
+    # Admin panel credentials (override via environment in production).
+    ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "admin")
+    ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "bestfix2026")
+
     # Optional SMTP — if configured, enquiries are also emailed.
     SMTP_HOST = os.environ.get("SMTP_HOST")
     SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))

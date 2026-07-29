@@ -1,0 +1,16 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="card">
+  <div class="card__hd"><h2>Homepage FAQs</h2><span class="pill">{{ faqs|length }} questions</span></div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th style="width:44px;">#</th><th style="width:34%;">Question</th><th>Answer</th></tr></thead>
+      <tbody>
+        {% for f in faqs %}
+        <tr><td class="mono">{{ loop.index }}</td><td><b>{{ f.q }}</b></td><td class="muted">{{ f.a }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

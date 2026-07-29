@@ -1,0 +1,28 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="note">Live enquiries captured from the website's contact &amp; booking forms. Newest first.</div>
+<div class="card">
+  <div class="card__hd"><h2>Enquiries</h2><span class="pill">{{ enquiries|length }} total</span></div>
+  <div class="tbl-wrap">
+    {% if enquiries %}
+    <table class="tbl">
+      <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Service</th><th>Message</th><th>Received</th></tr></thead>
+      <tbody>
+        {% for e in enquiries %}
+        <tr>
+          <td><b>{{ e.name or '—' }}</b></td>
+          <td class="mono">{{ e.phone or '—' }}</td>
+          <td class="mono">{{ e.email or '—' }}</td>
+          <td>{% if e.service %}<span class="badge badge--navy">{{ e.service }}</span>{% else %}<span class="muted">—</span>{% endif %}</td>
+          <td class="muted">{{ e.message or '—' }}</td>
+          <td class="muted">{{ e.when }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty">No enquiries yet. Submissions from the contact and booking forms will appear here.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

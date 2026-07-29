@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="sec-title">Maintenance Plans</div>
+<div class="adm-grid" style="margin-bottom:26px;">
+  {% for pl in plans %}
+  <div class="card">
+    <div class="card__hd">
+      <h2>{{ pl.name }}</h2>
+      {% if pl.popular %}<span class="badge badge--green">Most Popular</span>{% endif %}
+    </div>
+    <div class="card__bd">
+      <p class="muted" style="margin:0 0 12px;">{{ pl.tagline }}</p>
+      <p style="margin:0 0 6px;"><span class="badge badge--navy">{{ pl.visits }}</span> <span class="badge badge--amber">{{ pl.response }}</span></p>
+      <ul style="margin:14px 0 0; padding-left:18px; color:#2a3340; font-size:13.5px; line-height:1.9;">
+        {% for f in pl.features %}<li>{{ f }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="card">
+  <div class="card__hd"><h2>Full Comparison</h2><span class="pill">{{ comparison.rows|length }} features</span></div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Feature</th>{% for c in comparison.cols %}<th>{{ c }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {% for r in comparison.rows %}
+        <tr>
+          <td><b>{{ r.feature }}</b></td>
+          {% for v in [r.basic, r.standard, r.premium] %}
+          <td>{% if v == 'yes' %}<span class="badge badge--green">Yes</span>{% elif v == 'no' %}<span class="badge badge--grey">No</span>{% else %}{{ v }}{% endif %}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="note">Sub-services grouped by their parent core service. Renovation shows its full 3-level tree (sub-service → level-3 services).</div>
+{% for group in groups %}
+<div class="sec-title">{{ group.parent }} <span class="muted" style="font-weight:400;">· {{ group['items']|length }} sub-services</span></div>
+<div class="card" style="margin-bottom:22px;">
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Sub-service</th><th>URL</th><th>Level-3 services</th></tr></thead>
+      <tbody>
+        {% for it in group['items'] %}
+        <tr>
+          <td><b>{{ it.name }}</b></td>
+          <td><a class="mono" href="/services/{{ it.slug }}/" target="_blank" rel="noopener">/services/{{ it.slug }}/</a></td>
+          <td>{% if it.children %}{% for c in it.children %}<span class="badge badge--navy" style="margin:2px 3px 2px 0;">{{ c.name }}</span>{% endfor %}{% else %}<span class="muted">—</span>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

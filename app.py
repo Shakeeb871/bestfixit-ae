@@ -18,6 +18,8 @@ import smtplib
 from datetime import datetime, timezone
 from email.message import EmailMessage
 
+from functools import wraps
+
 from flask import (
     Flask,
     Response,
@@ -26,6 +28,7 @@ from flask import (
     redirect,
     render_template,
     request,
+    session,
     url_for,
 )
 
@@ -348,12 +351,176 @@ def thank_you():
     return render_template("thank_you.html")
 
 
+# --------------------------------------------------------------------------- #
+# Admin panel (session-gated overview of all site content + live enquiries)
+# --------------------------------------------------------------------------- #
+def _admin_required(view):
+    @wraps(view)
+    def wrapped(*args, **kwargs):
+        if not session.get("admin"):
+            return redirect(url_for("admin_login"))
+        return view(*args, **kwargs)
+
+    return wrapped
+
+
+def _read_leads() -> list:
+    """Read enquiries from the JSONL store, newest first."""
+    out = []
+    try:
+        with open(app.config["LEADS_FILE"], encoding="utf-8") as fh:
+            for line in fh:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    out.append(json.loads(line))
+                except ValueError:
+                    continue
+    except OSError:
+        return []
+    for r in out:
+        ts = r.get("received_at", "")
+        r["when"] = ts.replace("T", " ")[:16] if ts else ""
+    out.reverse()
+    return out
+
+
+@app.route("/admin/login/", methods=["GET", "POST"])
+def admin_login():
+    if session.get("admin"):
+        return redirect(url_for("admin_dashboard"))
+    error = None
+    if request.method == "POST":
+        user = request.form.get("username", "").strip()
+        pw = request.form.get("password", "")
+        if user == app.config["ADMIN_USERNAME"] and pw == app.config["ADMIN_PASSWORD"]:
+            session["admin"] = True
+            session.permanent = True
+            return redirect(url_for("admin_dashboard"))
+        error = "Invalid username or password."
+    return render_template("admin/login.html", error=error)
+
+
+@app.route("/admin/logout/")
+def admin_logout():
+    session.pop("admin", None)
+    return redirect(url_for("admin_login"))
+
+
+@app.route("/admin/")
+@_admin_required
+def admin_dashboard():
+    leads = _read_leads()
+    stats = {
+        "services": len(SERVICES),
+        "subservices": len(SUBSERVICE_PAGES),
+        "posts": len(POSTS),
+        "enquiries": len(leads),
+        "amc": len(AMC_PLANS),
+        "testimonials": len(TESTIMONIAL_SHOWCASE.get("items", [])),
+        "faqs": len(FAQS),
+        "areas": len(SERVICE_AREAS),
+    }
+    return render_template(
+        "admin/dashboard.html", active="dashboard", page_title="Dashboard",
+        page_sub="Overview of your website content and activity.",
+        stats=stats, recent_enquiries=leads[:6], recent_posts=POSTS[:6],
+    )
+
+
+@app.route("/admin/services/")
+@_admin_required
+def admin_services():
+    return render_template(
+        "admin/services.html", active="services", page_title="Core Services",
+        page_sub="The main service categories shown across the site.",
+        services=SERVICES, sublinks=SERVICE_SUBLINKS,
+    )
+
+
+@app.route("/admin/subservices/")
+@_admin_required
+def admin_subservices():
+    groups = []
+    for core_slug, items in SERVICE_SUBLINKS.items():
+        svc = SERVICE_BY_SLUG.get(core_slug)
+        groups.append({
+            "parent": svc["title"] if svc else core_slug.replace("-", " ").title(),
+            "items": items,
+        })
+    return render_template(
+        "admin/subservices.html", active="subservices", page_title="Sub-Services",
+        page_sub="Sub-service and level-3 pages grouped by parent service.",
+        groups=groups,
+    )
+
+
+@app.route("/admin/blog/")
+@_admin_required
+def admin_blog():
+    return render_template(
+        "admin/blog.html", active="blog", page_title="Blog Posts",
+        page_sub="Articles and categories.", posts=POSTS,
+        categories=CATEGORIES_WITH_COUNT,
+    )
+
+
+@app.route("/admin/amc/")
+@_admin_required
+def admin_amc():
+    return render_template(
+        "admin/amc.html", active="amc", page_title="AMC Plans",
+        page_sub="Annual Maintenance Contract plans and full comparison.",
+        plans=AMC_PLANS, comparison=AMC_COMPARISON,
+    )
+
+
+@app.route("/admin/testimonials/")
+@_admin_required
+def admin_testimonials():
+    return render_template(
+        "admin/testimonials.html", active="testimonials", page_title="Testimonials",
+        page_sub="Customer reviews shown on the site.",
+        showcase=TESTIMONIAL_SHOWCASE,
+    )
+
+
+@app.route("/admin/faqs/")
+@_admin_required
+def admin_faqs():
+    return render_template(
+        "admin/faqs.html", active="faqs", page_title="FAQs",
+        page_sub="Frequently asked questions on the homepage.", faqs=FAQS,
+    )
+
+
+@app.route("/admin/areas/")
+@_admin_required
+def admin_areas():
+    return render_template(
+        "admin/areas.html", active="areas", page_title="Service Areas",
+        page_sub="Areas the business covers.", areas=SERVICE_AREAS,
+    )
+
+
+@app.route("/admin/enquiries/")
+@_admin_required
+def admin_enquiries():
+    return render_template(
+        "admin/enquiries.html", active="enquiries", page_title="Enquiries",
+        page_sub="Contact and booking form submissions, newest first.",
+        enquiries=_read_leads(),
+    )
+
+
 @app.route("/robots.txt")
 def robots_txt():
     lines = [
         "User-agent: *",
         "Allow: /",
         "Disallow: /thank-you/",
+        "Disallow: /admin/",
         f"Sitemap: https://{app.config['SITE_DOMAIN']}/sitemap.xml",
     ]
     return Response("\n".join(lines) + "\n", mimetype="text/plain")

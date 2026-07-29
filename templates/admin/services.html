@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="card">
+  <div class="card__hd"><h2>Core Services</h2><span class="pill">{{ services|length }} total</span></div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th style="width:52px;">#</th><th>Service</th><th>Slug / URL</th><th>Short Description</th><th>Sub-services</th></tr></thead>
+      <tbody>
+        {% for s in services %}
+        <tr>
+          <td class="mono">{{ s.num }}</td>
+          <td><b>{{ s.title }}</b></td>
+          <td><a class="mono" href="/services/{{ s.slug }}/" target="_blank" rel="noopener">/services/{{ s.slug }}/</a></td>
+          <td class="muted">{{ s.short }}</td>
+          <td>{% set n = sublinks.get(s.slug)|length if sublinks.get(s.slug) else 0 %}{% if n %}<span class="badge badge--green">{{ n }}</span>{% else %}<span class="badge badge--grey">—</span>{% endif %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

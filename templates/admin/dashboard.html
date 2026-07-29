@@ -1,0 +1,45 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="adm-stats">
+  <div class="adm-stat"><span class="adm-stat__ico bg-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82M4.6 9a1.65 1.65 0 0 0-.33-1.82"></path></svg></span><div><div class="adm-stat__n">{{ stats.services }}</div><div class="adm-stat__l">Core Services</div></div></div>
+  <div class="adm-stat"><span class="adm-stat__ico bg-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18M3 12h18M3 17h18"></path></svg></span><div><div class="adm-stat__n">{{ stats.subservices }}</div><div class="adm-stat__l">Sub-Services</div></div></div>
+  <div class="adm-stat"><span class="adm-stat__ico bg-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"></path><path d="M8 8h8M8 12h8"></path></svg></span><div><div class="adm-stat__n">{{ stats.posts }}</div><div class="adm-stat__l">Blog Posts</div></div></div>
+  <div class="adm-stat"><span class="adm-stat__ico bg-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H5.17L4 17z"></path></svg></span><div><div class="adm-stat__n">{{ stats.enquiries }}</div><div class="adm-stat__l">Enquiries</div></div></div>
+  <div class="adm-stat"><span class="adm-stat__ico bg-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7H3V5h13"></path></svg></span><div><div class="adm-stat__n">{{ stats.amc }}</div><div class="adm-stat__l">AMC Plans</div></div></div>
+  <div class="adm-stat"><span class="adm-stat__ico bg-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span><div><div class="adm-stat__n">{{ stats.testimonials }}</div><div class="adm-stat__l">Testimonials</div></div></div>
+  <div class="adm-stat"><span class="adm-stat__ico bg-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"></path></svg></span><div><div class="adm-stat__n">{{ stats.faqs }}</div><div class="adm-stat__l">FAQs</div></div></div>
+  <div class="adm-stat"><span class="adm-stat__ico bg-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></span><div><div class="adm-stat__n">{{ stats.areas }}</div><div class="adm-stat__l">Service Areas</div></div></div>
+</div>
+
+<div class="adm-grid adm-grid--2">
+  <div class="card">
+    <div class="card__hd"><h2>Latest Enquiries</h2><a class="pill" href="/admin/enquiries/">View all →</a></div>
+    <div class="tbl-wrap">
+      {% if recent_enquiries %}
+      <table class="tbl">
+        <thead><tr><th>Name</th><th>Phone</th><th>Service</th><th>When</th></tr></thead>
+        <tbody>
+          {% for e in recent_enquiries %}
+          <tr><td><b>{{ e.name or '—' }}</b></td><td class="mono">{{ e.phone or '—' }}</td><td>{{ e.service or '—' }}</td><td class="muted">{{ e.when }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}<div class="empty">No enquiries yet.</div>{% endif %}
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card__hd"><h2>Recent Blog Posts</h2><a class="pill" href="/admin/blog/">View all →</a></div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Title</th><th>Category</th><th>Date</th></tr></thead>
+        <tbody>
+          {% for p in recent_posts %}
+          <tr><td><b>{{ p.title }}</b></td><td><span class="badge badge--navy">{{ p.category }}</span></td><td class="muted">{{ p.date }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

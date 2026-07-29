@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Login · Best Fix</title>
+<link rel="icon" href="{{ url_for('static', filename='img/favicon-bestfixit.png') }}" type="image/png">
+<style>
+  *{ box-sizing:border-box; }
+  body{ margin:0; min-height:100vh; display:grid; place-items:center;
+    font-family:"PT Sans",system-ui,sans-serif; color:#0f1a2b;
+    background:linear-gradient(135deg,#04345f,#024d87 55%,#1594ac); padding:20px; }
+  .lg{ width:100%; max-width:400px; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.28); }
+  .lg__hd{ text-align:center; padding:30px 30px 8px; }
+  .lg__hd img{ width:64px; height:64px; border-radius:12px; object-fit:contain; }
+  .lg__hd h1{ font-family:"Poppins",sans-serif; font-size:20px; margin:14px 0 4px; }
+  .lg__hd p{ margin:0; color:#6b7480; font-size:13px; }
+  .lg__body{ padding:20px 30px 30px; }
+  .lg label{ display:block; font-family:"Poppins",sans-serif; font-weight:700; font-size:12.5px; margin:14px 0 6px; }
+  .lg input{ width:100%; padding:12px 14px; border:1px solid #d5deea; border-radius:9px; font-size:14px; background:#fbfcfe; }
+  .lg input:focus{ outline:none; border-color:#2c74c0; background:#fff; }
+  .lg__btn{ width:100%; margin-top:20px; padding:13px; border:0; border-radius:9px; cursor:pointer;
+    background:#1f9d55; color:#fff; font-family:"Poppins",sans-serif; font-weight:800; font-size:15px; }
+  .lg__btn:hover{ background:#188047; }
+  .lg__err{ margin:14px 0 0; padding:11px 14px; background:#fdecec; border:1px solid #f5c6c6; color:#b3261e; border-radius:9px; font-size:13px; }
+</style>
+</head>
+<body>
+  <form class="lg" method="post" action="/admin/login/">
+    <div class="lg__hd">
+      <img src="{{ url_for('static', filename='img/favicon-bestfixit.png') }}" alt="Best Fix">
+      <h1>Best Fix Admin</h1>
+      <p>Sign in to manage your website</p>
+    </div>
+    <div class="lg__body">
+      {% if error %}<div class="lg__err">{{ error }}</div>{% endif %}
+      <label for="u">Username</label>
+      <input id="u" name="username" type="text" autocomplete="username" placeholder="admin" required autofocus>
+      <label for="p">Password</label>
+      <input id="p" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+      <button class="lg__btn" type="submit">Sign In</button>
+    </div>
+  </form>
+</body>
+</html>

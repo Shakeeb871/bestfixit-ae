@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="note">Google rating: <b>{{ showcase.rating }}★</b> — {{ showcase.rating_label }}. These reviews appear in the homepage testimonials section.</div>
+<div class="card">
+  <div class="card__hd"><h2>Customer Reviews</h2><span class="pill">{{ showcase["items"]|length }} shown</span></div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th style="width:150px;">Name</th><th>Review</th><th style="width:80px;">Rating</th><th style="width:120px;">When</th></tr></thead>
+      <tbody>
+        {% for r in showcase["items"] %}
+        <tr>
+          <td><b>{{ r.name }}</b></td>
+          <td class="muted">{{ r.quote }}</td>
+          <td><span class="badge badge--amber">{{ '★' * r.rating }}</span></td>
+          <td class="muted">{{ r.time }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

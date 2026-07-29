@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{{ page_title }} · Best Fix Admin</title>
+<link rel="icon" href="{{ url_for('static', filename='img/favicon-bestfixit.png') }}" type="image/png">
+<style>
+  :root{ --navy:#0f1a2b; --brand:#024d87; --blue:#2c74c0; --teal:#1594ac; --green:#1f9d55;
+    --bg:#eef2f7; --card:#ffffff; --line:#e4e9f0; --muted:#6b7480; --text:#0f1a2b; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text);
+    font-family:"PT Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  a{ color:inherit; }
+  h1,h2,h3,h4{ font-family:"Poppins",system-ui,sans-serif; margin:0; }
+
+  /* layout */
+  .adm{ display:grid; grid-template-columns:256px 1fr; min-height:100vh; }
+
+  /* sidebar */
+  .adm-side{ background:var(--navy); color:#cdd6e2; display:flex; flex-direction:column;
+    position:sticky; top:0; height:100vh; }
+  .adm-brand{ display:flex; align-items:center; gap:10px; padding:18px 20px; border-bottom:1px solid rgba(255,255,255,.08); }
+  .adm-brand img{ width:40px; height:40px; border-radius:8px; background:#fff; object-fit:contain; padding:3px; }
+  .adm-brand b{ font-family:"Poppins",sans-serif; color:#fff; font-size:15px; line-height:1.1; }
+  .adm-brand span{ display:block; font-size:11px; color:#8a93a2; font-weight:400; }
+  .adm-nav{ flex:1; overflow-y:auto; padding:14px 12px; }
+  .adm-nav__label{ padding:12px 12px 6px; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:#6b7688; }
+  .adm-nav a{ display:flex; align-items:center; gap:12px; padding:11px 12px; margin:2px 0; border-radius:8px;
+    text-decoration:none; color:#c3ccd9; font-size:14px; font-weight:600; transition:background .15s, color .15s; }
+  .adm-nav a svg{ width:18px; height:18px; flex:none; opacity:.85; }
+  .adm-nav a:hover{ background:rgba(255,255,255,.06); color:#fff; }
+  .adm-nav a.is-active{ background:linear-gradient(90deg,var(--brand),var(--teal)); color:#fff; }
+  .adm-nav a.is-active svg{ opacity:1; }
+  .adm-side__foot{ padding:14px 16px; border-top:1px solid rgba(255,255,255,.08); font-size:11.5px; color:#7b8698; }
+
+  /* main */
+  .adm-main{ min-width:0; display:flex; flex-direction:column; }
+  .adm-top{ position:sticky; top:0; z-index:5; display:flex; align-items:center; justify-content:space-between;
+    gap:16px; background:#fff; border-bottom:1px solid var(--line); padding:14px clamp(18px,3vw,32px); }
+  .adm-top h1{ font-size:20px; }
+  .adm-top__sub{ font-size:12.5px; color:var(--muted); margin-top:2px; }
+  .adm-top__actions{ display:flex; align-items:center; gap:10px; }
+  .adm-btn{ display:inline-flex; align-items:center; gap:7px; padding:9px 15px; border-radius:8px; border:1px solid var(--line);
+    background:#fff; color:var(--brand); font-family:"Poppins",sans-serif; font-weight:700; font-size:13px; text-decoration:none; cursor:pointer; }
+  .adm-btn:hover{ background:#f4f8fc; }
+  .adm-btn--solid{ background:var(--brand); color:#fff; border-color:var(--brand); }
+  .adm-btn--solid:hover{ background:#023d6c; }
+  .adm-content{ padding:clamp(18px,3vw,30px); }
+
+  /* stat cards */
+  .adm-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:24px; }
+  .adm-stat{ background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; display:flex; align-items:center; gap:16px; }
+  .adm-stat__ico{ width:52px; height:52px; border-radius:12px; display:grid; place-items:center; color:#fff; flex:none; }
+  .adm-stat__ico svg{ width:24px; height:24px; }
+  .adm-stat__n{ font-family:"Poppins",sans-serif; font-weight:800; font-size:26px; line-height:1; }
+  .adm-stat__l{ font-size:12.5px; color:var(--muted); margin-top:5px; }
+  .bg-navy{ background:var(--brand); } .bg-blue{ background:var(--blue); } .bg-teal{ background:var(--teal); } .bg-green{ background:var(--green); }
+
+  /* cards & grids */
+  .adm-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px; }
+  .adm-grid--2{ grid-template-columns:1fr 1fr; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  .card__hd{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:15px 20px; border-bottom:1px solid var(--line); }
+  .card__hd h2{ font-size:15.5px; }
+  .card__hd .pill{ font-size:11.5px; color:var(--muted); }
+  .card__bd{ padding:18px 20px; }
+
+  /* tables */
+  .tbl-wrap{ overflow-x:auto; }
+  table.tbl{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:520px; }
+  table.tbl th{ text-align:left; background:#f6f9fc; color:#5f6b7a; font-family:"Poppins",sans-serif; font-weight:700;
+    font-size:11.5px; letter-spacing:.03em; text-transform:uppercase; padding:12px 16px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  table.tbl td{ padding:13px 16px; border-bottom:1px solid #eef1f6; vertical-align:top; color:#2a3340; }
+  table.tbl tr:last-child td{ border-bottom:0; }
+  table.tbl tr:hover td{ background:#fafcfe; }
+  .badge{ display:inline-block; padding:3px 10px; border-radius:30px; font-size:11px; font-weight:700; font-family:"Poppins",sans-serif; }
+  .badge--navy{ background:#eaf1fb; color:#024d87; }
+  .badge--green{ background:#e7f6ee; color:#1f7a44; }
+  .badge--amber{ background:#fdf3e6; color:#a86818; }
+  .badge--grey{ background:#eef1f6; color:#5f6b7a; }
+  .mono{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; color:#5f6b7a; }
+  .muted{ color:var(--muted); }
+  .sec-title{ font-family:"Poppins",sans-serif; font-weight:800; font-size:16px; margin:26px 0 14px; }
+  .sec-title:first-child{ margin-top:0; }
+  .empty{ padding:40px 20px; text-align:center; color:var(--muted); }
+  .note{ background:#f5f8fc; border:1px solid #e2ecf6; border-radius:10px; padding:14px 18px; font-size:13px; color:#41506a; margin-bottom:22px; }
+  .note b{ color:var(--brand); }
+
+  @media (max-width:900px){
+    .adm{ grid-template-columns:1fr; }
+    .adm-side{ position:static; height:auto; flex-direction:column; }
+    .adm-nav{ display:grid; grid-template-columns:repeat(2,1fr); gap:2px; }
+    .adm-nav__label{ grid-column:1/-1; }
+    .adm-stats{ grid-template-columns:1fr 1fr; }
+    .adm-grid--2{ grid-template-columns:1fr; }
+  }
+  @media (max-width:520px){ .adm-stats{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+{% set NAV = [
+  ('dashboard','Dashboard','/admin/','<path d="M3 13h8V3H3zM13 21h8V3h-8zM3 21h8v-6H3z"></path>'),
+  ('services','Core Services','/admin/services/','<circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>'),
+  ('subservices','Sub-Services','/admin/subservices/','<path d="M3 7h18M3 12h18M3 17h18"></path>'),
+  ('blog','Blog Posts','/admin/blog/','<path d="M4 4h16v16H4z"></path><path d="M8 8h8M8 12h8M8 16h5"></path>'),
+  ('amc','AMC Plans','/admin/amc/','<path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>'),
+  ('testimonials','Testimonials','/admin/testimonials/','<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>'),
+  ('faqs','FAQs','/admin/faqs/','<circle cx="12" cy="12" r="10"></circle><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path>'),
+  ('areas','Service Areas','/admin/areas/','<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle>'),
+  ('enquiries','Enquiries','/admin/enquiries/','<path d="M4 4h16v12H5.17L4 17.17z"></path>'),
+] %}
+<div class="adm">
+  <aside class="adm-side">
+    <div class="adm-brand">
+      <img src="{{ url_for('static', filename='img/favicon-bestfixit.png') }}" alt="Best Fix">
+      <b>Best Fix<span>Admin Panel</span></b>
+    </div>
+    <nav class="adm-nav">
+      <span class="adm-nav__label">Manage</span>
+      {% for key,label,href,icon in NAV %}
+      <a href="{{ href }}" class="{{ 'is-active' if active == key }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{{ icon|safe }}</svg>
+        <span>{{ label }}</span>
+      </a>
+      {% endfor %}
+    </nav>
+    <div class="adm-side__foot">Best Fix Technical Services<br>&copy; {{ current_year }}</div>
+  </aside>
+
+  <main class="adm-main">
+    <header class="adm-top">
+      <div>
+        <h1>{{ page_title }}</h1>
+        {% if page_sub %}<div class="adm-top__sub">{{ page_sub }}</div>{% endif %}
+      </div>
+      <div class="adm-top__actions">
+        <a class="adm-btn" href="/" target="_blank" rel="noopener">View Site ↗</a>
+        <a class="adm-btn adm-btn--solid" href="/admin/logout/">Logout</a>
+      </div>
+    </header>
+    <div class="adm-content">
+      {% block body %}{% endblock %}
+    </div>
+  </main>
+</div>
+</body>
+</html>

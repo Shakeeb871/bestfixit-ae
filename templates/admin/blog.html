@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="adm-grid adm-grid--2" style="margin-bottom:22px;">
+  <div class="card">
+    <div class="card__hd"><h2>Categories</h2><span class="pill">{{ categories|length }}</span></div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>Category</th><th>Slug</th><th>Posts</th></tr></thead>
+        <tbody>
+          {% for c in categories %}
+          <tr><td><b>{{ c.name }}</b></td><td><a class="mono" href="/blog/category/{{ c.slug }}/" target="_blank" rel="noopener">/blog/category/{{ c.slug }}/</a></td><td><span class="badge badge--navy">{{ c.count }}</span></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card__hd"><h2>At a Glance</h2></div>
+    <div class="card__bd">
+      <p class="muted" style="margin:0 0 10px;">{{ posts|length }} published articles across {{ categories|length }} categories.</p>
+      <p class="muted" style="margin:0;">Newest: <b style="color:#0f1a2b;">{{ posts[0].title }}</b> ({{ posts[0].date }})</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card__hd"><h2>All Posts</h2><span class="pill">{{ posts|length }} total</span></div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>URL</th></tr></thead>
+      <tbody>
+        {% for p in posts %}
+        <tr>
+          <td><b>{{ p.title }}</b></td>
+          <td><span class="badge badge--navy">{{ p.category }}</span></td>
+          <td class="muted">{{ p.date }}</td>
+          <td><a class="mono" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.url }}</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
