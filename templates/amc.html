@@ -14,15 +14,6 @@
   "url": "https://{{ site_domain }}{{ request.path }}"
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {% for f in amc_faq.faqs %}{ "@type": "Question", "name": {{ f.q|tojson }}, "acceptedAnswer": { "@type": "Answer", "text": {{ f.a|tojson }} } }{{ "," if not loop.last }}{% endfor %}
-  ]
-}
-</script>
 {% endblock %}
 {% block content %}
 {% set AICONS = {
@@ -314,45 +305,5 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="amc-sec amc-sec--tint">
-    <div class="wrap">
-      <div class="amc-head"><h2>{{ amc_faq.h2 }}</h2></div>
-      <div class="amc-faq" id="amcFaq">
-        {% for f in amc_faq.faqs %}
-        <div class="faq-item{% if loop.first %} is-open{% endif %}">
-          <button type="button" class="faq-q" aria-expanded="{{ 'true' if loop.first else 'false' }}">
-            <span>{{ f.q }}</span>
-            <span class="faq-q__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span>
-          </button>
-          <div class="faq-a"><div class="faq-a__in"><p>{{ f.a }}</p></div></div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="amc-sec">
-    <div class="wrap">
-      <div class="amc-cta">
-        <h2>Ready to Set Up Your AMC?</h2>
-        <p>Tell us about your property and we'll recommend the right plan and a tailored quote.</p>
-        <a class="btn-skew btn-skew--green btn-skew--arrow" href="/contact/">Request a Quote</a>
-      </div>
-    </div>
-  </section>
-
 </div>
-<script>
-(function(){
-  var faq=document.getElementById('amcFaq');
-  if(faq){ faq.addEventListener('click',function(e){
-    var b=e.target.closest('.faq-q'); if(!b) return;
-    var it=b.parentElement, open=it.classList.contains('is-open');
-    faq.querySelectorAll('.faq-item.is-open').forEach(function(o){ if(o!==it){ o.classList.remove('is-open'); o.querySelector('.faq-q').setAttribute('aria-expanded','false'); }});
-    it.classList.toggle('is-open', !open); b.setAttribute('aria-expanded', String(!open));
-  });}
-})();
-</script>
 {% endblock %}

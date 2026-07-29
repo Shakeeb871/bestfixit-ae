@@ -649,7 +649,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 }
 
 .svc2{ position:relative; background:#eef3f9; overflow:hidden;
-    padding:clamp(56px,7vw,84px) 0 clamp(70px,8vw,96px); }
+    padding:clamp(56px,7vw,84px) 0 clamp(44px,5vw,60px); }
   .svc2__head{ max-width:1480px; margin:0 auto clamp(30px,3.5vw,44px); padding:0 clamp(16px,3vw,40px); }
 
   /* ── carousel (reference-style: circular badge overlapping each card) ── */
