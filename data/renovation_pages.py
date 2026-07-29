@@ -649,3 +649,95 @@ for _slug, _pg in RENOVATION_PAGES.items():
     _pg["hero"]["image_alt"] = _pg["breadcrumb"] + " in Dubai — Best Fix"
     if isinstance(_pg.get("diagnosis"), dict):
         _pg["diagnosis"]["image"] = _GEN_IMG
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Sub-service layout: render every renovation SUB-service (level 2 and level 3)
+# with the same two-column sub-service template used by the appliance pages.
+# The core "renovation" page stays on the grid layout; only its children move
+# to the sub-service layout. Content is mapped from the data above.
+# ═══════════════════════════════════════════════════════════════════════════
+_AREAS = [
+    "Downtown Dubai", "Dubai Marina", "Business Bay", "Jumeirah",
+    "Palm Jumeirah", "Arabian Ranches", "Emirates Hills", "The Springs",
+    "The Meadows", "Jumeirah Village Circle", "JLT", "Al Barsha",
+    "Bur Dubai", "Deira", "Dubai Hills Estate", "Motor City",
+    "Dubai Silicon Oasis", "International City", "Discovery Gardens",
+    "Mirdif", "Al Quoz", "Dubai Sports City", "Al Furjan", "DIFC",
+]
+
+_REN_CORE = {"name": "Renovation", "href": "/services/renovation/"}
+_LEVEL2 = [{"name": s["name"], "href": "/services/" + s["slug"] + "/"}
+           for s in RENOVATION_SUBLINKS]
+
+
+def _to_sub(slug, parent, nav_title, nav_parent, nav_links):
+    p = RENOVATION_PAGES[slug]
+    hero = p["hero"]
+    return {
+        "parent_slug": "renovation",
+        "meta_title": p["meta_title"],
+        "meta_description": p["meta_description"],
+        "breadcrumb": p["breadcrumb"],
+        "parent": parent,
+        "nav_title": nav_title,
+        "nav_parent": nav_parent,
+        "nav_links": nav_links,
+        "form_title": "Book a Consultation",
+        "form_label": "Tell us about your project",
+        "form_placeholder": "e.g. Full villa remodel, new kitchen, exterior repaint…",
+        "hero": {
+            "h1_accent": hero["h1_accent"],
+            "h1": hero["h1"],
+            "subheading": hero["subheading"],
+            "image": hero["image"],
+            "image_alt": hero.get("image_alt", p["breadcrumb"] + " — Best Fix"),
+        },
+        "intro": hero["paras"],
+        "services": {
+            "h2": p["services"]["h2"],
+            "intro": p["diagnosis"]["paras"][0],
+            "rows": [{"title": b["title"], "text": b["intro"]}
+                     for b in p["services"]["blocks"]],
+        },
+        "why": {
+            "h2": p["why"]["h2"],
+            "image": _GEN_IMG,
+            "image_alt": p["breadcrumb"] + " in Dubai — Best Fix",
+            "paras": [
+                p["why"]["intro"],
+                "Design, construction, MEP and finishing are handled by one "
+                "coordinated team, with a clear scope and price agreed up front "
+                "and the site kept clean and safe throughout.",
+            ],
+            "areas_intro": "We deliver " + p["breadcrumb"] + " across Dubai, including:",
+            "areas": _AREAS,
+        },
+        "faq_h2": p["faq_h2"],
+        "faqs": p["faqs"],
+    }
+
+
+RENOVATION_SUBSERVICE_PAGES = {}
+for _sub in RENOVATION_SUBLINKS:
+    _sub_href = "/services/" + _sub["slug"] + "/"
+    _children = _sub.get("children", [])
+    _child_links = [{"name": c["name"], "href": "/services/" + c["slug"] + "/"}
+                    for c in _children]
+    if _children:
+        # a level-2 that owns level-3 pages — its sidebar lists its children
+        RENOVATION_SUBSERVICE_PAGES[_sub["slug"]] = _to_sub(
+            _sub["slug"], parent=_REN_CORE, nav_title=_sub["name"],
+            nav_parent={"name": _sub["name"], "href": _sub_href},
+            nav_links=_child_links)
+        for _c in _children:
+            RENOVATION_SUBSERVICE_PAGES[_c["slug"]] = _to_sub(
+                _c["slug"], parent={"name": _sub["name"], "href": _sub_href},
+                nav_title=_sub["name"],
+                nav_parent={"name": _sub["name"], "href": _sub_href},
+                nav_links=_child_links)
+    else:
+        # a level-2 leaf (e.g. Interior Design) — sidebar lists the level-2 set
+        RENOVATION_SUBSERVICE_PAGES[_sub["slug"]] = _to_sub(
+            _sub["slug"], parent=_REN_CORE, nav_title="Renovation Services",
+            nav_parent=_REN_CORE, nav_links=_LEVEL2)

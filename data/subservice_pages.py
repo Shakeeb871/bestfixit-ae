@@ -1373,3 +1373,18 @@ _REVIEWS = {
 for _slug, _revs in _REVIEWS.items():
     if _slug in SUBSERVICE_PAGES:
         SUBSERVICE_PAGES[_slug]["reviews"] = _revs
+
+
+# --------------------------------------------------------------------------- #
+# Renovation sub-services (level 2 and level 3) reuse this same two-column
+# sub-service layout. They carry their own parent/sidebar fields; appliance
+# pages fall back to the appliance defaults below.
+# --------------------------------------------------------------------------- #
+from data.renovation_pages import RENOVATION_SUBSERVICE_PAGES as _RENOVATION_SUBSERVICE_PAGES
+SUBSERVICE_PAGES.update(_RENOVATION_SUBSERVICE_PAGES)
+
+for _sp in SUBSERVICE_PAGES.values():
+    _sp.setdefault("parent", APPLIANCE_PARENT)
+    _sp.setdefault("nav_title", "Appliance Repair Services")
+    _sp.setdefault("nav_parent", APPLIANCE_PARENT)
+    _sp.setdefault("nav_links", APPLIANCE_SERVICES)
