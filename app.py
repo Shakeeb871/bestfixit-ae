@@ -59,6 +59,15 @@ from data.services import (
 from data.stats import STATS
 from data.faq import FAQS
 from data.service_pages import SERVICE_PAGES
+from data.amc import (
+    AMC_META,
+    AMC_HERO,
+    AMC_PLANS,
+    AMC_COMPARISON,
+    AMC_BENEFITS,
+    AMC_DETAILS,
+    AMC_FAQ,
+)
 from data.subservice_pages import (
     APPLIANCE_PARENT,
     APPLIANCE_SERVICES,
@@ -149,6 +158,7 @@ def inject_globals():
         "why_choose": WHY_CHOOSE,
         "nav_subservices": SERVICE_SUBLINKS,
         "service_badges": _SERVICE_BADGES,
+        "amc_plans": AMC_PLANS,
         "css_version": _css_version(),
     }
 
@@ -177,6 +187,20 @@ def about():
 @app.route("/services/")
 def services():
     return render_template("services.html", services=SERVICES)
+
+
+@app.route("/amc/")
+def amc():
+    return render_template(
+        "amc.html",
+        amc_meta=AMC_META,
+        amc_hero=AMC_HERO,
+        amc_plans=AMC_PLANS,
+        amc_comparison=AMC_COMPARISON,
+        amc_benefits=AMC_BENEFITS,
+        amc_details=AMC_DETAILS,
+        amc_faq=AMC_FAQ,
+    )
 
 
 @app.route("/services/<slug>/")

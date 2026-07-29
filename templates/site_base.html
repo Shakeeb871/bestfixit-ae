@@ -227,6 +227,7 @@
       </div>
       <nav class="bfh__utility-right" aria-label="Quick links">
         <a href="/">Home</a>
+        <a href="/amc/"{% if request.path == '/amc/' %} class="is-active"{% endif %}>AMC Plans</a>
         <a href="/#testimonials">Reviews</a>
         <a href="/contact/">Contact Us</a>
         <span class="bfh__utility-social">
@@ -324,6 +325,7 @@
 
     <nav class="bfh-drawer__nav" aria-label="Mobile">
       <a class="bfh-drawer__link {{ 'is-active' if request.path == '/' }}" href="/">Home</a>
+      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/amc/' }}" href="/amc/">AMC Plans</a>
 
       {% for s in all_services %}
       {% set _subs = nav_subservices.get(s.slug) %}
