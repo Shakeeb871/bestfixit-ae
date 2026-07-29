@@ -133,7 +133,7 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
    removed across the whole website; section headings stand on their own. */
 [class*="eyebrow"], [class*="tagline"]{ display:none !important; }
 .svc-grid{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
-.svc-tile{ display:flex; flex-direction:column; background:#fff; border:1px solid #00000017; border-radius:7px; padding:30px 26px; transition:transform .25s ease; }
+.svc-tile{ display:flex; flex-direction:column; background:#eef3f9; border:0; border-radius:7px; padding:30px 26px; transition:transform .25s ease; }
 .svc-tile:hover{ transform:translateY(-5px); }
 .svc-tile__ico{ width:80px; height:80px; border-radius:12px; background:#eaf1fb; color:#2c74c0; display:grid; place-items:center; margin-bottom:18px; }
 .svc-tile__ico svg{ width:36px; height:36px; }
@@ -671,7 +671,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc-slide{ flex:0 0 calc((100% - (var(--svc-gap) * 4)) / 5); box-sizing:border-box;
     position:relative; min-height:var(--svc-card-h);
     display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:60px 18px 22px; background:#fff; border-radius:7px; border:1px solid #00000017;
+    padding:60px 18px 22px; background:#eef3f9; border-radius:7px; border:0;
     text-decoration:none; color:inherit; outline:none;
     transition:transform .25s ease; }
   .svc-slide:hover{ transform:translateY(-5px); }
