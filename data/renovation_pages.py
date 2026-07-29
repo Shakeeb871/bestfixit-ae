@@ -638,12 +638,14 @@ RENOVATION_PAGES.update(_leaf(
 ))
 
 
-# ── per-page uploaded images ───────────────────────────────────────────────
-# Villa Renovation: specific banner on the hero, and the same general
-# renovation image used on the right of the text+image (diagnosis) section.
-# Everything else stays the plumbing-style grid layout.
-_VILLA_IMG = ("img/Home renovation, villa renovation, office renovation, "
-              "exterior design, interior design.jpg")
-RENOVATION_PAGES["villa-renovation"]["hero"]["image"] = _VILLA_IMG
-RENOVATION_PAGES["villa-renovation"]["hero"]["image_alt"] = "Villa renovation in Dubai — Best Fix"
-RENOVATION_PAGES["villa-renovation"]["diagnosis"]["image"] = _VILLA_IMG
+# ── general renovation image ───────────────────────────────────────────────
+# One uploaded general renovation image is used across every renovation page:
+# as the hero banner, and on the right of the text+image (diagnosis) section.
+# The service cards below stay the plumbing-style grid layout.
+_GEN_IMG = ("img/Home renovation, villa renovation, office renovation, "
+            "exterior design, interior design.jpg")
+for _slug, _pg in RENOVATION_PAGES.items():
+    _pg["hero"]["image"] = _GEN_IMG
+    _pg["hero"]["image_alt"] = _pg["breadcrumb"] + " in Dubai — Best Fix"
+    if isinstance(_pg.get("diagnosis"), dict):
+        _pg["diagnosis"]["image"] = _GEN_IMG
