@@ -638,17 +638,18 @@ RENOVATION_PAGES.update(_leaf(
 ))
 
 
-# ── general renovation image ───────────────────────────────────────────────
-# One uploaded general renovation image is used across every renovation page:
-# as the hero banner, and on the right of the text+image (diagnosis) section.
-# The service cards below stay the plumbing-style grid layout.
+# ── renovation images ──────────────────────────────────────────────────────
+# The general renovation image is the hero banner on every renovation page.
+# The right-hand section image (diagnosis on the core grid page, why on the
+# sub-service pages) uses a separate, consistent image across all pages.
 _GEN_IMG = ("img/Home renovation, villa renovation, office renovation, "
             "exterior design, interior design.jpg")
+_SECTION_IMG = "img/Complete MEP Support From a Trusted Contractor.webp"
 for _slug, _pg in RENOVATION_PAGES.items():
     _pg["hero"]["image"] = _GEN_IMG
     _pg["hero"]["image_alt"] = _pg["breadcrumb"] + " in Dubai — Best Fix"
     if isinstance(_pg.get("diagnosis"), dict):
-        _pg["diagnosis"]["image"] = _GEN_IMG
+        _pg["diagnosis"]["image"] = _SECTION_IMG
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -702,7 +703,7 @@ def _to_sub(slug, parent, nav_title, nav_parent, nav_links):
         },
         "why": {
             "h2": p["why"]["h2"],
-            "image": _GEN_IMG,
+            "image": _SECTION_IMG,
             "image_alt": p["breadcrumb"] + " in Dubai — Best Fix",
             "paras": [
                 p["why"]["intro"],
