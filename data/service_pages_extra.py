@@ -536,10 +536,12 @@ EXTRA_SERVICE_PAGES = {
                 "maintenance contract or a fast repair.",
             ],
             "note": "Serving offices, retail units, villas and managed properties across Dubai.",
+            "image": "img/Electromechanical (MEP) Services in Dubai Mechanical, Electrical & Plumbing, Under One Team.webp",
+            "image_alt": "Best Fix electromechanical (MEP) team working in Dubai",
             "cta_label": "Contact Best Fix",
         },
         "diagnosis": {
-            "h2": "Complete MEP Support From a Trusted Contractor",
+            "h2": "Complete MEP Support From a Trusted Contractor", "image": "img/Complete MEP Support From a Trusted Contractor.webp",
             "paras": [
                 "MEP systems are central to both the daily running and the long-term "
                 "sustainability of any facility. Our teams bring technical skill and "
@@ -555,25 +557,25 @@ EXTRA_SERVICE_PAGES = {
         "services": {
             "h2": "What Our MEP Services Cover",
             "blocks": [
-                {"title": "Mechanical Systems", "icon": "fan",
+                {"title": "Mechanical Systems", "icon": "fan", "img": "Mechanical Systems.webp",
                  "intro": "Maintenance of the key mechanical components that keep a building "
                           "moving \u2014 pumps, air-handling units and ventilation \u2014 with "
                           "regular inspection and corrective work to prevent unplanned shutdowns.",
                  "types_title": "Includes:", "types": ["Pumps", "Air-handling units", "Ventilation systems", "Motors & drives", "Preventive inspections"],
                  "note": "All activity follows the relevant safety and compliance standards."},
-                {"title": "Electrical Systems", "icon": "bolt",
+                {"title": "Electrical Systems", "icon": "bolt", "img": "Electrical Systems.webp",
                  "intro": "Electrical work covering distribution boards, control panels, "
                           "capacitor banks, lighting and generator equipment, delivered with a "
                           "strong focus on reliability and risk reduction.",
                  "types_title": "Includes:", "types": ["Distribution boards", "Control panels", "Capacitor banks", "Lighting systems", "Generators & transfer switches"],
                  "note": "Specialised installations such as automatic transfer switches are handled in-house."},
-                {"title": "Plumbing Systems", "icon": "droplet",
+                {"title": "Plumbing Systems", "icon": "droplet", "img": "Plumbing Systems.webp",
                  "intro": "Servicing and maintenance of complete internal plumbing networks \u2014 "
                           "drainage, sump and sewage pumps and rainwater infrastructure \u2014 with "
                           "pressure and flow managed to meet demand during peak use.",
                  "types_title": "Includes:", "types": ["Water supply & drainage", "Sump & sewage pumps", "Rainwater systems", "Pressure & flow control", "Leak & blockage repair"],
                  "note": "Effective monitoring keeps performance steady when the building is busiest."},
-                {"title": "ELV (Extra-Low Voltage) Systems", "icon": "shield",
+                {"title": "ELV (Extra-Low Voltage) Systems", "icon": "shield", "img": "ELV (Extra-Low Voltage) Systems.webp",
                  "intro": "Installation and maintenance of extra-low-voltage systems that support "
                           "building security and automation, with proper configuration, regular "
                           "testing and a fast response to faults.",
