@@ -671,7 +671,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   .svc-slide{ flex:0 0 calc((100% - (var(--svc-gap) * 4)) / 5); box-sizing:border-box;
     position:relative; min-height:var(--svc-card-h);
     display:flex; flex-direction:column; align-items:center; text-align:center;
-    padding:60px 18px 22px; background:#eef3f9; border-radius:7px; border:0;
+    padding:60px 18px 22px; background:#fff; border-radius:7px; border:1px solid #00000017;
     text-decoration:none; color:inherit; outline:none;
     transition:transform .25s ease; }
   .svc-slide:hover{ transform:translateY(-5px); }

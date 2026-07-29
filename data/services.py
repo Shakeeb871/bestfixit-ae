@@ -164,13 +164,7 @@ SERVICES = [
             "maintenance you can rely on — from a dripping tap to a full "
             "bathroom fit-out, done fast and clean."
         ),
-        "points": [
-            "Leak Detection & Repair",
-            "Drain Unblocking",
-            "Water Heater Install",
-            "Sanitary Ware Fitting",
-            "Pipe & Drainage Works",
-        ],
+        "points": [],
     },
     {
         "slug": "swimming-pool-services",
@@ -182,13 +176,7 @@ SERVICES = [
             "Year-round swimming pool cleaning, water treatment and equipment "
             "maintenance to keep your pool crystal clear and safe all season."
         ),
-        "points": [
-            "Pool Cleaning",
-            "Pump & Filter Service",
-            "Water Treatment",
-            "Tiling & Repairs",
-            "Equipment Installation",
-        ],
+        "points": [],
     },
     {
         "slug": "painting-cleaning-services",
@@ -201,13 +189,7 @@ SERVICES = [
             "spotless, fresh finish — interior and exterior painting, facade "
             "and deep cleaning by a tidy, reliable team."
         ),
-        "points": [
-            "Interior Painting",
-            "Exterior Painting",
-            "Deep Cleaning",
-            "Facade Cleaning",
-            "Post-construction Cleaning",
-        ],
+        "points": [],
     },
     {
         "slug": "false-ceiling-partition-services",
@@ -220,13 +202,7 @@ SERVICES = [
             "high standard — gypsum ceilings, glass and drywall partitions and "
             "acoustic solutions."
         ),
-        "points": [
-            "Gypsum Ceilings",
-            "Glass Partitions",
-            "Drywall Works",
-            "Acoustic Panels",
-            "Light Partitions",
-        ],
+        "points": [],
     },
     {
         "slug": "renovation",
