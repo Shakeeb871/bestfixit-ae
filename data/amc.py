@@ -32,8 +32,8 @@ AMC_HERO = {
         "priority support and clear, predictable coverage.",
     ],
     "note": "Coverage across all Emirates · Working hours 8:00 AM – 8:00 PM with emergency support.",
-    "image": "img/hero-team.webp",
-    "image_alt": "Best Fix maintenance team in Dubai",
+    "image": "img/best fix it mainetnance fixerman.webp",
+    "image_alt": "Best Fix maintenance technician in Dubai",
     "cta_label": "Request a Quote",
 }
 
