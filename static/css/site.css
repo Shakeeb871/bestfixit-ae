@@ -115,12 +115,12 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
 
 .pagehero{ position:relative; overflow:hidden; background:linear-gradient(120deg,#04345f,#024d87); padding:clamp(46px,8vw,88px) 0; }
 .pagehero::after{ content:""; position:absolute; right:-90px; top:-90px; width:320px; height:320px; border:2px solid rgba(255,255,255,.09); border-radius:50%; pointer-events:none; }
-.pagehero__wrap{ position:relative; z-index:1; max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,44px); text-align:center; }
+.pagehero__wrap{ position:relative; z-index:1; max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,44px); text-align:center; }
 .pagehero h1{ font-size:clamp(28px,4vw,46px); margin:0 0 12px; }
 .pagehero__crumbs{ font-size:14px; color:rgba(255,255,255,.85); }
 .pagehero__crumbs a{ color:#fff; }
 .pagehero__crumbs a:hover{ text-decoration:underline; }
-.pagewrap{ max-width:1160px; margin:0 auto; padding:clamp(46px,7vw,82px) clamp(20px,5vw,44px); }
+.pagewrap{ max-width:1280px; margin:0 auto; padding:clamp(46px,7vw,82px) clamp(20px,5vw,44px); }
 .prose{ max-width:840px; margin:0 auto; }
 .prose h2{ font-size:22px; margin:34px 0 12px; }
 .prose h2:first-child{ margin-top:0; }
@@ -132,7 +132,7 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
    Every eyebrow-style label (the small pill above section headings) is
    removed across the whole website; section headings stand on their own. */
 [class*="eyebrow"], [class*="tagline"]{ display:none !important; }
-.svc-grid{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+.svc-grid{ max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
 .svc-tile{ display:flex; flex-direction:column; background:#eef3f9; border:0; border-radius:7px; padding:30px 26px; transition:transform .25s ease; }
 .svc-tile:hover{ transform:translateY(-5px); }
 .svc-tile__ico{ width:80px; height:80px; border-radius:12px; background:#eaf1fb; color:#2c74c0; display:grid; place-items:center; margin-bottom:18px; }
@@ -140,9 +140,9 @@ p:not([class*="eyebrow"]):not([class*="badge"]), li{
 .svc-tile h3{ font-size:clamp(16px,1.4vw,18px); margin:0 0 10px; }
 .svc-tile p{ margin:0 0 18px; }
 .svc-tile .btn-skew{ margin-top:auto; align-self:flex-start; }
-.split{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,54px); align-items:center; }
+.split{ max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,4vw,54px); align-items:center; }
 .split img{ width:100%; border-radius:10px; display:block; }
-.ct-grid{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:1fr 1.15fr; gap:40px; align-items:start; }
+.ct-grid{ max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,44px); display:grid; grid-template-columns:1fr 1.15fr; gap:40px; align-items:start; }
 .ct-info{ display:grid; gap:16px; }
 .ct-card{ display:flex; gap:14px; align-items:flex-start; background:#fff; border:1px solid #e6ebf3; border-radius:7px; padding:20px 22px; }
 .ct-card__ico{ width:46px; height:46px; border-radius:10px; background:#eaf1fb; color:#2c74c0; display:grid; place-items:center; flex:none; }
@@ -493,7 +493,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     color-mix(in srgb,var(--sf-overlay) 82%, transparent) 100%);
 }
 .site-footer__container{
-  position:relative; z-index:1; max-width:1240px; margin:0 auto;
+  position:relative; z-index:1; max-width:1280px; margin:0 auto;
   padding-inline:clamp(20px,5vw,60px);
 }
 .site-footer__top{
@@ -534,7 +534,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 .site-footer__info a:hover{ color:var(--sf-accent); }
 .site-footer__info b{ color:var(--sf-heading); display:block; font-size:14px; margin-bottom:3px; }
 .site-footer__bottom{
-  position:relative; z-index:1; max-width:1240px; margin:0 auto;
+  position:relative; z-index:1; max-width:1280px; margin:0 auto;
   padding:clamp(16px,2vw,20px) clamp(20px,5vw,60px);
   display:flex; align-items:center; justify-content:space-between; gap:16px 24px; flex-wrap:wrap;
   border-top:1px solid var(--sf-border);
@@ -612,7 +612,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 
 /* ── feature strip: full-width light band, 3 columns, linked to the hero ── */
 .hfeat{ position:relative; z-index:3; width:100%; margin-top:-64px; }
-.hfeat-row{ width:100%; background:#eef3f9;
+.hfeat-row{ width:100%; max-width:1280px; margin:0 auto; background:#eef3f9;
     display:grid; grid-template-columns:repeat(3,1fr);
     border:0; overflow:hidden; }
 .hfeat-card{ box-sizing:border-box; display:flex; flex-direction:row; align-items:center;
@@ -650,10 +650,10 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
 
 .svc2{ position:relative; background:#eef3f9; overflow:hidden;
     padding:clamp(56px,7vw,84px) 0 clamp(44px,5vw,60px); }
-  .svc2__head{ max-width:1480px; margin:0 auto clamp(30px,3.5vw,44px); padding:0 clamp(16px,3vw,40px); }
+  .svc2__head{ max-width:1280px; margin:0 auto clamp(30px,3.5vw,44px); padding:0 clamp(16px,3vw,40px); }
 
   /* ── carousel (reference-style: circular badge overlapping each card) ── */
-  .svc2__slider{ max-width:1480px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
+  .svc2__slider{ max-width:1280px; margin:0 auto; padding:0 clamp(16px,3vw,40px); }
   .svc2__stage{ position:relative;
     --svc-gap:20px; --svc-vp-x:20px; --svc-vp-top:66px; --svc-card-h:200px; }
   /* Horizontal padding equal to the gap gives the edge cards' shadows room
@@ -745,7 +745,7 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
   padding:clamp(60px,9vw,100px) 0 clamp(40px,5vw,60px);
   font-family:var(--font-body,inherit);
 }
-#bfc .bfc-wrap{ max-width:1180px; margin:0 auto;
+#bfc .bfc-wrap{ max-width:1280px; margin:0 auto;
   padding:0 clamp(20px,5vw,48px);
   display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
   gap:clamp(30px,5vw,70px); align-items:start; }
