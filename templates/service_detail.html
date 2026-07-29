@@ -198,7 +198,24 @@
 .svp-block__media{ position:sticky; top:96px; }
 .svp-block__media img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:7px; border:1px solid #00000017; display:block; }
 .svp-block--rev .svp-block__media{ order:2; }
+.svp-block--solo{ grid-template-columns:1fr; }
 .svp-block h3{ margin:0 0 12px; font-family:var(--font-heading); font-weight:800; font-size:clamp(20px,2vw,24px); color:#000; }
+
+/* ── homepage-style service card grid (banner-only pages) ── */
+.svp-prose--wide{ max-width:980px; }
+.svp-servicegrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(238px,1fr));
+  gap:clamp(52px,5vw,62px) clamp(18px,2vw,26px); padding-top:52px; }
+.svp-svc-card{ position:relative; background:#fff; border:1px solid #00000017; border-radius:7px;
+  padding:58px clamp(20px,1.8vw,26px) clamp(24px,2.2vw,28px); }
+.svp-svc-card__badge{ position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+  width:80px; height:80px; border-radius:50%; background:#024d87; display:grid; place-items:center; z-index:2; }
+.svp-svc-card__badge svg{ width:34px; height:34px; color:#fff !important; }
+.svp-svc-card h3{ margin:0 0 10px; font-family:var(--font-heading); font-weight:800; font-size:17px; color:#000; text-align:center; }
+.svp-svc-card p{ margin:0 0 14px; font-size:14px !important; line-height:1.6 !important; text-align:center; }
+.svp-svc-card__lt{ margin:0 0 8px !important; font-family:var(--font-heading); font-weight:800; font-size:13px !important; color:#0f1a2b !important; text-align:left; }
+.svp-svc-card__list{ list-style:none; margin:0; padding:0; }
+.svp-svc-card__list li{ position:relative; padding-left:20px; font-size:13.5px !important; line-height:1.5; margin:7px 0; }
+.svp-svc-card__list li::before{ content:""; position:absolute; left:0; top:7px; width:7px; height:7px; border-radius:50%; background:#1f9d55; }
 .svp-block__comp{ margin:16px 0 0 !important; font-size:14.5px !important; color:#3d4550 !important; }
 /* type tags */
 .svp-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
@@ -303,6 +320,7 @@
 </style>
 
 <div class="svp">
+{% set _grid = page.layout == 'grid' %}
 
   <!-- 1. HERO -->
   <section class="svp-hero">
@@ -341,12 +359,18 @@
   <section class="svp-sec">
     <div class="wrap">
       {{ sechead('The Approach', page.diagnosis.h2) }}
+      {% if _grid %}
+      <div class="svp-prose svp-prose--wide">
+        {% for p in page.diagnosis.paras %}<p>{{ p }}</p>{% endfor %}
+      </div>
+      {% else %}
       <div class="svp-textimg">
         <div>
           {% for p in page.diagnosis.paras %}<p>{{ p }}</p>{% endfor %}
         </div>
         {{ textimg_media(page.diagnosis, ICONS.get(page.diagnosis.icon,'')) }}
       </div>
+      {% endif %}
     </div>
   </section>
 
@@ -357,6 +381,21 @@
   <section class="svp-sec">
     <div class="wrap">
       {{ sechead('What We Fix', page.services.h2) }}
+      {% if _grid %}
+      <div class="svp-servicegrid">
+        {% for blk in page.services.blocks %}
+        <div class="svp-svc-card">
+          <span class="svp-svc-card__badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{{ ICONS.get(blk.icon,ICONS.get('gear'))|safe }}</svg></span>
+          <h3>{{ blk.title }}</h3>
+          <p>{{ blk.intro }}</p>
+          {% if blk.types %}
+          <p class="svp-svc-card__lt">{{ blk.types_title }}</p>
+          <ul class="svp-svc-card__list">{% for t in blk.types %}<li>{{ t }}</li>{% endfor %}</ul>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
       {% for blk in page.services.blocks %}
       <div class="svp-block{% if loop.index is even %} svp-block--rev{% endif %}">
         <div class="svp-block__media">
@@ -377,6 +416,7 @@
         </div>
       </div>
       {% endfor %}
+      {% endif %}
     </div>
   </section>
 
@@ -387,11 +427,13 @@
   <section class="svp-sec">
     <div class="wrap">
       {{ sechead('Emergency', page.emergency.h2) }}
-      <div class="svp-block">
+      <div class="svp-block{% if _grid %} svp-block--solo{% endif %}">
+        {% if not _grid %}
         <div class="svp-block__media">
           {% if page.emergency.img %}<img src="{{ url_for('static', filename='img/' + page.emergency.img) }}" alt="{{ page.emergency.h2 }} — Best Fix Dubai" loading="lazy">
           {% else %}<div class="svp-iconpanel svp-iconpanel--sq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">{{ ICONS.get(page.emergency.icon,ICONS.get('alert'))|safe }}</svg></div>{% endif %}
         </div>
+        {% endif %}
         <div class="svp-block__body">
           <p style="font-weight:700; color:#024d87 !important;">{{ page.emergency.lead }}</p>
           <p>{{ page.emergency.para }}</p>

@@ -387,7 +387,10 @@ EXTRA_SERVICE_PAGES = {
             "Same-day plumbers, clear pricing, tidy work."
         ),
         "breadcrumb": "Plumbing Services",
+        "layout": "grid",
         "hero": {
+            "image": "img/hero-team.webp",
+            "image_alt": "Best Fix plumbing team on a job in Dubai",
             "trustline": "Same-Day Plumbers · Leak & Blockage Experts · Emergency Support",
             "h1_accent": "Plumbing Services in Dubai",
             "h1": "Fixed Fast, Fixed Properly",
@@ -628,7 +631,10 @@ EXTRA_SERVICE_PAGES = {
             "and communities. Regular and one-off visits."
         ),
         "breadcrumb": "Swimming Pool Services",
+        "layout": "grid",
         "hero": {
+            "image": "img/hero-team.webp",
+            "image_alt": "Best Fix pool maintenance team in Dubai",
             "trustline": "Cleaning · Chemical Balancing · Equipment Repair",
             "h1_accent": "Swimming Pool Services in Dubai",
             "h1": "Clean, Clear and Balanced",
@@ -748,7 +754,10 @@ EXTRA_SERVICE_PAGES = {
             "offices and move-in/out. Clean, tidy, on-time work."
         ),
         "breadcrumb": "Painting & Cleaning Services",
+        "layout": "grid",
         "hero": {
+            "image": "img/hero-team.webp",
+            "image_alt": "Best Fix painting and cleaning team in Dubai",
             "trustline": "Interior & Exterior Painting · Deep Cleaning · Tidy Teams",
             "h1_accent": "Painting & Cleaning Services in Dubai",
             "h1": "A Fresh, Spotless Finish",
@@ -867,7 +876,10 @@ EXTRA_SERVICE_PAGES = {
             "businesses. Clean lines, on-time delivery."
         ),
         "breadcrumb": "False Ceiling & Partition Services",
+        "layout": "grid",
         "hero": {
+            "image": "img/hero-team.webp",
+            "image_alt": "Best Fix false-ceiling and partition team in Dubai",
             "trustline": "Gypsum Ceilings · Partitions · Office Fit-Out",
             "h1_accent": "False Ceiling & Partition Services in Dubai",
             "h1": "Clean Lines, Smart Spaces",
