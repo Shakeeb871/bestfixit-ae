@@ -37,7 +37,16 @@ except ImportError:
     pass
 
 from config import Config
-from data.blog import BLOG, POSTS, POST_BY_SLUG
+from data.blog import (
+    BLOG,
+    POSTS,
+    POST_BY_SLUG,
+    CATEGORIES,
+    CATEGORIES_WITH_COUNT,
+    CATEGORY_BY_SLUG,
+    RECENT_POSTS,
+    posts_in_category,
+)
 from data.cta import CTA_BANNER
 from data.expertise import SERVICE_EXPERTISE
 from data.process import (
@@ -244,7 +253,29 @@ def service_detail(slug):
 
 @app.route("/blog/")
 def blog():
-    return render_template("blog.html", posts=POSTS)
+    return render_template(
+        "blog.html",
+        posts=POSTS,
+        categories=CATEGORIES_WITH_COUNT,
+        recent_posts=RECENT_POSTS,
+        active_category=None,
+        featured=POSTS[0],
+    )
+
+
+@app.route("/blog/category/<cat_slug>/")
+def blog_category(cat_slug):
+    cat = CATEGORY_BY_SLUG.get(cat_slug)
+    if cat is None:
+        abort(404)
+    return render_template(
+        "blog.html",
+        posts=posts_in_category(cat_slug),
+        categories=CATEGORIES_WITH_COUNT,
+        recent_posts=RECENT_POSTS,
+        active_category=cat,
+        featured=None,
+    )
 
 
 @app.route("/blog/<slug>/")
@@ -252,8 +283,18 @@ def blog_post(slug):
     post = POST_BY_SLUG.get(slug)
     if post is None:
         abort(404)
-    others = [p for p in POSTS if p["slug"] != slug][:3]
-    return render_template("blog_post.html", post=post, others=others)
+    # related: same category first, then fill with other recent posts.
+    related = [p for p in posts_in_category(post["category_slug"]) if p["slug"] != slug]
+    if len(related) < 3:
+        related += [p for p in POSTS if p["slug"] != slug and p not in related]
+    others = related[:3]
+    return render_template(
+        "blog_post.html",
+        post=post,
+        others=others,
+        categories=CATEGORIES_WITH_COUNT,
+        recent_posts=RECENT_POSTS,
+    )
 
 
 @app.route("/contact/", methods=["GET", "POST"])
@@ -335,8 +376,10 @@ def sitemap_xml():
         ("/terms/", "0.3"),
         ("/cookies/", "0.3"),
     ]
+    paths += [("/amc/", "0.7")]
     paths += [(f"/services/{s['slug']}/", "0.8") for s in SERVICES]
     paths += [(f"/services/{slug}/", "0.7") for slug in SUBSERVICE_PAGES]
+    paths += [(f"/blog/category/{c['slug']}/", "0.5") for c in CATEGORIES]
     paths += [(f"/blog/{p['slug']}/", "0.6") for p in POSTS]
 
     items = "".join(

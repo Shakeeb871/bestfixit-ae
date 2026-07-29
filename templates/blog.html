@@ -1,48 +1,164 @@
 {% extends "site_base.html" %}
-{% block title %}Blog — Best Fix Technical Services{% endblock %}
-{% block description %}Practical home-maintenance advice for the UAE — AC servicing, plumbing, electrical safety and seasonal upkeep tips from Best Fix.{% endblock %}
+{% block title %}{% if active_category %}{{ active_category.name }} Articles{% else %}Blog{% endif %} — Best Fix Technical Services{% endblock %}
+{% block description %}{% if active_category %}{{ active_category.name }} tips and advice for UAE homes and businesses from Best Fix.{% else %}Practical home-maintenance advice for the UAE — AC servicing, plumbing, electrical safety, renovation and seasonal upkeep tips from Best Fix.{% endif %}{% endblock %}
 {% block content %}
+<style>
+  .blg{ font-family:var(--font-body,inherit); color:#000; }
+  .blg .wrap{ max-width:1240px; margin:0 auto; padding:0 clamp(20px,5vw,48px); }
+
+  /* filter bar */
+  .blg-filter{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:clamp(30px,4vw,44px) 0 clamp(24px,3vw,34px); }
+  .blg-chip{ display:inline-flex; align-items:center; gap:7px; padding:9px 18px; border-radius:30px;
+    background:#eef3f9; color:#024d87; font-family:var(--font-heading); font-weight:700; font-size:13.5px;
+    text-decoration:none; transition:background .18s ease, color .18s ease; }
+  .blg-chip:hover{ background:#dde8f5; }
+  .blg-chip.is-active{ background:#024d87; color:#fff; }
+  .blg-chip__n{ font-size:11.5px; opacity:.8; }
+
+  /* featured */
+  .blg-feat{ display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(22px,3vw,40px); align-items:center;
+    background:#eef3f9; border-radius:12px; overflow:hidden; margin-bottom:clamp(34px,4vw,48px); }
+  .blg-feat__img{ display:block; height:100%; min-height:280px; }
+  .blg-feat__img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .blg-feat__body{ padding:clamp(24px,3vw,40px) clamp(24px,3vw,40px) clamp(24px,3vw,40px) 0; }
+  .blg-feat__tag{ display:inline-block; margin:0 0 12px; padding:5px 13px; border-radius:30px; background:#024d87;
+    color:#fff !important; font-family:var(--font-heading); font-weight:800; font-size:11px; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; }
+  .blg-feat__title{ margin:0 0 12px; font-family:var(--font-heading); font-weight:800; font-size:clamp(21px,2.4vw,30px) !important; line-height:1.2 !important; }
+  .blg-feat__title a{ color:#0f1a2b; text-decoration:none; }
+  .blg-feat__title a:hover{ color:#024d87; }
+  .blg-feat__ex{ margin:0 0 16px; color:#4d5560 !important; font-size:15px !important; line-height:1.7 !important; }
+  .blg-feat__meta{ color:#8a93a2; font-size:12.5px; margin-bottom:16px; }
+  @media (max-width:760px){ .blg-feat{ grid-template-columns:1fr; } .blg-feat__img{ min-height:210px; } .blg-feat__body{ padding:24px; } }
+
+  /* two-column layout */
+  .blg-layout{ display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:clamp(30px,4vw,52px);
+    padding-bottom:clamp(44px,5vw,64px); align-items:start; }
+
+  /* post grid */
+  .blg-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(20px,2.4vw,28px); }
+  .blg-card{ display:flex; flex-direction:column; background:#fff; border:1px solid #e2e8f1;
+    border-radius:7px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease; }
+  .blg-card:hover{ transform:translateY(-5px); box-shadow:0 16px 34px rgba(2,77,135,.1); }
+  .blg-card__img{ display:block; aspect-ratio:16/10; overflow:hidden; }
+  .blg-card__img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
+  .blg-card:hover .blg-card__img img{ transform:scale(1.05); }
+  .blg-card__body{ display:flex; flex-direction:column; gap:10px; padding:20px 20px 22px; flex:1; }
+  .blg-card__tag{ align-self:flex-start; padding:4px 11px; border-radius:30px; background:#eef3f9; color:#024d87;
+    font-family:var(--font-heading); font-weight:700; font-size:11px; letter-spacing:.04em; text-transform:uppercase; text-decoration:none; }
+  .blg-card__tag:hover{ background:#dde8f5; }
+  .blg-card__title{ margin:0; font-size:17px !important; line-height:1.3 !important; }
+  .blg-card__title a{ color:#0f1a2b; text-decoration:none; }
+  .blg-card__title a:hover{ color:#024d87; }
+  .blg-card__ex{ margin:0; color:#5a616b !important; font-size:13.5px !important; line-height:1.6 !important; flex:1; }
+  .blg-card__date{ color:#8a93a2; font-size:12px; }
+  @media (max-width:560px){ .blg-grid{ grid-template-columns:1fr; } }
+
+  /* sidebar */
+  .blg-side{ display:flex; flex-direction:column; gap:20px; align-self:start; }
+  .blg-widget{ background:#fff; border:1px solid #e2e8f1; border-radius:7px; overflow:hidden; }
+  .blg-widget__hd{ padding:15px 20px; background:#0f1a2b; color:#fff; font-family:var(--font-heading); font-weight:800; font-size:15px; }
+  .blg-cats{ list-style:none; margin:0; padding:0; }
+  .blg-cats li + li{ border-top:1px solid #eef1f6; }
+  .blg-cats a{ display:flex; align-items:center; gap:10px; padding:12px 20px;
+    text-decoration:none; color:#1a2430; font-weight:600; font-size:14.5px; transition:background .16s ease, color .16s ease; }
+  .blg-cats a::before{ content:""; flex:none; width:7px; height:7px; border-radius:50%; background:#2c74c0; }
+  .blg-cats a span{ flex:1; }
+  .blg-cats a b{ font-size:12px; color:#8a93a2; font-weight:700; }
+  .blg-cats a:hover{ background:#f4f8fc; color:#024d87; }
+  .blg-cats a.is-active{ background:#eaf1fb; color:#024d87; font-weight:800; }
+  .blg-recent{ padding:8px 12px 12px; }
+  .blg-recent a{ display:flex; gap:12px; align-items:center; padding:10px 8px; text-decoration:none; border-radius:7px; transition:background .16s ease; }
+  .blg-recent a:hover{ background:#f4f8fc; }
+  .blg-recent img{ flex:none; width:64px; height:52px; border-radius:6px; object-fit:cover; }
+  .blg-recent__t{ font-family:var(--font-heading); font-weight:700; font-size:13.5px; line-height:1.35; color:#0f1a2b; }
+  .blg-recent a:hover .blg-recent__t{ color:#024d87; }
+  .blg-recent__d{ display:block; margin-top:3px; font-size:11.5px; color:#8a93a2; font-weight:600; }
+  @media (max-width:1000px){ .blg-layout{ grid-template-columns:1fr; } }
+</style>
+
 <section class="pagehero">
   <div class="pagehero__wrap">
-    <h1>Our Blog</h1>
-    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; Blog</p>
+    <h1>{% if active_category %}{{ active_category.name }}{% else %}Our Blog{% endif %}</h1>
+    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; <a href="/blog/">Blog</a>{% if active_category %} &middot; {{ active_category.name }}{% endif %}</p>
   </div>
 </section>
 
 <section class="pagewrap">
-  <style>
-    .blogx-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(20px,2.5vw,30px); }
-    .blogx-card{ display:flex; flex-direction:column; background:#fff; border:1px solid #00000017;
-      border-radius:7px; overflow:hidden; transition:transform .25s ease; }
-    .blogx-card:hover{ transform:translateY(-5px); }
-    .blogx-card__img{ display:block; aspect-ratio:16/10; overflow:hidden; }
-    .blogx-card__img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
-    .blogx-card:hover .blogx-card__img img{ transform:scale(1.05); }
-    .blogx-card__body{ display:flex; flex-direction:column; gap:12px; padding:22px 22px 24px; flex:1; }
-    .blogx-card__meta{ color:#2c74c0; font-family:var(--font-heading); font-weight:700; font-size:12px; letter-spacing:.04em; text-transform:uppercase; }
-    .blogx-card__title{ margin:0; font-size:19px !important; line-height:1.3 !important; }
-    .blogx-card__title a{ color:#0f1a2b; text-decoration:none; }
-    .blogx-card__title a:hover{ color:#024d87; }
-    .blogx-card__excerpt{ margin:0; color:#5a616b !important; font-size:14px !important; line-height:1.6 !important; flex:1; }
-    .blogx-card .btn-skew{ align-self:flex-start; margin-top:4px; }
-    @media (max-width:900px){ .blogx-grid{ grid-template-columns:1fr 1fr; } }
-    @media (max-width:600px){ .blogx-grid{ grid-template-columns:1fr; max-width:420px; margin-inline:auto; } }
-  </style>
+  <div class="blg">
+    <div class="wrap">
 
-  <div class="blogx-grid">
-    {% for p in posts %}
-    <article class="blogx-card">
-      <a class="blogx-card__img" href="/blog/{{ p.slug }}/" aria-label="{{ p.title }}">
-        <img src="{{ p.image }}" alt="{{ p.image_alt }}" width="440" height="275" loading="lazy">
-      </a>
-      <div class="blogx-card__body">
-        <span class="blogx-card__meta">{{ p.date }} &middot; {{ p.tags }}</span>
-        <h2 class="blogx-card__title"><a href="/blog/{{ p.slug }}/">{{ p.title }}</a></h2>
-        <p class="blogx-card__excerpt">{{ p.excerpt }}</p>
-        <a class="btn-skew btn-skew--arrow" href="/blog/{{ p.slug }}/">Read More</a>
+      <!-- Category filter -->
+      <nav class="blg-filter" aria-label="Blog categories">
+        <a class="blg-chip {{ 'is-active' if not active_category }}" href="/blog/">All Posts</a>
+        {% for c in categories %}
+        <a class="blg-chip {{ 'is-active' if active_category and active_category.slug == c.slug }}" href="/blog/category/{{ c.slug }}/">{{ c.name }}<span class="blg-chip__n">{{ c.count }}</span></a>
+        {% endfor %}
+      </nav>
+
+      <!-- Featured (all-posts view only) -->
+      {% if featured %}
+      <article class="blg-feat">
+        <a class="blg-feat__img" href="{{ featured.url }}" aria-label="{{ featured.title }}">
+          <img src="{{ featured.image }}" alt="{{ featured.image_alt }}" loading="lazy">
+        </a>
+        <div class="blg-feat__body">
+          <a class="blg-feat__tag" href="/blog/category/{{ featured.category_slug }}/">{{ featured.category }}</a>
+          <h2 class="blg-feat__title"><a href="{{ featured.url }}">{{ featured.title }}</a></h2>
+          <p class="blg-feat__meta">{{ featured.date }}</p>
+          <p class="blg-feat__ex">{{ featured.excerpt }}</p>
+          <a class="btn-skew btn-skew--arrow" href="{{ featured.url }}">Read Article</a>
+        </div>
+      </article>
+      {% endif %}
+
+      <div class="blg-layout">
+
+        <!-- Posts -->
+        <div class="blg-main">
+          <div class="blg-grid">
+            {% for p in posts %}
+            {% if not (featured and p.slug == featured.slug) %}
+            <article class="blg-card">
+              <a class="blg-card__img" href="{{ p.url }}" aria-label="{{ p.title }}">
+                <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
+              </a>
+              <div class="blg-card__body">
+                <a class="blg-card__tag" href="/blog/category/{{ p.category_slug }}/">{{ p.category }}</a>
+                <h2 class="blg-card__title"><a href="{{ p.url }}">{{ p.title }}</a></h2>
+                <p class="blg-card__ex">{{ p.excerpt }}</p>
+                <span class="blg-card__date">{{ p.date }}</span>
+              </div>
+            </article>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="blg-side">
+          <div class="blg-widget">
+            <div class="blg-widget__hd">Categories</div>
+            <ul class="blg-cats">
+              {% for c in categories %}
+              <li><a class="{{ 'is-active' if active_category and active_category.slug == c.slug }}" href="/blog/category/{{ c.slug }}/"><span>{{ c.name }}</span><b>{{ c.count }}</b></a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="blg-widget">
+            <div class="blg-widget__hd">Recent Posts</div>
+            <div class="blg-recent">
+              {% for p in recent_posts %}
+              <a href="{{ p.url }}">
+                <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
+                <span><span class="blg-recent__t">{{ p.title }}</span><span class="blg-recent__d">{{ p.date }}</span></span>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </aside>
+
       </div>
-    </article>
-    {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock %}
