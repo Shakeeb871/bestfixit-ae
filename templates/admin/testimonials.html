@@ -1,11 +1,27 @@
 {% extends "admin/base.html" %}
 {% block body %}
 <div class="note">Google rating: <b>{{ showcase.rating }}★</b> — {{ showcase.rating_label }}. These reviews appear in the homepage testimonials section.</div>
+<div class="form" style="margin-bottom:22px;">
+  <h2 id="formTitle" style="font-size:16px; margin-bottom:16px;">Add Testimonial</h2>
+  <form method="post" action="/admin/testimonials/save/">
+    <input type="hidden" name="index" id="t_index" value="">
+    <div class="form__row">
+      <div class="fld"><label>Customer Name</label><input name="name" id="t_name" required></div>
+      <div class="fld"><label>When <span class="hint">(e.g. 2 weeks ago)</span></label><input name="time" id="t_time" placeholder="Recently"></div>
+    </div>
+    <div class="fld"><label>Rating (1–5)</label><input name="rating" id="t_rating" type="number" min="1" max="5" value="5" style="max-width:120px;"></div>
+    <div class="fld"><label>Review</label><textarea name="quote" id="t_quote" required></textarea></div>
+    <div class="form__actions">
+      <button class="adm-btn adm-btn--solid" type="submit">Save Testimonial</button>
+      <button class="adm-btn" type="button" onclick="resetT()">Clear</button>
+    </div>
+  </form>
+</div>
 <div class="card">
   <div class="card__hd"><h2>Customer Reviews</h2><span class="pill">{{ showcase["items"]|length }} shown</span></div>
   <div class="tbl-wrap">
     <table class="tbl">
-      <thead><tr><th style="width:150px;">Name</th><th>Review</th><th style="width:80px;">Rating</th><th style="width:120px;">When</th></tr></thead>
+      <thead><tr><th style="width:140px;">Name</th><th>Review</th><th style="width:80px;">Rating</th><th style="width:110px;">When</th><th style="width:160px;">Actions</th></tr></thead>
       <tbody>
         {% for r in showcase["items"] %}
         <tr>
@@ -13,10 +29,19 @@
           <td class="muted">{{ r.quote }}</td>
           <td><span class="badge badge--amber">{{ '★' * r.rating }}</span></td>
           <td class="muted">{{ r.time }}</td>
+          <td><div class="act">
+            <a href="#" onclick="editT({{ loop.index0 }});return false;">Edit</a>
+            <form method="post" action="/admin/testimonials/{{ loop.index0 }}/delete/" onsubmit="return confirm('Delete this review?')"><button class="del" type="submit">Delete</button></form>
+          </div></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
+<script>
+  var REVS = {{ showcase["items"]|tojson }};
+  function editT(i){ var r=REVS[i]; t_index.value=i; t_name.value=r.name; t_time.value=r.time; t_rating.value=r.rating; t_quote.value=r.quote; formTitle.textContent='Edit Testimonial'; window.scrollTo({top:0,behavior:'smooth'}); }
+  function resetT(){ t_index.value=''; t_name.value=''; t_time.value=''; t_rating.value=5; t_quote.value=''; formTitle.textContent='Add Testimonial'; }
+</script>
 {% endblock %}

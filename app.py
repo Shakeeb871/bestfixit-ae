@@ -40,16 +40,8 @@ except ImportError:
     pass
 
 from config import Config
-from data.blog import (
-    BLOG,
-    POSTS,
-    POST_BY_SLUG,
-    CATEGORIES,
-    CATEGORIES_WITH_COUNT,
-    CATEGORY_BY_SLUG,
-    RECENT_POSTS,
-    posts_in_category,
-)
+from data.blog import BLOG
+from data import store
 from data.cta import CTA_BANNER
 from data.expertise import SERVICE_EXPERTISE
 from data.process import (
@@ -150,13 +142,18 @@ def _css_version() -> str:
 # --------------------------------------------------------------------------- #
 @app.context_processor
 def inject_globals():
+    _posts = store.blog_posts()
+    _blog = {**BLOG,
+             "featured": _posts[0] if _posts else None,
+             "related": _posts[1:4]}
+    _testi = {**TESTIMONIAL_SHOWCASE, "items": store.get_list("testimonials")}
     return {
         "site_name": app.config["SITE_NAME"],
         "site_domain": app.config["SITE_DOMAIN"],
         "contact_phone": app.config["CONTACT_PHONE"],
         "whatsapp_number": app.config["WHATSAPP_NUMBER"],
         "contact_email": app.config["CONTACT_EMAIL"],
-        "service_areas": SERVICE_AREAS,
+        "service_areas": store.get_list("areas"),
         "all_services": SERVICES,
         "current_year": datetime.now(timezone.utc).year,
         "process_steps": PROCESS_STEPS,
@@ -174,10 +171,10 @@ def inject_globals():
         "cta_secondary_url": CTA_BANNER["secondary_url"],
         "cta_background": CTA_BANNER["background"],
         "service_expertise": SERVICE_EXPERTISE,
-        "testimonial_showcase": TESTIMONIAL_SHOWCASE,
-        "blog": BLOG,
+        "testimonial_showcase": _testi,
+        "blog": _blog,
         "stats": STATS,
-        "faqs": FAQS,
+        "faqs": store.get_list("faqs"),
         "feature_cards": FEATURE_CARDS,
         "why_choose": WHY_CHOOSE,
         "nav_subservices": SERVICE_SUBLINKS,
@@ -271,26 +268,27 @@ def service_detail(slug):
 
 @app.route("/blog/")
 def blog():
+    posts = store.blog_posts()
     return render_template(
         "blog.html",
-        posts=POSTS,
-        categories=CATEGORIES_WITH_COUNT,
-        recent_posts=RECENT_POSTS,
+        posts=posts,
+        categories=store.blog_categories_with_count(),
+        recent_posts=store.recent_posts(),
         active_category=None,
-        featured=POSTS[0],
+        featured=posts[0] if posts else None,
     )
 
 
 @app.route("/blog/category/<cat_slug>/")
 def blog_category(cat_slug):
-    cat = CATEGORY_BY_SLUG.get(cat_slug)
+    cat = store.category_by_slug(cat_slug)
     if cat is None:
         abort(404)
     return render_template(
         "blog.html",
-        posts=posts_in_category(cat_slug),
-        categories=CATEGORIES_WITH_COUNT,
-        recent_posts=RECENT_POSTS,
+        posts=store.posts_in_category(cat_slug),
+        categories=store.blog_categories_with_count(),
+        recent_posts=store.recent_posts(),
         active_category=cat,
         featured=None,
     )
@@ -298,20 +296,20 @@ def blog_category(cat_slug):
 
 @app.route("/blog/<slug>/")
 def blog_post(slug):
-    post = POST_BY_SLUG.get(slug)
+    post = store.blog_post(slug)
     if post is None:
         abort(404)
-    # related: same category first, then fill with other recent posts.
-    related = [p for p in posts_in_category(post["category_slug"]) if p["slug"] != slug]
+    all_posts = store.blog_posts()
+    related = [p for p in store.posts_in_category(post["category_slug"]) if p["slug"] != slug]
     if len(related) < 3:
-        related += [p for p in POSTS if p["slug"] != slug and p not in related]
+        related += [p for p in all_posts if p["slug"] != slug and p not in related]
     others = related[:3]
     return render_template(
         "blog_post.html",
         post=post,
         others=others,
-        categories=CATEGORIES_WITH_COUNT,
-        recent_posts=RECENT_POSTS,
+        categories=store.blog_categories_with_count(),
+        recent_posts=store.recent_posts(),
     )
 
 
@@ -430,7 +428,7 @@ def admin_dashboard():
     stats = {
         "services": len(SERVICES),
         "subservices": len(SUBSERVICE_PAGES),
-        "posts": len(POSTS),
+        "posts": len(store.blog_posts()),
         "enquiries": len(leads),
         "amc": len(AMC_PLANS),
         "testimonials": len(TESTIMONIAL_SHOWCASE.get("items", [])),
@@ -440,7 +438,7 @@ def admin_dashboard():
     return render_template(
         "admin/dashboard.html", active="dashboard", page_title="Dashboard",
         page_sub="Overview of your website content and activity.",
-        stats=stats, recent_enquiries=leads[:6], recent_posts=POSTS[:6],
+        stats=stats, recent_enquiries=leads[:6], recent_posts=store.recent_posts(6),
     )
 
 
@@ -476,8 +474,8 @@ def admin_subservices():
 def admin_blog():
     return render_template(
         "admin/blog.html", active="blog", page_title="Blog Posts",
-        page_sub="Articles and categories.", posts=POSTS,
-        categories=CATEGORIES_WITH_COUNT,
+        page_sub="Articles and categories.", posts=store.blog_posts(),
+        categories=store.blog_categories_with_count(),
     )
 
 
@@ -497,7 +495,7 @@ def admin_testimonials():
     return render_template(
         "admin/testimonials.html", active="testimonials", page_title="Testimonials",
         page_sub="Customer reviews shown on the site.",
-        showcase=TESTIMONIAL_SHOWCASE,
+        showcase={**TESTIMONIAL_SHOWCASE, "items": store.get_list("testimonials")},
     )
 
 
@@ -506,7 +504,8 @@ def admin_testimonials():
 def admin_faqs():
     return render_template(
         "admin/faqs.html", active="faqs", page_title="FAQs",
-        page_sub="Frequently asked questions on the homepage.", faqs=FAQS,
+        page_sub="Frequently asked questions on the homepage.",
+        faqs=store.get_list("faqs"),
     )
 
 
@@ -515,7 +514,7 @@ def admin_faqs():
 def admin_areas():
     return render_template(
         "admin/areas.html", active="areas", page_title="Service Areas",
-        page_sub="Areas the business covers.", areas=SERVICE_AREAS,
+        page_sub="Areas the business covers.", areas=store.get_list("areas"),
     )
 
 
@@ -525,8 +524,273 @@ def admin_enquiries():
     return render_template(
         "admin/enquiries.html", active="enquiries", page_title="Enquiries",
         page_sub="Contact and booking form submissions, newest first.",
-        enquiries=_read_leads(),
+        enquiries=list(enumerate(_read_leads())),
     )
+
+
+# ---- content editing helpers ---------------------------------------------- #
+def _sections_to_text(sections) -> str:
+    """Render a post's sections back into an editable plain-text body."""
+    blocks = []
+    for s in sections or []:
+        if s.get("heading"):
+            blocks.append("## " + s["heading"])
+        for p in s.get("paras", []):
+            blocks.append(p)
+    return "\n\n".join(blocks)
+
+
+def _text_to_sections(text: str) -> list:
+    """Parse the editable body: '## ' lines are headings, blank lines split paras."""
+    sections = []
+    cur = {"heading": "", "paras": []}
+    for block in re.split(r"\n\s*\n", (text or "").strip()):
+        block = block.strip()
+        if not block:
+            continue
+        if block.startswith("## "):
+            if cur["heading"] or cur["paras"]:
+                sections.append(cur)
+            cur = {"heading": block[3:].strip(), "paras": []}
+        else:
+            cur["paras"].append(block)
+    if cur["heading"] or cur["paras"]:
+        sections.append(cur)
+    return sections or [{"heading": "", "paras": []}]
+
+
+# ---- FAQ CRUD ------------------------------------------------------------- #
+@app.route("/admin/faqs/save/", methods=["POST"])
+@_admin_required
+def admin_faq_save():
+    faqs = store.get_list("faqs")
+    q = request.form.get("q", "").strip()
+    a = request.form.get("a", "").strip()
+    idx = request.form.get("index", "")
+    if not q or not a:
+        flash("Both question and answer are required.", "error")
+        return redirect(url_for("admin_faqs"))
+    if idx == "":
+        faqs.append({"q": q, "a": a})
+        flash("FAQ added.", "success")
+    else:
+        i = int(idx)
+        faqs[i] = {"q": q, "a": a}
+        flash("FAQ updated.", "success")
+    store.replace_list("faqs", faqs)
+    return redirect(url_for("admin_faqs"))
+
+
+@app.route("/admin/faqs/<int:i>/delete/", methods=["POST"])
+@_admin_required
+def admin_faq_delete(i):
+    faqs = store.get_list("faqs")
+    if 0 <= i < len(faqs):
+        faqs.pop(i)
+        store.replace_list("faqs", faqs)
+        flash("FAQ deleted.", "success")
+    return redirect(url_for("admin_faqs"))
+
+
+# ---- Testimonial CRUD ----------------------------------------------------- #
+@app.route("/admin/testimonials/save/", methods=["POST"])
+@_admin_required
+def admin_testimonial_save():
+    items = store.get_list("testimonials")
+    name = request.form.get("name", "").strip()
+    quote = request.form.get("quote", "").strip()
+    time_ = request.form.get("time", "").strip()
+    try:
+        rating = max(1, min(5, int(request.form.get("rating", "5"))))
+    except ValueError:
+        rating = 5
+    idx = request.form.get("index", "")
+    if not name or not quote:
+        flash("Name and review text are required.", "error")
+        return redirect(url_for("admin_testimonials"))
+    rec = {"name": name, "quote": quote, "time": time_ or "Recently", "rating": rating}
+    if idx == "":
+        items.append(rec)
+        flash("Testimonial added.", "success")
+    else:
+        items[int(idx)] = rec
+        flash("Testimonial updated.", "success")
+    store.replace_list("testimonials", items)
+    return redirect(url_for("admin_testimonials"))
+
+
+@app.route("/admin/testimonials/<int:i>/delete/", methods=["POST"])
+@_admin_required
+def admin_testimonial_delete(i):
+    items = store.get_list("testimonials")
+    if 0 <= i < len(items):
+        items.pop(i)
+        store.replace_list("testimonials", items)
+        flash("Testimonial deleted.", "success")
+    return redirect(url_for("admin_testimonials"))
+
+
+# ---- Service Areas CRUD --------------------------------------------------- #
+@app.route("/admin/areas/save/", methods=["POST"])
+@_admin_required
+def admin_area_save():
+    areas = store.get_list("areas")
+    name = request.form.get("name", "").strip()
+    idx = request.form.get("index", "")
+    if not name:
+        flash("Area name is required.", "error")
+        return redirect(url_for("admin_areas"))
+    if idx == "":
+        areas.append(name)
+        flash("Area added.", "success")
+    else:
+        areas[int(idx)] = name
+        flash("Area updated.", "success")
+    store.replace_list("areas", areas)
+    return redirect(url_for("admin_areas"))
+
+
+@app.route("/admin/areas/<int:i>/delete/", methods=["POST"])
+@_admin_required
+def admin_area_delete(i):
+    areas = store.get_list("areas")
+    if 0 <= i < len(areas):
+        areas.pop(i)
+        store.replace_list("areas", areas)
+        flash("Area deleted.", "success")
+    return redirect(url_for("admin_areas"))
+
+
+# ---- Blog category CRUD --------------------------------------------------- #
+@app.route("/admin/blog/category/save/", methods=["POST"])
+@_admin_required
+def admin_category_save():
+    cats = store.get_list("blog_categories")
+    name = request.form.get("name", "").strip()
+    if not name:
+        flash("Category name is required.", "error")
+        return redirect(url_for("admin_blog"))
+    slug = store.unique_slug(store.slugify(name), {c["slug"] for c in cats})
+    cats.append({"name": name, "slug": slug})
+    store.replace_list("blog_categories", cats)
+    flash("Category added.", "success")
+    return redirect(url_for("admin_blog"))
+
+
+@app.route("/admin/blog/category/<slug>/delete/", methods=["POST"])
+@_admin_required
+def admin_category_delete(slug):
+    cats = store.get_list("blog_categories")
+    if any(p.get("category") and store.slugify(p["category"]) == slug or
+           _cat_name_slug(p, cats) == slug for p in store.get_list("blog_posts")):
+        flash("Cannot delete a category that still has posts.", "error")
+        return redirect(url_for("admin_blog"))
+    store.replace_list("blog_categories", [c for c in cats if c["slug"] != slug])
+    flash("Category deleted.", "success")
+    return redirect(url_for("admin_blog"))
+
+
+def _cat_name_slug(post, cats):
+    m = {c["name"]: c["slug"] for c in cats}
+    return m.get(post.get("category", ""), "")
+
+
+# ---- Blog post CRUD ------------------------------------------------------- #
+@app.route("/admin/blog/new/")
+@_admin_required
+def admin_blog_new():
+    return render_template(
+        "admin/blog_form.html", active="blog", page_title="New Blog Post",
+        page_sub="Create a new article.", post=None, body="",
+        categories=store.blog_categories(),
+    )
+
+
+@app.route("/admin/blog/<slug>/edit/")
+@_admin_required
+def admin_blog_edit(slug):
+    post = store.blog_post(slug)
+    if post is None:
+        abort(404)
+    return render_template(
+        "admin/blog_form.html", active="blog", page_title="Edit Blog Post",
+        page_sub=post["title"], post=post, body=_sections_to_text(post.get("sections")),
+        categories=store.blog_categories(),
+    )
+
+
+@app.route("/admin/blog/save/", methods=["POST"])
+@_admin_required
+def admin_blog_save():
+    posts = store.get_list("blog_posts")
+    orig = request.form.get("orig_slug", "").strip()
+    title = request.form.get("title", "").strip()
+    if not title:
+        flash("Title is required.", "error")
+        return redirect(url_for("admin_blog"))
+    rec = {
+        "title": title,
+        "category": request.form.get("category", "").strip(),
+        "date": request.form.get("date", "").strip(),
+        "tags": request.form.get("tags", "").strip(),
+        "image": request.form.get("image", "").strip() or "/static/img/hero-team.webp",
+        "image_alt": request.form.get("image_alt", "").strip() or title,
+        "excerpt": request.form.get("excerpt", "").strip(),
+        "sections": _text_to_sections(request.form.get("body", "")),
+    }
+    if orig:  # editing — keep the existing slug so URLs don't break
+        for i, p in enumerate(posts):
+            if p.get("slug") == orig:
+                rec["slug"] = orig
+                posts[i] = rec
+                break
+        flash("Post updated.", "success")
+    else:
+        rec["slug"] = store.unique_slug(store.slugify(title), {p.get("slug") for p in posts})
+        posts.insert(0, rec)
+        flash("Post created.", "success")
+    store.replace_list("blog_posts", posts)
+    return redirect(url_for("admin_blog"))
+
+
+@app.route("/admin/blog/<slug>/delete/", methods=["POST"])
+@_admin_required
+def admin_blog_delete(slug):
+    posts = store.get_list("blog_posts")
+    store.replace_list("blog_posts", [p for p in posts if p.get("slug") != slug])
+    flash("Post deleted.", "success")
+    return redirect(url_for("admin_blog"))
+
+
+# ---- Enquiries management ------------------------------------------------- #
+def _write_leads(leads: list) -> None:
+    """Rewrite the leads store (leads are held newest-first in memory)."""
+    try:
+        with open(app.config["LEADS_FILE"], "w", encoding="utf-8") as fh:
+            for r in reversed(leads):
+                rec = {k: v for k, v in r.items() if k != "when"}
+                fh.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        app.logger.error("Could not rewrite leads: %s", exc)
+
+
+@app.route("/admin/enquiries/<int:i>/delete/", methods=["POST"])
+@_admin_required
+def admin_enquiry_delete(i):
+    leads = _read_leads()
+    if 0 <= i < len(leads):
+        leads.pop(i)
+        _write_leads(leads)
+        flash("Enquiry deleted.", "success")
+    return redirect(url_for("admin_enquiries"))
+
+
+@app.route("/admin/enquiries/clear/", methods=["POST"])
+@_admin_required
+def admin_enquiry_clear():
+    _write_leads([])
+    flash("All enquiries cleared.", "success")
+    return redirect(url_for("admin_enquiries"))
 
 
 @app.route("/robots.txt")
@@ -561,8 +825,8 @@ def sitemap_xml():
     paths += [("/amc/", "0.7")]
     paths += [(f"/services/{s['slug']}/", "0.8") for s in SERVICES]
     paths += [(f"/services/{slug}/", "0.7") for slug in SUBSERVICE_PAGES]
-    paths += [(f"/blog/category/{c['slug']}/", "0.5") for c in CATEGORIES]
-    paths += [(f"/blog/{p['slug']}/", "0.6") for p in POSTS]
+    paths += [(f"/blog/category/{c['slug']}/", "0.5") for c in store.blog_categories()]
+    paths += [(f"/blog/{p['slug']}/", "0.6") for p in store.blog_posts()]
 
     items = "".join(
         f"<url><loc>https://{domain}{path}</loc>"

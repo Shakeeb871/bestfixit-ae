@@ -1,14 +1,21 @@
 {% extends "admin/base.html" %}
 {% block body %}
-<div class="note">Live enquiries captured from the website's contact &amp; booking forms. Newest first.</div>
+<div class="toolbar">
+  <div class="note" style="margin:0; flex:1;">Live enquiries captured from the website's contact &amp; booking forms. Newest first.</div>
+  {% if enquiries %}
+  <form method="post" action="/admin/enquiries/clear/" onsubmit="return confirm('Delete ALL enquiries? This cannot be undone.')">
+    <button class="adm-btn" type="submit" style="color:#b3261e; border-color:#f1d0d0;">Clear All</button>
+  </form>
+  {% endif %}
+</div>
 <div class="card">
   <div class="card__hd"><h2>Enquiries</h2><span class="pill">{{ enquiries|length }} total</span></div>
   <div class="tbl-wrap">
     {% if enquiries %}
     <table class="tbl">
-      <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Service</th><th>Message</th><th>Received</th></tr></thead>
+      <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Service</th><th>Message</th><th>Received</th><th style="width:90px;">Action</th></tr></thead>
       <tbody>
-        {% for e in enquiries %}
+        {% for i, e in enquiries %}
         <tr>
           <td><b>{{ e.name or '—' }}</b></td>
           <td class="mono">{{ e.phone or '—' }}</td>
@@ -16,6 +23,9 @@
           <td>{% if e.service %}<span class="badge badge--navy">{{ e.service }}</span>{% else %}<span class="muted">—</span>{% endif %}</td>
           <td class="muted">{{ e.message or '—' }}</td>
           <td class="muted">{{ e.when }}</td>
+          <td><div class="act">
+            <form method="post" action="/admin/enquiries/{{ i }}/delete/" onsubmit="return confirm('Delete this enquiry?')"><button class="del" type="submit">Delete</button></form>
+          </div></td>
         </tr>
         {% endfor %}
       </tbody>

@@ -1,16 +1,41 @@
 {% extends "admin/base.html" %}
 {% block body %}
+<div class="form" style="margin-bottom:22px;">
+  <h2 id="formTitle" style="font-size:16px; margin-bottom:16px;">Add FAQ</h2>
+  <form method="post" action="/admin/faqs/save/">
+    <input type="hidden" name="index" id="f_index" value="">
+    <div class="fld"><label>Question</label><input name="q" id="f_q" required></div>
+    <div class="fld"><label>Answer</label><textarea name="a" id="f_a" required></textarea></div>
+    <div class="form__actions">
+      <button class="adm-btn adm-btn--solid" type="submit">Save FAQ</button>
+      <button class="adm-btn" type="button" onclick="resetFaq()">Clear</button>
+    </div>
+  </form>
+</div>
 <div class="card">
-  <div class="card__hd"><h2>Homepage FAQs</h2><span class="pill">{{ faqs|length }} questions</span></div>
+  <div class="card__hd"><h2>All FAQs</h2><span class="pill">{{ faqs|length }} questions</span></div>
   <div class="tbl-wrap">
     <table class="tbl">
-      <thead><tr><th style="width:44px;">#</th><th style="width:34%;">Question</th><th>Answer</th></tr></thead>
+      <thead><tr><th style="width:44px;">#</th><th style="width:32%;">Question</th><th>Answer</th><th style="width:160px;">Actions</th></tr></thead>
       <tbody>
         {% for f in faqs %}
-        <tr><td class="mono">{{ loop.index }}</td><td><b>{{ f.q }}</b></td><td class="muted">{{ f.a }}</td></tr>
+        <tr>
+          <td class="mono">{{ loop.index }}</td>
+          <td><b>{{ f.q }}</b></td>
+          <td class="muted">{{ f.a }}</td>
+          <td><div class="act">
+            <a href="#" onclick="editFaq({{ loop.index0 }});return false;">Edit</a>
+            <form method="post" action="/admin/faqs/{{ loop.index0 }}/delete/" onsubmit="return confirm('Delete this FAQ?')"><button class="del" type="submit">Delete</button></form>
+          </div></td>
+        </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
+<script>
+  var FAQS = {{ faqs|tojson }};
+  function editFaq(i){ var f=FAQS[i]; f_index.value=i; f_q.value=f.q; f_a.value=f.a; formTitle.textContent='Edit FAQ'; window.scrollTo({top:0,behavior:'smooth'}); }
+  function resetFaq(){ f_index.value=''; f_q.value=''; f_a.value=''; formTitle.textContent='Add FAQ'; }
+</script>
 {% endblock %}

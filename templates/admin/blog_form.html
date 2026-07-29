@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<form class="form" method="post" action="/admin/blog/save/">
+  <input type="hidden" name="orig_slug" value="{{ post.slug if post else '' }}">
+  <div class="fld"><label>Title</label><input name="title" value="{{ post.title if post else '' }}" required></div>
+  <div class="form__row">
+    <div class="fld"><label>Category</label>
+      <select name="category">
+        {% for c in categories %}<option value="{{ c.name }}" {{ 'selected' if post and post.category == c.name }}>{{ c.name }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="fld"><label>Date <span class="hint">(e.g. 18 March 2026)</span></label><input name="date" value="{{ post.date if post else '' }}"></div>
+  </div>
+  <div class="form__row">
+    <div class="fld"><label>Tags <span class="hint">(comma separated)</span></label><input name="tags" value="{{ post.tags if post else '' }}"></div>
+    <div class="fld"><label>Image path</label><input name="image" value="{{ post.image if post else '/static/img/hero-team.webp' }}"></div>
+  </div>
+  <div class="fld"><label>Image alt text</label><input name="image_alt" value="{{ post.image_alt if post else '' }}"></div>
+  <div class="fld"><label>Excerpt <span class="hint">(short summary shown on cards)</span></label><textarea name="excerpt">{{ post.excerpt if post else '' }}</textarea></div>
+  <div class="fld"><label>Body <span class="hint">— start a line with "## " for a heading; leave a blank line between paragraphs</span></label>
+    <textarea name="body" style="min-height:300px;">{{ body }}</textarea></div>
+  <div class="form__actions">
+    <button class="adm-btn adm-btn--solid" type="submit">{{ 'Update Post' if post else 'Create Post' }}</button>
+    <a class="adm-btn" href="/admin/blog/">Cancel</a>
+  </div>
+</form>
+{% endblock %}

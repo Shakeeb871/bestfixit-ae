@@ -1,24 +1,32 @@
 {% extends "admin/base.html" %}
 {% block body %}
-<div class="adm-grid adm-grid--2" style="margin-bottom:22px;">
-  <div class="card">
-    <div class="card__hd"><h2>Categories</h2><span class="pill">{{ categories|length }}</span></div>
+<div class="toolbar">
+  <div class="muted">{{ posts|length }} articles across {{ categories|length }} categories</div>
+  <a class="adm-btn adm-btn--solid" href="/admin/blog/new/">+ New Post</a>
+</div>
+
+<div class="card" style="margin-bottom:22px;">
+  <div class="card__hd"><h2>Categories</h2><span class="pill">{{ categories|length }}</span></div>
+  <div class="card__bd">
+    <form method="post" action="/admin/blog/category/save/" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;">
+      <input name="name" placeholder="New category name" required style="flex:1; min-width:200px; padding:10px 13px; border:1px solid #d5deea; border-radius:9px; font-size:14px;">
+      <button class="adm-btn adm-btn--solid" type="submit">Add Category</button>
+    </form>
     <div class="tbl-wrap">
       <table class="tbl">
-        <thead><tr><th>Category</th><th>Slug</th><th>Posts</th></tr></thead>
+        <thead><tr><th>Category</th><th>Posts</th><th style="width:120px;">Actions</th></tr></thead>
         <tbody>
           {% for c in categories %}
-          <tr><td><b>{{ c.name }}</b></td><td><a class="mono" href="/blog/category/{{ c.slug }}/" target="_blank" rel="noopener">/blog/category/{{ c.slug }}/</a></td><td><span class="badge badge--navy">{{ c.count }}</span></td></tr>
+          <tr>
+            <td><b>{{ c.name }}</b> <span class="mono">/{{ c.slug }}/</span></td>
+            <td><span class="badge badge--navy">{{ c.count }}</span></td>
+            <td><div class="act">
+              <form method="post" action="/admin/blog/category/{{ c.slug }}/delete/" onsubmit="return confirm('Delete this category?')"><button class="del" type="submit"{% if c.count %} disabled title="Has posts"{% endif %}>Delete</button></form>
+            </div></td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card__hd"><h2>At a Glance</h2></div>
-    <div class="card__bd">
-      <p class="muted" style="margin:0 0 10px;">{{ posts|length }} published articles across {{ categories|length }} categories.</p>
-      <p class="muted" style="margin:0;">Newest: <b style="color:#0f1a2b;">{{ posts[0].title }}</b> ({{ posts[0].date }})</p>
     </div>
   </div>
 </div>
@@ -27,14 +35,18 @@
   <div class="card__hd"><h2>All Posts</h2><span class="pill">{{ posts|length }} total</span></div>
   <div class="tbl-wrap">
     <table class="tbl">
-      <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>URL</th></tr></thead>
+      <thead><tr><th>Title</th><th>Category</th><th>Date</th><th style="width:190px;">Actions</th></tr></thead>
       <tbody>
         {% for p in posts %}
         <tr>
           <td><b>{{ p.title }}</b></td>
           <td><span class="badge badge--navy">{{ p.category }}</span></td>
           <td class="muted">{{ p.date }}</td>
-          <td><a class="mono" href="{{ p.url }}" target="_blank" rel="noopener">{{ p.url }}</a></td>
+          <td><div class="act">
+            <a href="{{ p.url }}" target="_blank" rel="noopener">View</a>
+            <a href="/admin/blog/{{ p.slug }}/edit/">Edit</a>
+            <form method="post" action="/admin/blog/{{ p.slug }}/delete/" onsubmit="return confirm('Delete this post?')"><button class="del" type="submit">Delete</button></form>
+          </div></td>
         </tr>
         {% endfor %}
       </tbody>
