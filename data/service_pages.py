@@ -625,7 +625,7 @@ def _icon_for(title):
 # Electrical keeps all its uploaded images; every other core service uses the
 # 2-image standard (hero + diagnosis) and icon panels everywhere else.
 _FULL_IMAGE_PAGES = {"electrical-services", "home-appliances-repair",
-                     "electromechanical-services"}
+                     "electromechanical-services", "hvac-services"}
 
 for _slug, _p in SERVICE_PAGES.items():
     _keep = _slug in _FULL_IMAGE_PAGES

@@ -269,10 +269,12 @@ EXTRA_SERVICE_PAGES = {
                 "small faults before they become a breakdown on the hottest day of the year.",
             ],
             "note": "Same-day appointments are available for weak cooling, water leaks and complete cooling failure.",
+            "image": "img/AC & HVAC Services in Dubai.webp",
+            "image_alt": "Best Fix technician servicing an air-conditioning system in Dubai",
             "cta_label": "Book AC Service",
         },
         "diagnosis": {
-            "h2": "We Diagnose the Cause, Not Just the Symptom",
+            "h2": "We Diagnose the Cause, Not Just the Symptom", "image": "img/We Diagnose the Cause, Not Just the Symptom.webp",
             "paras": [
                 "Weak cooling can be low gas, a dirty coil, a failing compressor, a blocked "
                 "drain or a thermostat fault — and topping up gas on a system that's leaking "
@@ -285,22 +287,22 @@ EXTRA_SERVICE_PAGES = {
         "services": {
             "h2": "HVAC Services We Provide",
             "blocks": [
-                {"title": "AC Repair & Fault-Finding",
+                {"title": "AC Repair & Fault-Finding", "img": "AC Repair & Fault-Finding.webp",
                  "intro": "Weak or warm airflow, water leaks, strange noises, tripping units and "
                           "systems that won't switch on — diagnosed and repaired.",
                  "types_title": "We work on:", "types": ["Split & wall-mounted units", "Ducted / concealed systems", "Central AC", "Cassette units", "Window units"],
                  "note": "A sudden jump in your DEWA bill often means the system is straining — worth a check."},
-                {"title": "AC Servicing & Maintenance",
+                {"title": "AC Servicing & Maintenance", "img": "AC Servicing & Maintenance.webp",
                  "intro": "Full servicing — coil and filter cleaning, gas check, drain clearing "
                           "and performance testing — to keep cooling strong and efficient.",
                  "types_title": "A service covers:", "types": ["Filter & coil cleaning", "Gas pressure check", "Drain line clearing", "Electrical & thermostat check", "Performance test"],
                  "note": "In Dubai's climate we recommend a service every few months, not once a year."},
-                {"title": "Gas Top-Up & Leak Repair",
+                {"title": "Gas Top-Up & Leak Repair", "img": "Gas Top-Up & Leak Repair.webp",
                  "intro": "Refrigerant top-ups done properly — with the leak traced and repaired "
                           "first, so cooling is restored and stays restored.",
                  "types_title": "Included:", "types": ["Leak detection", "Leak repair", "Refrigerant top-up", "Pressure testing", "Cooling verification"],
                  "note": "Topping up gas without fixing the leak is a short-term patch — we do it right."},
-                {"title": "Duct Cleaning & Installation",
+                {"title": "Duct Cleaning & Installation", "img": "Duct Cleaning & Installation.webp",
                  "intro": "Duct cleaning for cleaner, healthier air, and full installation of new "
                           "split, ducted and central systems sized to the space.",
                  "types_title": "We handle:", "types": ["Duct cleaning", "New split installation", "Ducted system install", "Unit relocation", "Thermostat upgrades"],
@@ -308,7 +310,7 @@ EXTRA_SERVICE_PAGES = {
             ],
         },
         "emergency": {
-            "h2": "Same-Day AC Support",
+            "h2": "Same-Day AC Support", "img": "Same-Day AC Support.webp",
             "lead": "In the Dubai heat, a failed AC is an emergency.",
             "para": "When a unit stops cooling completely, leaks water across the floor or trips "
                     "the power, we prioritise the call and aim to get to you the same day.",
