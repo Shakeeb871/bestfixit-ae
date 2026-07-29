@@ -636,3 +636,14 @@ RENOVATION_PAGES.update(_leaf(
         "renovation last, not just look good on day one.",
     ],
 ))
+
+
+# ── per-page uploaded images ───────────────────────────────────────────────
+# Villa Renovation: specific banner on the hero, and the same general
+# renovation image used on the right of the text+image (diagnosis) section.
+# Everything else stays the plumbing-style grid layout.
+_VILLA_IMG = ("img/Home renovation, villa renovation, office renovation, "
+              "exterior design, interior design.jpg")
+RENOVATION_PAGES["villa-renovation"]["hero"]["image"] = _VILLA_IMG
+RENOVATION_PAGES["villa-renovation"]["hero"]["image_alt"] = "Villa renovation in Dubai — Best Fix"
+RENOVATION_PAGES["villa-renovation"]["diagnosis"]["image"] = _VILLA_IMG

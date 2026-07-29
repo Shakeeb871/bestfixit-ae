@@ -367,9 +367,18 @@
     <div class="wrap">
       {{ sechead('The Approach', page.diagnosis.h2) }}
       {% if _grid %}
+      {% if page.diagnosis.image %}
+      <div class="svp-textimg">
+        <div>
+          {% for p in page.diagnosis.paras %}<p>{{ p }}</p>{% endfor %}
+        </div>
+        {{ textimg_media(page.diagnosis) }}
+      </div>
+      {% else %}
       <div class="svp-prose svp-prose--wide">
         {% for p in page.diagnosis.paras %}<p>{{ p }}</p>{% endfor %}
       </div>
+      {% endif %}
       {% else %}
       <div class="svp-textimg">
         <div>
