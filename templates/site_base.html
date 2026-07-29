@@ -17,8 +17,9 @@
 <link rel="canonical" href="https://{{ site_domain }}{{ request.path }}">
 
 <!-- favicons -->
-<link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/logo.webp') }}">
+<link rel="icon" href="{{ url_for('static', filename='img/favicon-bestfixit.png') }}?v={{ css_version }}" type="image/png">
+<link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon-bestfixit.png') }}?v={{ css_version }}" type="image/png">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon-bestfixit.png') }}?v={{ css_version }}">
 
 <!-- Open Graph -->
 <meta property="og:type" content="{% block og_type %}website{% endblock %}">
