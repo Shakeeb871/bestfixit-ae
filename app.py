@@ -78,6 +78,26 @@ app.jinja_env.auto_reload = True
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
+def _service_badges() -> set:
+    """Slugs that have a slider badge PNG (static/img/service-<slug>.png).
+
+    The homepage "Our Services" slider uses these PNG badges; a service
+    without one (e.g. renovation) falls back to its inline SVG icon.
+    """
+    badges = set()
+    try:
+        img_dir = os.path.join(app.static_folder, "img")
+        for s in SERVICES:
+            if os.path.exists(os.path.join(img_dir, f"service-{s['slug']}.png")):
+                badges.add(s["slug"])
+    except OSError:
+        pass
+    return badges
+
+
+_SERVICE_BADGES = _service_badges()
+
+
 def _css_version() -> str:
     """Cache-busting token for site.css — its last-modified time.
 
@@ -128,6 +148,7 @@ def inject_globals():
         "feature_cards": FEATURE_CARDS,
         "why_choose": WHY_CHOOSE,
         "nav_subservices": SERVICE_SUBLINKS,
+        "service_badges": _SERVICE_BADGES,
         "css_version": _css_version(),
     }
 
@@ -173,16 +194,27 @@ def service_detail(slug):
             google=GOOGLE_RATING,
         )
 
+    page = SERVICE_PAGES.get(slug)
     service = SERVICE_BY_SLUG.get(slug)
+    # Renovation sub-service / level-3 pages live in SERVICE_PAGES but are not
+    # top-level core services, so synthesise a minimal service object for them.
     if service is None:
-        abort(404)
+        if page is None:
+            abort(404)
+        service = {
+            "title": page.get("breadcrumb", "Service"),
+            "slug": slug,
+            "short": "",
+            "description": "",
+            "points": [],
+        }
     # A few "other services" for cross-linking at the bottom of the page.
     others = [s for s in SERVICES if s["slug"] != slug][:4]
     return render_template(
         "service_detail.html",
         service=service,
         others=others,
-        page=SERVICE_PAGES.get(slug),
+        page=page,
     )
 
 

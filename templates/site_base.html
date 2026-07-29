@@ -154,6 +154,15 @@
 .bfh__dd-all{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:6px; padding:11px 14px; color:#024d87; font-size:12.5px; font-weight:800; text-decoration:none; border-top:1px solid #eef1f6; text-transform:uppercase; letter-spacing:.03em; }
 .bfh__dd-all svg{ width:15px; height:15px; transition:transform .18s ease; }
 .bfh__dd-all:hover svg{ transform:translateX(4px); }
+/* level-3 nested flyout (sub-service → its level-3 services) */
+.bfh__dd-sub{ position:relative; }
+.bfh__dd-link--parent{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.bfh__dd-link--parent .bfh-chev{ width:13px; height:13px; opacity:.65; transform:rotate(-90deg); }
+.bfh__dd--flyout{ top:-8px; left:100%; margin-left:3px; border-top:3px solid #1594ac; }
+.bfh__dd-sub:hover > .bfh__dd--flyout{ opacity:1; visibility:visible; transform:translateY(0); }
+.bfh__dd-sub:hover > .bfh__dd-link--parent{ background:#f2f6fb; color:#024d87; }
+/* mirror the right-edge alignment of the last nav items for their flyouts */
+.bfh__nav-item:last-child .bfh__dd--flyout, .bfh__nav-item:nth-last-child(2) .bfh__dd--flyout{ left:auto; right:100%; margin-left:0; margin-right:3px; }
 
 /* ── mobile drawer ── */
 .bfh-drawer[hidden]{ display:none; }
@@ -181,6 +190,8 @@
 .bfh-acc__inner{ overflow:hidden; }
 .bfh-acc__inner a{ display:block; padding:12px 22px 12px 34px; color:#4d5560; font-size:14px; font-weight:600; text-decoration:none; transition:color .16s ease; }
 .bfh-acc__inner a:hover{ color:#024d87; }
+.bfh-acc__inner a.bfh-acc__child{ padding:9px 22px 9px 50px; font-size:13px; font-weight:600; color:#6b7480; position:relative; }
+.bfh-acc__inner a.bfh-acc__child::before{ content:"–"; position:absolute; left:38px; color:#9aa4b0; }
 .bfh-acc__all{ color:#024d87 !important; font-weight:800 !important; }
 .bfh-drawer__foot{ padding:16px 20px; border-top:1px solid #eef1f6; display:flex; flex-direction:column; gap:10px; flex:none; }
 .bfh-drawer__call{ display:flex; align-items:center; justify-content:center; gap:9px; color:#024d87; font-size:18px; font-weight:800; text-decoration:none; }
@@ -264,7 +275,18 @@
         <div class="bfh__dd">
           {% if _subs %}
           {% for sub in _subs %}
-          <a class="bfh__dd-link {{ 'is-active' if request.path == '/services/' + sub.slug }}" href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
+          {% if sub.children %}
+          <div class="bfh__dd-sub">
+            <a class="bfh__dd-link bfh__dd-link--parent {{ 'is-active' if request.path == '/services/' + sub.slug + '/' }}" href="/services/{{ sub.slug }}/">{{ sub.name }}{{ _chevd|safe }}</a>
+            <div class="bfh__dd bfh__dd--flyout">
+              {% for c in sub.children %}
+              <a class="bfh__dd-link {{ 'is-active' if request.path == '/services/' + c.slug + '/' }}" href="/services/{{ c.slug }}/">{{ c.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+          {% else %}
+          <a class="bfh__dd-link {{ 'is-active' if request.path == '/services/' + sub.slug + '/' }}" href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
+          {% endif %}
           {% endfor %}
           {% else %}
           {% for p in s.points %}
@@ -275,15 +297,6 @@
         {% endif %}
       </li>
       {% endfor %}
-
-      <li class="bfh__nav-item">
-        <a class="bfh__nav-link" href="/contact/">Service Areas{{ _chevd|safe }}</a>
-        <div class="bfh__dd">
-          {% for a in service_areas %}
-          <a class="bfh__dd-link" href="/contact/">{{ a }}</a>
-          {% endfor %}
-        </div>
-      </li>
 
       <li class="bfh__nav-item">
         <a class="bfh__nav-link {{ 'is-active' if request.path in ['/about','/mission','/vision'] }}" href="/about/">About Us{{ _chevd|safe }}</a>
@@ -324,6 +337,11 @@
           {% if _subs %}
           {% for sub in _subs %}
           <a href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
+          {% if sub.children %}
+          {% for c in sub.children %}
+          <a class="bfh-acc__child" href="/services/{{ c.slug }}/">{{ c.name }}</a>
+          {% endfor %}
+          {% endif %}
           {% endfor %}
           {% else %}
           {% for p in s.points %}
@@ -336,16 +354,6 @@
       <a class="bfh-drawer__link {{ 'is-active' if request.path == '/services/' + s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}</a>
       {% endif %}
       {% endfor %}
-
-      <div class="bfh-acc" data-acc>
-        <button class="bfh-acc__trigger" type="button" data-acc-trigger>
-          Service Areas
-          <svg class="bfh-acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
-        </button>
-        <div class="bfh-acc__panel"><div class="bfh-acc__inner">
-          {% for a in service_areas %}<a href="/contact/">{{ a }}</a>{% endfor %}
-        </div></div>
-      </div>
 
       <div class="bfh-acc" data-acc>
         <button class="bfh-acc__trigger" type="button" data-acc-trigger>

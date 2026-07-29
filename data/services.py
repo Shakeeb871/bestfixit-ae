@@ -73,6 +73,14 @@ _IC_CEILING = (
     '<path d="M3 9h18"></path><path d="M9 21V9"></path>'
     '<path d="M15 21V9"></path></svg>'
 )
+_IC_RENOVATION = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M3 21h18"></path>'
+    '<path d="M5 21V10l7-6 7 6v11"></path>'
+    '<path d="M9 21v-6h6v6"></path>'
+    '<path d="m14.5 6.5 3 3"></path></svg>'
+)
 
 SERVICES = [
     {
@@ -219,6 +227,19 @@ SERVICES = [
             "Acoustic Panels",
             "Light Partitions",
         ],
+    },
+    {
+        "slug": "renovation",
+        "num": "09",
+        "title": "Renovation",
+        "icon": _IC_RENOVATION,
+        "short": "Home renovation, interior design and exterior works.",
+        "description": (
+            "Complete renovation, interior design and exterior works for homes "
+            "and businesses — planned and delivered by one coordinated team, from "
+            "first drawing to final handover."
+        ),
+        "points": [],
     },
 ]
 

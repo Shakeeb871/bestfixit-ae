@@ -577,6 +577,9 @@ SERVICE_PAGES = {
 from data.service_pages_extra import EXTRA_SERVICE_PAGES
 SERVICE_PAGES.update(EXTRA_SERVICE_PAGES)
 
+from data.renovation_pages import RENOVATION_PAGES
+SERVICE_PAGES.update(RENOVATION_PAGES)
+
 
 # --------------------------------------------------------------------------- #
 # Standard: a core-service page shows at most TWO images (hero + diagnosis).

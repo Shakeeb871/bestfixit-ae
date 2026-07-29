@@ -32,6 +32,8 @@ _BRAND_LOGOS = [{"name": n, "img": "Brands/" + f} for n, f in _BRAND_TUPLES]
 # --------------------------------------------------------------------------- #
 # Sidebar / navigation: sub-service pages grouped under each core service.
 # --------------------------------------------------------------------------- #
+from data.renovation_pages import RENOVATION_SUBLINKS as _RENOVATION_SUBLINKS
+
 APPLIANCE_PARENT = {
     "name": "Home Appliances Repair",
     "href": "/services/home-appliances-repair/",
@@ -47,6 +49,7 @@ SERVICE_SUBLINKS = {
         {"name": "Microwave Repair", "slug": "microwave-repair"},
         {"name": "Small Appliance Repair", "slug": "small-appliance-repair"},
     ],
+    "renovation": _RENOVATION_SUBLINKS,
 }
 
 # Sidebar link list (name + resolved href) for the appliance family.

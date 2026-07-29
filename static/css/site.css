@@ -684,6 +684,8 @@ details[open] .bf-faq-chev{ transform:rotate(180deg); }
     transition:transform .25s ease; }
   .svc-slide:hover .svc-slide__badge{ transform:translateX(-50%) scale(1.03); }
   .svc-slide__badge img{ width:75%; height:75%; object-fit:contain; display:block; }
+  .svc-slide__badge--ico{ background:#024d87; }
+  .svc-slide__badge--ico svg{ width:44%; height:44%; color:#fff; stroke:#fff; }
 
   .svc-slide__title{ margin:0 0 8px; color:#000 !important;
     font-family:var(--font-heading); font-weight:800; font-size:clamp(16px,1.4vw,18px); line-height:1.24;

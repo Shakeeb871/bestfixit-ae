@@ -279,8 +279,12 @@
       <div class="svc2__track" data-svc2-track>
         {% for sv in all_services %}
         <a class="svc-slide" href="/services/{{ sv.slug }}/" aria-label="{{ sv.title }}">
-          <span class="svc-slide__badge" aria-hidden="true">
+          <span class="svc-slide__badge{% if sv.slug not in service_badges %} svc-slide__badge--ico{% endif %}" aria-hidden="true">
+            {% if sv.slug in service_badges %}
             <img src="/static/img/service-{{ sv.slug }}.png" alt="" loading="lazy" width="90" height="90">
+            {% else %}
+            {{ sv.icon|safe }}
+            {% endif %}
           </span>
           <h3 class="svc-slide__title">{{ sv.title }}</h3>
           <span class="svc-slide__desc">{{ sv.short }}</span>
