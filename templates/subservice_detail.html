@@ -270,7 +270,7 @@
   <!-- HERO -->
   <section class="ssp-hero">
     <div class="ssp-hero__bg">
-      <img src="{{ url_for('static', filename=sub.hero.image) }}" alt="{{ sub.hero.image_alt }}">
+      <img src="{{ url_for('static', filename=sub.hero.image) }}" alt="{{ sub.hero.image_alt }}" width="1900" height="1014">
     </div>
     <div class="ssp-hero__overlay" aria-hidden="true"></div>
     <div class="ssp-hero__content">
@@ -332,7 +332,7 @@
         <section class="ssp-sec ssp-why">
           {{ sechead('Why Best Fix', sub.why.h2) }}
           <div class="ssp-why__grid">
-            <img class="ssp-why__img" src="{{ url_for('static', filename=sub.why.image) }}" alt="{{ sub.why.image_alt }}" loading="lazy">
+            <img class="ssp-why__img" src="{{ url_for('static', filename=sub.why.image) }}" alt="{{ sub.why.image_alt }}" width="720" height="360" loading="lazy">
             <div>
               {% for p in sub.why.paras %}<p>{{ p }}</p>{% endfor %}
               <p class="ssp-areas-intro">{{ sub.why.areas_intro }}</p>
@@ -352,7 +352,7 @@
           <p>{{ sub.brands.intro }}</p>
           <div class="ssp-brands">
             {% for b in sub.brands.logos %}
-            <div class="ssp-brand"><img src="{{ url_for('static', filename='img/' + b.img) }}" alt="{{ b.name }} appliance repair Dubai" loading="lazy"></div>
+            <div class="ssp-brand"><img src="{{ url_for('static', filename='img/' + b.img) }}" alt="{{ b.name }} appliance repair Dubai" width="252" height="118" loading="lazy"></div>
             {% endfor %}
           </div>
         </section>
@@ -430,11 +430,11 @@
           <div class="ssp-widget__hd">{{ sub.form_title or 'Book a Repair' }}</div>
           <div class="ssp-widget__bd">
             <form class="ssp-form" action="/contact/" method="post" novalidate>
-              <div class="fld"><label>Your Name</label><input type="text" name="name" placeholder="e.g. Sara Ahmed" required></div>
-              <div class="fld"><label>Phone</label><input type="tel" name="phone" placeholder="+971 5X XXX XXXX" required></div>
-              <div class="fld"><label>Email <span style="font-weight:600;color:#9aa3b0;">(optional)</span></label><input type="email" name="email" placeholder="you@example.com"></div>
+              <div class="fld"><label for="ssp-name">Your Name</label><input id="ssp-name" type="text" name="name" placeholder="e.g. Sara Ahmed" required></div>
+              <div class="fld"><label for="ssp-phone">Phone</label><input id="ssp-phone" type="tel" name="phone" placeholder="+971 5X XXX XXXX" required></div>
+              <div class="fld"><label for="ssp-email">Email <span style="font-weight:600;color:#9aa3b0;">(optional)</span></label><input id="ssp-email" type="email" name="email" placeholder="you@example.com"></div>
               <input type="hidden" name="service" value="{{ sub.breadcrumb }}">
-              <div class="fld"><label>{{ sub.form_label or "What's wrong?" }}</label><textarea name="message" placeholder="{{ sub.form_placeholder or 'e.g. Front-loader not draining, leaking from the door…' }}"></textarea></div>
+              <div class="fld"><label for="ssp-message">{{ sub.form_label or "What's wrong?" }}</label><textarea id="ssp-message" name="message" placeholder="{{ sub.form_placeholder or 'e.g. Front-loader not draining, leaking from the door…' }}"></textarea></div>
               <button type="submit" class="ssp-form__btn">Request a Callback</button>
               <p class="ssp-form__note">Same-day slots where available &middot; No obligation</p>
             </form>

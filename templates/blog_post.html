@@ -103,7 +103,7 @@
             <div class="blg-related__grid">
               {% for p in others %}
               <a class="blg-related__item" href="{{ p.url }}">
-                <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
+                <img src="{{ p.image }}" alt="{{ p.image_alt }}" width="320" height="200" loading="lazy">
                 <span>{{ p.title }}</span>
               </a>
               {% endfor %}
@@ -127,7 +127,7 @@
             <div class="blg-recent">
               {% for p in recent_posts %}
               <a href="{{ p.url }}">
-                <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
+                <img src="{{ p.image }}" alt="{{ p.image_alt }}" width="64" height="52" loading="lazy">
                 <span><span class="blg-recent__t">{{ p.title }}</span><span class="blg-recent__d">{{ p.date }}</span></span>
               </a>
               {% endfor %}

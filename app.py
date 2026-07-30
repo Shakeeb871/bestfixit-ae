@@ -204,6 +204,35 @@ def _css_version() -> str:
 
 
 # --------------------------------------------------------------------------- #
+# Security headers — applied to every response.
+# --------------------------------------------------------------------------- #
+_CSP = (
+    "default-src 'self'; "
+    "img-src 'self' data: https:; "
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+    "font-src 'self' https://fonts.gstatic.com; "
+    "script-src 'self' 'unsafe-inline'; "
+    "connect-src 'self'; base-uri 'self'; form-action 'self'; "
+    "frame-ancestors 'self'; object-src 'none'"
+)
+
+
+@app.after_request
+def _security_headers(resp):
+    resp.headers.setdefault("X-Content-Type-Options", "nosniff")
+    resp.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
+    resp.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    resp.headers.setdefault(
+        "Permissions-Policy",
+        "geolocation=(), microphone=(), camera=(), payment=()")
+    resp.headers.setdefault(
+        "Strict-Transport-Security",
+        "max-age=31536000; includeSubDomains; preload")
+    resp.headers.setdefault("Content-Security-Policy", _CSP)
+    return resp
+
+
+# --------------------------------------------------------------------------- #
 # Template context — brand details available in every template.
 # --------------------------------------------------------------------------- #
 @app.context_processor

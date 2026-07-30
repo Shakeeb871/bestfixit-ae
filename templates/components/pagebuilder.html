@@ -25,7 +25,7 @@
   {% for sec in sections %}
   {% if sec.type == 'hero' %}
     <section class="pb-hero">
-      <div class="pb-hero__bg">{% if sec.image %}<img src="{{ sec.image if sec.image.startswith('/') or sec.image.startswith('http') else url_for('static', filename=sec.image) }}" alt="{{ sec.title }}">{% endif %}</div>
+      <div class="pb-hero__bg">{% if sec.image %}<img src="{{ sec.image if sec.image.startswith('/') or sec.image.startswith('http') else url_for('static', filename=sec.image) }}" alt="{{ sec.title }}" width="1900" height="1014">{% endif %}</div>
       <div class="pb-hero__ov" aria-hidden="true"></div>
       <div class="pb-wrap pb-hero__in">
         {% if sec.subheading %}<span class="pb-hero__trust">{{ sec.subheading }}</span>{% endif %}
@@ -53,7 +53,7 @@
               {% if sec.points %}<ul class="pb-check pb-check--1">{% for it in sec.points %}<li>{{ _tick() }}<span>{{ it }}</span></li>{% endfor %}</ul>{% endif %}
             </div>
             <div class="pb-textimg__media">
-              {% if sec.image %}<img src="{{ sec.image if sec.image.startswith('/') or sec.image.startswith('http') else url_for('static', filename=sec.image) }}" alt="{{ sec.heading }}" loading="lazy">
+              {% if sec.image %}<img src="{{ sec.image if sec.image.startswith('/') or sec.image.startswith('http') else url_for('static', filename=sec.image) }}" alt="{{ sec.heading }}" width="800" height="600" loading="lazy">
               {% else %}<div class="pb-iconpanel">{{ _icon('gear') }}</div>{% endif %}
             </div>
           </div>
@@ -133,7 +133,7 @@
 /* text + image */
 .pb-textimg{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,4vw,54px); align-items:center; }
 .pb-textimg--rev .pb-textimg__media{ order:-1; }
-.pb-textimg__media img{ width:100%; border-radius:9px; box-shadow:0 12px 34px rgba(22,35,63,.14); }
+.pb-textimg__media img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:9px; box-shadow:0 12px 34px rgba(22,35,63,.14); display:block; }
 .pb-iconpanel{ display:flex; align-items:center; justify-content:center; aspect-ratio:4/3; background:#024d87; color:#fff; border-radius:9px; padding:60px; }
 .pb-iconpanel svg{ width:100%; height:100%; max-width:120px; }
 /* checklist */

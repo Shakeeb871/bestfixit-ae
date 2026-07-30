@@ -109,7 +109,7 @@
 {% macro textimg_media(sec, icon_svg='') %}
 <div class="svp-textimg__media">
   {% if sec.image %}
-  <img class="svp-textimg__img" src="{{ url_for('static', filename=sec.image) }}" alt="{{ sec.h2 }} — Best Fix Dubai" loading="lazy">
+  <img class="svp-textimg__img" src="{{ url_for('static', filename=sec.image) }}" alt="{{ sec.h2 }} — Best Fix Dubai" width="640" height="640" loading="lazy">
   {% elif icon_svg %}
   <div class="svp-iconpanel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">{{ icon_svg|safe }}</svg></div>
   {% else %}
@@ -334,7 +334,7 @@
   <!-- 1. HERO -->
   <section class="svp-hero">
     <div class="svp-hero__bg{% if not page.hero.image %} svp-hero__bg--ph{% endif %}">
-      {% if page.hero.image %}<img src="{{ url_for('static', filename=page.hero.image) }}" alt="{{ page.hero.image_alt }}">{% endif %}
+      {% if page.hero.image %}<img src="{{ url_for('static', filename=page.hero.image) }}" alt="{{ page.hero.image_alt }}" width="1900" height="1014">{% endif %}
     </div>
     <div class="svp-hero__overlay" aria-hidden="true"></div>
     <div class="svp-hero__content">
@@ -419,7 +419,7 @@
       {% for blk in page.services.blocks %}
       <div class="svp-block{% if loop.index is even %} svp-block--rev{% endif %}">
         <div class="svp-block__media">
-          {% if blk.img %}<img src="{{ url_for('static', filename='img/' + blk.img) }}" alt="{{ blk.title }} — Best Fix Dubai" loading="lazy">
+          {% if blk.img %}<img src="{{ url_for('static', filename='img/' + blk.img) }}" alt="{{ blk.title }} — Best Fix Dubai" width="640" height="640" loading="lazy">
           {% else %}<div class="svp-iconpanel svp-iconpanel--sq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">{{ ICONS.get(blk.icon,ICONS.get('gear'))|safe }}</svg></div>{% endif %}
         </div>
         <div class="svp-block__body">
@@ -450,7 +450,7 @@
       <div class="svp-block{% if _grid %} svp-block--solo{% endif %}">
         {% if not _grid %}
         <div class="svp-block__media">
-          {% if page.emergency.img %}<img src="{{ url_for('static', filename='img/' + page.emergency.img) }}" alt="{{ page.emergency.h2 }} — Best Fix Dubai" loading="lazy">
+          {% if page.emergency.img %}<img src="{{ url_for('static', filename='img/' + page.emergency.img) }}" alt="{{ page.emergency.h2 }} — Best Fix Dubai" width="640" height="640" loading="lazy">
           {% else %}<div class="svp-iconpanel svp-iconpanel--sq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">{{ ICONS.get(page.emergency.icon,ICONS.get('alert'))|safe }}</svg></div>{% endif %}
         </div>
         {% endif %}
@@ -549,7 +549,7 @@
       <div class="svp-prose"><p>{{ page.brands.intro }}</p></div>
       <div class="svp-brands__grid">
         {% for b in page.brands.logos %}
-        <div class="svp-brand"><img src="{{ url_for('static', filename='img/' + b.img) }}" alt="{{ b.name }} appliance repair Dubai" loading="lazy"></div>
+        <div class="svp-brand"><img src="{{ url_for('static', filename='img/' + b.img) }}" alt="{{ b.name }} appliance repair Dubai" width="252" height="118" loading="lazy"></div>
         {% endfor %}
       </div>
       <div class="svp-note" style="max-width:900px;"><p>{{ page.brands.note }}</p></div>

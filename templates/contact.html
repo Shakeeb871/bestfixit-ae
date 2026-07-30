@@ -32,18 +32,18 @@
 
     <form class="ct-form" action="/contact/" method="post" novalidate>
       <div class="ct-row">
-        <div><label>Your Name</label><input type="text" name="name" placeholder="e.g. Sara Ahmed" required></div>
-        <div><label>Phone</label><input type="tel" name="phone" placeholder="+971 5X XXX XXXX" required></div>
+        <div><label for="ct-name">Your Name</label><input id="ct-name" type="text" name="name" placeholder="e.g. Sara Ahmed" required></div>
+        <div><label for="ct-phone">Phone</label><input id="ct-phone" type="tel" name="phone" placeholder="+971 5X XXX XXXX" required></div>
       </div>
-      <label>Email</label>
-      <input type="email" name="email" placeholder="you@example.com">
-      <label>Service</label>
-      <select name="service">
+      <label for="ct-email">Email</label>
+      <input id="ct-email" type="email" name="email" placeholder="you@example.com">
+      <label for="ct-service">Service</label>
+      <select id="ct-service" name="service">
         {% for s in all_services %}<option value="{{ s.title }}">{{ s.title }}</option>{% endfor %}
         <option value="Other">Something else</option>
       </select>
-      <label>How Can We Help?</label>
-      <textarea name="message" rows="5" placeholder="Describe the job, your location and preferred time." required></textarea>
+      <label for="ct-message">How Can We Help?</label>
+      <textarea id="ct-message" name="message" rows="5" placeholder="Describe the job, your location and preferred time." required></textarea>
       <button type="submit" class="btn-skew" style="border:0; cursor:pointer;">Send Request
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"></path><path d="M7 7h10v10"></path></svg></button>
     </form>

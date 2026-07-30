@@ -180,7 +180,7 @@
           </span>
         </div>
         <p class="blog-featured__excerpt">{{ bl.featured.excerpt }}</p>
-        <a class="blog-featured__btn btn-skew btn-skew--arrow" href="{{ bl.featured.url }}">Read More</a>
+        <a class="blog-featured__btn btn-skew btn-skew--arrow" href="{{ bl.featured.url }}" aria-label="Read more: {{ bl.featured.title }}">Read More</a>
       </article>
 
       <aside class="blog-list" aria-label="More blog posts">
@@ -191,7 +191,7 @@
           <div class="blog-item__body">
             <h4 class="blog-item__title">{{ post.title }}</h4>
             <p class="blog-item__excerpt">{{ post.excerpt }}</p>
-            <a class="blog-item__more" href="{{ post.url }}">Read More
+            <a class="blog-item__more" href="{{ post.url }}" aria-label="Read more: {{ post.title }}">Read More
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>
             </a>
           </div>

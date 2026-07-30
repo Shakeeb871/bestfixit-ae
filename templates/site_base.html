@@ -11,8 +11,16 @@
 
 
 
-<title>{% block title %}Best Fix Technical Services — Home Maintenance & Handyman in Dubai{% endblock %}</title>
-<meta name="description" content="{% block description %}Trusted plumbing, electrical, AC, carpentry and handyman services across Dubai and the UAE.{% endblock %}">
+{# Capture title/description so we can keep them within SEO length limits
+   (title ≤60, description ≤155) on every page, including CMS-built ones. #}
+{% set _raw_title %}{% block title %}Best Fix Technical Services — Maintenance & Handyman in Dubai{% endblock %}{% endset %}
+{% set _raw_desc %}{% block description %}Trusted plumbing, electrical, AC, carpentry and handyman services across Dubai and the UAE. Fast, licensed technicians and same-day response.{% endblock %}{% endset %}
+{% set seo_title = _raw_title|striptags|trim %}
+{% if seo_title|length > 60 %}{% set seo_title = seo_title[:60]|trim %}{% if ' ' in seo_title %}{% set seo_title = seo_title.rsplit(' ',1)[0] %}{% endif %}{% set seo_title = seo_title|trim(' -–—|&,·:•') %}{% endif %}
+{% set seo_desc = _raw_desc|striptags|trim %}
+{% if seo_desc|length > 155 %}{% set seo_desc = (seo_desc[:154]|trim) %}{% if ' ' in seo_desc %}{% set seo_desc = seo_desc.rsplit(' ',1)[0] %}{% endif %}{% set seo_desc = seo_desc ~ '…' %}{% endif %}
+<title>{{ seo_title }}</title>
+<meta name="description" content="{{ seo_desc }}">
 <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
 <link rel="canonical" href="https://{{ site_domain }}{{ request.path }}">
 
@@ -25,15 +33,15 @@
 <meta property="og:type" content="{% block og_type %}website{% endblock %}">
 <meta property="og:site_name" content="Best Fix Technical Services">
 <meta property="og:locale" content="en_AE">
-<meta property="og:title" content="{{ self.title() }}">
-<meta property="og:description" content="{{ self.description() }}">
+<meta property="og:title" content="{{ seo_title }}">
+<meta property="og:description" content="{{ seo_desc }}">
 <meta property="og:url" content="https://{{ site_domain }}{{ request.path }}">
 <meta property="og:image" content="https://{{ site_domain }}{% block og_image %}{{ url_for('static', filename='img/best fix it mainetnance fixerman.webp') }}{% endblock %}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ self.title() }}">
-<meta name="twitter:description" content="{{ self.description() }}">
+<meta name="twitter:title" content="{{ seo_title }}">
+<meta name="twitter:description" content="{{ seo_desc }}">
 <meta name="twitter:image" content="https://{{ site_domain }}{{ self.og_image() }}">
 
 <!-- LocalBusiness structured data -->
@@ -392,7 +400,7 @@
     <div class="site-footer__top">
 
       <div class="site-footer__brand">
-        <img src="/static/img/logo.webp" alt="BEST FIX iT — Technical Services">
+        <img src="/static/img/logo.webp" alt="BEST FIX iT — Technical Services" width="180" height="66">
       </div>
 
       <div class="site-footer__divider" aria-hidden="true"></div>

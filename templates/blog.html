@@ -1,6 +1,6 @@
 {% extends "site_base.html" %}
 {% block title %}{% if active_category %}{{ active_category.name }} Articles{% else %}Blog{% endif %} — Best Fix Technical Services{% endblock %}
-{% block description %}{% if active_category %}{{ active_category.name }} tips and advice for UAE homes and businesses from Best Fix.{% else %}Practical home-maintenance advice for the UAE — AC servicing, plumbing, electrical safety, renovation and seasonal upkeep tips from Best Fix.{% endif %}{% endblock %}
+{% block description %}{% if active_category %}{{ active_category.name }} tips, guides and expert advice for UAE homes and businesses — practical maintenance help from the Best Fix team in Dubai.{% else %}Practical home-maintenance advice for the UAE — AC servicing, plumbing, electrical safety, renovation and seasonal upkeep tips from Best Fix.{% endif %}{% endblock %}
 {% block content %}
 <style>
   .blg{ font-family:var(--font-body,inherit); color:#000; }
@@ -99,7 +99,7 @@
       {% if featured %}
       <article class="blg-feat">
         <a class="blg-feat__img" href="{{ featured.url }}" aria-label="{{ featured.title }}">
-          <img src="{{ featured.image }}" alt="{{ featured.image_alt }}" loading="lazy">
+          <img src="{{ featured.image }}" alt="{{ featured.image_alt }}" width="720" height="430" loading="lazy">
         </a>
         <div class="blg-feat__body">
           <a class="blg-feat__tag" href="/blog/category/{{ featured.category_slug }}/">{{ featured.category }}</a>
@@ -120,7 +120,7 @@
             {% if not (featured and p.slug == featured.slug) %}
             <article class="blg-card">
               <a class="blg-card__img" href="{{ p.url }}" aria-label="{{ p.title }}">
-                <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
+                <img src="{{ p.image }}" alt="{{ p.image_alt }}" width="640" height="400" loading="lazy">
               </a>
               <div class="blg-card__body">
                 <a class="blg-card__tag" href="/blog/category/{{ p.category_slug }}/">{{ p.category }}</a>
@@ -149,7 +149,7 @@
             <div class="blg-recent">
               {% for p in recent_posts %}
               <a href="{{ p.url }}">
-                <img src="{{ p.image }}" alt="{{ p.image_alt }}" loading="lazy">
+                <img src="{{ p.image }}" alt="{{ p.image_alt }}" width="64" height="52" loading="lazy">
                 <span><span class="blg-recent__t">{{ p.title }}</span><span class="blg-recent__d">{{ p.date }}</span></span>
               </a>
               {% endfor %}
