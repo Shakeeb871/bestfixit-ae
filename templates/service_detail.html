@@ -316,14 +316,24 @@
   .svp-block, .svp-block--rev { grid-template-columns:1fr; }
   .svp-block--rev .svp-block__media{ order:0; }
   .svp-block__media{ max-width:460px; position:static; top:auto; }
+  .svp-textimg, .svp-textimg--rev{ grid-template-columns:1fr; }
+  .svp-textimg--rev .svp-textimg__media{ order:0; }
   .svp-grid{ grid-template-columns:repeat(2,1fr); }
   .svp-steps, .svp-care{ grid-template-columns:repeat(2,1fr); }
   .svp-brands__grid{ grid-template-columns:repeat(5,1fr); }
+  /* square content images become too tall when full-width on phones — give
+     them a fixed, shorter height and crop with object-fit (a fixed height
+     beats the width/height HTML attribute hints without collapsing the grid). */
+  .svp-textimg__img, .svp-block__media img, .svp-textimg .svp-ph,
+  .svp-iconpanel, .svp-iconpanel--sq{ aspect-ratio:auto; width:100%; height:300px; object-fit:cover; }
 }
 @media (max-width:600px){
   .svp-check--2, .svp-check--3{ grid-template-columns:1fr; }
   .svp-grid, .svp-steps, .svp-care{ grid-template-columns:1fr; }
   .svp-brands__grid{ grid-template-columns:repeat(3,1fr); }
+  .svp-hero{ min-height:auto; }
+  .svp-textimg__img, .svp-block__media img, .svp-textimg .svp-ph,
+  .svp-iconpanel, .svp-iconpanel--sq{ aspect-ratio:auto; width:100%; height:220px; object-fit:cover; }
 }
 @media (prefers-reduced-motion:reduce){ .svp-faq .faq-a, .svp-faq .faq-q__ic{ transition:none; } }
 </style>
