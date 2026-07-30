@@ -26,6 +26,7 @@
   "url": "https://{{ site_domain }}{{ request.path }}"
 }
 </script>
+{% if page.faqs %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,6 +36,7 @@
   ]
 }
 </script>
+{% endif %}
 {% endif %}
 {% endblock %}
 {% block content %}

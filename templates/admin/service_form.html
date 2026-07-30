@@ -1,0 +1,77 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<form class="form" method="post" action="/admin/services/save/">
+  <input type="hidden" name="orig_slug" value="{{ svc.slug if svc else '' }}">
+
+  <div class="form__row">
+    <div class="fld"><label>Title</label><input name="title" value="{{ svc.title if svc else '' }}" required></div>
+    <div class="fld"><label>Menu label <span class="hint">(short — shown in the top nav)</span></label><input name="nav_label" value="{{ svc.nav_label if svc else '' }}" placeholder="e.g. Plumbing"></div>
+  </div>
+
+  <div class="form__row">
+    <div class="fld"><label>Number <span class="hint">(optional, e.g. 09)</span></label><input name="num" value="{{ svc.num if svc else '' }}"></div>
+    <div class="fld"><label>URL slug <span class="hint">(leave blank to auto-generate)</span></label>
+      <input name="slug" value="{{ svc.slug if svc and svc.custom else '' }}" {{ 'readonly' if svc and not svc.custom }}>
+      {% if svc and not svc.custom %}<div class="hint">Built-in service — slug is fixed.</div>{% endif %}
+    </div>
+  </div>
+
+  <div class="fld"><label>Icon</label>
+    <input type="hidden" name="icon_key" id="iconKey" value="{{ svc.icon_key if svc else 'gear' }}">
+    <div class="iconpick">
+      {% for key in icons %}
+      <button type="button" class="iconpick__opt{{ ' is-sel' if (svc.icon_key if svc else 'gear') == key }}" data-key="{{ key }}" title="{{ key }}">{{ icon_set[key]|safe }}</button>
+      {% endfor %}
+    </div>
+    {% if svc and not svc.custom %}<div class="hint">Built-in services keep their original custom icon; this picker only applies to custom services.</div>{% endif %}
+  </div>
+
+  <div class="fld"><label>Short description <span class="hint">(one line — homepage slider &amp; cards)</span></label><input name="short" value="{{ svc.short if svc else '' }}"></div>
+
+  <div class="fld"><label>Full description <span class="hint">(opening paragraph on the service page)</span></label><textarea name="description">{{ svc.description if svc else '' }}</textarea></div>
+
+  <div class="fld"><label>Highlight points <span class="hint">(one per line — used in the menu dropdown &amp; as fallback features)</span></label>
+    <textarea name="points" style="min-height:110px;">{{ points_text }}</textarea></div>
+
+  {% if not has_rich_page %}
+  <div class="fld"><label>Page intro <span class="hint">(extra paragraph under the description on the auto-built page)</span></label>
+    <textarea name="page_intro">{{ svc.page_intro if svc else '' }}</textarea></div>
+
+  <div class="fld"><label>Feature cards <span class="hint">— one per line as <code>Title :: description</code></span></label>
+    <textarea name="page_features" style="min-height:150px;" placeholder="Fast response :: We reach most of Dubai within the hour.&#10;Fixed pricing :: No surprises — you approve the quote first.">{{ features_text }}</textarea></div>
+  {% else %}
+  <div class="note"><b>This service has a hand-crafted page.</b> Its rich page layout is managed in code — the fields above update the menu label, icon, descriptions and homepage card.</div>
+  {% endif %}
+
+  <div class="fld" style="margin-top:6px;">
+    <label style="display:flex; align-items:center; gap:9px; cursor:pointer;">
+      <input type="checkbox" name="enabled" {{ 'checked' if (svc.enabled if svc else True) }} style="width:auto;">
+      <span>Visible on the site (nav, homepage &amp; services list)</span>
+    </label>
+  </div>
+
+  <div class="form__actions">
+    <button class="adm-btn adm-btn--solid" type="submit">{{ 'Update Service' if svc else 'Create Service' }}</button>
+    <a class="adm-btn" href="/admin/services/">Cancel</a>
+    {% if svc %}<a class="adm-btn" href="/services/{{ svc.slug }}/" target="_blank" rel="noopener">View page ↗</a>{% endif %}
+  </div>
+</form>
+
+<style>
+  .iconpick{ display:flex; flex-wrap:wrap; gap:8px; }
+  .iconpick__opt{ width:46px; height:46px; display:inline-flex; align-items:center; justify-content:center; padding:10px;
+    border:1px solid var(--line); border-radius:9px; background:#fff; color:#4a5568; cursor:pointer; transition:all .15s; }
+  .iconpick__opt svg{ width:100%; height:100%; }
+  .iconpick__opt:hover{ border-color:#2c74c0; color:#2c74c0; }
+  .iconpick__opt.is-sel{ background:#024d87; border-color:#024d87; color:#fff; }
+</style>
+<script>
+(function(){
+  var picks=document.querySelectorAll('.iconpick__opt'), key=document.getElementById('iconKey');
+  picks.forEach(function(b){ b.addEventListener('click',function(){
+    picks.forEach(function(x){x.classList.remove('is-sel');});
+    b.classList.add('is-sel'); key.value=b.dataset.key;
+  });});
+})();
+</script>
+{% endblock %}

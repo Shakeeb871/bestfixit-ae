@@ -90,17 +90,7 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="bfCardTop" clipPathUnits="objectBoundingBox"><path d="M0,1 L0,0.01 C0.2,0.09 0.36,0.15 0.5,0.15 C0.64,0.15 0.8,0.09 1,0.01 L1,1 Z"></path></clipPath></defs></svg>
 
 <!-- ═══════════════ HEADER (Carter-style, Best Fix colours) ═══════════════ -->
-{% set nav_labels = {
-  'home-appliances-repair':'Appliances',
-  'electrical-services':'Electrical',
-  'electromechanical-services':'Electro-Mech',
-  'hvac-services':'HVAC',
-  'plumbing-services':'Plumbing',
-  'swimming-pool-services':'Pool',
-  'painting-cleaning-services':'Painting',
-  'false-ceiling-partition-services':'Ceilings'
-} %}
-{% set _chevd = '<svg class="bfh-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>' %}
+{% set _chevd ='<svg class="bfh-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>' %}
 {% set _arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>' %}
 
 <style id="bfh-style">
@@ -272,7 +262,7 @@
       {% for s in all_services %}
       {% set _subs = nav_subservices.get(s.slug) %}
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}{% if _subs or s.points %}{{ _chevd|safe }}{% endif %}</a>
+        <a class="bfh__nav-link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ s.nav_label or s.title }}{% if _subs or s.points %}{{ _chevd|safe }}{% endif %}</a>
         {% if _subs or s.points %}
         <div class="bfh__dd">
           {% if _subs %}
@@ -333,7 +323,7 @@
       {% if _subs or s.points %}
       <div class="bfh-acc" data-acc>
         <button class="bfh-acc__trigger" type="button" data-acc-trigger>
-          {{ nav_labels.get(s.slug, s.title) }}
+          {{ s.nav_label or s.title }}
           <svg class="bfh-acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
         </button>
         <div class="bfh-acc__panel"><div class="bfh-acc__inner">
@@ -354,7 +344,7 @@
         </div></div>
       </div>
       {% else %}
-      <a class="bfh-drawer__link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ nav_labels.get(s.slug, s.title) }}</a>
+      <a class="bfh-drawer__link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ s.nav_label or s.title }}</a>
       {% endif %}
       {% endfor %}
 

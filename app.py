@@ -103,6 +103,72 @@ for _core_slug, _items in SERVICE_SUBLINKS.items():
             _SLUG_TO_CORE[_c["slug"]] = _core_slug
 
 
+def _active_core() -> str:
+    """Top-level service slug to highlight in the nav for the current path.
+
+    Uses the static core→sub→level-3 map, and falls back to any custom
+    (CMS-created) service whose slug matches the current /services/<slug>/ URL.
+    """
+    if not request.path.startswith("/services/"):
+        return ""
+    slug = request.path[len("/services/"):].strip("/")
+    if not slug:
+        return ""
+    core = _SLUG_TO_CORE.get(slug)
+    if core:
+        return core
+    # custom service pages have no sub-links; the slug is its own core.
+    if store.get_service(slug):
+        return slug
+    return ""
+
+
+def _custom_service_page(svc: dict) -> dict:
+    """Build a service_detail-compatible ``page`` dict for a CMS service.
+
+    Custom services created in the admin don't have a hand-authored rich page
+    module, so we synthesise a clean banner-hero + feature-grid layout from the
+    fields the editor filled in (title, description, intro, feature cards,
+    highlight points).
+    """
+    title = svc.get("title", "Service")
+    paras = [p for p in (svc.get("description", ""), svc.get("page_intro", "")) if p]
+    features = svc.get("page_features") or [
+        {"title": p, "text": ""} for p in svc.get("points", [])
+    ]
+    _desc = (svc.get("short") or svc.get("description")
+             or f"Professional {title.lower()} in Dubai by Best Fix.")
+    page = {
+        "layout": "grid",
+        "breadcrumb": title,
+        "meta_title": f"{title} in Dubai | Best Fix Technical Services",
+        "meta_description": _desc,
+        "faqs": [],
+        "hero": {
+            "image": "img/best fix it mainetnance fixerman.webp",
+            "image_alt": f"{title} — Best Fix Dubai",
+            "trustline": "Licensed Dubai Maintenance Company",
+            "h1_accent": title,
+            "h1": "in Dubai",
+            "subheading": svc.get("short", ""),
+            "paras": paras or [svc.get("short", "")],
+            "note": "Same-day response across Dubai · Transparent pricing",
+            "cta_label": "Book a Service",
+        },
+    }
+    if features:
+        page["why"] = {
+            "h2": f"Why choose Best Fix for {title.lower()}",
+            "intro": svc.get("short", ""),
+            "rows": [
+                {"icon": f.get("icon", svc.get("icon_key", "check")),
+                 "title": f.get("title", ""), "text": f.get("text", "")}
+                for f in features
+            ],
+        }
+    return page
+
+
 def _service_badges() -> set:
     """Slugs that have a slider badge PNG (static/img/service-<slug>.png).
 
@@ -154,7 +220,7 @@ def inject_globals():
         "whatsapp_number": app.config["WHATSAPP_NUMBER"],
         "contact_email": app.config["CONTACT_EMAIL"],
         "service_areas": store.get_list("areas"),
-        "all_services": SERVICES,
+        "all_services": store.services_public(),
         "current_year": datetime.now(timezone.utc).year,
         "process_steps": PROCESS_STEPS,
         "process_eyebrow_primary": PROCESS_EYEBROW_PRIMARY,
@@ -178,9 +244,7 @@ def inject_globals():
         "feature_cards": FEATURE_CARDS,
         "why_choose": WHY_CHOOSE,
         "nav_subservices": SERVICE_SUBLINKS,
-        "nav_active_core": _SLUG_TO_CORE.get(
-            request.path[len("/services/"):].strip("/"), ""
-        ) if request.path.startswith("/services/") else "",
+        "nav_active_core": _active_core(),
         "service_badges": _SERVICE_BADGES,
         "amc_plans": AMC_PLANS,
         "css_version": _css_version(),
@@ -210,7 +274,7 @@ def about():
 
 @app.route("/services/")
 def services():
-    return render_template("services.html", services=SERVICES)
+    return render_template("services.html", services=store.services_public())
 
 
 @app.route("/amc/")
@@ -248,16 +312,23 @@ def service_detail(slug):
     # top-level core services, so synthesise a minimal service object for them.
     if service is None:
         if page is None:
-            abort(404)
-        service = {
-            "title": page.get("breadcrumb", "Service"),
-            "slug": slug,
-            "short": "",
-            "description": "",
-            "points": [],
-        }
+            # CMS-created custom service: build its page from stored fields.
+            svc = store.get_service(slug)
+            if svc and svc.get("enabled", True):
+                service = svc
+                page = _custom_service_page(svc)
+            else:
+                abort(404)
+        else:
+            service = {
+                "title": page.get("breadcrumb", "Service"),
+                "slug": slug,
+                "short": "",
+                "description": "",
+                "points": [],
+            }
     # A few "other services" for cross-linking at the bottom of the page.
-    others = [s for s in SERVICES if s["slug"] != slug][:4]
+    others = [s for s in store.services_public() if s["slug"] != slug][:4]
     return render_template(
         "service_detail.html",
         service=service,
@@ -426,7 +497,7 @@ def admin_logout():
 def admin_dashboard():
     leads = _read_leads()
     stats = {
-        "services": len(SERVICES),
+        "services": len(store.services_all()),
         "subservices": len(SUBSERVICE_PAGES),
         "posts": len(store.blog_posts()),
         "enquiries": len(leads),
@@ -447,9 +518,104 @@ def admin_dashboard():
 def admin_services():
     return render_template(
         "admin/services.html", active="services", page_title="Core Services",
-        page_sub="The main service categories shown across the site.",
-        services=SERVICES, sublinks=SERVICE_SUBLINKS,
+        page_sub="Add, edit, reorder, enable or remove the main service categories.",
+        services=store.services_all(), sublinks=SERVICE_SUBLINKS,
+        rich_pages=set(SERVICE_PAGES.keys()),
     )
+
+
+@app.route("/admin/services/new/")
+@app.route("/admin/services/<slug>/edit/")
+@_admin_required
+def admin_service_form(slug=None):
+    svc = store.get_service(slug) if slug else None
+    if slug and svc is None:
+        abort(404)
+    features = svc.get("page_features", []) if svc else []
+    features_text = "\n".join(
+        f"{f.get('title', '')} :: {f.get('text', '')}" for f in features
+    )
+    points_text = "\n".join(svc.get("points", [])) if svc else ""
+    return render_template(
+        "admin/service_form.html", active="services",
+        page_title=("Edit Service" if svc else "New Service"),
+        page_sub="Custom services get their own auto-built page; the nav, homepage "
+                 "slider and services list all update automatically.",
+        svc=svc, icons=list(store.ICON_SET.keys()), icon_set=store.ICON_SET,
+        features_text=features_text, points_text=points_text,
+        has_rich_page=(slug in SERVICE_PAGES) if slug else False,
+    )
+
+
+def _parse_features(text: str) -> list:
+    rows = []
+    for line in (text or "").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if "::" in line:
+            t, _, d = line.partition("::")
+            rows.append({"title": t.strip(), "text": d.strip()})
+        else:
+            rows.append({"title": line, "text": ""})
+    return rows
+
+
+@app.route("/admin/services/save/", methods=["POST"])
+@_admin_required
+def admin_service_save():
+    f = request.form
+    orig = f.get("orig_slug", "").strip()
+    points = [p.strip() for p in f.get("points", "").splitlines() if p.strip()]
+    data = {
+        "title": f.get("title", "").strip(),
+        "nav_label": f.get("nav_label", "").strip(),
+        "num": f.get("num", "").strip(),
+        "icon_key": f.get("icon_key", "gear").strip(),
+        "short": f.get("short", "").strip(),
+        "description": f.get("description", "").strip(),
+        "points": points,
+        "enabled": f.get("enabled") == "on",
+        "page_intro": f.get("page_intro", "").strip(),
+        "page_features": _parse_features(f.get("page_features", "")),
+    }
+    if f.get("slug", "").strip():
+        data["slug"] = f.get("slug").strip()
+    store.save_service(data, orig)
+    flash("Service saved.", "success")
+    return redirect(url_for("admin_services"))
+
+
+@app.route("/admin/services/<slug>/toggle/", methods=["POST"])
+@_admin_required
+def admin_service_toggle(slug):
+    svc = store.get_service(slug)
+    if svc:
+        store.save_service({**svc, "enabled": not svc.get("enabled", True)}, slug)
+        flash("Service visibility updated.", "success")
+    return redirect(url_for("admin_services"))
+
+
+@app.route("/admin/services/<slug>/delete/", methods=["POST"])
+@_admin_required
+def admin_service_delete(slug):
+    if store.delete_service(slug):
+        flash("Service deleted.", "success")
+    else:
+        flash("Built-in services can't be deleted — you can disable them instead.",
+              "error")
+    return redirect(url_for("admin_services"))
+
+
+@app.route("/admin/services/reorder/", methods=["POST"])
+@_admin_required
+def admin_service_reorder():
+    order = request.form.get("order", "")
+    slugs = [s for s in order.split(",") if s]
+    if slugs:
+        store.reorder_services(slugs)
+        flash("Order updated.", "success")
+    return redirect(url_for("admin_services"))
 
 
 @app.route("/admin/subservices/")

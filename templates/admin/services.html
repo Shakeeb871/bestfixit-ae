@@ -1,22 +1,74 @@
 {% extends "admin/base.html" %}
 {% block body %}
+<div class="toolbar">
+  <div class="muted">{{ services|length }} core services · drag rows to reorder, then Save order</div>
+  <a class="adm-btn adm-btn--solid" href="/admin/services/new/">+ New Service</a>
+</div>
+
 <div class="card">
   <div class="card__hd"><h2>Core Services</h2><span class="pill">{{ services|length }} total</span></div>
   <div class="tbl-wrap">
-    <table class="tbl">
-      <thead><tr><th style="width:52px;">#</th><th>Service</th><th>Slug / URL</th><th>Short Description</th><th>Sub-services</th></tr></thead>
-      <tbody>
+    <table class="tbl" id="svcTable">
+      <thead><tr><th style="width:34px;"></th><th>Service</th><th>URL</th><th>Sub-services</th><th>Type</th><th>Status</th><th style="width:230px;">Actions</th></tr></thead>
+      <tbody id="svcBody">
         {% for s in services %}
-        <tr>
-          <td class="mono">{{ s.num }}</td>
-          <td><b>{{ s.title }}</b></td>
+        <tr draggable="true" data-slug="{{ s.slug }}">
+          <td class="drag" title="Drag to reorder" style="cursor:grab; color:#9aa7b8;">⋮⋮</td>
+          <td>
+            <span style="display:inline-flex; align-items:center; gap:9px;">
+              <span style="width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;background:#024d87;color:#fff;border-radius:7px;padding:5px;">{{ s.icon|safe }}</span>
+              <b>{{ s.title }}</b>
+            </span>
+            {% if s.nav_label and s.nav_label != s.title %}<div class="mono" style="margin-top:3px;">nav: {{ s.nav_label }}</div>{% endif %}
+          </td>
           <td><a class="mono" href="/services/{{ s.slug }}/" target="_blank" rel="noopener">/services/{{ s.slug }}/</a></td>
-          <td class="muted">{{ s.short }}</td>
           <td>{% set n = sublinks.get(s.slug)|length if sublinks.get(s.slug) else 0 %}{% if n %}<span class="badge badge--green">{{ n }}</span>{% else %}<span class="badge badge--grey">—</span>{% endif %}</td>
+          <td>{% if s.custom %}<span class="badge badge--navy">Custom</span>{% elif s.slug in rich_pages %}<span class="badge badge--green">Rich page</span>{% else %}<span class="badge badge--grey">Built-in</span>{% endif %}</td>
+          <td>{% if s.enabled %}<span class="badge badge--green">Visible</span>{% else %}<span class="badge badge--grey">Hidden</span>{% endif %}</td>
+          <td><div class="act">
+            <a href="/admin/services/{{ s.slug }}/edit/">Edit</a>
+            <form method="post" action="/admin/services/{{ s.slug }}/toggle/"><button type="submit">{{ 'Hide' if s.enabled else 'Show' }}</button></form>
+            {% if s.custom %}
+            <form method="post" action="/admin/services/{{ s.slug }}/delete/" onsubmit="return confirm('Delete this service and its page?')"><button class="del" type="submit">Delete</button></form>
+            {% endif %}
+          </div></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
+  <div style="padding:14px 18px; display:flex; gap:10px; align-items:center; border-top:1px solid var(--line);">
+    <form method="post" action="/admin/services/reorder/" id="reorderForm">
+      <input type="hidden" name="order" id="orderInput">
+      <button class="adm-btn adm-btn--solid" type="submit" id="saveOrder" disabled>Save order</button>
+    </form>
+    <span class="muted" id="reorderHint">Order is unchanged.</span>
+  </div>
 </div>
+
+<div class="note" style="margin-top:18px;">
+  <b>How it works:</b> Built-in services keep their hand-crafted pages and can be edited or hidden but not deleted.
+  New custom services get a clean auto-built page and appear automatically in the top menu, the homepage slider and the Services list.
+</div>
+
+<script>
+(function(){
+  var body=document.getElementById('svcBody');
+  var input=document.getElementById('orderInput');
+  var btn=document.getElementById('saveOrder');
+  var hint=document.getElementById('reorderHint');
+  var dragEl=null, orig=slugs();
+  function slugs(){ return [].map.call(body.querySelectorAll('tr'),function(r){return r.dataset.slug;}); }
+  function sync(){
+    var cur=slugs(); input.value=cur.join(',');
+    var changed=cur.join(',')!==orig.join(',');
+    btn.disabled=!changed; hint.textContent=changed?'Order changed — click Save order.':'Order is unchanged.';
+  }
+  body.addEventListener('dragstart',function(e){ dragEl=e.target.closest('tr'); e.target.closest('tr').style.opacity=.4; });
+  body.addEventListener('dragend',function(e){ if(dragEl){dragEl.style.opacity='';} dragEl=null; sync(); });
+  body.addEventListener('dragover',function(e){ e.preventDefault(); var t=e.target.closest('tr'); if(!t||t===dragEl)return;
+    var rect=t.getBoundingClientRect(); var after=(e.clientY-rect.top)/rect.height>0.5;
+    body.insertBefore(dragEl, after?t.nextSibling:t); });
+})();
+</script>
 {% endblock %}
