@@ -34,11 +34,16 @@
     <textarea name="points" style="min-height:110px;">{{ points_text }}</textarea></div>
 
   {% if not has_rich_page %}
-  <div class="fld"><label>Page intro <span class="hint">(extra paragraph under the description on the auto-built page)</span></label>
+  <div class="fld"><label>Page intro <span class="hint">(quick auto-page — used only if you don't build sections below)</span></label>
     <textarea name="page_intro">{{ svc.page_intro if svc else '' }}</textarea></div>
 
-  <div class="fld"><label>Feature cards <span class="hint">— one per line as <code>Title :: description</code></span></label>
-    <textarea name="page_features" style="min-height:150px;" placeholder="Fast response :: We reach most of Dubai within the hour.&#10;Fixed pricing :: No surprises — you approve the quote first.">{{ features_text }}</textarea></div>
+  <div class="fld"><label>Feature cards <span class="hint">— quick auto-page — one per line as <code>Title :: description</code></span></label>
+    <textarea name="page_features" style="min-height:110px;" placeholder="Fast response :: We reach most of Dubai within the hour.&#10;Fixed pricing :: No surprises — you approve the quote first.">{{ features_text }}</textarea></div>
+
+  {% if is_custom %}
+  <div class="note" style="margin:6px 0 12px;"><b>Full page builder (optional).</b> Add sections below to design a complete page — this overrides the quick auto-page above.</div>
+  {% include "admin/_section_builder.html" %}
+  {% endif %}
   {% else %}
   <div class="note"><b>This service has a hand-crafted page.</b> Its rich page layout is managed in code — the fields above update the menu label, icon, descriptions and homepage card.</div>
   {% endif %}

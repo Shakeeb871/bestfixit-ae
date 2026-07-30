@@ -245,6 +245,7 @@ def inject_globals():
         "why_choose": WHY_CHOOSE,
         "nav_subservices": SERVICE_SUBLINKS,
         "nav_active_core": _active_core(),
+        "custom_pages": store.pages_in_menu(),
         "service_badges": _SERVICE_BADGES,
         "amc_plans": AMC_PLANS,
         "css_version": _css_version(),
@@ -275,6 +276,18 @@ def about():
 @app.route("/services/")
 def services():
     return render_template("services.html", services=store.services_public())
+
+
+@app.route("/page/<slug>/")
+def custom_page(slug):
+    """CMS-created standalone page (WordPress-style)."""
+    pg = store.get_page(slug)
+    if pg is None or not pg.get("enabled", True):
+        abort(404)
+    return render_template(
+        "page_builder.html",
+        page={**pg, "sections": store.normalize_sections(pg.get("sections", []))},
+    )
 
 
 @app.route("/amc/")
@@ -312,9 +325,17 @@ def service_detail(slug):
     # top-level core services, so synthesise a minimal service object for them.
     if service is None:
         if page is None:
-            # CMS-created custom service: build its page from stored fields.
+            # CMS-created custom service: render its section-built page, or a
+            # clean auto-built page if no sections were added yet.
             svc = store.get_service(slug)
             if svc and svc.get("enabled", True):
+                if svc.get("sections"):
+                    return render_template(
+                        "page_builder.html",
+                        page={"title": svc["title"],
+                              "meta_description": svc.get("short", ""),
+                              "sections": store.normalize_sections(svc["sections"])},
+                    )
                 service = svc
                 page = _custom_service_page(svc)
             else:
@@ -544,6 +565,9 @@ def admin_service_form(slug=None):
         svc=svc, icons=list(store.ICON_SET.keys()), icon_set=store.ICON_SET,
         features_text=features_text, points_text=points_text,
         has_rich_page=(slug in SERVICE_PAGES) if slug else False,
+        is_custom=(svc.get("custom") if svc else True),
+        sections_json=json.dumps(
+            store.normalize_sections(svc.get("sections", [])) if svc else []),
     )
 
 
@@ -581,6 +605,8 @@ def admin_service_save():
     }
     if f.get("slug", "").strip():
         data["slug"] = f.get("slug").strip()
+    if "sections_json" in f:
+        data["sections"] = _parse_sections(f.get("sections_json", ""))
     store.save_service(data, orig)
     flash("Service saved.", "success")
     return redirect(url_for("admin_services"))
@@ -616,6 +642,70 @@ def admin_service_reorder():
         store.reorder_services(slugs)
         flash("Order updated.", "success")
     return redirect(url_for("admin_services"))
+
+
+def _parse_sections(raw: str) -> list:
+    """Parse the section-builder's JSON payload safely."""
+    try:
+        data = json.loads(raw or "[]")
+    except (ValueError, TypeError):
+        return []
+    return data if isinstance(data, list) else []
+
+
+# ---- standalone pages ----------------------------------------------------- #
+@app.route("/admin/pages/")
+@_admin_required
+def admin_pages():
+    return render_template(
+        "admin/pages.html", active="pages", page_title="Pages",
+        page_sub="Build standalone pages from sections — add them to the menu "
+                 "and edit them like WordPress.",
+        pages=store.pages_all(),
+    )
+
+
+@app.route("/admin/pages/new/")
+@app.route("/admin/pages/<slug>/edit/")
+@_admin_required
+def admin_page_form(slug=None):
+    pg = store.get_page(slug) if slug else None
+    if slug and pg is None:
+        abort(404)
+    sections = store.normalize_sections(pg.get("sections", [])) if pg else []
+    return render_template(
+        "admin/page_form.html", active="pages",
+        page_title=("Edit Page" if pg else "New Page"),
+        page_sub="Add, edit, reorder and remove sections to compose the page.",
+        pg=pg, sections_json=json.dumps(sections),
+        section_types=store.SECTION_TYPES, icons=list(store.ICON_SET.keys()),
+    )
+
+
+@app.route("/admin/pages/save/", methods=["POST"])
+@_admin_required
+def admin_page_save():
+    f = request.form
+    data = {
+        "title": f.get("title", "").strip(),
+        "nav_label": f.get("nav_label", "").strip(),
+        "slug": f.get("slug", "").strip(),
+        "meta_description": f.get("meta_description", "").strip(),
+        "enabled": f.get("enabled") == "on",
+        "in_menu": f.get("in_menu") == "on",
+        "sections": _parse_sections(f.get("sections_json", "")),
+    }
+    store.save_page(data, f.get("orig_slug", "").strip())
+    flash("Page saved.", "success")
+    return redirect(url_for("admin_pages"))
+
+
+@app.route("/admin/pages/<slug>/delete/", methods=["POST"])
+@_admin_required
+def admin_page_delete(slug):
+    if store.delete_page(slug):
+        flash("Page deleted.", "success")
+    return redirect(url_for("admin_pages"))
 
 
 @app.route("/admin/subservices/")
@@ -989,8 +1079,9 @@ def sitemap_xml():
         ("/cookies/", "0.3"),
     ]
     paths += [("/amc/", "0.7")]
-    paths += [(f"/services/{s['slug']}/", "0.8") for s in SERVICES]
+    paths += [(f"/services/{s['slug']}/", "0.8") for s in store.services_public()]
     paths += [(f"/services/{slug}/", "0.7") for slug in SUBSERVICE_PAGES]
+    paths += [(f"/page/{p['slug']}/", "0.6") for p in store.pages_public()]
     paths += [(f"/blog/category/{c['slug']}/", "0.5") for c in store.blog_categories()]
     paths += [(f"/blog/{p['slug']}/", "0.6") for p in store.blog_posts()]
 

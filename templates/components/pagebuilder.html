@@ -1,0 +1,185 @@
+{# ============================================================= #}
+{#  Section (block) renderer — shared by standalone pages and     #}
+{#  custom services. Self-contained, brand-matched, namespaced.   #}
+{# ============================================================= #}
+
+{% macro _icon(key) %}{% set I = {
+  'gear':'<circle cx=\"12\" cy=\"12\" r=\"3\"></circle><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z\"></path>',
+  'bolt':'<path d=\"M13 2 3 14h9l-1 8 10-12h-9z\"></path>',
+  'droplet':'<path d=\"M12 2.7 6.3 9a8 8 0 1 0 11.4 0z\"></path>',
+  'wind':'<path d=\"M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.7 7.8A2.5 2.5 0 1 1 19.5 12H2\"></path>',
+  'brush':'<rect x=\"3\" y=\"3\" width=\"15\" height=\"6\" rx=\"1\"></rect><path d=\"M16 6h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-7v3\"></path><rect x=\"10\" y=\"15\" width=\"4\" height=\"6\" rx=\"1\"></rect>',
+  'ruler':'<path d=\"M3 17 17 3l4 4L7 21z\"></path><path d=\"M7 9l2 2M11 5l2 2M15 13l2 2\"></path>',
+  'home':'<path d=\"m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path><path d=\"M9 22V12h6v10\"></path>',
+  'wrench':'<path d=\"M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2.9 2.9-2.6-.7-.7-2.6z\"></path>',
+  'building':'<rect x=\"4\" y=\"2\" width=\"16\" height=\"20\" rx=\"2\"></rect><path d=\"M9 22v-4h6v4\"></path><path d=\"M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01\"></path>',
+  'leaf':'<path d=\"M11 20A7 7 0 0 1 4 13C4 7 11 4 20 4c0 9-3 16-9 16z\"></path><path d=\"M4 20 12 12\"></path>',
+  'pool':'<path d=\"M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1\"></path><path d=\"M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1\"></path><path d=\"M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1\"></path>',
+  'check':'<path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path><path d=\"m9 11 3 3L22 4\"></path>' } %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{{ I.get(key, I['check'])|safe }}</svg>{% endmacro %}
+
+{% macro _tick() %}<svg class="pb-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>{% endmacro %}
+
+{% macro render_sections(sections) %}
+<div class="pb">
+  {% set ns = namespace(tint=0) %}
+  {% for sec in sections %}
+  {% if sec.type == 'hero' %}
+    <section class="pb-hero">
+      <div class="pb-hero__bg">{% if sec.image %}<img src="{{ sec.image if sec.image.startswith('/') or sec.image.startswith('http') else url_for('static', filename=sec.image) }}" alt="{{ sec.title }}">{% endif %}</div>
+      <div class="pb-hero__ov" aria-hidden="true"></div>
+      <div class="pb-wrap pb-hero__in">
+        {% if sec.subheading %}<span class="pb-hero__trust">{{ sec.subheading }}</span>{% endif %}
+        <h1>{% if sec.accent %}<span class="pb-accent">{{ sec.accent }}</span> {% endif %}{{ sec.title }}</h1>
+        <span class="pb-hero__rule" aria-hidden="true"></span>
+        {% for p in sec.paras %}<p class="pb-hero__p">{{ p }}</p>{% endfor %}
+        {% if sec.note %}<p class="pb-hero__note">{{ sec.note }}</p>{% endif %}
+        {% if sec.cta_label %}<div class="pb-hero__btns"><a class="btn-skew btn-skew--green btn-skew--arrow" href="{{ sec.cta_url or '/contact/' }}">{{ sec.cta_label }}</a><a class="btn-skew" href="tel:+971547393716">Request Emergency Help</a></div>{% endif %}
+      </div>
+    </section>
+  {% else %}
+    {% set ns.tint = ns.tint + 1 %}
+    <section class="pb-sec{% if ns.tint is divisibleby 2 %} pb-sec--tint{% endif %}">
+      <div class="pb-wrap">
+        {% if sec.type == 'richtext' %}
+          {% if sec.eyebrow %}<span class="pb-eyebrow">{{ sec.eyebrow }}</span>{% endif %}
+          {% if sec.heading %}<h2 class="pb-h2">{{ sec.heading }}</h2>{% endif %}
+          <div class="pb-prose">{% for p in sec.paras %}<p>{{ p }}</p>{% endfor %}</div>
+
+        {% elif sec.type == 'text_image' %}
+          {% if sec.heading %}<h2 class="pb-h2">{{ sec.heading }}</h2>{% endif %}
+          <div class="pb-textimg{% if sec.image_side == 'left' %} pb-textimg--rev{% endif %}">
+            <div class="pb-textimg__body">
+              {% for p in sec.paras %}<p>{{ p }}</p>{% endfor %}
+              {% if sec.points %}<ul class="pb-check pb-check--1">{% for it in sec.points %}<li>{{ _tick() }}<span>{{ it }}</span></li>{% endfor %}</ul>{% endif %}
+            </div>
+            <div class="pb-textimg__media">
+              {% if sec.image %}<img src="{{ sec.image if sec.image.startswith('/') or sec.image.startswith('http') else url_for('static', filename=sec.image) }}" alt="{{ sec.heading }}" loading="lazy">
+              {% else %}<div class="pb-iconpanel">{{ _icon('gear') }}</div>{% endif %}
+            </div>
+          </div>
+
+        {% elif sec.type == 'features' %}
+          {% if sec.heading %}<h2 class="pb-h2">{{ sec.heading }}</h2>{% endif %}
+          {% if sec.intro %}<div class="pb-prose pb-prose--c"><p>{{ sec.intro }}</p></div>{% endif %}
+          <div class="pb-grid">
+            {% for c in sec.cards %}
+            <div class="pb-card"><span class="pb-card__badge" aria-hidden="true">{{ _icon(c.icon or 'check') }}</span><h3>{{ c.title }}</h3>{% if c.text %}<p>{{ c.text }}</p>{% endif %}</div>
+            {% endfor %}
+          </div>
+
+        {% elif sec.type == 'checklist' %}
+          {% if sec.heading %}<h2 class="pb-h2">{{ sec.heading }}</h2>{% endif %}
+          {% if sec.intro %}<div class="pb-prose pb-prose--c"><p>{{ sec.intro }}</p></div>{% endif %}
+          <ul class="pb-check pb-check--{{ sec.columns or '2' }}">{% for it in sec.items %}<li>{{ _tick() }}<span>{{ it }}</span></li>{% endfor %}</ul>
+
+        {% elif sec.type == 'steps' %}
+          {% if sec.heading %}<h2 class="pb-h2">{{ sec.heading }}</h2>{% endif %}
+          <div class="pb-steps">{% for r in sec.rows %}<div class="pb-step"><span class="pb-step__n">{{ '%02d'|format(loop.index) }}</span><div><h3>{{ r.title }}</h3>{% if r.text %}<p>{{ r.text }}</p>{% endif %}</div></div>{% endfor %}</div>
+
+        {% elif sec.type == 'faq' %}
+          {% if sec.heading %}<h2 class="pb-h2">{{ sec.heading }}</h2>{% endif %}
+          <div class="pb-faq" data-pb-faq>
+            {% for f in sec.items_qa %}
+            <div class="pb-faq__item{% if loop.first %} is-open{% endif %}">
+              <button type="button" class="pb-faq__q" aria-expanded="{{ 'true' if loop.first else 'false' }}"><span>{{ f.q }}</span><span class="pb-faq__ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></span></button>
+              <div class="pb-faq__a"><div class="pb-faq__a-in"><p>{{ f.a }}</p></div></div>
+            </div>
+            {% endfor %}
+          </div>
+
+        {% elif sec.type == 'cta' %}
+          <div class="pb-cta">
+            <h2>{{ sec.heading }}</h2>
+            {% if sec.text %}<p>{{ sec.text }}</p>{% endif %}
+            {% if sec.button_label %}<a class="btn-skew btn-skew--green btn-skew--arrow" href="{{ sec.button_url or '/contact/' }}">{{ sec.button_label }}</a>{% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<style>
+.pb-wrap{ max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,44px); }
+.pb-sec{ padding:clamp(46px,6vw,78px) 0; background:#fff; }
+.pb-sec--tint{ background:#f4f8fc; }
+.pb-eyebrow{ display:block; font-family:"Poppins",sans-serif; font-weight:700; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:#1594ac; margin-bottom:12px; }
+.pb-h2{ font-family:"Poppins",sans-serif; font-weight:800; font-size:clamp(24px,3vw,34px); line-height:1.2; color:#0f2038; margin:0 0 22px; }
+.pb-prose{ max-width:880px; }
+.pb-prose--c{ margin:0 auto 30px; text-align:center; }
+.pb-prose p, .pb-textimg__body p{ font-size:16px; line-height:1.75; color:#43536b; margin:0 0 14px; }
+/* hero */
+.pb-hero{ position:relative; min-height:clamp(380px,48vw,520px); display:flex; align-items:center; overflow:hidden; }
+.pb-hero__bg{ position:absolute; inset:0; background:#0f2038; }
+.pb-hero__bg img{ width:100%; height:100%; object-fit:cover; }
+.pb-hero__ov{ position:absolute; inset:0; background:linear-gradient(90deg,rgba(2,77,135,.92) 0%,rgba(2,77,135,.70) 52%,rgba(2,77,135,.30) 100%); }
+.pb-hero__in{ position:relative; z-index:1; color:#fff; padding-top:clamp(40px,6vw,70px); padding-bottom:clamp(40px,6vw,70px); width:100%; }
+.pb-hero__trust{ display:inline-block; font-family:"Poppins",sans-serif; font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; background:rgba(255,255,255,.14); padding:7px 15px; border-radius:40px; margin-bottom:18px; }
+.pb-hero__in h1{ font-family:"Poppins",sans-serif; font-weight:800; font-size:clamp(30px,4.6vw,54px); line-height:1.08; margin:0; max-width:820px; }
+.pb-accent{ color:#3ddc84; }
+.pb-hero__rule{ display:block; width:74px; height:4px; background:#1f9d55; border-radius:3px; margin:20px 0; }
+.pb-hero__p{ font-size:clamp(15px,1.5vw,18px); line-height:1.7; color:#e8f0f8; margin:0 0 12px; max-width:640px; }
+.pb-hero__note{ font-size:14px; color:#c8dbec; margin-top:6px; }
+.pb-hero__btns{ display:flex; gap:14px; flex-wrap:wrap; margin-top:26px; }
+/* cards grid */
+.pb-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:22px; }
+.pb-card{ background:#fff; border-radius:7px; padding:26px 24px; box-shadow:0 6px 22px rgba(22,35,63,.07); }
+.pb-sec--tint .pb-card{ background:#fff; }
+.pb-card__badge{ display:inline-flex; align-items:center; justify-content:center; width:52px; height:52px; padding:13px; border-radius:11px; background:#024d87; color:#fff; margin-bottom:16px; }
+.pb-card__badge svg{ width:100%; height:100%; }
+.pb-card h3{ font-family:"Poppins",sans-serif; font-weight:700; font-size:17px; color:#0f2038; margin:0 0 9px; }
+.pb-card p{ font-size:14.5px; line-height:1.65; color:#54637a; margin:0; }
+/* text + image */
+.pb-textimg{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,4vw,54px); align-items:center; }
+.pb-textimg--rev .pb-textimg__media{ order:-1; }
+.pb-textimg__media img{ width:100%; border-radius:9px; box-shadow:0 12px 34px rgba(22,35,63,.14); }
+.pb-iconpanel{ display:flex; align-items:center; justify-content:center; aspect-ratio:4/3; background:#024d87; color:#fff; border-radius:9px; padding:60px; }
+.pb-iconpanel svg{ width:100%; height:100%; max-width:120px; }
+/* checklist */
+.pb-check{ list-style:none; margin:0; padding:0; display:grid; gap:12px 26px; }
+.pb-check--1{ grid-template-columns:1fr; }
+.pb-check--2{ grid-template-columns:repeat(2,1fr); }
+.pb-check--3{ grid-template-columns:repeat(3,1fr); }
+.pb-check li{ display:flex; gap:11px; align-items:flex-start; font-size:15.5px; line-height:1.55; color:#38465c; }
+.pb-tick{ flex:0 0 auto; width:20px; height:20px; color:#1f9d55; margin-top:2px; }
+/* steps */
+.pb-steps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px; }
+.pb-step{ display:flex; gap:15px; align-items:flex-start; }
+.pb-step__n{ font-family:"Poppins",sans-serif; font-weight:800; font-size:22px; color:#fff; background:#024d87; width:46px; height:46px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+.pb-step h3{ font-family:"Poppins",sans-serif; font-weight:700; font-size:16px; color:#0f2038; margin:4px 0 6px; }
+.pb-step p{ font-size:14.5px; line-height:1.6; color:#54637a; margin:0; }
+/* faq */
+.pb-faq{ max-width:900px; }
+.pb-faq__item{ border:1px solid #e2e9f2; border-radius:9px; margin-bottom:12px; overflow:hidden; background:#fff; }
+.pb-faq__q{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:17px 20px; background:none; border:0; cursor:pointer; font-family:"Poppins",sans-serif; font-weight:700; font-size:15.5px; color:#0f2038; text-align:left; }
+.pb-faq__ic{ flex:0 0 auto; width:26px; height:26px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; background:#024d87; transition:transform .35s ease, background .25s; }
+.pb-faq__ic svg{ width:12px; height:12px; }
+.pb-faq__item.is-open .pb-faq__ic{ transform:rotate(180deg); background:#2c74c0; }
+.pb-faq__a{ display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+.pb-faq__item.is-open .pb-faq__a{ grid-template-rows:1fr; }
+.pb-faq__a-in{ overflow:hidden; }
+.pb-faq__a p{ margin:0; padding:2px 20px 18px; font-size:15px; line-height:1.65; color:#4a596f; }
+/* cta */
+.pb-cta{ text-align:center; background:linear-gradient(120deg,#024d87,#1594ac); border-radius:12px; padding:clamp(34px,5vw,56px) 26px; color:#fff; }
+.pb-cta h2{ font-family:"Poppins",sans-serif; font-weight:800; font-size:clamp(22px,2.6vw,30px); margin:0 0 12px; color:#fff; }
+.pb-cta p{ font-size:16px; line-height:1.7; color:#e6f2f8; max-width:640px; margin:0 auto 24px; }
+@media (max-width:900px){
+  .pb-textimg{ grid-template-columns:1fr; }
+  .pb-textimg--rev .pb-textimg__media{ order:0; }
+  .pb-check--2, .pb-check--3{ grid-template-columns:1fr; }
+}
+</style>
+<script>
+(function(){
+  document.querySelectorAll('[data-pb-faq]').forEach(function(faq){
+    faq.addEventListener('click',function(e){
+      var b=e.target.closest('.pb-faq__q'); if(!b) return;
+      var it=b.parentElement, open=it.classList.contains('is-open');
+      faq.querySelectorAll('.pb-faq__item.is-open').forEach(function(o){ if(o!==it){o.classList.remove('is-open'); o.querySelector('.pb-faq__q').setAttribute('aria-expanded','false');} });
+      it.classList.toggle('is-open', !open); b.setAttribute('aria-expanded', String(!open));
+    });
+  });
+})();
+</script>
+{% endmacro %}

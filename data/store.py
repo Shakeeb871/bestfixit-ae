@@ -90,7 +90,74 @@ def _seed() -> dict:
         "testimonials": copy.deepcopy(TESTIMONIAL_SHOWCASE.get("items", [])),
         "areas": list(SERVICE_AREAS),
         "services": _seed_services(),
+        "pages": [],
     }
+
+
+# --------------------------------------------------------------------------- #
+# Section (block) page builder
+# --------------------------------------------------------------------------- #
+# Every builder-driven page is an ordered list of typed sections. Each type has
+# a fixed set of fields; ``SECTION_TYPES`` is the single source of truth used by
+# both the admin builder UI and the renderer.
+SECTION_TYPES = {
+    "hero":      {"label": "Banner hero",
+                  "fields": ["title", "accent", "subheading", "paras",
+                             "note", "cta_label", "cta_url", "image"]},
+    "richtext":  {"label": "Text block",
+                  "fields": ["eyebrow", "heading", "paras"]},
+    "text_image": {"label": "Text + image",
+                   "fields": ["heading", "paras", "points",
+                              "image", "image_side"]},
+    "features":  {"label": "Feature cards",
+                  "fields": ["heading", "intro", "cards"]},
+    "checklist": {"label": "Checklist",
+                  "fields": ["heading", "intro", "columns", "items"]},
+    "steps":     {"label": "Steps / process",
+                  "fields": ["heading", "rows"]},
+    "faq":       {"label": "FAQ",
+                  "fields": ["heading", "items_qa"]},
+    "cta":       {"label": "Call to action",
+                  "fields": ["heading", "text", "button_label", "button_url"]},
+}
+
+# fields that hold a plain list of strings (one per line in the editor)
+_LIST_FIELDS = {"paras", "points", "items"}
+# fields that hold a list of objects (parsed from "a | b | c" lines)
+_OBJ_FIELDS = {
+    "cards": ["icon", "title", "text"],
+    "rows": ["title", "text"],
+    "items_qa": ["q", "a"],
+}
+
+
+def normalize_section(sec: dict) -> dict:
+    """Ensure a section dict has every field its type expects."""
+    t = sec.get("type", "richtext")
+    spec = SECTION_TYPES.get(t, SECTION_TYPES["richtext"])
+    out = {"type": t}
+    for f in spec["fields"]:
+        if f in _LIST_FIELDS:
+            out[f] = list(sec.get(f, []) or [])
+        elif f in _OBJ_FIELDS:
+            keys = _OBJ_FIELDS[f]
+            out[f] = [
+                {k: (row.get(k, "") if isinstance(row, dict) else "")
+                 for k in keys}
+                for row in (sec.get(f, []) or [])
+            ]
+        else:
+            out[f] = sec.get(f, "")
+    if t == "checklist" and not out.get("columns"):
+        out["columns"] = "2"
+    if t == "text_image" and not out.get("image_side"):
+        out["image_side"] = "right"
+    return out
+
+
+def normalize_sections(sections) -> list:
+    return [normalize_section(s) for s in (sections or [])
+            if isinstance(s, dict) and s.get("type")]
 
 
 def load() -> dict:
@@ -266,6 +333,8 @@ def save_service(data: dict, orig_slug: str = "") -> str:
             rec["page_intro"] = data["page_intro"]
         if "page_features" in data:
             rec["page_features"] = data["page_features"]
+        if "sections" in data:
+            rec["sections"] = normalize_sections(data["sections"])
         save()
         return slug
 
@@ -288,6 +357,74 @@ def reorder_services(slugs: list) -> None:
             if s["slug"] in order:
                 s["order"] = order[s["slug"]]
         save()
+
+
+# ---- standalone pages (WordPress-style) ----------------------------------- #
+def pages_all() -> list:
+    items = load().get("pages", [])
+    return sorted(items, key=lambda p: p.get("menu_order", 0))
+
+
+def pages_public() -> list:
+    return [p for p in pages_all() if p.get("enabled", True)]
+
+
+def pages_in_menu() -> list:
+    return [p for p in pages_public() if p.get("in_menu")]
+
+
+def get_page(slug: str):
+    for p in pages_all():
+        if p.get("slug") == slug:
+            return p
+    return None
+
+
+# slugs that already belong to built-in routes — a custom page can't use these.
+RESERVED_SLUGS = {
+    "", "about", "mission", "vision", "contact", "services", "amc", "blog",
+    "admin", "static", "hero-demo", "sitemap.xml", "robots.txt",
+}
+
+
+def save_page(data: dict, orig_slug: str = "") -> str:
+    with _LOCK:
+        items = load().setdefault("pages", [])
+        existing = {p["slug"] for p in items if p["slug"] != orig_slug}
+        existing |= RESERVED_SLUGS
+        base = slugify(data.get("slug") or data.get("title") or "page")
+        current = next((p for p in items if p["slug"] == orig_slug), None) \
+            if orig_slug else None
+        if current is None:
+            slug = unique_slug(base, existing)
+            order = (max((p.get("menu_order", 0) for p in items), default=-1)) + 1
+            rec = {"slug": slug, "menu_order": order}
+            items.append(rec)
+        else:
+            rec = current
+            slug = current["slug"]
+            if data.get("slug") and slugify(data["slug"]) != slug:
+                slug = unique_slug(slugify(data["slug"]), existing)
+        rec["slug"] = slug
+        rec["title"] = data.get("title", rec.get("title", ""))
+        rec["nav_label"] = data.get("nav_label") or rec.get("title", "")
+        rec["meta_description"] = data.get("meta_description",
+                                           rec.get("meta_description", ""))
+        rec["enabled"] = bool(data.get("enabled", True))
+        rec["in_menu"] = bool(data.get("in_menu", False))
+        rec["sections"] = normalize_sections(data.get("sections", []))
+        save()
+        return slug
+
+
+def delete_page(slug: str) -> bool:
+    with _LOCK:
+        items = load().get("pages", [])
+        if not any(p["slug"] == slug for p in items):
+            return False
+        load()["pages"] = [p for p in items if p["slug"] != slug]
+        save()
+        return True
 
 
 # ---- generic list mutation ------------------------------------------------ #

@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<form class="form" method="post" action="/admin/pages/save/" style="max-width:960px;">
+  <input type="hidden" name="orig_slug" value="{{ pg.slug if pg else '' }}">
+
+  <div class="form__row">
+    <div class="fld"><label>Page title</label><input name="title" value="{{ pg.title if pg else '' }}" required></div>
+    <div class="fld"><label>Menu label <span class="hint">(short — if shown in the top menu)</span></label><input name="nav_label" value="{{ pg.nav_label if pg else '' }}"></div>
+  </div>
+
+  <div class="form__row">
+    <div class="fld"><label>URL slug <span class="hint">(blank = auto)</span></label><input name="slug" value="{{ pg.slug if pg else '' }}" placeholder="e.g. warranty-policy"></div>
+    <div class="fld"><label>Meta description <span class="hint">(SEO)</span></label><input name="meta_description" value="{{ pg.meta_description if pg else '' }}"></div>
+  </div>
+
+  {% include "admin/_section_builder.html" %}
+
+  <div class="fld" style="display:flex; gap:22px; flex-wrap:wrap;">
+    <label style="display:flex; align-items:center; gap:9px; cursor:pointer;"><input type="checkbox" name="enabled" {{ 'checked' if (pg.enabled if pg else True) }} style="width:auto;"><span>Published (visible on the site)</span></label>
+    <label style="display:flex; align-items:center; gap:9px; cursor:pointer;"><input type="checkbox" name="in_menu" {{ 'checked' if (pg.in_menu if pg else False) }} style="width:auto;"><span>Show in the top menu</span></label>
+  </div>
+
+  <div class="form__actions">
+    <button class="adm-btn adm-btn--solid" type="submit">{{ 'Update Page' if pg else 'Create Page' }}</button>
+    <a class="adm-btn" href="/admin/pages/">Cancel</a>
+    {% if pg %}<a class="adm-btn" href="/page/{{ pg.slug }}/" target="_blank" rel="noopener">View page ↗</a>{% endif %}
+  </div>
+</form>
+{% endblock %}

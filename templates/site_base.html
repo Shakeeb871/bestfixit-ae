@@ -290,6 +290,12 @@
       </li>
       {% endfor %}
 
+      {% for cp in custom_pages %}
+      <li class="bfh__nav-item">
+        <a class="bfh__nav-link {{ 'is-active' if request.path == '/page/' + cp.slug + '/' }}" href="/page/{{ cp.slug }}/">{{ cp.nav_label or cp.title }}</a>
+      </li>
+      {% endfor %}
+
       <li class="bfh__nav-item">
         <a class="bfh__nav-link {{ 'is-active' if request.path in ['/about/','/mission/','/vision/'] }}" href="/about/">About Us{{ _chevd|safe }}</a>
         <div class="bfh__dd">
@@ -346,6 +352,10 @@
       {% else %}
       <a class="bfh-drawer__link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ s.nav_label or s.title }}</a>
       {% endif %}
+      {% endfor %}
+
+      {% for cp in custom_pages %}
+      <a class="bfh-drawer__link {{ 'is-active' if request.path == '/page/' + cp.slug + '/' }}" href="/page/{{ cp.slug }}/">{{ cp.nav_label or cp.title }}</a>
       {% endfor %}
 
       <div class="bfh-acc" data-acc>

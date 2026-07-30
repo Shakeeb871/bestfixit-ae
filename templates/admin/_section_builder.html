@@ -1,0 +1,166 @@
+{# Visual section builder — include inside a <form>. Requires:
+   sections_json (initial JSON string), icons (list of icon keys). #}
+<div class="sb">
+  <input type="hidden" name="sections_json" id="sectionsJson">
+  <div class="sb__bar">
+    <span class="sb__title">Page sections</span>
+    <div class="sb__add">
+      <select id="sbAddType">
+        <option value="hero">Banner hero</option>
+        <option value="richtext">Text block</option>
+        <option value="text_image">Text + image</option>
+        <option value="features">Feature cards</option>
+        <option value="checklist">Checklist</option>
+        <option value="steps">Steps / process</option>
+        <option value="faq">FAQ</option>
+        <option value="cta">Call to action</option>
+      </select>
+      <button type="button" class="adm-btn adm-btn--solid" id="sbAddBtn">+ Add section</button>
+    </div>
+  </div>
+  <div id="sbList" class="sb__list"></div>
+  <div class="sb__empty" id="sbEmpty">No sections yet — add one above to start building the page.</div>
+</div>
+<script type="application/json" id="sbInitial">{{ sections_json|safe }}</script>
+
+<style>
+  .sb{ border:1px solid var(--line); border-radius:12px; padding:16px; background:#f7fafd; margin-bottom:18px; }
+  .sb__bar{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+  .sb__title{ font-family:"Poppins",sans-serif; font-weight:700; font-size:14px; color:#0f1a2b; }
+  .sb__add{ display:flex; gap:8px; }
+  .sb__add select{ padding:9px 12px; border:1px solid #d5deea; border-radius:8px; font-size:13.5px; background:#fff; }
+  .sb__empty{ text-align:center; color:var(--muted); font-size:13.5px; padding:18px; }
+  .sb__list:not(:empty)+.sb__empty{ display:none; }
+  .sbc{ background:#fff; border:1px solid #e2e9f2; border-radius:10px; margin-bottom:12px; overflow:hidden; }
+  .sbc__hd{ display:flex; align-items:center; gap:10px; padding:11px 14px; background:#eef4fa; border-bottom:1px solid #e2e9f2; }
+  .sbc__grip{ cursor:grab; color:#9aa7b8; font-size:15px; }
+  .sbc__type{ font-family:"Poppins",sans-serif; font-weight:700; font-size:13px; color:#024d87; flex:1; }
+  .sbc__btns{ display:flex; gap:6px; }
+  .sbc__btns button{ border:1px solid #d5deea; background:#fff; border-radius:6px; width:28px; height:28px; cursor:pointer; font-size:14px; color:#4a5568; display:inline-flex; align-items:center; justify-content:center; }
+  .sbc__btns button.sbc-del{ color:#b3261e; border-color:#f1d0d0; }
+  .sbc__bd{ padding:15px; display:grid; gap:13px; }
+  .sbf label{ display:block; font-family:"Poppins",sans-serif; font-weight:600; font-size:12px; color:#33445c; margin-bottom:5px; }
+  .sbf label .h{ font-weight:400; color:#8a93a2; }
+  .sbf input, .sbf textarea, .sbf select{ width:100%; padding:9px 11px; border:1px solid #d5deea; border-radius:8px; font-size:13.5px; font-family:inherit; background:#fff; }
+  .sbf textarea{ min-height:70px; resize:vertical; line-height:1.55; }
+  .sbf--row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+</style>
+
+<script>
+(function(){
+  var ICONS = {{ icons|tojson }};
+  var iconOpts = ICONS.map(function(k){return '<option value="'+k+'">'+k+'</option>';}).join('');
+
+  // field kind: text | area | lines | objlines | select
+  var F = {
+    title:{l:'Title',k:'text'}, accent:{l:'Accent word',k:'text',h:'coloured green at the start of the heading'},
+    subheading:{l:'Eyebrow / trustline',k:'text'}, note:{l:'Small note',k:'text'},
+    cta_label:{l:'Button label',k:'text'}, cta_url:{l:'Button link',k:'text',h:'e.g. /contact/'},
+    image:{l:'Image path',k:'text',h:'e.g. img/photo.webp or /static/img/photo.webp'},
+    eyebrow:{l:'Eyebrow',k:'text'}, heading:{l:'Heading',k:'text'},
+    paras:{l:'Paragraphs',k:'lines',h:'one paragraph per line'},
+    points:{l:'Tick points',k:'lines',h:'one per line'},
+    items:{l:'Checklist items',k:'lines',h:'one per line'},
+    intro:{l:'Intro text',k:'area'}, text:{l:'Text',k:'area'},
+    image_side:{l:'Image side',k:'select',o:[['right','Right'],['left','Left']]},
+    columns:{l:'Columns',k:'select',o:[['1','1 column'],['2','2 columns'],['3','3 columns']]},
+    button_label:{l:'Button label',k:'text'}, button_url:{l:'Button link',k:'text',h:'e.g. /contact/'},
+    cards:{l:'Feature cards',k:'objlines',keys:['icon','title','text'],h:'one per line: icon | title | description — icon is one of: '+ICONS.join(', ')},
+    rows:{l:'Steps',k:'objlines',keys:['title','text'],h:'one per line: title | description'},
+    items_qa:{l:'Questions',k:'objlines',keys:['q','a'],h:'one per line: question | answer'}
+  };
+  var TYPES = {
+    hero:{label:'Banner hero',fields:['title','accent','subheading','paras','note','cta_label','cta_url','image']},
+    richtext:{label:'Text block',fields:['eyebrow','heading','paras']},
+    text_image:{label:'Text + image',fields:['heading','paras','points','image','image_side']},
+    features:{label:'Feature cards',fields:['heading','intro','cards']},
+    checklist:{label:'Checklist',fields:['heading','intro','columns','items']},
+    steps:{label:'Steps / process',fields:['heading','rows']},
+    faq:{label:'FAQ',fields:['heading','items_qa']},
+    cta:{label:'Call to action',fields:['heading','text','button_label','button_url']}
+  };
+
+  var list=document.getElementById('sbList');
+  var hidden=document.getElementById('sectionsJson');
+  var form=hidden.closest('form');
+
+  function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function fieldHtml(fname, val){
+    var m=F[fname]; if(!m) return '';
+    var inner='';
+    if(m.k==='text'){ inner='<input data-f="'+fname+'" value="'+esc(val||'')+'">'; }
+    else if(m.k==='area'){ inner='<textarea data-f="'+fname+'">'+esc(val||'')+'</textarea>'; }
+    else if(m.k==='lines'){ inner='<textarea data-f="'+fname+'" data-kind="lines">'+esc((val||[]).join('\n'))+'</textarea>'; }
+    else if(m.k==='objlines'){
+      var lines=(val||[]).map(function(o){ return m.keys.map(function(k){return (o&&o[k])||'';}).join(' | '); }).join('\n');
+      inner='<textarea data-f="'+fname+'" data-kind="objlines" data-keys="'+m.keys.join(',')+'">'+esc(lines)+'</textarea>';
+    }
+    else if(m.k==='select'){
+      var opts=(fname==='icon'? [] : m.o).map(function(o){ return '<option value="'+o[0]+'"'+(o[0]===val?' selected':'')+'>'+o[1]+'</option>'; }).join('');
+      inner='<select data-f="'+fname+'">'+opts+'</select>';
+    }
+    return '<div class="sbf"><label>'+m.l+(m.h?' <span class="h">('+m.h+')</span>':'')+'</label>'+inner+'</div>';
+  }
+
+  function cardHtml(sec){
+    var t=sec.type, spec=TYPES[t]; if(!spec) return '';
+    var fields=spec.fields.map(function(f){ return fieldHtml(f, sec[f]); }).join('');
+    return '<div class="sbc" data-type="'+t+'" draggable="true">'
+      +'<div class="sbc__hd"><span class="sbc__grip">⋮⋮</span><span class="sbc__type">'+spec.label+'</span>'
+      +'<span class="sbc__btns"><button type="button" class="sbc-up" title="Move up">↑</button>'
+      +'<button type="button" class="sbc-down" title="Move down">↓</button>'
+      +'<button type="button" class="sbc-del" title="Remove">✕</button></span></div>'
+      +'<div class="sbc__bd">'+fields+'</div></div>';
+  }
+
+  function readCard(card){
+    var sec={type:card.dataset.type};
+    card.querySelectorAll('[data-f]').forEach(function(el){
+      var f=el.dataset.f, kind=el.dataset.kind;
+      if(kind==='lines'){ sec[f]=el.value.split('\n').map(function(s){return s.trim();}).filter(Boolean); }
+      else if(kind==='objlines'){
+        var keys=el.dataset.keys.split(',');
+        sec[f]=el.value.split('\n').map(function(s){return s.trim();}).filter(Boolean).map(function(line){
+          var parts=line.split('|'); var o={};
+          keys.forEach(function(k,i){ o[k]=(parts[i]||'').trim(); });
+          return o;
+        });
+      } else { sec[f]=el.value; }
+    });
+    return sec;
+  }
+
+  function serialize(){
+    var arr=[].map.call(list.querySelectorAll('.sbc'), readCard);
+    hidden.value=JSON.stringify(arr);
+  }
+
+  function add(type){ list.insertAdjacentHTML('beforeend', cardHtml({type:type})); }
+
+  document.getElementById('sbAddBtn').addEventListener('click', function(){
+    add(document.getElementById('sbAddType').value);
+  });
+
+  list.addEventListener('click', function(e){
+    var card=e.target.closest('.sbc'); if(!card) return;
+    if(e.target.classList.contains('sbc-del')){ if(confirm('Remove this section?')) card.remove(); }
+    else if(e.target.classList.contains('sbc-up')){ var p=card.previousElementSibling; if(p) list.insertBefore(card,p); }
+    else if(e.target.classList.contains('sbc-down')){ var n=card.nextElementSibling; if(n) list.insertBefore(n,card); }
+  });
+
+  // drag reorder
+  var dragEl=null;
+  list.addEventListener('dragstart', function(e){ dragEl=e.target.closest('.sbc'); if(dragEl) dragEl.style.opacity=.4; });
+  list.addEventListener('dragend', function(){ if(dragEl) dragEl.style.opacity=''; dragEl=null; });
+  list.addEventListener('dragover', function(e){ e.preventDefault(); var t=e.target.closest('.sbc'); if(!t||t===dragEl) return;
+    var r=t.getBoundingClientRect(); var after=(e.clientY-r.top)/r.height>0.5; list.insertBefore(dragEl, after?t.nextSibling:t); });
+
+  if(form) form.addEventListener('submit', serialize);
+
+  // hydrate
+  var initial=[];
+  try{ initial=JSON.parse(document.getElementById('sbInitial').textContent||'[]'); }catch(e){}
+  initial.forEach(function(sec){ list.insertAdjacentHTML('beforeend', cardHtml(sec)); });
+})();
+</script>

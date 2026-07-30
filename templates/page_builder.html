@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+{% from "components/pagebuilder.html" import render_sections %}
+{% block title %}{{ page.title }} — Best Fix Technical Services{% endblock %}
+{% block description %}{{ page.meta_description or page.title }}{% endblock %}
+{% block content %}
+{% set _has_hero = page.sections and page.sections[0].type == 'hero' %}
+{% if not _has_hero %}
+<section class="pagehero">
+  <div class="pagehero__wrap">
+    <h1>{{ page.title }}</h1>
+    <p class="pagehero__crumbs"><a href="/">Home</a> &middot; {{ page.title }}</p>
+  </div>
+</section>
+{% endif %}
+{{ render_sections(page.sections) }}
+{% endblock %}

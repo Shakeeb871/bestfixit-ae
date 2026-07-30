@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+{% block body %}
+<div class="toolbar">
+  <div class="muted">{{ pages|length }} page{{ '' if pages|length == 1 else 's' }} built from sections</div>
+  <a class="adm-btn adm-btn--solid" href="/admin/pages/new/">+ New Page</a>
+</div>
+
+<div class="card">
+  <div class="card__hd"><h2>Pages</h2><span class="pill">{{ pages|length }} total</span></div>
+  <div class="tbl-wrap">
+    {% if pages %}
+    <table class="tbl">
+      <thead><tr><th>Title</th><th>URL</th><th>Sections</th><th>In menu</th><th>Status</th><th style="width:190px;">Actions</th></tr></thead>
+      <tbody>
+        {% for p in pages %}
+        <tr>
+          <td><b>{{ p.title }}</b>{% if p.nav_label and p.nav_label != p.title %}<div class="mono" style="margin-top:3px;">nav: {{ p.nav_label }}</div>{% endif %}</td>
+          <td><a class="mono" href="/page/{{ p.slug }}/" target="_blank" rel="noopener">/page/{{ p.slug }}/</a></td>
+          <td><span class="badge badge--navy">{{ p.sections|length }}</span></td>
+          <td>{% if p.in_menu %}<span class="badge badge--green">Yes</span>{% else %}<span class="badge badge--grey">No</span>{% endif %}</td>
+          <td>{% if p.enabled %}<span class="badge badge--green">Visible</span>{% else %}<span class="badge badge--grey">Hidden</span>{% endif %}</td>
+          <td><div class="act">
+            <a href="/page/{{ p.slug }}/" target="_blank" rel="noopener">View</a>
+            <a href="/admin/pages/{{ p.slug }}/edit/">Edit</a>
+            <form method="post" action="/admin/pages/{{ p.slug }}/delete/" onsubmit="return confirm('Delete this page?')"><button class="del" type="submit">Delete</button></form>
+          </div></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty">No pages yet. Click “New Page” to build one from sections — like adding blocks in WordPress.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
