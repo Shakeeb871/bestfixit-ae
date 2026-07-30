@@ -270,10 +270,9 @@
       {% for s in all_services %}
       {% set _subs = nav_subservices.get(s.slug) %}
       <li class="bfh__nav-item">
-        <a class="bfh__nav-link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ s.nav_label or s.title }}{% if _subs or s.points %}{{ _chevd|safe }}{% endif %}</a>
-        {% if _subs or s.points %}
+        <a class="bfh__nav-link {{ 'is-active' if nav_active_core == s.slug }}" href="/services/{{ s.slug }}/">{{ s.nav_label or s.title }}{% if _subs %}{{ _chevd|safe }}{% endif %}</a>
+        {% if _subs %}
         <div class="bfh__dd">
-          {% if _subs %}
           {% for sub in _subs %}
           {% if sub.children %}
           <div class="bfh__dd-sub">
@@ -288,11 +287,6 @@
           <a class="bfh__dd-link {{ 'is-active' if request.path == '/services/' + sub.slug + '/' }}" href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
           {% endif %}
           {% endfor %}
-          {% else %}
-          {% for p in s.points %}
-          <a class="bfh__dd-link" href="/services/{{ s.slug }}/">{{ p }}</a>
-          {% endfor %}
-          {% endif %}
         </div>
         {% endif %}
       </li>
@@ -334,14 +328,13 @@
 
       {% for s in all_services %}
       {% set _subs = nav_subservices.get(s.slug) %}
-      {% if _subs or s.points %}
+      {% if _subs %}
       <div class="bfh-acc" data-acc>
         <button class="bfh-acc__trigger" type="button" data-acc-trigger>
           {{ s.nav_label or s.title }}
           <svg class="bfh-acc__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
         </button>
         <div class="bfh-acc__panel"><div class="bfh-acc__inner">
-          {% if _subs %}
           {% for sub in _subs %}
           <a href="/services/{{ sub.slug }}/">{{ sub.name }}</a>
           {% if sub.children %}
@@ -350,11 +343,6 @@
           {% endfor %}
           {% endif %}
           {% endfor %}
-          {% else %}
-          {% for p in s.points %}
-          <a href="/services/{{ s.slug }}/">{{ p }}</a>
-          {% endfor %}
-          {% endif %}
         </div></div>
       </div>
       {% else %}
